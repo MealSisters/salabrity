@@ -11,6 +11,7 @@
 <body>
 	<div id="container">
 		<header>
+			<%-- 변경 테스트 --%>
 			<%-- 메인 로고 --%>
 			<div class="main-logo">
 				<a href="<%= request.getContextPath() %>" title="메인화면으로 돌아가기">
