@@ -1,0 +1,180 @@
+#content {
+  height: 750px;
+}
+.div-level1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.div-level2 {
+  /* background-color: antiquewhite; */
+  margin: 0 15px;
+  padding: 0;
+}
+.middlediv {
+  margin-top: 15px;
+}
+.bottomdiv {
+  margin-top: 30px;
+}
+.leftdiv {
+  width: 582px;
+}
+.rightdiv {
+  width: 378px
+}
+h1 {
+  font-size: 28px;
+  margin: 10px;
+  text-align: center;
+}
+/*-------------------- today summary 영역 --------------------*/
+#tbl-summaryData {
+  width: inherit;
+}
+#tbl-summaryData tbody tr {
+  display: flex;
+  justify-content: space-between;
+}
+#tbl-summaryData tr:not(:first-of-type) {
+  margin-top: 15px;
+}
+#tbl-summaryData thead {
+  height: 45px;
+}
+#tbl-summaryData td {
+  width: 256px;
+  height: 80px;
+  padding: 10px;
+  background-color: #ddd;
+}
+#tbl-summaryData h2 {
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+#tbl-summaryData p {
+  font-size: 24px;
+  margin: 0;
+  text-align: right;
+}
+
+/*-------------------- Board 영역 --------------------*/
+#div-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#div-QnAboard {
+  width: inherit;
+  padding: 0;
+}
+#div-QnAboard-head {
+  height: 45px;
+  padding: 0;
+  position: relative;
+}
+#div-QnAboard-head > div {
+  width: 30px;
+  padding: 2px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #116916;
+  border: 1px solid #ffffffff;
+  border-radius: 7px;
+  display: flex;
+  text-align: center;
+}
+#div-QnAboard-head a {
+  width: inherit;
+  color: #fff;
+  text-decoration: none;
+}
+#tbl-QnAboard {
+  width: inherit;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  border-collapse: collapse;
+}
+#tbl-QnAboard thead {
+  text-align: center;
+}
+#tbl-QnAboard tbody {
+  text-align: center;
+}
+#tbl-QnAboard th:first-of-type {
+  width: 40px;
+}
+#tbl-QnAboard th:nth-of-type(2) {
+  width: 90px;
+}
+#tbl-QnAboard td:last-of-type {
+  text-align: left;
+}
+#tbl-QnAboard th {
+  height: 24px;
+  background-color: #ddd;
+  border-bottom: 1px solid #333;
+}
+#tbl-QnAboard td {
+  height: 24px;
+  border-bottom: 1px dashed #888;
+}
+#div-board > div:last-child {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around; 
+} 
+.div-174wrap {
+  width: 174px;
+  height: 40px;
+  padding: 0;
+  background-color: #333;
+  border: 1px solid #ffffffff;
+  border-radius: 6px;
+}
+.div-174wrap a {
+  display: table-cell;
+  width: inherit;
+  height: inherit;
+  text-align: center;
+  vertical-align: middle;
+  color: #fff;
+  text-decoration: none;
+}
+
+/*-------------------- Sales Trend 영역 --------------------*/
+#div-salestrend-chart {
+  height: 200px;
+  background-color: #ddd;
+}
+
+/*-------------------- Members 영역 --------------------*/
+#div-members-chart {
+  height: 200px;
+  background-color: #ddd;
+}
+
+/*-------------------- 이동 아이콘 영역 --------------------*/
+#div-icons {
+  width: 990px;
+  display: flex;
+  justify-content: space-between;
+}
+.div-icon {
+  width: 174px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.div-icon a {
+  width: 110px;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  line-height: 2.5;
+  font-weight: 700;
+}
+.div-icon i {
+  width: inherit;
+}
