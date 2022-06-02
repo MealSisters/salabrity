@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Salabrity</title>
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/basic.css" />
 	<script src="https://kit.fontawesome.com/97c6ec6a69.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -29,7 +29,7 @@
 					<li class="notice"><a href="#">공지사항/이벤트</a></li>
 				<%-- 관리자 페이지 조건문 적용 예정! --%>
 				<%-- if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { --%>
-					<li class="admin"><a href="#">관리자페이지</a></li>
+					<li class="admin"><a href="<%= request.getContextPath()%>/admin/dashboard">관리자페이지</a></li>
 				<%-- } --%>
 				</ul>
 			</nav>
