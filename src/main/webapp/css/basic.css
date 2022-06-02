@@ -16,7 +16,11 @@ div#container {
 
 /* header */
 header {
-	height: 130px;
+	height: 80px;
+}
+
+.main-logo, .main-nav, .member-nav {
+	margin-top: 10px;	
 }
 
 /* main-logo */
@@ -98,8 +102,13 @@ header nav ul li:hover {
 	color: black;
 }
 
-section {
-	height: 650px;
+#content {
+	height: 700px;
+}
+
+#content h2 {
+	margin-top: 250px;
+	text-align: center;
 }
 
 /* footer */

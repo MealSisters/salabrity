@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Salabrity</title>
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/basic.css" />
 	<script src="https://kit.fontawesome.com/97c6ec6a69.js" crossorigin="anonymous"></script>
 </head>
 <body>
