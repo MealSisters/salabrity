@@ -1,0 +1,80 @@
+
+div.return-dashboard {
+  width: 180px;
+  border-radius: 24px;
+  text-align: center;
+  transition-duration: 0.3s;  
+}
+a.return-dashboard {
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  color: #bbb;
+  transition-duration: 0.3s;
+}
+a.return-dashboard i {
+  margin: 0 10px 0 0;
+}
+a.return-dashboard:hover {
+  color: #116916;
+}
+div.return-dashboard:hover {
+  background-color: #f2f2f2;
+}
+
+
+.div-level1 {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  
+}
+.div-level2 {
+  width: 582px;
+  padding: inherit;
+  display: flex;
+  justify-content: center;
+}
+table {
+  width: inherit;
+}
+.div-level2 h1 {
+  font-size: 28px;
+  margin: 10px;
+}
+table td {
+  padding: 10px 0;
+  text-align: center;
+  vertical-align: top;
+}
+#div-lineChart {
+  padding: 40px 10px;
+  width: 578px;
+  height: 350px;
+}
+#div-pieChart {
+  width: 578px;
+  height: 300px;
+}
+.div-legend ul {
+  margin: 10px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.div-legend ul li {
+  list-style: none;
+  margin: 5px 10px;
+}
+.span-customlabel-pie {
+  font-size: 14px;
+  width: 100px;
+}
+.div-legend ul li span:first-of-type {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}

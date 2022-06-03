@@ -13,22 +13,30 @@
             <tbody>
                 <tr>
                     <td>
-                        <h2>Sales</h2>
-                        <p>(매출액)</p>
+                        <div>
+                            <h2>Sales</h2>
+                            <p>(매출액)</p>
+                        </div>
                     </td>
                     <td>
-                        <h2>Visitor</h2>
-                        <p>(방문자수)</p>
+                        <div>
+                            <h2>Visitor</h2>
+                            <p>(방문자수)</p>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <h2>New Member</h2>
-                        <p>(가입자수)</p>
+                        <div>
+                            <h2>New Member</h2>
+                            <p>(가입자수)</p>
+                        </div>
                     </td>
                     <td>
-                        <h2>New Posting</h2>
-                        <p>(자유게시판 글 수)</p>
+                        <div>
+                            <h2>New Posting</h2>
+                            <p>(자유게시판 글 수)</p>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -85,7 +93,7 @@
     </div>
     
     <div id="div-salestrend" class="div-level2 leftdiv middlediv">
-        <h1><a>Sales Trend</a></h1>
+        <h1><a href="<%= request.getContextPath()%>/admin/salesTrend">Sales Trend</a></h1>
         <div id="div-salestrend-chart">(매출 추이 영역)</div>
     </div>
     
