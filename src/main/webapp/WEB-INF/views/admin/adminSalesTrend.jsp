@@ -4,12 +4,9 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminSalesChart.css">
 <script src="<%= request.getContextPath() %>/js/Chart.min.js"></script>
 <script src="<%= request.getContextPath() %>/js/admin/adminchart.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
+<%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
 
-<div class="return-dashboard">
-    <a class="return-dashboard" href="<%= request.getContextPath()%>/admin/dashboard">
-        <i class="fa-solid fa-chevron-left"></i>대시보드로 돌아가기
-    </a>
-</div>
 <div class="div-level1">
     <div id="div-salesTrend" class="div-level2">
         <table>

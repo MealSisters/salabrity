@@ -1,12 +1,4 @@
-/*
- color
- 로고색 #116916 rgb(17, 105, 22)
- 녹색 #667302 rgb(102, 115, 2)
- 진녹색 #384001 rgb(56, 64, 1)
- 연녹색 #B9BF04 rgb(185, 191, 4)
- 토마토색 #BF2604 rgb(191, 38, 4)
- 흰색#F2F2F2
-*/
+
 #content {
   height: 750px;
 }
@@ -163,6 +155,7 @@
   background-color: #07823E;
   border: 1px solid #ffffffff;
   border-radius: 6px;
+  transition-duration: 0.2s;
 }
 .div-174wrap a {
   display: table-cell;
@@ -173,7 +166,9 @@
   color: #fff;
   text-decoration: none;
 }
-
+.div-174wrap:hover {
+  background-color: #044F26;
+}
 /*-------------------- Sales Trend 영역 --------------------*/
 #div-salestrend {
   text-align: center;

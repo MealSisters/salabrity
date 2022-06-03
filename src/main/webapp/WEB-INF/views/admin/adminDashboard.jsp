@@ -95,7 +95,7 @@
     </div>
     
     <div id="div-salestrend" class="div-level2 leftdiv middlediv">
-        <a href="<%= request.getContextPath()%>/admin/salesTrend"><h1>Sales Trend</h1></a>
+        <a href="<%= request.getContextPath() %>/admin/salesTrend"><h1>Sales Trend</h1></a>
         <div id="div-salestrend-chart">
             <canvas id="lineChart-sales"></canvas>
         </div>
@@ -113,7 +113,7 @@
         <div class="div-icon"><a href=""><i class="fa-solid fa-calendar-days fa-3x"></i>캘린더관리</a></div>
         <div class="div-icon"><a href=""><i class="fa-solid fa-receipt fa-3x"></i>주문내역관리</a></div>
         <div class="div-icon"><a href=""><i class="fa-regular fa-comments fa-3x"></i>1:1채팅상담</a></div>
-        <div class="div-icon"><a href=""><i class="fa-solid fa-unlock fa-3x"></i>역할관리</a></div>
+        <div class="div-icon"><a href="<%= request.getContextPath() %>/admin/memberList"><i class="fa-solid fa-unlock fa-3x"></i>역할관리</a></div>
     </div>
 </div>
 <script>
