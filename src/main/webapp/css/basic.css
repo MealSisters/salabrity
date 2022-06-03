@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* ===================================
-body
+index.jsp - header/footer
 ======================================*/
 div, section, header, footer {
 	padding: 10px;
@@ -10,7 +10,7 @@ div, section, header, footer {
 /* container */
 div#container {
 	width: 1200px;
-	height: 1080px;
+	min-height: 1080px;
 	margin: 0 auto;
 }
 
@@ -103,7 +103,7 @@ header nav ul li:hover {
 }
 
 #content {
-	height: 700px;
+	min-height: 700px;
 }
 
 #content h2 {
@@ -198,7 +198,3 @@ tbody {
 .rights a {
 	font-weight: bold;
 }
-
-/* ===================================
-next
-======================================*/
