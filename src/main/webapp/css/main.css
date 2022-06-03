@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+/* ===================================
+index.jsp - main
+======================================*/
+
+/* main-slide-wrap */
+#main-slide-wrap {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+#main-slide-wrap ul {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#main-slide-wrap ul li {
+    float: left;
+    position: relative;
+    width: 600px;
+    height: 400px;
+    list-style-type: none;
+}
+
+#main-slide-wrap ul li div {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+}
+
+#main-slide-wrap ul li div h3 {
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+#main-slide-wrap ul li img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* table */
+.tbl-main-product, .tbl-main-service {
+	margin: 0 auto;
+	padding: 20px;
+	width: 90%;
+}
+
+.tbl-main-product {
+	border-collapse: separate;
+  	border-spacing: 10px 10px;
+}
+
+.tbl-main-service {
+	padding-bottom: 50px;
+}
+
+.main-product-btn, .tbl-main-service {
+	text-align: center;
+}
+
+/* th, td */
+
+.tbl-main-product th, .tbl-main-service th {
+	height: 30px;
+}
+
+.main-title {
+	text-align: center;
+	font-size: 25px;
+	padding: 10px 10px 5px 10px;
+}
+
+.main-sub-title {
+	text-align: center;
+	font-size: 15px;
+	padding: 5px 10px 30px 10px;
+	color: rgb(65, 65, 65);
+}
+
+.main-product-img td {
+	width: 250px;
+	height: 300px;
+	border: 1px solid gray;
+	border-radius: 20px;
+}
+
+.main-product-img a {
+	text-decoration: none;
+	color: black;
+}
+
+.main-product-name td {
+	font-weight: bold;
+}
+
+.main-product-price {
+	font-weight: bold;
+	color: #116916;
+}
+
+.main-product-price td :last-child {
+	font-size: 20px;
+	color: black;
+	float: right;
+	margin-right: 7px;
+}
+
+/* button */
+.main-product-btn, .main-service-btn {
+	background-color: #116916;
+	font-size: 15px;
+	margin: 50px auto;
+	width: 250px;
+}
+
+.main-product-btn:hover, .main-service-btn:hover {
+	cursor: position;
+	font-weight: bold;
+}
+
+.main-product-btn a, .main-service-btn a {
+	color: white;
+	text-decoration: none;
+}
+
+.main-service-msg {
+	width: 45%;
+}
+
+#main-service-msg1 {
+    padding-top: 60px;
+}
+
+.main-service-img {
+	border: 1px solid gray;
+	border-radius: 20px;
+	height: 300px;
+}
+
+.main-service-img a {
+	text-decoration: none;
+	color: black;
+}
+
+
+
+
+
+
+
