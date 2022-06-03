@@ -15,8 +15,13 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+.div-level1 * {
+  font-family: 'LeferiBaseType-RegularA';
+  font-weight: normal;
+  font-size: 12px;
+  vertical-align: bottom;
+}
 .div-level2 {
-  /* background-color: antiquewhite; */
   margin: 0 15px;
   padding: 0;
 }
@@ -32,7 +37,9 @@
 .rightdiv {
   width: 378px
 }
-h1 {
+.div-level1 h1 {
+  font-family: 'LeferiPoint-BlackObliqueA';
+  font-weight: normal;
   font-size: 28px;
   margin: 10px;
   text-align: center;
@@ -57,19 +64,23 @@ h1 {
   padding: 10px 13px;
   border: 0px solid #000;
   border-radius: 10px;
-  background: linear-gradient(119deg, rgba(56,64,1,1) 0%, rgba(185,191,4,1) 98%);
+  background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% );
 }
 #tbl-summaryData td>div {
   padding: 0;
   color: #fff;
 }
 #tbl-summaryData h2 {
+  font-family: 'LeferiPoint-WhiteObliqueA';
   font-size: 24px;
   margin: 0 0 10px;
   text-align: left;
 }
 #tbl-summaryData p {
-  font-size: 24px;
+  font-family: 'LeferiPoint-WhiteA';
+  letter-spacing: 1px;
+  font-weight: bolder;
+  font-size: 28px;
   margin: 0;
   text-align: right;
 }
@@ -91,11 +102,12 @@ h1 {
 }
 #div-QnAboard-head > div {
   width: 30px;
+  height: 20px;
   padding: 2px;
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background-color: #384001;
+  background-color: #07823E;
   border: 1px solid #ffffffff;
   border-radius: 7px;
   display: flex;
@@ -103,10 +115,13 @@ h1 {
 }
 #div-QnAboard-head a {
   width: inherit;
+  height: inherit;
   color: #fff;
   text-decoration: none;
+  line-height: 200%;
 }
 #tbl-QnAboard {
+  margin: 10px 0;
   width: inherit;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
@@ -137,7 +152,7 @@ h1 {
   border-bottom: 1px dashed #888;
 }
 #div-board > div:last-child {
-  padding: 10px 0;
+  padding: 5px 0;
   display: flex;
   justify-content: space-between; 
 } 
@@ -145,7 +160,7 @@ h1 {
   width: 174px;
   height: 40px;
   padding: 0;
-  background-color: #384001;
+  background-color: #07823E;
   border: 1px solid #ffffffff;
   border-radius: 6px;
 }
@@ -153,32 +168,37 @@ h1 {
   display: table-cell;
   width: inherit;
   height: inherit;
-  text-align: center;
-  vertical-align: middle;
+  text-align: center; 
+  line-height: 280%;
   color: #fff;
   text-decoration: none;
 }
 
 /*-------------------- Sales Trend 영역 --------------------*/
-#div-salestrend h1 a {
+#div-salestrend {
+  text-align: center;
+}
+#div-salestrend a {
   color: #000;
   text-decoration: none;
   transition-duration: 0.25s;
   transition-timing-function: ease;
 }
-#div-salestrend h1 a:hover {
-  color: #667302;
+#div-salestrend h1 {
+  display: inline-block;
+}
+#div-salestrend a:hover {
+  color: #07823E;
   cursor: pointer;
 }
 #div-salestrend-chart {
   height: 200px;
-  background-color: #ddd;
 }
 
 /*-------------------- Members 영역 --------------------*/
 #div-members-chart {
   height: 200px;
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }
 
 /*-------------------- 이동 아이콘 영역 --------------------*/
@@ -206,7 +226,7 @@ h1 {
   transition-timing-function: ease;
 }
 .div-icon a:hover {
-  color: #667302;
+  color: #07823E;
 }
 .div-icon i {
   width: inherit;

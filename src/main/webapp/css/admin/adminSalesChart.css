@@ -1,14 +1,22 @@
-
+/*-------------------- 뒤로가기 영역 --------------------*/
 div.return-dashboard {
-  width: 180px;
+  display: inline-block;
+  width: 160px;
+  height: 30px;
+  padding: 0;
   border-radius: 24px;
   text-align: center;
   transition-duration: 0.3s;  
 }
 a.return-dashboard {
+  width: inherit;
+  height: inherit;
+  font-family: 'LeferiPoint-WhiteA';
+  font-weight: bolder;
+  font-size: 14px;
+  letter-spacing: 90%;
+  color: #ddd;
   text-decoration: none;
-  letter-spacing: -0.5px;
-  color: #bbb;
   transition-duration: 0.3s;
 }
 a.return-dashboard i {
@@ -17,16 +25,12 @@ a.return-dashboard i {
 a.return-dashboard:hover {
   color: #116916;
 }
-div.return-dashboard:hover {
-  background-color: #f2f2f2;
-}
 
-
+/*---------------------- 차트 공통 영역 ----------------------*/
 .div-level1 {
   padding: 0;
   display: flex;
   justify-content: space-between;
-  
 }
 .div-level2 {
   width: 582px;
@@ -38,25 +42,69 @@ table {
   width: inherit;
 }
 .div-level2 h1 {
-  font-size: 28px;
+  font-family: 'LeferiPoint-BlackObliqueA';
+  font-weight: normal;
+  font-size: 32px;
   margin: 10px;
 }
 table td {
-  padding: 10px 0;
+  padding: 5px 0;
   text-align: center;
-  vertical-align: top;
 }
+table tr:first-of-type td{
+  height: 60px;
+}
+.div-searchfilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div-searchfilter > * {
+  margin: 0 3px;
+}
+.div-searchfilter label {
+  font-family: 'LeferiBaseType-BoldA';
+  font-size: 16px;
+}
+.input-period {
+  padding: 0 10px;
+}
+.input-period input {
+  width: 150px;
+}
+.input-period span {
+  padding: 0 3px;
+}
+.div-searchfilter button {
+  width: 40px;
+  height: 26px;
+  background-color: #07823E;
+  border: 0px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+.div-searchfilter button:hover {
+  background-color: #044F26;
+}
+/*---------------------- 라인차트 영역 ----------------------*/
 #div-lineChart {
   padding: 40px 10px;
   width: 578px;
   height: 350px;
 }
+/*---------------------- 파이차트 영역 ----------------------*/
 #div-pieChart {
   width: 578px;
   height: 300px;
+  /* padding: 0; */
+}
+#div-topSalesProduct tr:last-of-type td {
+  vertical-align: top;
 }
 .div-legend ul {
-  margin: 10px;
+  margin: 20px 10px;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
