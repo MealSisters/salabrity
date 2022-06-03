@@ -1,8 +1,66 @@
 @charset "UTF-8";
 
 /* ===================================
+font
+======================================*/
+@font-face {
+    font-family: 'LeferiPoint-BlackA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiBaseType-BoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-BoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiBaseType-RegularA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-RegularA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiPoint-SpecialA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiPoint-SpecialItalicA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===================================
 index.jsp - header/footer
 ======================================*/
+
+* {
+	font-family: 'LeferiBaseType-RegularA';
+}
+
+
 div, section, header, footer {
 	padding: 10px;
 }
@@ -20,12 +78,15 @@ header {
 }
 
 .main-logo, .main-nav, .member-nav {
-	margin-top: 10px;	
+	margin-top: 10px;
+	font-weight: bold;
 }
 
 /* main-logo */
 .main-logo {
 	float: left;
+	font-family: 'LeferiPoint-BlackObliqueA';
+	letter-spacing: -2px;
 	font-weight: bold;
 	font-size: 30px;
 	color: #116916;
@@ -33,6 +94,7 @@ header {
 }
 
 .main-logo a {
+	font-family: 'LeferiPoint-BlackObliqueA';
 	text-decoration: none;
 	color: #116916;
 }
@@ -65,7 +127,6 @@ header nav ul li:hover {
 
 .main-nav {
 	float: left;
-	margin-left: 10px;
 }
 
 .member-nav {
@@ -140,6 +201,11 @@ footer a:hover {
 .info-logo {
 	color: #116916;
 	font-size: 30px;
+}
+
+.info-logo span {
+	font-family: 'LeferiPoint-BlackObliqueA';
+	letter-spacing: -2px;
 }
 
 .info table {
