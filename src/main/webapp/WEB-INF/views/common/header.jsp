@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Salabrity</title>
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/basic.css" />
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css" />
 	<script src="https://kit.fontawesome.com/97c6ec6a69.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -23,7 +24,7 @@
 			<nav class="main-nav">
 				<ul>					
 					<li class="diet-diagnosis"><a href="#">맞춤식단찾기</a></li>
-					<li class="diet-calendar"><a href="#">식단캘린더</a></li>
+					<li class="diet-calendar"><a href="#">이달의식단</a></li>
 					<li class="diete-products"><a href="#">전체식품</a></li>
 					<li class="comminity-board"><a href="#">커뮤니티</a></li>
 					<li class="notice"><a href="#">공지사항/이벤트</a></li>
