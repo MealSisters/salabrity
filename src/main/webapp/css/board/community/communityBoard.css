@@ -121,7 +121,7 @@ communityBoard.jsp
 .hacks-btn, .general-btn {
 	font-size: 14px;
 	text-align: center;
-	margin: 50px auto;
+	margin: 30px auto;
 	border: 1px solid #116916;
 	width: 250px;
 }
@@ -130,7 +130,153 @@ communityBoard.jsp
 	font-weight: bold;
 }
 
+.hacks-btn:hover a, .general-btn:hover a {
+	display: block;
+}
+
 /* ===================================
 communityBoardList.jsp
 ======================================*/
+
+/* 검색창 */
+.board-search-wrap {
+	padding: 10px;
+	height: 10px;
+	border: 1px solid #116916;
+	border-radius: 30px;
+	transition: 0.4s;
+	width: 10px;
+	float: right;
+}
+
+.board-search-wrap:hover {
+	box-shadow: 0px 0px .5px 1px #116916;
+	width: 282px;
+}
+
+.board-search-btn {
+	text-decoration: none;
+	float: right;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #116916;
+}
+
+.board-search-text {
+	display: flex;
+	padding: 0;
+	width: 0px;
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	font-size: 13px;
+	line-height: 10px;
+	transition: .4s;
+}
+
+.board-search-wrap:hover > .board-search-text {
+	width: 200px;
+	padding: 0 5px;
+}
+
+/* table */
+.tbl-community-list {
+	clear: both;
+	width: 100%;
+	margin: 50px auto;
+	font-size: 14px;
+	border-collapse: collapse;
+	text-align: center;
+	table-layout: fixed;
+}
+
+.tbl-community-list a {
+	text-decoration: none;
+	color: black;
+}
+
+.tbl-community-list a:hover {
+	text-decoration: underline;
+}
+
+.tbl-community-list th {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	height: 30px;
+}
+
+.tbl-community-list th:first-of-type,
+.tbl-community-list th:nth-of-type(4),
+.tbl-community-list th:nth-of-type(5),
+.tbl-community-list th:nth-of-type(6) {
+	width: 100px;
+}
+
+.tbl-community-list th:nth-of-type(3),
+.tbl-community-list th:nth-of-type(7) {
+	width: 170px;
+}
+
+.tbl-community-list td {
+	height: 25px;
+	font-size: 13.5px;
+	border-bottom: 1px solid gray;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* buttom */
+#hacks-btn, #general-btn {
+	border: none;
+	padding: 5px;
+	border-radius: 10px;
+	background-color: white;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#hacks-btn:hover, #general-btn:hover {
+	color: #116916;
+}
+
+#board-post-btn {
+	float: right;
+	border: none;
+	padding: 5px;
+	color: white;
+	background-color: #116916;
+	width: 70px;
+	height: 30px;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+/* page-bar */
+.page-bar {
+	text-align: center;
+	font-size: 15px;
+}
+
+.page-bar a {
+	margin: 0 5px;
+	color: black;
+	text-decoration: none;
+}
+
+.page-bar a:hover {
+	color: #116916;
+	font-weight: bold;
+}
+
+.page-bar .cPage {
+	color: #f8674f;
+	font-weight: bold;
+}
+
 
