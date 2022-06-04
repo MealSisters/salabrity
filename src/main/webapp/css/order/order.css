@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+/*css연결 테스트
+#content h1{
+	font-size: 100px;
+}
+*/
+#content{
+	overflow-x: scroll;
+
+}
+::-webkit-scrollbar {
+display: none;
+}
+
+
+#content h1 {
+    font-size: 36px;
+    border-bottom: 4px solid darkgray;
+    padding-bottom: 10px;
+	margin-top: 0;
+	margin-bottom: 35px;
+}
+div.order_list{
+	padding: 0;
+	margin-bottom: 20px;
+}
+#content .order_tbl{
+	border-top: solid;
+
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+.order_tbl td{
+	padding: 12px;
+}
+.order_tbl td{ 
+	border-top: solid 1px;
+
+	font-size: 18px;
+
+}
+.order_tbl tbody>td{
+	height: 100px;
+}
+.prd_title ul{
+	list-style: none;
+}
+.prd_title ul{
+	display: table;
+}
+.prd_title ul>li{
+	display: table-cell;
+	vertical-align: middle;
+}
+.order_tbl tbody>td{
+	height: 100px;
+}
+td.total_tit{
+	text-align: right;
+	font-size: 25px;
+	padding-top: 15px;
+}
+.prd_title img{
+	width: 80px;
+	height: 80px;
+	margin: 0 30px 0 10px;
+}
+#content h2 {
+    font-size: 24px;
+    padding: 10px 0;
+	margin: 0;
+	text-align: left;
+
+}
+
+
+.ship_info{
+	position: absolute;
+	padding: 0;
+}
+.ship-header h2{
+	display: inline;
+	padding: 0;
+}
+.shipping_tbl{
+	border-top: solid;
+	border-bottom: solid;
+	border-collapse: collapse;
+	width: 100%;
+}
+.shipping_tbl th{
+	border-top: solid 1px;
+	border-bottom: solid 1px;
+	padding: 10px;
+	
+}
+.shipping_tbl td{
+	border-top: solid 1px;
+	border-bottom: solid 1px;
+	padding: 10px 0;
+}
+
+.addr_chk>label{
+	margin-right: 30px;
+	vertical-align: middle;
+	position: relative;
+	top: 3px;
+}
+
+input{
+	outline: none;
+	border: none;
+	background-color: #eee;
+	padding: 8px;
+}
+.add1, .add2{
+	width: 300px;
+	margin-top: 10px;
+}
+textarea{
+	width: 300px;
+	margin-bottom: 15px;
+	resize: none;
+	outline: none;
+	border: none;
+	background-color: #eee;
+}
+.address a{
+	padding: 10px;
+	background-color: #555;
+	border-radius: 3px;
+	color: #FFFF;
+	text-decoration: none;
+	border: solid;
+	font-size: 15px;
+}
+
+input[type=radio]{
+	background-color: #FFFF;
+	border: solid #116916;
+	margin: 0;
+	vertical-align: middle;
+	
+	width: 15px;
+	height: 15px;
+	appearance: none;
+	border-radius: 100%;
+}
+input[type=radio]:checked{
+	margin: 0;
+	appearance: none;
+	background-color: #116916;
+	border: solid #116916;
+	width: 18px;
+	height: 18px;
+	border-radius: 100%;
+}
+
+.payment a{
+	font-size: 20px;
+	display: inline-block;
+	/* border: #116916 solid; */
+	border-radius: 3px;
+	padding: 10px 50px;
+	background-color: #555;
+	color: white;
+	vertical-align: middle;
+	text-decoration: none;
+}
+#content div.payment{
+	width: fit-content;
+	padding: 0;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.required_col{
+	color: #d66;
+}
+
+
+
