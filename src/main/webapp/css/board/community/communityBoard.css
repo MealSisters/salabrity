@@ -4,6 +4,133 @@
 communityBoard.jsp
 ======================================*/
 
+#community-board-wrap a {
+	text-decoration: none;
+	color: black;
+	cursor: position;
+}
+
+#community-board-wrap .hacks-title a,
+#community-board-wrap .general-title a {
+	color: #116916;
+}
+
+#community-board-wrap .hacks-content-title,
+#community-board-wrap .general-content-title {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#community-board-wrap .hacks-content-title a:hover,
+#community-board-wrap .general-content-title a:hover {
+	color: #f8674f;
+}
+
+/* table */
 .tbl-community-hacks, .tbl-community-general {
 	margin: 0 auto;
+	width: 90%;
+	border-spacing: 10px 0;
+	table-layout: fixed;
 }
+
+/* th, td */
+.hacks-title th, .general-title th {
+	padding: 20px 10px;
+	text-align: left;
+	color: #116916;
+}
+
+.hacks-title th i, .general-title i {
+	padding-right: 10px;
+}
+
+.hacks-content-title div, .general-content-title div {
+	/* 제목이 한 줄 이상인 경우 ...처리 */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.hacks-content div, .general-content div {
+	border-top: 1px solid rgb(225, 225, 225);	
+	border-bottom: 1px dashed rgb(225, 225, 225);	
+}
+
+.hacks-content div a {
+	/* hacks content 영역이 3줄 이상일 경우 ...처리 */
+	white-space: normal;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.general-content div a {
+	/* general content 영역이 5줄 이상일 경우 ...처리 */
+	white-space: normal;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.hacks-content, .general-content {
+	font-size: 13px;
+}
+
+/* hacks image */
+.hacks-img div {
+	height: 300px;
+	border: 1px solid gray;
+}
+
+.hack-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.general-content-writer div {
+	font-size: 13px;
+	font-weight: bold;
+	padding-bottom: 2px;
+}
+
+.general-content-reg-date div {
+	font-size: 13px;
+	padding-top: 2px;
+}
+
+.comment-cnt, .like-cnt {
+	font-size: 14px;
+}
+
+.like-cnt {
+	text-align: right;
+}
+
+.like-cnt i {
+	color: red;	
+}
+
+.comment-cnt i:hover, .like-cnt i:hover {
+	transform: scale(1.2);
+}
+
+/* button */
+.hacks-btn, .general-btn {
+	font-size: 14px;
+	text-align: center;
+	margin: 50px auto;
+	border: 1px solid #116916;
+	width: 250px;
+}
+
+.hacks-btn:hover, .general-btn:hover {
+	font-weight: bold;
+}
+
+/* ===================================
+communityBoardList.jsp
+======================================*/
+

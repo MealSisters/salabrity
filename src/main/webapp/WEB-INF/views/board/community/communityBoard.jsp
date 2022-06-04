@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
+
 <!-- 커뮤니티게시판 메인 -->
 <div id="community-board-wrap">
 	<!-- 게시판1 테이블 -->
@@ -9,13 +10,17 @@
 		<table class="tbl-community-hacks">
 			<thead>
 				<tr>
-					<th colspan="6">Community</th>
+					<th class="main-title" colspan="6">Community</th>
 				</tr>
 				<tr>
-					<td colspan="6">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</td>
+					<td class="main-sub-title" colspan="6">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</td>
 				</tr>
 				<tr class="hacks-title">
-					<th colspan="6">커뮤니티게시판1</th>
+					<th colspan="6">
+						<a href="<%= request.getContextPath() %>/board/community/hacks">
+							<i class="fa-solid fa-caret-right"></i>커뮤니티게시판1
+						</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,40 +49,76 @@
 				</tr>
 				<tr class="hacks-content-title">
 					<td colspan="2">
-						<a href="#">게시글1</a>
+						<div>
+							<a href="#">게시글1</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글2</a>
+						<div>
+							<a href="#">게시글2</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글3</a>
+						<div>
+							<a href="#">게시글3</a>
+						</div>
 					</td>
 				</tr>
 				<tr class="hacks-content">
 					<td colspan="2">
-						<a href="#">게시글 내용</a>
+						<div>
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem exercitationem a debitis est cum sed nesciunt magnam error odio veritatis fuga deleniti dolor beatae iure facere incidunt consequatur ab harum.</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글 내용</a>
+						<div>
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quos itaque ullam provident soluta optio ea vitae esse totam nesciunt autem reprehenderit. Itaque ab totam possimus nemo sunt ex pariatur.</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글 내용</a>
+						<div>
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque rem temporibus nemo necessitatibus saepe neque ad atque excepturi inventore amet quasi itaque cumque porro quaerat nesciunt officiis illo est dicta!</a>
+						</div>
 					</td>
 				</tr>
 				<tr>
-					<td><i class="fa-regular fa-comment"></i>0</td>
-					<td>0<i class="fa-solid fa-heart"></i></td>
-					<td><i class="fa-regular fa-comment"></i>0</td>
-					<td>0<i class="fa-solid fa-heart"></i></td>
-					<td><i class="fa-regular fa-comment"></i>0</td>
-					<td>0<i class="fa-solid fa-heart"></i></td>
+					<td>
+						<div class="comment-cnt">
+							<i class="fa-regular fa-comment"></i>0
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							0<i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
+					<td>
+						<div class="comment-cnt">
+							<i class="fa-regular fa-comment"></i>0
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							0<i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
+					<td>
+						<div class="comment-cnt">
+							<i class="fa-regular fa-comment"></i>0
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							0<i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="6">
 						<div class="hacks-btn">
-							<a href="#">게시판1 이동</a>
+							<a href="<%= request.getContextPath() %>/board/community/hacks">게시판1 이동</a>
 						</div>
 					</td>
 				</tr>
@@ -89,71 +130,108 @@
 		<table class="tbl-community-general">
 			<thead>
 				<tr class="general-title">
-					<th colspan="6">커뮤니티게시판2</th>
+					<th colspan="6">
+						<a href="<%= request.getContextPath() %>/board/community/general">
+							<i class="fa-solid fa-caret-right"></i>커뮤니티게시판2
+						</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="general-content-writer">
-					<td rowspan="2">
-						<div>
-							<i class="fa-solid fa-circle-user"></i>
-						</div>
+					<td colspan="2">
+						<div>작성자　writer</div>
 					</td>
-					<td>작성자</td>
-					<td rowspan="2">
-						<div>
-							<i class="fa-solid fa-circle-user"></i>
-						</div>
+					<td colspan="2">
+						<div>작성자　writer</div>
 					</td>
-					<td>작성자</td>
-					<td rowspan="2">
-						<div>
-							<i class="fa-solid fa-circle-user"></i>
-						</div>
+					<td colspan="2">
+						<div>작성자　writer</div>
 					</td>
-					<td>작성자</td>
 				</tr>
 				<tr class="general-content-reg-date">
-					<td>작성일</td>
-					<td>작성일</td>
-					<td>작성일</td>
+					<td colspan="2">
+						<div>작성일　22-06-04</div>
+					</td>
+					<td colspan="2">
+						<div>작성일　22-06-04</div>
+					</td>
+					<td colspan="2">
+						<div>작성일　22-06-04</div>
+					</td>
 				</tr>
 				<tr class="general-content-title">
 					<td colspan="2">
-						<a href="#">게시글1</a>
+						<div>						
+							<a href="#">게시글1</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글2</a>
+						<div>						
+							<a href="#">게시글2</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글3</a>
+						<div>						
+							<a href="#">게시글3</a>
+						</div>
 					</td>
 				</tr>
 				<tr class="general-content">
 					<td colspan="2">
-						<a href="#">게시글 내용</a>
+						<div>
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi quaerat accusantium excepturi debitis consectetur iure iusto numquam incidunt fugiat rerum accusamus velit aspernatur facere quis praesentium officiis hic voluptates temporibus!</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글 내용</a>
+						<div>
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis sequi totam sapiente quisquam doloribus ratione amet laudantium impedit vero minima magni pariatur vitae recusandae dolores adipisci ut maiores temporibus et.</a>
+						</div>
 					</td>
 					<td colspan="2">
-						<a href="#">게시글 내용</a>
+						<div>
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur laborum hic quisquam optio necessitatibus autem blanditiis modi explicabo non adipisci. Iure impedit quo sed dicta cumque natus nam officia corporis?</a>
+						</div>
 					</td>
 				</tr>
 				<tr>
-					<td><i class="fa-regular fa-comment"></i>0</td>
-					<td>0<i class="fa-solid fa-heart"></i></td>
-					<td><i class="fa-regular fa-comment"></i>0</td>
-					<td>0<i class="fa-solid fa-heart"></i></td>
-					<td><i class="fa-regular fa-comment"></i>0</td>
-					<td>0<i class="fa-solid fa-heart"></i></td>
+					<td>
+						<div class="comment-cnt">
+							<i class="fa-regular fa-comment"></i>0
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							0<i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
+					<td>
+						<div class="comment-cnt">	
+							<i class="fa-regular fa-comment"></i>0
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							0<i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
+					<td>
+						<div class="comment-cnt">
+							<i class="fa-regular fa-comment"></i>0
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							0<i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="6">
 						<div class="general-btn">
-							<a href="#">게시판2 이동</a>
+							<a href="<%= request.getContextPath() %>/board/community/general">게시판2 이동</a>
 						</div>
 					</td>
 				</tr>
