@@ -1,0 +1,27 @@
+/*-------------------- 뒤로가기 영역 --------------------*/
+div.return-dashboard {
+  display: inline-block;
+  width: 160px;
+  height: 30px;
+  padding: 0;
+  border-radius: 24px;
+  text-align: center;
+  transition-duration: 0.3s;  
+}
+a.return-dashboard {
+  width: inherit;
+  height: inherit;
+  font-family: 'LeferiPoint-WhiteA';
+  font-weight: bolder;
+  font-size: 14px;
+  letter-spacing: 90%;
+  color: #ddd;
+  text-decoration: none;
+  transition-duration: 0.3s;
+}
+a.return-dashboard i {
+  margin: 0 10px 0 0;
+}
+a.return-dashboard:hover {
+  color: #116916;
+}

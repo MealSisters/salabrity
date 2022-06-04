@@ -1,0 +1,101 @@
+
+/*---------------------- 차트 공통 영역 ----------------------*/
+.div-level1 {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.div-level2 {
+  width: 582px;
+  padding: inherit;
+  display: flex;
+  justify-content: center;
+}
+table {
+  width: inherit;
+}
+.div-level2 h1 {
+  font-family: 'LeferiPoint-BlackObliqueA';
+  font-weight: normal;
+  font-size: 32px;
+  margin: 10px;
+}
+table td {
+  padding: 5px 0;
+  text-align: center;
+}
+table tr:first-of-type td{
+  height: 60px;
+}
+.div-searchfilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div-searchfilter > * {
+  margin: 0 3px;
+}
+.div-searchfilter label {
+  font-family: 'LeferiBaseType-BoldA';
+  font-size: 16px;
+}
+.input-period {
+  padding: 0 10px;
+}
+.input-period input {
+  width: 150px;
+}
+.input-period span {
+  padding: 0 3px;
+}
+.div-searchfilter button {
+  width: 40px;
+  height: 26px;
+  background-color: #116135;
+  border: 0px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+.div-searchfilter button:hover {
+  background-color: #0EAE57;
+}
+/*---------------------- 라인차트 영역 ----------------------*/
+#div-lineChart {
+  padding: 40px 10px;
+  width: 578px;
+  height: 350px;
+}
+/*---------------------- 파이차트 영역 ----------------------*/
+#div-pieChart {
+  width: 578px;
+  height: 300px;
+  /* padding: 0; */
+}
+#div-topSalesProduct tr:last-of-type td {
+  vertical-align: top;
+}
+.div-legend ul {
+  margin: 20px 10px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.div-legend ul li {
+  list-style: none;
+  margin: 5px 10px;
+}
+.span-customlabel-pie {
+  font-size: 14px;
+  width: 100px;
+}
+.div-legend ul li span:first-of-type {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}

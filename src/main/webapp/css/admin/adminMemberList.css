@@ -1,0 +1,134 @@
+.div-level1 {
+  height: 900px;
+  width: 1180px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  font-size: 14px;
+}
+.div-level2 {
+  width: inherit;
+}
+
+/*---------------------- 검색필터 영역 ----------------------*/
+.div-level2:first-of-type {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  margin: 0 0 30px;
+}
+.div-level1 > p {
+  width: inherit;
+  margin-bottom: 0;
+  font-family: 'LeferiPoint-BlackObliqueA';
+  font-size: 20px;
+  color: #044F26;
+}
+form[name='memberFilterFrm'] {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.div-searchFilter {
+  display: flex;
+  align-items: center;
+}
+.div-searchFilter label {
+  margin: 0 7px;
+}
+.div-searchFilter input[type="text"] {
+  font-family: 'NanumSquare';
+  width: 120px;
+  height: 20px;
+}
+.div-searchFilter input[type="radio"] {
+  margin: -4px 4px 0 10px;
+  vertical-align: middle;
+}
+.div-searchbtn {
+  padding: 3px;
+  width: 40px;
+  height: 26px;
+  background-color: #116135;
+  border: 0px;
+  border-radius: 6px;
+  transition-duration: 0.1s;
+}
+.div-searchbtn button {
+  cursor: pointer;
+  width: inherit;
+  height: inherit;
+  background: none;
+  border: none;
+  color: #fff;
+}
+.div-searchbtn:hover {
+  background-color: #0EAE57;
+}
+/*---------------------- 조회결과 영역 ----------------------*/
+.div-resultlist {
+  padding: 0;
+}
+#tbl-memberList {
+  margin: auto;
+  width: inherit;
+  border-collapse: collapse;
+}
+#tbl-memberList tr {
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+}
+#tbl-memberList thead {
+  height: 35px;
+  font-size: 13px;
+  background-color: #224747;
+  color: #fff;
+}
+#tbl-memberList th {
+  font-weight: normal;
+}
+#tbl-memberList td {
+  font-family: 'LeferiBaseType-RegularA';
+  padding: 2px 7px;
+  font-size: 13px;
+  text-align: center;
+}
+.col-no {
+  width: 26px;
+  text-align: center;
+}
+.col-memberRole select{
+  font-size: 13px;
+  font-family: 'NanumSquare';
+}
+.col-memberId {
+  width: 130px;
+}
+.col-gender {
+  width: 40px;
+}
+.col-phone {
+  width: 110px;
+}
+.col-birth, .col-regDate {
+  width: 94px;
+}
+/*---------------------- 페이지바 영역 ----------------------*/
+.page-bar {
+  margin: 20px;
+}
+.page-bar a {
+  color: #aaa;
+  margin: 0 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.page-bar a:hover {
+  font-family: 'LeferiBaseType-BoldA';
+  color: #0eae57;
+}
+.page-bar .cPage {
+  font-family: 'LeferiBaseType-BoldA';
+  color: #0c7475;
+}
