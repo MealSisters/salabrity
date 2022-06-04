@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+/* ===================================
+communityBoard.jsp
+======================================*/
+
+.tbl-community-hacks, .tbl-community-general {
+	margin: 0 auto;
+}
