@@ -40,12 +40,12 @@
 					<li class="login">
 					<%-- if(loginMember == null) { --%>
 						<%-- 로그인 전 --%>
-						<a href="#" title="로그인"><i class="fa-solid fa-user"></i></a>
+						<a href="<%= request.getContextPath() %>/member/login" title="로그인"><i class="fa-solid fa-user"></i></a>
 					<%-- } else { --%>
 						<%-- 로그인 후 --%>
 						<%-- 이 부분은 일단 주석처리해둘게요! --%>
-						<!-- <a href="#" title="마이페이지"><i class="fa-solid fa-user"></i></a>
-						<div class=inner-member-nav>
+					<!--	 <a href="#" title="마이페이지"><i class="fa-solid fa-user"></i></a>
+						  <div class=inner-member-nav>
 							<ul>
 								<li class="shipping-info"><a href="#">쇼핑정보</a></li>
 								<li class="my-info"><a href="#">회원정보</a></li>
