@@ -6,9 +6,6 @@
 
 
 <style>
-#content {
-    height:980px;
-}
 #step2 {
 	color: #116916;
 	font-weight: bold;

@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
-/* login page */
+* {
+    font-family: 'LeferiBaseType-RegularA';
+}
+
+/* 검색 키워드 "페이지" */
+
+/* login 페이지 */
 .head_log {
 	text-align: center;
 	font-size: 22px;
@@ -27,7 +33,7 @@
 	/* border-radius:5px; */
 }
 
-#loginId {
+#_memberId {
 	margin-bottom: 14px;
 }
 
@@ -146,7 +152,7 @@
 	width: 13px;
 }
 
-/* joinAgree page */
+/* joinAgree 페이지 */
 .agree_box {
 	border-top: 1px solid #dbdbdb;
 	width: 700px;
@@ -201,7 +207,7 @@ label {
 	text-align: center;
 }
 
-strong {
+.agree_choice {
 	color: #116916;
 	font-size: 13px;
 }
@@ -241,12 +247,12 @@ strong {
 	margin-top: 25px;
 }
 
-h4 {
+.use_agree {
 	border-bottom: 1px solid black;
 	padding: 10px;
 }
 
-/* join page */
+/* join 페이지 */
 .join_box {
 	width: 700px;
 	margin: 0 auto;
@@ -323,7 +329,7 @@ h4 {
 	border: 1px solid #116916;
 }
 
-/* join page */
+/* join page 페이지 enroll */
 .join_box {
 	width: 700px;
 	margin: 0 auto;
@@ -372,6 +378,10 @@ h4 {
 	border: 1px solid #116916;
 }
 
+#phone {
+    margin-bottom: 0px;
+}
+
 #btn_cancle {
 	width: 250px;
 	height: 52px;
@@ -400,11 +410,13 @@ h4 {
 	border: 1px solid #116916;
 }
 
-/* join 완료 */
+/* joinend 회원가입 완료 페이지 */
 #end {
 	text-align: center;
 	margin-top: 5px;
+    padding-bottom: 30px;
 }
+
 
 .finish {
 	text-align: center;
@@ -445,7 +457,7 @@ h4 {
 	border: 1px solid #116916;
 }
 
-/* find */
+/* find 페이지 */
 .find_box {
 	padding: 30px;
 	width: 360px;
@@ -464,9 +476,6 @@ h4 {
 	padding-left: 16px;
 }
 
-#phone {
-	margin-bottom: 30px;
-}
 
 .find_input {
 	padding: 0;
@@ -505,6 +514,10 @@ h4 {
 	margin-right: 30px;
 }
 
+.plus {
+	margin-top : 10px;
+}
+
 .plus span {
 	font-size: 12px;
 	display: inline-block;
@@ -519,68 +532,91 @@ h4 {
 	border-bottom: solid 1px #bdbdbd;
 }
 
-/* 회원 정보 수정 member update */
-.sub_inner_list {
-	color: #000;
-	text-decoration: none;
-	list-style: none;
-	margin-top: 6px;
+/* 회원 정보 수정 페이지 member update */
+
+/* 회원 탈퇴 페이지 */
+
+
+.del_strong {
+	color: black;
+	font-size: 15px;
 }
 
-.sub_inner_list a {
-	color: #000;
-	text-decoration: none;
-	font-size: 13px;
+.del_com_strong {
+	color: black;
+	font-size : 13px;
 }
 
-.sub_inner_list a:hover {
-	color: #116916;
+.del_hd, .del_cont {
+	text-align: center;
+	/* margin-bottom: 30px; */
+	margin-left: 13px;
+	
 }
 
-.sub {
-	width: 130px;
+.del_hd {
+	padding-bottom: 20px;
 }
 
-.sub_box_inner {
-	padding: 0;
-	border-top: 1px solid #dbdbdb;
-	margin-bottom: 25px;
+.del_li {
+	list-style:none;
+	margin-bottom: 30px;
+}
+.del_strong {
+	display: block;
 }
 
-.sub_my_box {
-	padding: 0;
+.del_cont {
+	padding-top: 30px;
+	padding-bottom: 0.5px;
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
 }
 
-.my_page_content {
-	margin-top: 22px;
-	border-top: 1px solid #dbdbdb;
+.del_hd span {
+	font-size: 14px;
+}
+
+.del_cont span {
+	font-size: 12px;
+	color: #888888;
+}
+
+#del_ask {
+	display: block;
+}
+
+
+.del_com_strong {
+	line-height: 45px;
+	padding-right: 30px;
+}
+#del_ask {
+	width: 450px;
+	height: 37px;
+	border: 1px solid #ccc;
+	padding-left: 10px
+}
+.del_textarea textarea {
+	border: 1px solid #ccc;
+	overflow: hidden;
+	overflow-y: auto;
+	width: 580px;
+	height: 100px;
+	padding: 15px;
+	resize: none;
+	
+}
+.del_flex {
 	display: flex;
+	
 }
 
-aside {
-	margin-left: 35px;
+#del_flex_com {
+	margin-bottom: -15px;
 }
 
-.li_head {
-	margin-bottom: 10px;
-}
-
-#top_bor {
-	border-top: 2px solid black;
-}
-
-.my_hd {
-	margin-top: 35px;
-}
-
-.my_sub_content {
-	margin-top: 50px;
-	margin-left: 40px;
-	width: 870px;
-	margin: 0 auto;
-}
-
-#btn_update {
+#btn_del {
 	width: 190px;
 	height: 45px;
 	line-height: 45px;
@@ -592,7 +628,7 @@ aside {
 	border: 1px solid #116916;
 }
 
-#btn_update_can {
+#btn_del_can {
 	width: 190px;
 	height: 45px;
 	line-height: 45px;
@@ -608,23 +644,18 @@ aside {
 	margin-right: 30px;
 	margin-left: 160px;
 }
-
-.update_member {
-	width: 870px;
-}
-
-.btn_update_box {
+.btn_del_box {
 	border-top: solid 1px #dbdbdb;
 	/* text-align: center; */
-	/* margin-left: 200px; */
+	margin-left: 25px;
+
 	margin-top: 10px;
-	padding-top: 20px;
+	padding-top: 35px;
+}
+.del_comment {
+	margin-left: 40px;
 }
 
-.update_hd {
-	margin-left: 30px;
-	border-bottom: 1px solid #dbdbdb;
-	padding-bottom: 20px;
-	margin-top: 30px;
-	margin-bottom: 0px;
+footer {
+	margin-top: 80px;
 }
