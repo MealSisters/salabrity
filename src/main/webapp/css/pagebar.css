@@ -1,0 +1,20 @@
+/* ===================================
+ pagebar.jsp
+======================================*/
+.page-bar {
+  margin: 20px;
+}
+.page-bar a {
+  color: #aaa;
+  margin: 0 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.page-bar a:hover {
+  font-family: 'LeferiBaseType-BoldA';
+  color: #0eae57;
+}
+.page-bar .cPage {
+  font-family: 'LeferiBaseType-BoldA';
+  color: #116135;
+}
