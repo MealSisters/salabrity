@@ -52,8 +52,8 @@
 						<div class="total_price">100,000원</div>
 					</div>
 					<div class="order_btn_wrp">
-						<a href="" class="btn_order">주문하기</a>
-						<a href="" class="btn_add_cart">장바구니 담기</a>
+						<a href="<%= request.getContextPath()%>/order/order" class="btn_order">주문하기</a>
+						<a href="<%= request.getContextPath()%>/order/cart"" class="btn_add_cart">장바구니 담기</a>
 					</div>
 				</div>
 			</div>
