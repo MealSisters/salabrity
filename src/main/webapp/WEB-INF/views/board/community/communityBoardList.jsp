@@ -6,16 +6,16 @@
 <div id="community-board-list-wrap">
 	<div>
 		<div class="main-title">Community</div>
-		<div class="main-sub-title">게시판 소개</div>
+		<div class="main-sub-title">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</div>
 	</div>
-	<input type="button" value="게시판1" id="hacks-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks';" />
-	<input type="button" value="게시판2" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" />
+	<input type="button" value="샐브's 레시피" id="hacks-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks';" />
+	<input type="button" value="자유게시판" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" />
 	<br /><hr />
 <%-- <% if(loginMember != null) { %> --%>
-	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks/enroll';" />	
+	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general/enroll';" />	
 <%-- <% } %> --%>
 	<div class="board-search-wrap">
-		<input type="text" class="board-search-text" name="" placeholder="검색어 입력" />
+		<input type="text" class="board-search-text" placeholder="검색어 입력" />
 		<a class="board-search-btn" href="#">
 			<i class="fa-solid fa-magnifying-glass"></i>
 		</a>
