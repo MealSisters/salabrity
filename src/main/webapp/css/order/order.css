@@ -4,18 +4,8 @@
 #content h1{
 	font-size: 100px;
 }
-*/
-#content{
-	overflow-x: scroll;
-
-}
-::-webkit-scrollbar {
-display: none;
-}
-
-
-#content h1 {
-    font-size: 36px;
+*/#content h1 {
+    font-size: 20px;
     border-bottom: 4px solid darkgray;
     padding-bottom: 10px;
 	margin-top: 0;
@@ -32,17 +22,23 @@ div.order_list{
 	width: 100%;
 	text-align: center;
 }
-.order_tbl td{
-	padding: 12px;
+.order_tbl thead>tr>th{
+	padding: 7px;
+	border-top: solid 1px;
+	font-size: 15px;
 }
 .order_tbl td{ 
 	border-top: solid 1px;
+	font-size: 13px;
+}
 
-	font-size: 18px;
-
+.order_tbl th{ 
+	border-top: solid 1px;
+	font-size: 15px;
+	padding: 7px 0;
 }
 .order_tbl tbody>td{
-	height: 100px;
+	height: 90px;
 }
 .prd_title ul{
 	list-style: none;
@@ -59,16 +55,16 @@ div.order_list{
 }
 td.total_tit{
 	text-align: right;
-	font-size: 25px;
+	font-size: 20px;
 	padding-top: 15px;
 }
 .prd_title img{
-	width: 80px;
-	height: 80px;
+	width: 70px;
+	height: 70px;
 	margin: 0 30px 0 10px;
 }
 #content h2 {
-    font-size: 24px;
+    font-size: 15px;
     padding: 10px 0;
 	margin: 0;
 	text-align: left;
@@ -90,26 +86,33 @@ td.total_tit{
 	border-collapse: collapse;
 	width: 100%;
 }
-.shipping_tbl th{
+#content .order_tbl_tit {
 	border-top: solid 1px;
+	font-size: 13x;
 	border-bottom: solid 1px;
 	padding: 10px;
-	
 }
 .shipping_tbl td{
 	border-top: solid 1px;
 	border-bottom: solid 1px;
-	padding: 10px 0;
+	padding: 7px 0;
+	font-size: 13x;
 }
-
+.shipping_tbl th{
+	border-top: solid 1px;
+	border-bottom: solid 1px;
+	padding: 7px 0;
+	font-size: 13x;
+}
 .addr_chk>label{
 	margin-right: 30px;
 	vertical-align: middle;
 	position: relative;
 	top: 3px;
+	font-size: 13px;
 }
 
-input{
+.shipping_tbl input{
 	outline: none;
 	border: none;
 	background-color: #eee;
@@ -119,7 +122,7 @@ input{
 	width: 300px;
 	margin-top: 10px;
 }
-textarea{
+.shipping_tbl textarea{
 	width: 300px;
 	margin-bottom: 15px;
 	resize: none;
@@ -128,16 +131,16 @@ textarea{
 	background-color: #eee;
 }
 .address a{
-	padding: 10px;
-	background-color: #555;
+	padding: 11px;
+	background-color: #116916;
 	border-radius: 3px;
 	color: #FFFF;
 	text-decoration: none;
 	border: solid;
-	font-size: 15px;
+	font-size: 12px;
 }
 
-input[type=radio]{
+.shipping_tbl input[type=radio]{
 	background-color: #FFFF;
 	border: solid #116916;
 	margin: 0;
@@ -148,7 +151,7 @@ input[type=radio]{
 	appearance: none;
 	border-radius: 100%;
 }
-input[type=radio]:checked{
+.shipping_tbl input[type=radio]:checked{
 	margin: 0;
 	appearance: none;
 	background-color: #116916;
@@ -159,12 +162,12 @@ input[type=radio]:checked{
 }
 
 .payment a{
-	font-size: 20px;
+	font-size: 18px;
 	display: inline-block;
 	/* border: #116916 solid; */
 	border-radius: 3px;
 	padding: 10px 50px;
-	background-color: #555;
+	background-color: #116916;
 	color: white;
 	vertical-align: middle;
 	text-decoration: none;
@@ -173,12 +176,13 @@ input[type=radio]:checked{
 	width: fit-content;
 	padding: 0;
 	margin: auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 12px;
+	margin-bottom: 18px;
 }
 .required_col{
 	color: #d66;
 }
+
 
 
 

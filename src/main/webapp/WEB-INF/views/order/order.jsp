@@ -11,19 +11,19 @@
 					<table class="order_tbl">
 						<thead>
 							<tr>
-								<td class="prd_title">상품명</td>
-								<td class="term">배송기간</td>
-								<td class="date">첫배송일</td>
-								<td class="qty">수량</td>
-								<td class="prd_price">판매가격</td>
-								<td class="prd_price">합계가격</td>
+								<th class="prd_title order_tbl_tit">상품명</th>
+								<th class="date order_tbl_tit">첫배송일</th>
+								<th class="qt order_tbl_tit">수량</th>
+								<th class="term order_tbl_tit">배송기간</th>
+								<th class="prd_price order_tbl_tit">판매가격</th>
+								<th class="prd_price order_tbl_tit">합계가격</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td class="prd_title">
 									<ul>
-										<li><img src="meal-1307604_1920.jpg" alt="이미지"></li>
+										<li><img src="<%= request.getContextPath() %>/images/meal-1307604_1920.jpg" alt="이미지"></li>
 										<li>베이비 식단</li>
 									</ul>
 								</td>
@@ -36,7 +36,7 @@
 							<tr>
 								<td class="prd_title">
 									<ul>
-										<li><img src="meal-1307604_1920.jpg" alt="이미지"></li>
+										<li><img src="<%= request.getContextPath() %>/images/meal-1307604_1920.jpg" alt="이미지"></li>
 										<li>체중조절 식단</li>
 									</ul>
 								</td>
@@ -103,6 +103,5 @@
 				</div>
 				<div class="payment"><a href="">결제하기</a></div>
 			</form>
-
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

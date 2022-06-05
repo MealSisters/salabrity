@@ -3,7 +3,11 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
-
+<style>
+#phone {
+    margin-bottom: 30px;
+}
+</style>
 	
        <h3 class="head_log">아이디 찾기</h3>
 			<div class="find_box">

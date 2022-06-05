@@ -5,13 +5,12 @@
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 
 <style>
-#content {
-	height:950px;
-}
+
 #step1 {
 	color: #116916;
 	font-weight: bold;
 }
+
 </style>
 <div class="join_main_head">
 			<h3>약관동의</h3>
@@ -24,14 +23,14 @@
 		<div class="agree_box">
 				<div class="join_main_cont">
 					<div class="join_agree_box">
-						<h4>이용약관동의</h4>
+						<h4 class="use_agree">이용약관동의</h4>
 						<div class="join_check" >
 							<input type="checkbox" name="" id="AllAgree">
 							<label>
 							<span id="every_agree">샐러브리티의 모든 약관을 확인하고 전체 동의합니다.</span></label>
 						</div>
 						<div class="join_check">
-							<input type="checkbox" name="" id=""><strong>(필수)</strong>
+							<input type="checkbox" name="" id=""><strong class="agree_choice">(필수)</strong>
 							<label>
 								 이용약관</label>
 						</div>
@@ -269,7 +268,7 @@
 2. 2015년 08월 17일부터 시행되던 종전의 약관은 이 약관으로 대체됩니다.
 						</div>
 						<div class="join_check">
-							<input type="checkbox" name="" id=""><strong>(필수)</strong>
+							<input type="checkbox" name="" id=""><strong class="agree_choice">(필수)</strong>
 							<label>
 								 개인 정보 수집 및 이용</label>
 						</div>
@@ -281,7 +280,7 @@
 					보유 및 이용기간 : 회원탈퇴 후 5일까지 
 			</div>
 			<div class="join_check" id="age_agree">
-							<input type="checkbox" name="" id=""><strong>(필수)</strong>
+							<input type="checkbox" name="" id=""><strong class="agree_choice">(필수)</strong>
 							<label>
 								 만 14세 이상입니다.</label>
 						</div>
