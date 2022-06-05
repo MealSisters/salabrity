@@ -1,0 +1,101 @@
+@charset "EUC-KR";
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+.list_header {
+    height: 300px;
+    background-color: #f1f1f1;
+}
+
+.list_header h1 {
+    margin: 100px 0 0 50px;
+}
+
+.list_header p {
+    margin-left: 50px;
+}
+
+#content .sort_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort_box div {
+    font-weight: 900;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.product {
+    background-color: #eee;
+    border-radius: 10px;
+    width: 20%;
+
+}
+#sort{
+    line-height: normal;
+    height: 40px;
+    padding: 2px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    border: none;
+}
+
+.item {
+    display: flex;
+    list-style: none;
+    width: 350px;
+    flex-wrap: wrap;
+    margin: 10px 11.6px;
+    justify-content: space-between;
+}
+
+.item_img {
+    width: 100%;
+    height: 440px;
+    border-radius: 13px;
+    margin: auto;
+}
+
+.item_tit,
+.item_price,
+.item_dsc {
+
+    padding: 10px 0 0 0;
+
+}
+
+.item_tit {
+    font-weight: 900;
+    font-size: 1.1em;
+    width: 100%;
+}
+
+.item_price {
+    font-weight: 900;
+    width: 60%;
+}
+
+.item_dsc {
+    width: 100%;
+}
+
+.add_cart {
+    display: block;
+    font-size: 1.7em;
+    margin: 0 3% 0 0;
+    color: #116916;
+    padding-top: 3%;
+}
+
+.product_list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 100px;
+}
