@@ -99,11 +99,15 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background-color: #07823E;
+  background-color: #116135;
   border: 1px solid #ffffffff;
   border-radius: 7px;
   display: flex;
   text-align: center;
+  transition-duration: 0.2s;
+}
+#div-QnAboard-head > div:hover {
+  background-color: #0EAE57;
 }
 #div-QnAboard-head a {
   width: inherit;
@@ -152,7 +156,7 @@
   width: 174px;
   height: 40px;
   padding: 0;
-  background-color: #07823E;
+  background-color: #116135;
   border: 1px solid #ffffffff;
   border-radius: 6px;
   transition-duration: 0.2s;
@@ -167,7 +171,7 @@
   text-decoration: none;
 }
 .div-174wrap:hover {
-  background-color: #044F26;
+  background-color: #0EAE57;
 }
 /*-------------------- Sales Trend 영역 --------------------*/
 #div-salestrend {
@@ -183,7 +187,7 @@
   display: inline-block;
 }
 #div-salestrend a:hover {
-  color: #07823E;
+  color: #0EAE57;
   cursor: pointer;
 }
 #div-salestrend-chart {
@@ -210,7 +214,7 @@
 }
 .div-icon a {
   width: 110px;
-  height: 90px;
+  height: 55px;
   color: #000;
   text-align: center;
   text-decoration: none;
@@ -221,7 +225,7 @@
   transition-timing-function: ease;
 }
 .div-icon a:hover {
-  color: #07823E;
+  color: #0EAE57;
 }
 .div-icon i {
   width: inherit;

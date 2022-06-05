@@ -3,20 +3,22 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
+
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminMemberList.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminResultSetList.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/ListSearchFilter.css">
 <div class="div-level1">
-    <p>Filter</p>
-    <div class="div-level2">
+    <p id="filter-wrapper-title">Filter</p>
+    <div id="filter-wrapper" class="div-level2">
         <form name="memberFilterFrm" action="" onSubmit="return false;">
             <div class="div-searchFilter">
                 <label for="filter-memberId">아이디</label>
-                <input type="text" name="" id="filter-memberId">
+                <input type="text" name="memberId" id="filter-memberId">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-memberName">이름</label>
-                <input type="text" name="" id="filter-memberName">
+                <input type="text" name="memberName" id="filter-memberName">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-gender">성별</label>
@@ -24,8 +26,8 @@
                 <input type="radio" name="gender" id="radio-female" value="female">여
             </div>
             <div class="div-searchFilter">
-                <label for="filter-birth">생년월일</label>
-                <input type="date" name="" id="filter-birth">
+                <label for="filter-birthday">생년월일</label>
+                <input type="date" name="birthday" id="filter-birthday">
             </div>
             <div class="div-searchbtn">
                 <button>조회</button>
@@ -34,7 +36,7 @@
     </div>
 
     <div class="div-level2 div-resultlist">
-        <table id="tbl-memberList">
+        <table id="tbl-memberList" class="tbl-searchResult">
             <thead>
                 <tr>
                     <th class="col-no">No</th>
@@ -64,7 +66,7 @@
                     <td>1980-08-08</td>
                     <td>gdgd1234@gmail.com</td>
                     <td>010-1111-2222</td>
-                    <td>서울특별시 강남구 청담동 어쩔로 저쩔길 티비아파트</td>
+                    <td>서울특별시 강남구 청담동 어쩔로 저쩔길 티비아파트 1234번 1234 어쩌고저쩌고 11111 2222</td>
                     <td>2022-04-01</td>
                 </tr>
                 <!-- (tr>td{$})*20 -->
@@ -114,18 +116,7 @@
         </table>
     </div>
 
-
-    <div class="page-bar">
-        <a href=""><i class="fa-solid fa-angles-left"></i></a>
-        <a href=""><i class="fa-solid fa-angle-left"></i></a>
-        <a href="" class="cPage">1</a>
-        <a href="">2</a>
-        <a href="">3</a>
-        <a href="">4</a>
-        <a href="">5</a>
-        <a href=""><i class="fa-solid fa-angle-right"></i></a>
-        <a href=""><i class="fa-solid fa-angles-right"></i></a>
-    </div>
+    <%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
 
 </div>
 
