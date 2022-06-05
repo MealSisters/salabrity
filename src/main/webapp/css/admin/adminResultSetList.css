@@ -97,6 +97,7 @@ td.col-buttons > div {
   background-color: #0eae5622;
   display: flex;
   align-items: center;
+  transition-duration: 0.1s;
 }
 td.col-buttons a {
   padding: 0 7px;
