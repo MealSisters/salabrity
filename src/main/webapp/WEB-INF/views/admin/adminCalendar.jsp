@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminCalendar.css">
 <div class="div-level1">
     <div class="div-level2 productName-wrapper">
-        <form action="">
+        <form name="selectProductFrm" action="">
             <label>상품명</label>
             <select name="productName" class="select-product">
                 <!-- value에 상품id -->
@@ -56,7 +56,7 @@
                         <div class="day-num"><span>2</span></div>
                         <div class="day-btns">
                             <div class="enrollDay-wrapper">
-                                <button class="enrollDay">등록</button>
+                                <button class="enrollDay" >등록</button>
                             </div>
                         </div>
                     </li>
@@ -103,5 +103,17 @@
         </div>
     </div>
 </div>
+<script>
+window.addEventListener('load', () => {
+    const enrollBtns = document.querySelectorAll(".enrollDay");
+    enrollBtns.forEach((button) => {
+        button.addEventListener('click', menuEnrollEvent );
+    })
+});
+
+const menuEnrollEvent = () => {
+	location.href = "<%= request.getContextPath() %>/admin/calendarMenuEnroll?menuId=&data-date=";
+}
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
