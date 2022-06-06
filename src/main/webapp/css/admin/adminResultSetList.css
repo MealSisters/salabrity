@@ -11,6 +11,45 @@
   width: inherit;
 }
 
+.div-spacebtween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0;
+}
+.enrollBtn-wrapper {
+  padding: 0;
+  height: 25px;
+  background-color: #0eae5622;
+  border-radius: 8px;
+  transition-duration: 0.1s;
+}
+.enrollBtn-wrapper button {
+  height: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.enrollBtn-wrapper:hover {
+  background-color: #0EAE57;
+}
+.enrollBtn-wrapper button:hover {
+  color: #fff;
+}
+.sort-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+}
+.sort-wrapper select {
+  height: 22px;
+  border: .5px solid #888;
+}
+.sort-wrapper span {
+  margin: 4px 5px 0;
+}
+
 /*---------------------- 조회결과 영역 ----------------------*/
 .div-resultlist {
   margin: 0 0 15px;
@@ -63,13 +102,13 @@
 .col-price {
   width: 70px;
 }
-.col-memberName, .col-shippingStatus {
+.col-memberName, .col-shippingStatus, .col-calorie {
   width: 80px;
 }
 .col-birth, .col-regDate, .col-orderDate {
   width: 96px;
 }
-.col-phone {
+.col-phone, #tbl-menuList .col-buttons {
   width: 110px;
 }
 .col-memberId {
@@ -78,7 +117,10 @@
 .col-products, .col-orderReq {
   width: 150px;
 }
-.col-shippingAddr {
+.col-menuId {
+  width: 180px;
+}
+.col-shippingAddr, .col-menuName {
   width: 270px;
 }
 
