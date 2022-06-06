@@ -141,7 +141,7 @@
 }
 
 .idpw_list li:not(:first-child) {
-	border-left: 1px solid #BEBEBE;
+	/*border-left: 1px solid #BEBEBE;*/
 }
 
 .on {
@@ -252,82 +252,6 @@ label {
 	padding: 10px;
 }
 
-/* join 페이지 */
-.join_box {
-	width: 700px;
-	margin: 0 auto;
-}
-
-.member_box {
-	width: 600px;
-	margin-left: 60px;
-}
-
-.input_text {
-	padding: 0 20px;
-	width: 300px;
-	height: 35px;
-	border: 1px solid #BDBDBD;
-	box-sizing: border-box;
-}
-
-.member_title {
-	display: inline-block;
-	width: 130px;
-	font-weight: bold;
-}
-
-.member_title {
-	font-size: 13px;
-}
-
-.guide {
-	display: block;
-	padding: 3px 0 0 137px;
-	color: #888;
-	font-size: 11px;
-}
-
-.gender_cb {
-	display: inline-block;
-}
-
-.checkId {
-	margin-left: 10px;
-	background: #116916;
-	color: #fff;
-	font-size: 12px;
-	cursor: pointer;
-	border: 1px solid #116916;
-}
-
-#btn_cancle {
-	width: 250px;
-	height: 52px;
-	line-height: 52px;
-	border: 1px solid #116916;
-	background: #116916;
-	color: #f1f1f1;
-	font-size: 20px;
-	font-weight: bold;
-	cursor: pointer;
-	border: 1px solid #116916;
-	color: #116916;
-	background: #fff;
-	margin-right: 30px;
-}
-
-#btn_join {
-	width: 250px;
-	height: 52px;
-	line-height: 52px;
-	background: #116916;
-	color: #fff;
-	font-size: 20px;
-	font-weight: 500;
-	cursor: pointer;
-	border: 1px solid #116916;
-}
 
 /* join page 페이지 enroll */
 .join_box {
@@ -415,6 +339,7 @@ label {
 	text-align: center;
 	margin-top: 5px;
     padding-bottom: 30px;
+    border-bottom: 1px solid black;
 }
 
 
@@ -658,4 +583,99 @@ label {
 
 footer {
 	margin-top: 80px;
+}
+
+/* member update 페이지 */
+
+#btn_update {
+	width: 190px;
+	height: 45px;
+	line-height: 45px;
+	background: #116916;
+	color: #fff;
+	font-size: 17px;
+	font-weight: 500;
+	cursor: pointer;
+	border: 1px solid #116916;
+}
+
+#btn_update_can {
+	width: 190px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #116916;
+	background: #116916;
+	color: #f1f1f1;
+	font-size: 17px;
+	font-weight: bold;
+	cursor: pointer;
+	border: 1px solid #116916;
+	color: #116916;
+	background: #fff;
+	margin-right: 30px;
+	margin-left: 160px;
+}
+
+.btn_update_box {
+	border-top: solid 1px #dbdbdb;
+	/* text-align: center; */
+	margin-left: 25px;
+
+	margin-top: 10px;
+	padding-top: 35px;
+}
+
+.update_content {
+	/* margin-left: 100px; */
+	padding: 20px;
+}
+
+.input__text {
+    padding: 0 20px;
+    width: 400px;
+    height: 35px;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+}
+
+.update_cont_box {
+	margin-left: 100px;
+}
+.info_ck {
+	width: 12px;
+    height: 11px;
+}
+
+#inputDomain, #email {
+	width: 133px;
+}	
+.email_select {
+	display: inline;
+}
+#emailType {
+	height: 35px;
+	border: 1px solid #BDBDBD;
+}
+
+#address1 {
+	width: 140px;
+}
+
+#address2 {
+	display: block;
+	margin-top: 15px;
+	margin-left: 135px;
+	
+}
+.btn_address {
+	height: 35px;
+	background-color: #fff;
+	border: 1px solid #BDBDBD;
+	font-size: 12px;
+	width: 100px;
+	margin-left: 10px;
+}
+
+.btn_address:hover {
+	cursor: pointer;
 }
