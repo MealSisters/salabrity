@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Salabrity</title>
+	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/basic.css" />
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css" />
 	<script src="https://kit.fontawesome.com/97c6ec6a69.js" crossorigin="anonymous"></script>
