@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CommunityBoardHacksServlet
+ * Servlet implementation class CommunityBoardGeneralViewServlet
  */
-@WebServlet("/board/community/hacks")
-public class CommunityBoardHacksServlet extends HttpServlet {
+@WebServlet("/board/community/general/view")
+public class CommunityBoardGeneralViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardList.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardView.jsp")
 			.forward(request, response);
 	}
 

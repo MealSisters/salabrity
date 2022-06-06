@@ -18,7 +18,7 @@
 				<tr class="hacks-title">
 					<th colspan="6">
 						<a href="<%= request.getContextPath() %>/board/community/hacks">
-							<i class="fa-solid fa-caret-right"></i>커뮤니티게시판1
+							<i class="fa-solid fa-caret-right"></i>샐브's 레시피
 						</a>
 					</th>
 				</tr>
@@ -118,7 +118,9 @@
 				<tr>
 					<td colspan="6">
 						<div class="hacks-btn">
-							<a href="<%= request.getContextPath() %>/board/community/hacks">게시판1 이동</a>
+							<a href="<%= request.getContextPath() %>/board/community/hacks">
+								샐브's 레시피 더보기　<i class="fa-solid fa-rectangle-list"></i>
+							</a>
 						</div>
 					</td>
 				</tr>
@@ -132,7 +134,7 @@
 				<tr class="general-title">
 					<th colspan="6">
 						<a href="<%= request.getContextPath() %>/board/community/general">
-							<i class="fa-solid fa-caret-right"></i>커뮤니티게시판2
+							<i class="fa-solid fa-caret-right"></i>자유게시판
 						</a>
 					</th>
 				</tr>
@@ -231,7 +233,9 @@
 				<tr>
 					<td colspan="6">
 						<div class="general-btn">
-							<a href="<%= request.getContextPath() %>/board/community/general">게시판2 이동</a>
+							<a href="<%= request.getContextPath() %>/board/community/general">
+								자유게시판 더보기　<i class="fa-solid fa-rectangle-list"></i>
+							</a>
 						</div>
 					</td>
 				</tr>

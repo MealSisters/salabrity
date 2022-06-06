@@ -279,4 +279,107 @@ communityBoardList.jsp
 	font-weight: bold;
 }
 
+/* ===================================
+communityBoardEnroll.jsp
+======================================*/
 
+#community-board-enroll-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#community-board-enroll-wrap .main-title {
+	font-size: 21px;
+}
+
+#community-board-enroll-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
+/* table */
+.tbl-board-enroll {
+	text-align: left;
+	width: 100%;
+	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	table-layout: fixed;
+}
+
+.tbl-board-enroll th {
+	width: 150px;
+	height: 60px;
+}
+
+.tbl-board-enroll td input,
+.tbl-board-enroll td textarea {
+	font-size: 14px;
+}
+
+.tbl-board-enroll td input {
+	height: 25px;	
+}
+
+input[name="memberId"], input[name="password"] {
+	width: 25%;
+}
+
+input[name="title"] {
+	width: 50%;
+}
+
+.tbl-board-enroll textarea {
+	resize: none;
+	width: 100%;
+	height: 250px;
+}
+
+/* button */
+.board-attach-wrap .board-attach-name {
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%;
+    color: gray;
+}
+
+.board-attach-wrap label {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 8px;
+    margin-left: 10px;
+    color: white;
+    background-color: #116916;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.board-attach-wrap input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.board-button-wrap {
+	text-align: center;
+}
+
+#board-enroll-btn, #board-reset-btn {
+	margin: 5px;
+	border: none;
+	padding: 10px 25px;
+	background-color: white;
+	color: #116916;
+	border: 1px solid #116916;
+	font-size: 13px;
+}
+
+#board-enroll-btn:hover, #board-reset-btn:hover {
+	background-color: #116916;
+	color: white;
+}
