@@ -111,6 +111,16 @@
     </div>
     <%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
 </div>
-
+<script>
+    window.addEventListener('load', () => {
+        enrollMenu();
+    });
+    const enrollMenu = () => {
+        const btn = document.querySelector(".enrollBtn");
+        btn.onclick = () => {
+            location.href = "<%= request.getContextPath() %>/admin/menuEnroll";
+        };
+    }
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

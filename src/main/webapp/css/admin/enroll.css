@@ -20,10 +20,47 @@
 }
 .formLine-wrapper label {
     font-family: 'LeferiBaseType-BoldA';
+    width: 93px;
 }
 .formLine-wrapper > p {
     margin: 10px 16px;
 }
+.formLine-wrapper > input {
+    margin-right: 10px;
+    width: 174px;
+}
+.textarea-wrapper {
+    align-items: flex-start;
+}
+textarea {
+    resize: none;
+}
+.uniqueCkeck-wrapper, .upfileBtn-wrapper {
+    padding: 0;
+    height: 25px;
+    background-color: #116135;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.uniqueCkeckBtn, .upfileBtn-wrapper button {
+    height: inherit;
+    line-height: 200%;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+}
+.uniqueCkeck-wrapper:hover, .upfileBtn-wrapper:hover {
+    background-color: #0EAE57;
+}
+input[type="file"] {
+    display: none;
+}
+.formLine-wrapper .upfileName {
+    font-size: 13px;
+    margin: 0 10px;
+}
+
 .menutable-wrapper {
     margin-top: 7px;
     height: 200px;
