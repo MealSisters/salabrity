@@ -9,30 +9,35 @@ font
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiPoint-BlackObliqueA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiBaseType-BoldA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-BoldA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiBaseType-RegularA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-RegularA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiPoint-SpecialA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiPoint-SpecialItalicA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
@@ -45,6 +50,7 @@ font
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiPoint-WhiteObliqueA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
@@ -60,9 +66,12 @@ index.jsp - header/footer
 	font-family: 'LeferiBaseType-RegularA';
 }
 
-
 div, section, header, footer {
 	padding: 10px;
+}
+
+select {
+	font-family: 'NanumSquare';
 }
 
 /* container */
