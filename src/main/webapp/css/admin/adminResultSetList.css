@@ -49,7 +49,6 @@
 
 .col-memberRole select {
   font-size: 13px;
-  font-family: 'NanumSquare';
 }
 .col-no {
   width: 26px;
@@ -184,7 +183,6 @@ td.td-xscroll::-webkit-scrollbar-thumb:hover {
   height: 22px;
   margin-top: -4px;
   font-size: 13px;
-  font-family: 'NanumSquare';
 }
 .shippingAddrList-wrapper {
   height: 10vh;

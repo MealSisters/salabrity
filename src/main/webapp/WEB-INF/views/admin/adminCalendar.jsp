@@ -6,8 +6,15 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminCalendar.css">
 <div class="div-level1">
-    <div class="div-level2">
-        <!-- 상품선택 폼 출력 -->
+    <div class="div-level2 productName-wrapper">
+        <form action="">
+            <label>상품명</label>
+            <select name="productName" class="select-product">
+                <!-- value에 상품id -->
+                <option value="">황금비율 탄단지 2주</option>
+                <option value="">혈당관리 4주</option>
+            </select>
+        </form>
     </div>
     <div class="div-level2 monthPlan-calendar">
         <div class="calendar-top">

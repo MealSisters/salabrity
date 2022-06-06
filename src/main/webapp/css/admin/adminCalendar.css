@@ -2,8 +2,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
+/*------------------ 상품명 선택영역 ------------------*/
+.productName-wrapper {
+    width: 1016px;
+    margin-top: 50px;
+    padding: 0;
+    position: absolute;
+}
+.productName-wrapper label {
+    font-family: 'LeferiBaseType-RegularA';
+    font-size: 15px;
+}
+.productName-wrapper select {
+    height: 22px;
+    width: 200px;
+    text-overflow: ellipsis;
+}
+.productName-wrapper option {
+    height: 40px;
+    font-size: 13px;
+    font-family: 'NanumSquare';
+}
+
+
+/*------------------ 캘린더 상단 영역 ------------------*/
 .calendar-top {
     display: flex;
     justify-content: center;
@@ -20,13 +45,13 @@
 .prev i, .next i {
     font-size: 22px;
 }
+
+/*------------------ 캘린더 내용 영역 ------------------*/
 .calendar-content ul {
     display: flex;
     padding: 0;
     margin: 0;
 }
-
-
 .head {
     padding: 0;
     border-top: 2px solid #333;
