@@ -1,0 +1,107 @@
+.div-level1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calendar-title {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    font-size: 24px;
+    margin: 24px 24px 22px;
+}
+.prev, .next {
+    cursor: pointer;
+}
+.prev i, .next i {
+    font-size: 22px;
+}
+.calendar-content ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+
+.head {
+    padding: 0;
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #ddd;
+}
+.head ul {
+    height: 40px;
+}
+.head li {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    font-size: 13px;
+    width: 114px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 15px 10px;
+}
+
+.body {
+    padding: 0;
+}
+.body li {
+    list-style: none;
+    width: 144px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.body ul > li:first-of-type {
+    border-left: 1px solid #ddd;
+}
+.body li:not([data-date]) {
+    background-color: #eee;
+}
+.day-menu span {
+    color: #333;
+    text-decoration: none;
+}
+.day-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+.day-btns > div {
+    padding: 0;
+    width: 40px;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.modifyDay-wrapper {
+    background-color: #116135;
+}
+.modifyDay-wrapper:hover {
+    background-color: #0EAE57;
+}
+.deleteDay-wrapper {
+    background-color: #333;
+}
+.deleteDay-wrapper:hover {
+    background-color: #AD1C0E;
+}
+.enrollDay-wrapper {
+    background-color: #0eae5670;
+}
+.enrollDay-wrapper:hover {
+    background-color: #0EAE57;
+}
+.day-btns button {
+    color: #fff;
+    border: none;
+    background-color: #ffffff00;
+    padding: 4px 6px 1px;
+    width: inherit;
+    text-align: center;
+}
