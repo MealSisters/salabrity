@@ -295,11 +295,13 @@ label {
 
 .checkId {
 	margin-left: 10px;
-	background: #116916;
-	color: #fff;
-	font-size: 12px;
-	cursor: pointer;
-	border: 1px solid #116916;
+    background: #116916;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #116916;
+    height: 35px;
+    font-size: 12px;
+    width: 95px;
 }
 
 #phone {
