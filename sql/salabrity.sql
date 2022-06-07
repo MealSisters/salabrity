@@ -131,7 +131,7 @@ create table calendar (
 	cal_no number,
 	product_no number not null,
 	menu_no number not null,
-    cal_date date not null,
+    week_day_code varchar2(10) not null, -- 1w1d, 1w2d, 이런식으로 저장
     
     constraint pk_calendar_no primary key(cal_no),
     constraint fk_calendar_product_no foreign key(product_no) references product(product_no),
