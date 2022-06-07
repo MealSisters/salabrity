@@ -6,22 +6,21 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminCalendar.css">
 <div class="div-level1">
+    <div class="div-level2 calendarimg-wrapper">
+        <img class="calendarimg" src="<%=request.getContextPath() %>/images/food_sample.jpg" alt="">
+    </div>
     <div class="div-level2 productName-wrapper">
+        <p class="now-productName">황금비율 탄단지 2주</p>
         <form name="selectProductFrm" action="">
-            <label>상품명</label>
+            <label>상품변경</label>
             <select name="productName" class="select-product">
                 <!-- value에 상품id -->
                 <option value="">황금비율 탄단지 2주</option>
-                <option value="">혈당관리 4주</option>
+                <option value="">혈당관리 2주</option>
             </select>
         </form>
     </div>
     <div class="div-level2 monthPlan-calendar">
-        <div class="calendar-top">
-            <div class="prev"><i class="fa-solid fa-angle-left"></i></div>
-            <p class="calendar-title">2022년 6월</p>
-            <div class="next"><i class="fa-solid fa-angle-right"></i></div>
-        </div>
         <div class="calendar-content">
             <div class="head">
                 <ul>
@@ -38,10 +37,24 @@
                 <!-- (ul>li[data-date]*7)*5 -->
                 <ul>
                     <li></li>
-                    <li></li>
-                    <li></li>
-                    <li data-date="2022-06-01">
-                        <div class="day-num"><span>1</span></div>
+                    <li data-wdCode="w1d1">
+                        <div class="day-code"><span>Week1 Day1</span></div>
+                        <div class="day-btns">
+                            <div class="enrollDay-wrapper">
+                                <button class="enrollDay" >등록</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-wdCode="w1d2">
+                        <div class="day-code"><span>Week1 Day2</span></div>
+                        <div class="day-btns">
+                            <div class="enrollDay-wrapper">
+                                <button class="enrollDay" >등록</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-wdCode="w1d3">
+                        <div class="day-code"><span>Week1 Day3</span></div>
                         <div class="day-menu"><span>닭가슴살볶음밥</span></div>
                         <div class="day-btns">
                             <div class="modifyDay-wrapper">
@@ -52,51 +65,24 @@
                             </div>
                         </div>
                     </li>
-                    <li data-date="2022-06-02">
-                        <div class="day-num"><span>2</span></div>
+                    <li data-wdCode="w1d4">
+                        <div class="day-code"><span>Week1 Day4</span></div>
                         <div class="day-btns">
                             <div class="enrollDay-wrapper">
                                 <button class="enrollDay" >등록</button>
                             </div>
                         </div>
                     </li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                </ul>
-                <ul>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                </ul>
-                <ul>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                </ul>
-                <ul>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                </ul>
-                <ul>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
-                    <li data-date=""></li>
+                    <li data-wdCode=""></li>
                     <li></li>
+                </ul>
+                <ul>
+                    <li></li>
+                    <li data-wdCode=""></li>
+                    <li data-wdCode=""></li>
+                    <li data-wdCode=""></li>
+                    <li data-wdCode=""></li>
+                    <li data-wdCode=""></li>
                     <li></li>
                 </ul>
             </div>

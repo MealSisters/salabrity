@@ -12,9 +12,9 @@
             <input type="hidden" name="productId" value="">
         </div>
         <div class="formLine-wrapper">
-            <label for="data-date">선택일자</label>
-            <p class="fixed-data cal-date">2022-06-03</p>
-            <input type="hidden" name="data-date" value="">
+            <label for="data-wdCode">선택일자</label>
+            <p class="fixed-data cal-date">Week1 Day1</p>
+            <input type="hidden" name="data-wdCode" value="">
         </div>
         <div class="formLine-wrapper">
             <div class="menuList-wrapper">

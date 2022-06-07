@@ -26,7 +26,7 @@
             </div>
             <div class="div-searchFilter">
                 <label for="filter-shippingStatus">배송상태</label>
-                <select name="shippingState" calss="filter-select">
+                <select name="shippingState" class="filter-select">
                     <option value="전체" selected>전체보기</option>
                     <option value="입금확인중">입금확인중</option>
                     <option value="결제완료">결제완료</option>
@@ -144,7 +144,7 @@
             </div>
             <div class="div-shippingStatusModify">
                 <label for="shippingStatusModify">배송상태</label>
-                <select name="shippingState" calss="shippingStatusModify-select" data-member-id="">
+                <select name="shippingState" class="shippingStatusModify-select" data-member-id="">
                     <option value="입금확인중" selected>입금확인중</option>
                     <option value="결제완료">결제완료</option>
                     <option value="상품준비중">상품준비중</option>

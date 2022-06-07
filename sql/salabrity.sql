@@ -18,7 +18,7 @@ alter user salabrity quota unlimited on users;
 --==============================================
 
 -- ---------------------------------------------
--- 테이블/시퀀스 삭제시 이부분 주석 해제하고 실행하기
+-- 테이블/시퀀스 삭제시 이부분 주석 해제하고 아래부터 실행하기
 -- ---------------------------------------------
 --drop table product;
 --drop sequence seq_product_no;
@@ -63,7 +63,7 @@ create table product (
 	product_description varchar2(255) not null,
 	product_target	varchar2(20) not null, --not null로 하면 될까요?(은지)
 	views number default 0,
-	sales_rate number default 0,
+	sales_cnt number default 0,
 	registration_date date default sysdate,
 	subscription_period number default 1,
     del_flag char(1) default 'N',
@@ -106,14 +106,14 @@ create sequence seq_menu_no;
 
 
 create table menu_attach (
-	menu_attach_no,
-	menu_id varchar(30) not null,
+	menu_attach_no number,
+	menu_no number not null,
 	original_filename varchar2(255),
     renamed_filename varchar2(255),
     reg_date date default sysdate,
     
     constraint pk_menu_attach primary key(menu_attach_no),
-    constraint fk_menu_attach_menu_id foreign key(menu_id) references menu(menu_id) on delete cascade --메뉴삭제시 메뉴첨부파일정보도 삭제(은지)
+    constraint fk_menu_attach_menu_no foreign key(menu_no) references menu(menu_no) on delete cascade --메뉴삭제시 메뉴첨부파일정보도 삭제(은지)
 );
 create sequence seq_menu_attach_no;
 
@@ -131,7 +131,7 @@ create table calendar (
 	cal_no number,
 	product_no number not null,
 	menu_no number not null,
-    cal_date date not null,
+    week_day_code varchar2(10) not null, -- 1w1d, 1w2d, 이런식으로 저장
     
     constraint pk_calendar_no primary key(cal_no),
     constraint fk_calendar_product_no foreign key(product_no) references product(product_no),
@@ -272,8 +272,6 @@ create table buy (
 	shipping_statement_code number not null,
 	buy_date date default sysdate,
 	request_term varchar2(2000),
-	first_shipping_date date not null,
-    
 	transport_document_number number,
     
     constraint pk_buy_no primary key(buy_no),
@@ -288,8 +286,8 @@ create table product_buy (
     product_buy_no number,
 	product_no number not null,
 	buy_no number not null,
-	member_id varchar2(15) not null,
     quantity number	not null,
+    first_shipping_date date not null,
     
     constraint pk_product_buy_no primary key(product_buy_no),
     constraint fk_product_buy_product_no foreign key(product_no) references product(product_no) on delete cascade, -- 맞나요..?(은지)
@@ -301,9 +299,6 @@ create sequence seq_product_buy_no;
 create table pay (
 	pay_no number,
 	buy_no number not null,
-	member_id varchar2(15) not null,
-	shipping_address_no number not null,
-	shipping_statement_code number not null,
 	total_price number not null,
 	payment_method varchar2(255) not null,
 	is_paid char(1)	not null,
@@ -311,9 +306,6 @@ create table pay (
     
     constraint pk_pay_no primary key(pay_no),
     constraint fk_pay_buy_no foreign key(buy_no) references buy(buy_no),
-    constraint fk_pay_member_id foreign key(member_id) references member(member_id) on delete set null, --회원이 탈퇴하면 해당 결제레코드 member_id는 null로 변경(은지)
-    constraint fk_pay_shipping_address_no foreign key(shipping_address_no) references shipping_address(shipping_address_no) on delete set null, --배송지정보가 삭제되면 null로 변경(은지)
-    constraint fk_pay_shipping_statement_code foreign key(shipping_statement_code) references shipping_statement(shipping_statement_code),
     constraint ck_pay_is_paid check(is_paid in('Y', 'N'))
 );
 create sequence seq_pay_no;

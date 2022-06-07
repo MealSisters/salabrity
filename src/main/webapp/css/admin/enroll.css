@@ -16,11 +16,11 @@
 .formLine-wrapper {
     width: 990px;
     display: flex;
-    align-items: center;
+    align-items: baseline;
 }
 .formLine-wrapper label {
     font-family: 'LeferiBaseType-BoldA';
-    width: 93px;
+    width: 100px;
 }
 .formLine-wrapper > p {
     margin: 10px 16px;
@@ -60,7 +60,25 @@ input[type="file"] {
     font-size: 13px;
     margin: 0 10px;
 }
+.detailimgLine-wrapper {
+    padding: 15px 10px;
+}
+.detailimgGroup-wrapper {
+    padding: 0;
+}
+.detail-wrapper {
+    display: flex;
+    align-items: baseline;
+    padding: 7px 0;
+}
 
+.radioGroup-wrapper {
+    padding: 0;
+    display: flex;
+}
+.radio-wrapper span {
+    margin: 0 20px 0 10px;
+}
 .menutable-wrapper {
     margin-top: 7px;
     height: 200px;

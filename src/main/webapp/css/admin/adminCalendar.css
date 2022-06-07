@@ -5,12 +5,31 @@
     margin-bottom: 20px;
 }
 
+/*------------------ 상단 이미지 영역 ------------------*/
+.calendarimg-wrapper {
+    width: 1016px;
+    height: 200px;
+}
+.calendarimg {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
 /*------------------ 상품명 선택영역 ------------------*/
 .productName-wrapper {
     width: 1016px;
-    margin-top: 50px;
+    margin-top: 40px;
     padding: 0;
-    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productName-wrapper > p {
+    font-family: 'LeferiPoint-BlackA';
+    margin: 0;
+    font-size: 24px;
+    color: #333;
 }
 .productName-wrapper label {
     font-family: 'LeferiBaseType-RegularA';
@@ -27,24 +46,6 @@
     font-family: 'NanumSquare';
 }
 
-
-/*------------------ 캘린더 상단 영역 ------------------*/
-.calendar-top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.calendar-title {
-    font-family: 'LeferiPoint-WhiteObliqueA';
-    font-size: 24px;
-    margin: 24px 24px 22px;
-}
-.prev, .next {
-    cursor: pointer;
-}
-.prev i, .next i {
-    font-size: 22px;
-}
 
 /*------------------ 캘린더 내용 영역 ------------------*/
 .calendar-content ul {
@@ -77,7 +78,7 @@
 .body li {
     list-style: none;
     width: 144px;
-    height: 130px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -87,17 +88,22 @@
 .body ul > li:first-of-type {
     border-left: 1px solid #ddd;
 }
-.body li:not([data-date]) {
+.body li:not([data-wdCode]) {
     background-color: #eee;
 }
-.day-menu span {
-    color: #333;
-    text-decoration: none;
+.day-code span {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    font-size: 14px;
+    color: #116135;
+}
+.day-code, .day-menu {
+    text-align: center;
 }
 .day-btns {
     display: flex;
     justify-content: space-evenly;
 }
+
 .day-btns > div {
     padding: 0;
     width: 40px;
