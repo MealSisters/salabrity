@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 * {
-    font-family: 'LeferiBaseType-RegularA';
+	font-family: 'LeferiBaseType-RegularA';
 }
 
 /* 검색 키워드 "페이지" */
@@ -142,6 +142,7 @@
 
 .idpw_list li:not(:first-child) {
 	/*border-left: 1px solid #BEBEBE;*/
+	
 }
 
 .on {
@@ -252,7 +253,6 @@ label {
 	padding: 10px;
 }
 
-
 /* join page 페이지 enroll */
 .join_box {
 	width: 700px;
@@ -297,13 +297,15 @@ label {
 	margin-left: 10px;
 	background: #116916;
 	color: #fff;
-	font-size: 12px;
 	cursor: pointer;
 	border: 1px solid #116916;
+	height: 35px;
+	font-size: 12px;
+	width: 95px;
 }
 
 #phone {
-    margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 #btn_cancle {
@@ -338,10 +340,9 @@ label {
 #end {
 	text-align: center;
 	margin-top: 5px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid black;
+	padding-bottom: 30px;
+	border-bottom: 1px solid black;
 }
-
 
 .finish {
 	text-align: center;
@@ -401,7 +402,6 @@ label {
 	padding-left: 16px;
 }
 
-
 .find_input {
 	padding: 0;
 }
@@ -440,7 +440,7 @@ label {
 }
 
 .plus {
-	margin-top : 10px;
+	margin-top: 10px;
 }
 
 .plus span {
@@ -460,8 +460,6 @@ label {
 /* 회원 정보 수정 페이지 member update */
 
 /* 회원 탈퇴 페이지 */
-
-
 .del_strong {
 	color: black;
 	font-size: 15px;
@@ -469,14 +467,13 @@ label {
 
 .del_com_strong {
 	color: black;
-	font-size : 13px;
+	font-size: 13px;
 }
 
 .del_hd, .del_cont {
 	text-align: center;
 	/* margin-bottom: 30px; */
 	margin-left: 13px;
-	
 }
 
 .del_hd {
@@ -484,9 +481,10 @@ label {
 }
 
 .del_li {
-	list-style:none;
+	list-style: none;
 	margin-bottom: 30px;
 }
+
 .del_strong {
 	display: block;
 }
@@ -511,17 +509,18 @@ label {
 	display: block;
 }
 
-
 .del_com_strong {
 	line-height: 45px;
 	padding-right: 30px;
 }
+
 #del_ask {
 	width: 450px;
 	height: 37px;
 	border: 1px solid #ccc;
 	padding-left: 10px
 }
+
 .del_textarea textarea {
 	border: 1px solid #ccc;
 	overflow: hidden;
@@ -530,11 +529,10 @@ label {
 	height: 100px;
 	padding: 15px;
 	resize: none;
-	
 }
+
 .del_flex {
 	display: flex;
-	
 }
 
 #del_flex_com {
@@ -569,14 +567,15 @@ label {
 	margin-right: 30px;
 	margin-left: 160px;
 }
+
 .btn_del_box {
 	border-top: solid 1px #dbdbdb;
 	/* text-align: center; */
 	margin-left: 25px;
-
 	margin-top: 10px;
 	padding-top: 35px;
 }
+
 .del_comment {
 	margin-left: 40px;
 }
@@ -586,7 +585,6 @@ footer {
 }
 
 /* member update 페이지 */
-
 #btn_update {
 	width: 190px;
 	height: 45px;
@@ -620,7 +618,6 @@ footer {
 	border-top: solid 1px #dbdbdb;
 	/* text-align: center; */
 	margin-left: 25px;
-
 	margin-top: 10px;
 	padding-top: 35px;
 }
@@ -631,27 +628,30 @@ footer {
 }
 
 .input__text {
-    padding: 0 20px;
-    width: 400px;
-    height: 35px;
-    border: 1px solid #BDBDBD;
-    box-sizing: border-box;
+	padding: 0 20px;
+	width: 400px;
+	height: 35px;
+	border: 1px solid #BDBDBD;
+	box-sizing: border-box;
 }
 
 .update_cont_box {
 	margin-left: 100px;
 }
+
 .info_ck {
 	width: 12px;
-    height: 11px;
+	height: 11px;
 }
 
 #inputDomain, #email {
 	width: 133px;
-}	
+}
+
 .email_select {
 	display: inline;
 }
+
 #emailType {
 	height: 35px;
 	border: 1px solid #BDBDBD;
@@ -665,8 +665,8 @@ footer {
 	display: block;
 	margin-top: 15px;
 	margin-left: 135px;
-	
 }
+
 .btn_address {
 	height: 35px;
 	background-color: #fff;
@@ -679,3 +679,4 @@ footer {
 .btn_address:hover {
 	cursor: pointer;
 }
+

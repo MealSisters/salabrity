@@ -25,9 +25,9 @@
 				<li class="sub_inner_list">
 					<h4 class="li_head">회원정보</h4>
 				</li>
-				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/member/memberUpdate">회원 정보 변경</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/memberUpdate">회원 정보 변경</a></li>
 				<li class="sub_inner_list"><a href="">배송지 관리</a></li>
-				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/member/memberDelete">회원 탈퇴</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/memberDelete">회원 탈퇴</a></li>
 			</ul>
 
 			<ul class="sub_box_inner">
@@ -35,7 +35,7 @@
 					<h4 class="li_head">커뮤니티</h4>
 				</li>
 				<li class="sub_inner_list"><a href="">작성 게시글 조회</a></li>
-				<li class="sub_inner_list"><a href="">1:1 문의 내역</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/boardQuestionList">1:1 문의 내역</a></li>
 			</ul>
 
 
