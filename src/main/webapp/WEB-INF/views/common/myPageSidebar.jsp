@@ -32,7 +32,7 @@
 
 			<ul class="sub_box_inner">
 				<li class="sub_inner_list">
-					<h4 class="li_head">커뮤니티</h4>
+					<h4 class="li_head">활동정보</h4>
 				</li>
 				<li class="sub_inner_list"><a href="">작성 게시글 조회</a></li>
 				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/boardQuestionList">1:1 문의 내역</a></li>
