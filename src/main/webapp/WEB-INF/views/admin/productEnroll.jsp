@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 <div class="div-level1">
     <h1 class="pageTitle">상품정보</h1>
+    <!-- 수정시 아이디,가격은 편집불가 -->
     <form name="productEnrollFrm" action="">
         <div class="formLine-wrapper">
             <label for="prodcutId">상품ID</label>
@@ -66,7 +67,7 @@
             </div>
         </div>
         <div class="formLine-wrapper">
-            <label for="subscriptionPeriod">타겟층</label>
+            <label for="subscriptionPeriod">구독기간</label>
             <div class="radioGroup-wrapper">
                 <div class="radio-wrapper">
                     <input type="radio" class="period-radio" name="subscriptionPeriod" value="1"><span>1 Week</span>
