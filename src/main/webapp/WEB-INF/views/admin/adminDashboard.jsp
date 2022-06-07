@@ -109,7 +109,7 @@
     </div>
 
     <div id="div-icons" class="div-level2 bottomdiv">
-        <div class="div-icon"><a href=""><i class="fa-solid fa-plate-wheat fa-3x"></i>상품관리</a></div>
+        <div class="div-icon"><a href="<%= request.getContextPath() %>/product/productList"><i class="fa-solid fa-plate-wheat fa-3x"></i>상품관리</a></div>
         <div class="div-icon"><a href="<%= request.getContextPath() %>/admin/calendar"><i class="fa-solid fa-calendar-days fa-3x"></i>캘린더관리</a></div>
         <div class="div-icon"><a href="<%= request.getContextPath() %>/admin/orderList"><i class="fa-solid fa-receipt fa-3x"></i>주문내역관리</a></div>
         <div class="div-icon"><a href=""><i class="fa-regular fa-comments fa-3x"></i>1:1채팅상담</a></div>
