@@ -4,8 +4,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
 
-<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminResultSetList.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/ListSearchFilter.css">
 <div class="div-level1">

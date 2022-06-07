@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+#order_view h1{
+    font-size: 20px;
+	border-bottom: 1px #dbdbdb solid;
+	padding-bottom: 15px;
+}
+#content{
+    display: flex;
+}
+#order_view{
+    width: 75%;
+	margin: 0 auto;
+}
+div.heading_wrp{
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+div.heading_wrp>div{
+	font-size: 12px;
+}
+#order_view a{
+	color: #116916;
+	text-decoration: none;
+}
+#order_view a:hover{
+	font-weight: 900;
+
+}
+#order_view h2{
+	font-size: 16px;
+    margin: 10px 0;
+    text-align: start;
+	padding: 4px;
+}
+
+#order_view .order_product_tbl{
+    border-bottom: 1px solid #dbdbdb;
+	font-size: 12px;
+    border-collapse: collapse;
+    width: 100%;
+	margin-bottom: 10px;
+}
+
+.row_even{
+	border-bottom: 1px #dbdbdb solid;
+	
+}
+.prd_img{
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+}
+#order_view .order_product_tbl td{
+    vertical-align: middle;
+    height: 45px;
+    font-size: 14px;
+	border: none;
+}
+.order_product_tbl .r2_1{
+	vertical-align: bottom;
+}
+.order_product_tbl .r2_2{
+	vertical-align: middle;
+}
+#order_view .r1,#order_view .r2_1, #order_view .r2_2{
+    text-align: left; 
+}
+.r1{
+    width: 11%;
+}
+
+.r3, .r4{
+    text-align: right;
+    width: 15%;
+}
+
+.r4 button{
+	background-color: white;
+	border-radius: 3.5px;
+	border: #116916 solid 2px;
+	padding: 9px 5px 5px 5px;
+	font-size: 12px;
+	color: #116916;
+}
+
+.order_btn_wrp{
+	text-align: center;
+	margin-bottom: 20px;
+}
+.order_btn_wrp button{
+	font-size: 14px;
+	padding: 12px 7px 7px 7px;
+	background-color: #FFF;
+	border-radius: 4px;
+	margin: 10px 5px;
+}
+.all_cart_btn{
+	color: #116916;
+	border: #116916 solid 2px;	
+}
+#order_view button:hover{
+	font-weight: 900;
+}
+
+#order_view table {
+    border-top: 2px solid #116916;
+    border-bottom: 1px solid #dbdbdb;
+	font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+	margin: 0 0 70px 0;
+}
+#order_view td, #order_view th{
+	height: 40px;
+	border-bottom: 1px solid #dbdbdb;
+	padding-left: 3px;
+	text-align: left;
+}
+#order_view th{
+	width: 18%;
+}
