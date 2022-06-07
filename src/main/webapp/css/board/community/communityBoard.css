@@ -383,3 +383,198 @@ input[name="title"] {
 	background-color: #116916;
 	color: white;
 }
+
+/* ===================================
+communityBoardView.jsp
+======================================*/
+
+#community-board-view-wrap {
+	margin-bottom: 50px;
+}
+
+/* tbl-posting-view */
+.tbl-posting-view {
+	width: 95%;
+	margin: 30px auto;
+	text-align: left;
+}
+
+.tbl-posting-view th, .tbl-posting-view td {
+	padding-top: 10px;
+}
+
+.tbl-posting-view thead {
+	font-size: 14px;
+}
+
+.posting-view-writer i {
+	color: #f8674f;
+}
+
+.posting-view-reg-date {
+	text-align: right;
+}
+
+.posting-view-board-name {
+	font-size: 14px;
+}
+
+.posting-view-board-name a {
+	text-decoration: none;
+	color: #116916;
+}
+
+.posting-view-board-name:hover {
+	font-weight: bold;
+}
+
+.posting-view-title {
+	font-size: 23px;
+}
+
+.posting-view-content div {
+	padding: 10px 0;
+}
+
+.posting-view-cnt span {
+	margin: 7px;
+}
+
+.posting-view-comment-tap a {
+	text-decoration: none;
+	color: black;
+}
+
+.posting-view-comment-tap:hover {
+	font-weight: bold;
+}
+
+.posting-view-like-cnt i {
+	color: red;
+}
+
+/* button */
+#board-like-btn {
+	margin: 0 5px 30px 5px;
+	border: 1px solid #f0f0f0;
+	padding: 10px 25px;
+	background-color: white;
+	font-size: 15px;
+}
+
+#board-like-btn i {
+	color: red;	
+}
+
+#board-update-btn, #board-delete-btn {
+	margin: 0 5px 30px 5px;
+	padding: 10px 25px;
+	background-color: white;
+	color: #116916;
+	border: 1px solid #116916;
+	font-size: 13px;
+}
+
+#board-update-btn:hover, #board-delete-btn:hover {
+	background-color: #116916;
+	color: white;
+}
+
+/* comment-enroll-wrap */
+.comment-enroll-wrap {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.comment-enroll-wrap h4 {
+	text-align: left;
+	padding: 10px 40px;
+	margin: 0 auto;
+}
+
+.comment-enroll-wrap textarea {
+	resize: none;
+	height: 80px;
+	width: 85%;
+	vertical-align: middle;
+}
+
+#comment-enroll-btn {
+	display: inline;
+	border: none;
+	padding: 10px 25px;
+	height: 87px;
+	vertical-align: middle;
+	color: white;
+    background-color: #116916;
+    cursor: pointer;
+}
+
+/* tbl-posting-comment-view */
+.tbl-posting-comment-view {
+	margin: 20px auto;
+	text-align: center;
+	width: 90%;
+	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+	border-collapse: collapse;
+}
+
+.tbl-posting-comment-view th,
+.tbl-posting-comment-view td {
+	border-top: 1px solid #c0c0c0;
+	height: 60px;
+	padding: 10px;
+}
+
+.tbl-posting-comment-view td span {
+	display: block;
+	padding-top: 10px;
+}
+
+.level1 td:first-of-type,
+.level2 td:first-of-type {
+	text-align: left;
+}
+
+.level2 i {
+	color: #f8674f;
+}
+
+.level2 td:first-of-type {
+	padding-left: 30px;
+}
+
+.level1 td:last-of-type,
+.level2 td:last-of-type {
+	text-align: right;
+}
+
+.comment-writer, .comment-date {
+	color: #116916;
+}
+
+/* button */
+#comment-reply-btn,
+#comment-delete-btn,
+#comment-delete-btn {
+	border: 1px solid #116916;
+	background-color: white;
+	padding: 10px 15px;
+	margin: 3px;
+	font-size: 13px;
+}
+
+#comment-reply-btn:hover,
+#comment-delete-btn:hover,
+#comment-delete-btn:hover {
+	color: white;
+	background-color: #116916;
+}
+
+
+
+
+
+
+
