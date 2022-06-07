@@ -299,9 +299,6 @@ create sequence seq_product_buy_no;
 create table pay (
 	pay_no number,
 	buy_no number not null,
-	member_id varchar2(15) not null,
-	shipping_address_no number not null,
-	shipping_statement_code number not null,
 	total_price number not null,
 	payment_method varchar2(255) not null,
 	is_paid char(1)	not null,
@@ -309,9 +306,6 @@ create table pay (
     
     constraint pk_pay_no primary key(pay_no),
     constraint fk_pay_buy_no foreign key(buy_no) references buy(buy_no),
-    constraint fk_pay_member_id foreign key(member_id) references member(member_id) on delete set null, --회원이 탈퇴하면 해당 결제레코드 member_id는 null로 변경(은지)
-    constraint fk_pay_shipping_address_no foreign key(shipping_address_no) references shipping_address(shipping_address_no) on delete set null, --배송지정보가 삭제되면 null로 변경(은지)
-    constraint fk_pay_shipping_statement_code foreign key(shipping_statement_code) references shipping_statement(shipping_statement_code),
     constraint ck_pay_is_paid check(is_paid in('Y', 'N'))
 );
 create sequence seq_pay_no;
