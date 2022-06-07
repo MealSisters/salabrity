@@ -53,7 +53,7 @@
                 <tr>
                     <td class="col-no">1</td>
                     <td class="col-memberRole">
-                        <select calss="member-role" data-member-id="">
+                        <select class="member-role" data-member-id="">
                             <option value="회원" selected>회원</option>
                             <option value="관리자">관리자</option>
                         </select>

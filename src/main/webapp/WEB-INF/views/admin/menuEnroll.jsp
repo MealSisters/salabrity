@@ -65,14 +65,14 @@
             const target = document.querySelector("#menuAttach");
             target.click();
         });
-    }
+    };
 
     const goToMenuList = () => {
         const btn = document.querySelector(".cancelBtn");
         btn.onclick = () => {
             location.href = "<%= request.getContextPath() %>/admin/menuList";
         };
-    }
+    };
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
