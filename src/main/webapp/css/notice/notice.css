@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/* notice side bar */
+.notice_hd {
+	text-align: center;
+	font-size: 25px;
+	margin-top: 0px;
+}
+
+.sub {
+	width: 130px;
+}
+
+.sub_notice_list {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	list-style-type: none;
+}
+
+.sub_notice_list a {
+	text-decoration: none;
+	color: black;
+	font-size: 13px;
+}
+
+.sub_notice_list a:hover {
+	color: #116916;
+}
+
+.sub_notice_box {
+	padding: 0;
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
+	margin-bottom: 25px;
+}
+
+.notice_page_content {
+	margin-top: 22px;
+}
+
+aside {
+	margin-left: 45px;
+}
+
+.cs_center {
+	padding: 0px;
+	font-size: 13px;
+}
+
+.cs_center_time {
+	line-height: 22px;
+}
+
+.cs_center_hd {
+	line-height: 25px;
+}
+
+/* notice 공지사항 게시판 */
+.notice_wrap {
+	display: flex;
+}
+
+.notice_cont {
+	margin-left: 35px;
+	margin-top: 5px;
+}
+
+.tbl_notice {
+	border-collapse: collapse;
+}
+
+.tbl_notice th {
+	border-top: 1px solid #000;
+	width: 190px;
+	/* line-height: 30px; */
+	padding: 6px;
+	font-size: 13px;
+}
+
+.tbl_notice td {
+	border-top: 1px solid #bdbdbd;
+	border-bottom: 1px solid #bdbdbd;
+	/* line-height: 30px; */
+	text-align: center;
+	padding: 6px;
+	font-size: 13px;
+}
+
+.tbl_notice td a {
+	text-decoration: none;
+	color: black;
+}
+
+strong {
+	color :#116916;
+}
