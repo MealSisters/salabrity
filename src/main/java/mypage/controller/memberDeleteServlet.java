@@ -1,4 +1,4 @@
-package member.controller;
+package mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class memberDeleteServlet
  */
-@WebServlet("/member/memberDelete")
+@WebServlet("/mypage/memberDelete")
 public class memberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class memberDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/memberDelete.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/mypage/memberDelete.jsp").forward(request, response);
 	}
 
 }

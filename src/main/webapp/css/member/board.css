@@ -1,0 +1,204 @@
+@charset "UTF-8";
+
+/* 1:1문의 */
+.date_view_box {
+	border: solid 1px #bdbdbd;
+	text-align: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-bottom: 10px;
+}
+
+.date_check_box button {
+	color: #777777;
+}
+
+.date_check_box button:hover {
+	background-color: #aeaeae;
+	color: #fff;
+}
+
+.btn_question {
+	float: right;
+	margin-top: 27px;
+	margin-right: 20px;
+	background-color: #fff;
+	border: 1px solid #116916;
+	height: 30px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #116916;
+}
+
+.btn_question:hover, .date_check_box button:hover, .btn_date_check:hover
+	{
+	cursor: pointer;
+}
+
+.date_span {
+	float: left;
+	line-height: 50px;
+	/* margin-right: 8px; */
+	font-size: 13px;
+	margin-left: 90px;
+}
+
+.date_check_box {
+	float: left;
+}
+
+.date_check_box button {
+	background-color: #fff;
+	border: 1px solid #bdbdbd;
+	margin-right: -7px;
+	width: 46px;
+	height: 28px;
+	font-size: 12px;
+}
+
+.btn_date_check {
+	width: 50px;
+	height: 25px;
+	background-color: #116916;
+	border: #116916;
+	color: #fff;
+	font-size: 12px;
+}
+
+.ck_calendar {
+	width: 100px;
+	height: 23px;
+	border: 1px solid #bdbdbd;
+	font-size: 12px;
+}
+
+.ck_calendar:first-child {
+	margin-left: -80px;
+}
+
+/* list th:nth-of-type(4), */
+.question_list {
+	border-collapse: collapse;
+}
+
+.question_list th {
+	border-top: 1px solid #000;
+	width: 300px;
+	/* line-height: 30px; */
+	padding: 6px;
+	font-size: 13px;
+}
+
+.question_list td {
+	border-top: 1px solid #bdbdbd;
+	border-bottom: 1px solid #bdbdbd;
+	/* line-height: 30px; */
+	text-align: center;
+	padding: 6px;
+	font-size: 13px;
+}
+
+/* 1:1 문의글 작성 */
+#p_title {
+	width: 605px;
+	height: 37px;
+	border: 1px solid #ccc;
+	/* padding-left: 10px; */
+}
+
+#p_content {
+	border: 1px solid #ccc;
+	overflow: hidden;
+	overflow-y: auto;
+	width: 580px;
+	height: 160px;
+	padding: 15px;
+}
+
+#upFile {
+	width: 200px;
+	height: 37px;
+	border: 1px solid #ccc;
+}
+
+.btn_upload_box {
+	float: right;
+	margin-right: 300px;
+	margin-top: -9px;
+}
+
+#search_file {
+	width: 70px;
+	height: 39px;
+	background-color: #fff;
+	border: 1px solid #116916;
+	color: #116916
+}
+
+#plus_file {
+	height: 39px;
+	background-color: #fff;
+	border: 1px solid #BDBDBD;
+   	margin-left: 5px;
+}
+
+#search_file:hover, #plus_file:hover {
+	cursor: pointer;
+}
+
+.btn_question_box {
+	border-top: solid 1px #dbdbdb;
+	/* text-align: center; */
+	margin-left: 25px;
+	margin-top: 10px;
+	padding-top: 35px;
+}
+
+#btn_del_can {
+	width: 190px;
+	height: 45px;
+	line-height: 45px;
+	border: 1px solid #116916;
+	background: #116916;
+	color: #f1f1f1;
+	font-size: 17px;
+	font-weight: bold;
+	cursor: pointer;
+	border: 1px solid #116916;
+	color: #116916;
+	background: #fff;
+	margin-right: 30px;
+	margin-left: 160px;
+}
+
+#btn_question_enroll {
+	width: 190px;
+	height: 45px;
+	line-height: 45px;
+	background: #116916;
+	color: #fff;
+	font-size: 17px;
+	font-weight: 500;
+	cursor: pointer;
+	border: 1px solid #116916;
+}
+
+.tbl_question {
+	margin-left: 40px;
+}
+
+.tbl_question th {
+	line-height: 45px;
+	padding-right: 30px;
+	font-size: 13px;
+}
+
+.tbl_question {
+	border-collapse: separate;
+	border-spacing: 0 10px;
+}
+
+.upload_file {
+	padding-left: 0px;
+    padding-top: 0px;
+}
