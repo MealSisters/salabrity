@@ -9,7 +9,7 @@
 	<div>
 		<form
 			name="generalBoardEnrollFrm" 
-			action="<%=request.getContextPath() %>/board/community/general/enroll" 
+			action="<%= request.getContextPath() %>/board/community/general/enroll" 
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-board-enroll">

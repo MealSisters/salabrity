@@ -345,7 +345,7 @@ input[name="title"] {
     color: gray;
 }
 
-.board-attach-wrap label {
+.board-attach-wrap label[for=upFile] {
     display: inline-block;
     vertical-align: middle;
     padding: 8px;
@@ -572,7 +572,182 @@ communityBoardView.jsp
 	background-color: #116916;
 }
 
+/* ===================================
+communityBoardUpdate.jsp
+======================================*/
 
+#community-board-update-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#community-board-update-wrap .main-title {
+	font-size: 21px;
+}
+
+#community-board-update-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
+/* table */
+.tbl-board-update {
+	text-align: left;
+	width: 100%;
+	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	table-layout: fixed;
+}
+
+.tbl-board-update th {
+	width: 150px;
+	height: 60px;
+}
+
+.tbl-board-update td input,
+.tbl-board-update td textarea {
+	font-size: 14px;
+}
+
+.tbl-board-update td input {
+	height: 25px;	
+}
+
+input[name="memberId"], input[name="password"] {
+	width: 25%;
+}
+
+input[name="title"] {
+	width: 50%;
+}
+
+.tbl-board-update textarea {
+	resize: none;
+	width: 100%;
+	height: 250px;
+}
+
+.existing-attach-wrap {
+	padding: 0;
+	width: 60%;
+}
+
+.existing-attach-img {
+	padding: 0;
+	display: inline;
+	width: 150px;
+	height: 150px;
+}
+
+.existing-attach-img img {
+	width: 150px;
+	height: 150px;
+}
+
+.existing-attach-name {
+	display: inline-block;
+	vertical-align: text-bottom;
+	margin: 10px;
+	width: 30%;
+	border-bottom: 1px dashed #116916;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 14px;
+}
+
+/* checkbox ver1 */
+input[name=delFile] {
+	display: none;
+}
+
+input[name=delFile] + label {
+	display: inline-block;
+	cursor: pointer;
+	vertical-align: super;
+}
+
+.st0 {
+	fill: white;
+	stroke: black;
+	stroke-width: 5px;
+	stroke-miterlimit: 10;
+}
+
+.st1 {
+	fill: none; 
+	stroke: white;
+	stroke-width: 5px;
+	stroke-miterlimit: 10;
+	stroke-dashoffset: 0;
+	stroke-dasharray: 60;
+}
+
+input:checked ~ label .st1 {
+    stroke: #116916; 
+    animation: dash 0.3s linear alternate 1;
+}
+
+@keyframes dash {
+	from {
+    	stroke-dashoffset: 60;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+label[for=delFile] sup {
+	font-size: 13px;
+	color: red;
+}
+
+/* checkbox ver2 */
+/* input[name=delFile] + label {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border:1px solid #116916;
+	position: relative;
+	vertical-align: super;
+	cursor: pointer;
+}
+
+input[name=delFile]:checked + label::after {
+	content:'✔';
+	font-size: 13px;
+	width: 15px;
+	height: 15px;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	top:0;
+}
+
+.attach-del-check {
+	font-size: 13px;
+	color: red;
+	vertical-align: super;
+} */
+
+/* button */
+#board-update-btn, #board-back-btn {
+	margin: 5px;
+	border: none;
+	padding: 10px 25px;
+	background-color: white;
+	color: #116916;
+	border: 1px solid #116916;
+	font-size: 13px;
+}
+
+#board-update-btn:hover, #board-back-btn:hover {
+	background-color: #116916;
+	color: white;
+}
 
 
 
