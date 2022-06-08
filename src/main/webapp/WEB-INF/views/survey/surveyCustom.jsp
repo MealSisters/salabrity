@@ -11,19 +11,21 @@
 
 <div class="survey_box">
 
-	<div class="survey_list">
-		<script type="text/javascript">
-			<input type="radio" name="gender" value="female" checked="checked"> 여자
-			<input type="radio" name="gender" value="male"> 남자		
-			
-			<p>
-			  키키키키를 입력해주세요. : <input type="number" id="height"/> cm
-			</p>
-
-			<p>
-			  몸무게를 입력해주세요 : <input type="number" id="weight"/> kg
-			</p>
-			  
+	<div class="survey_gen">	
+	
+		<input type="radio" name="gender" value="female" checked="checked"> 여자
+		<input type="radio" name="gender" value="male"> 남자	
+	</div>
+	<div class="survey_bmi">
+		<p>
+		  키를 입력해주세요. : <input type="number" id="height"/> cm
+		</p>
+	
+		<p>
+		  몸무게를 입력해주세요 : <input type="number" id="weight"/> kg
+		</p>
+	</div>
+		<script type="text/javascript">	
 		  function(){
 			    document.getElementById("button").onclick = function(){
 			       var h = parseFloat(document.getElementById("height").value);
@@ -56,12 +58,7 @@
 		} 
 		</script>
 		
-		<select name="period" size="1"> 
-	        <option value="1" selected>1</option> 
-       </select>
-       <>
-	</div>
-
 </div>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
