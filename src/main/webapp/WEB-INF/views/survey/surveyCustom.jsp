@@ -58,6 +58,20 @@
 		} 
 		</script>
 		
+		<script> // 성별 미선택시 경고문
+		$('button.survey-btn').click(function(){
+		    var error='';
+		    $('div.survays').each(function(){
+		        var survaysName=$(this).find('div.gender').text();
+		        var checkBtn=$(this).find('input[type="radio"]:checked');
+		        if(!checkBtn.length){
+		            error+=gender+'가 선택되지 않았습니다.\n';
+		        }
+		    });
+		    if(error) alert(error);
+		});
+		</script>
+		
 </div>
 
 
