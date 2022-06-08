@@ -3,6 +3,7 @@
 /* ===================================
 font
 ======================================*/
+
 @font-face {
     font-family: 'LeferiPoint-BlackA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
@@ -44,6 +45,7 @@ font
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'LeferiPoint-WhiteA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
@@ -171,6 +173,86 @@ header nav ul li:hover {
 .member-nav li i:hover {
 	color: black;
 }
+
+.login {
+	position: relative;
+}
+
+.member-nav-depth {
+	position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 999;
+    visibility: hidden;
+    max-height: 0;
+    margin-top: -1px;
+    padding-top: 10px;
+    transform: translateX(-50%);
+    width: 100px;
+}
+
+.inner-member-nav {
+	padding: 15px 20px;
+	border: 1px solid #116916;
+	border-radius: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.inner-member-nav ul {
+	display: contents;
+}
+
+.inner-member-nav ul li {
+	margin-right: 0;
+	width: fit-content;
+	margin-left: 5px;
+}
+
+/* .member-nav-depth li 사이 간격 */
+.member-nav-depth ul > li + li {
+	margin-top: 10px;
+}
+
+/* .inner-member-nav ul li의 마우스오버시 초기 설정 */
+.inner-member-nav ul > li > a {
+	display: inline;
+    color: #808080;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+}
+
+/* .inner-member-nav ul li의 a 마우스오버시 색상 변화 */
+.inner-member-nav ul > li > a:hover {
+	color: #f8674f;
+	border-color: #f8674f;
+}
+
+/* .login 마우스 오버시 사이드 메뉴 노출 */
+.login:hover > a + .member-nav-depth {
+	visibility: visible;
+	max-height: 100px;
+	-webkit-transition: max-height 0.5s ease;
+	transition: max-height 0.5s ease;
+}
+
+/* cart-order-cnt */
+/* .cart-order-cnt {
+	position: relative;
+	width: 13px;
+    height: 13px;
+    display: flex;
+	justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f8674f;
+    font-size: 10px;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: -1;
+    transform: translate(20px, -25px);
+} */
 
 #content {
 	min-height: 700px;

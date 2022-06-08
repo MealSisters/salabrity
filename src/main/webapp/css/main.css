@@ -48,12 +48,12 @@ index.jsp - main
 .tbl-main-product, .tbl-main-service {
 	margin: 0 auto;
 	padding: 20px;
-	width: 90%;
+	width: 100%;
 }
 
 .tbl-main-product {
 	border-collapse: separate;
-  	border-spacing: 10px 10px;
+  	border-spacing: 20px 10px;
 }
 
 .tbl-main-service {
@@ -65,7 +65,6 @@ index.jsp - main
 }
 
 /* th, td */
-
 .tbl-main-product th, .tbl-main-service th {
 	height: 30px;
 }
@@ -86,7 +85,7 @@ index.jsp - main
 
 .main-product-img td {
 	width: 250px;
-	height: 300px;
+	height: 250px;
 	border: 1px solid gray;
 	border-radius: 20px;
 }
@@ -148,10 +147,3 @@ index.jsp - main
 	text-decoration: none;
 	color: black;
 }
-
-
-
-
-
-
-
