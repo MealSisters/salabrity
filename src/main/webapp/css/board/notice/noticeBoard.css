@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* ===================================
+noticeBoardEnroll.jsp
+======================================*/
+
+#notice-board-enroll-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#notice-board-enroll-wrap .main-title {
+	font-size: 21px;
+}
+
+#notice-board-enroll-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
+/* select */
+#notice-board-select {
+	font-size: 14px;
+	width: 20%;
+	height: 30px;
+	background: url('') no-repeat 95% 50%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#notice-board-select::-ms-expand {
+	display: none;
+}
+
