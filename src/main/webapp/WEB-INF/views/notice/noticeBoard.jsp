@@ -8,7 +8,8 @@
 	
 <div class="notice_page_content">
     <h3 class="notice_hd">공지사항</h3>
-    <div class="notice_wrap">        
+    <div class="notice_wrap">    
+     <button type="button" class="btn_notice_enroll">등록</button>    
 <%@ include file="/WEB-INF/views/common/noticePagebar.jsp" %>
         <div class="notice_cont"> <!-- FAQ랑 같이 사용 -->
             <table class="tbl_notice">
