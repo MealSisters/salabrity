@@ -25,8 +25,8 @@
 			<nav class="main-nav">
 				<ul>					
 					<li class="diet-diagnosis"><a href="#">맞춤식단찾기</a></li>
-					<li class="diet-calendar"><a href="#">이달의식단</a></li>
-					<li class="diete-products"><a href="#">전체식품</a></li>
+					<li class="diet-calendar"><a href="#">샐브의식단</a></li>
+					<li class="diete-products"><a href="<%= request.getContextPath() %>/product/productList">전체상품</a></li>
 					<li class="comminity-board"><a href="<%= request.getContextPath() %>/board/community">커뮤니티</a></li>
 					<li class="notice"><a href="<%= request.getContextPath() %>/board/notice">공지사항/이벤트</a></li>
 				<%-- 관리자 페이지 조건문 적용 예정! --%>
@@ -44,21 +44,24 @@
 						<a href="<%= request.getContextPath() %>/member/login" title="로그인"><i class="fa-solid fa-user"></i></a>
 					<%-- } else { --%>
 						<%-- 로그인 후 --%>
-						<%-- 이 부분은 일단 주석처리해둘게요! --%>
-					<!--	 <a href="#" title="마이페이지"><i class="fa-solid fa-user"></i></a>
-						  <div class=inner-member-nav>
-							<ul>
-								<li class="shipping-info"><a href="#">쇼핑정보</a></li>
-								<li class="my-info"><a href="#">회원정보</a></li>
-								<li class="activity-info"><a href="#">내 활동정보</a></li>
-									<li class="logout"><a href="#">로그아웃</a></li>
-							</ul>
-						</div> -->
+						<%-- 이 부분은 일단 주석처리해둘게요!
+						<a href="#" title="마이페이지"><i class="fa-solid fa-user"></i></a> --%>
+						<div class="member-nav-depth">
+							<div class="inner-member-nav">
+								<ul>
+									<li class="shipping-info"><a href="<%= request.getContextPath() %>/mypage/orderView">쇼핑정보</a></li>
+									<li class="my-info"><a href="<%= request.getContextPath() %>/mypage/memberUpdate">회원정보</a></li>
+									<li class="activity-info"><a href="#">활동정보</a></li>
+									<li class="logout"><a href="<%= request.getContextPath() %>">로그아웃</a></li>
+								</ul>
+							</div>
+						</div>
 					<%-- } --%>
 					</li>
 					<li class="cart">
-						<a href="#" title="장바구니"><i class="fa-solid fa-cart-shopping"></i></a>
-						
+						<a href="<%= request.getContextPath() %>/order/cart" title="장바구니"><i class="fa-solid fa-cart-shopping"></i></a>
+						<%-- 카트 수량 부분 --%>
+						<%-- <span class="cart-order-cnt">0</span> --%>
 					</li>
 				</ul>
 			</nav>
