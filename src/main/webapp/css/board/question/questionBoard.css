@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+/* ===================================
+questionBoardReplyEnroll.jsp
+======================================*/
+
+#question-board-reply-enroll-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#question-board-reply-enroll-wrap .main-title {
+	font-size: 21px;
+}
+
+#question-board-reply-enroll-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
+/* table */
+.tbl-member-question, .tbl-admin-reply {
+	text-align: left;
+	width: 100%;
+	margin-bottom: 10px;
+	table-layout: fixed;
+}
+
+.tbl-member-question {
+	padding: 20px 0;
+	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+}
+
+.tbl-admin-reply {
+	padding-bottom: 20px;
+	margin-top: 0px;
+	border-bottom: 1px solid #c0c0c0;
+}
+
+.tbl-member-question th, .tbl-admin-reply th {
+	width: 150px;
+	height: 60px;
+}
+
+.tbl-member-question td input, .tbl-admin-reply td input,
+.tbl-member-question td textarea, .tbl-admin-reply td textarea {
+	font-size: 14px;
+}
+
+.tbl-member-question td input, .tbl-admin-reply td input {
+	height: 25px;	
+}
+
+input[name="memberId"], input[name="email"] {
+	width: 25%;
+}
+
+input[name="qTitle"], input[name="rTitle"] {
+	width: 50%;
+}
+
+.tbl-member-question textarea, .tbl-admin-reply textarea {
+	resize: none;
+	width: 100%;
+	height: 250px;
+}
+
+
+
+
