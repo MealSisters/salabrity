@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class orderViewServlet
  */
 @WebServlet("/mypage/orderView")
-public class orderViewServlet extends HttpServlet {
+public class OrderViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,6 +19,6 @@ public class orderViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/views/member/orderView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderView.jsp").forward(request, response);
 	}
 }
