@@ -4,64 +4,56 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/survey/surveyCustom.css">
-	
 
 <link rel="stylesheet" href="surveyCustom.css">
 
-
-<div class="survey_box">
-
-	<div class="survey_list">
-		<script type="text/javascript">
-			<input type="radio" name="gender" value="female" checked="checked"> 여자
-			<input type="radio" name="gender" value="male"> 남자		
-			
-			<p>
-			  키키키키를 입력해주세요. : <input type="number" id="height"/> cm
-			</p>
-
-			<p>
-			  몸무게를 입력해주세요 : <input type="number" id="weight"/> kg
-			</p>
-			  
-		  function(){
-			    document.getElementById("button").onclick = function(){
-			       var h = parseFloat(document.getElementById("height").value);
-			       var w = parseFloat(document.getElementById("weight").value);
-			       var bmi = document.getElementById("");
-			  }
-
-			function surbeyCheck(){ 
-				
-		        var form = document.make_form; 
-		        if(form.question.value.length==0) 
-		        { 
-	                alert("질문"); 
-	                form.question.focus(); 
-	                return false; 
-		        } 
-		        if(form.answer1.value.length==0) 
-		        { 
-	                alert("답변1"); 
-	                form.answer1.focus(); 
-	                return false; 
-		        } 
-		        if(form.answer2.value.length==0) 
-		        { 
-	                alert("답변2"); 
-	                form.answer2.focus(); 
-	                return false; 
-		        } 
-		        form.submit(); 
-		} 
-		</script>
-		
-		<select name="period" size="1"> 
-	        <option value="1" selected>1</option> 
-       </select>
-       <>
+  <form action="surveyResult.jsp" method="post">
+  <div class="surveyContainer">
+  	<div class="h1-container">
+      <h1>맞춤 식단 찾기</h1>
+    </div>
+    
+	<div class="gender">
+		<input type="radio" name="gender" value="female" checked="checked"> 여자
+		<input type="radio" name="gender" value="male"> 남자
+    </div>
+    
+	<div class="survey_height">
+		키 <input type="number" id="height" placeholder="cm">
 	</div>
+	<div class="survey_weight">
+		몸무게 <input type="number" id="weight" placeholder="kg">
+	</div>
+    
+    <div class="Uniqueness">
+    	해당되는 사항이 있으신가요? <br>
+    	<input type="checkbox" name="uniq" value="diabetes"> 당뇨환자
+		<input type="checkbox" name="uniq" value="baby"> 유아
+    </div>
 
+	<div class="submit">
+      <input type="submit" value="GO">
+    </div>
+  </form>
 </div>
+	    
+	<script type="text/javascript"> // 미선택시 메시지 미완성
+		var survey = new Survey.Model(surveyJSON);
+		$("#surveyContainer").Survey({
+		    model: survey,
+		    onComplete: sendDataToServer
+		});
+				$('button.survey-btn').click(function(){
+				    var error='';
+				    $('div.surveys').each(function(){
+				        var survaysName=$(this).find('div.gender').text();
+				        var checkBtn=$(this).find('input[type="radio"]:checked');
+				        if(!checkBtn.length){
+				            error+=gender+'가 입력되지 않았습니다.\n';
+				        }
+				    });
+				    if(error) alert(error);
+				});
+	</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

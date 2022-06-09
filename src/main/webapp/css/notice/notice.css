@@ -93,18 +93,16 @@ aside {
 	color: black;
 }
 
-.tbl_notice tr th:nth-of-type(1),
-.tbl_notice tr th:nth-of-type(3) {
-	width : 120px;
+.tbl_notice tr th:nth-of-type(1), .tbl_notice tr th:nth-of-type(3) {
+	width: 120px;
 }
 
 .tbl_notice tr th:nth-of-type(4) {
-    width: 94px;
-
+	width: 94px;
 }
 
 .tbl_notice tr th:nth-of-type(2) {
-    width: 507px;
+	width: 507px;
 }
 
 strong {
@@ -142,7 +140,7 @@ strong {
 /* 공지사항 관리자 글 등록 */
 .btn_notice_enroll {
 	position: absolute;
-	margin-left: 1039px;
+	margin-left: 1021px;
 	margin-top: 10px;
 	float: right;
 	background-color: #116916;
@@ -150,6 +148,7 @@ strong {
 	height: 29px;
 	width: 50px;
 	color: #fff;
+	font-size: 13px;
 }
 
 .btn_notice_enroll:hover {
@@ -162,4 +161,62 @@ strong {
 
 .tbl_faq tr th:nth-of-type(2) {
 	width: 613px;
+}
+
+/* 공지사항 상세글 조회 */
+.noticeDetail_head {
+	border-top: 1px solid black;
+}
+
+.noticeSecond_head {
+	border-top: 1px solid #bdbdbd;
+	border-bottom: 1px solid #bdbdbd;
+	padding: 5px;
+}
+
+.notice_cont {
+	width: 870px;
+}
+
+.notice__head {
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.noticeDetail_view {
+	border-bottom: 1px solid #dbdbdb;
+}
+
+.noticeDetail_view p {
+	font-size: 14px;
+}
+
+.noticeDetail_date {
+	font-size: 13px;
+	margin-left: 8px;
+}
+
+.noticeDetail_look {
+	font-size: 13px;
+	float: right;
+}
+
+.noticeDetail_view img {
+	width: 250px;
+}
+
+/* 글 목록 버튼 */
+.back_notice {
+	margin-top: 10px;
+	float: right;
+	background-color: #116916;
+	border: 1px solid #fff;
+	color: #fff;
+	height: 29px;
+	width: 65px;
+    font-size: 12px;
+}
+
+.back_notice:hover {
+	cursor: pointer;
 }
