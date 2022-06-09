@@ -1,0 +1,49 @@
+.boardTitle {
+    margin-top: 0;
+    font-size: 25px;
+}
+.div-level1 {
+    width: 1180px;
+    display: flex;
+}
+
+.div-level2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+}
+.div-sidemenu {
+    width: 200px;
+}
+.div-sidemenu aside {
+    margin-top: 10px;
+}
+
+
+.div-board {
+    margin-top: 12px;
+    margin-left: 20px;
+    width: 900px;
+}
+.boardTitle, .div-level3 {
+    width: inherit;
+    text-align: center;
+}
+.tbl-searchResult {
+    width: inherit;
+    border-collapse: collapse;
+}
+.tbl-searchResult thead {
+    border-top: 2px solid #333;
+    background-color: #116135;
+    color: #fff;
+}
+.tbl-searchResult th {
+    font-family: 'LeferiPoint-WhiteA';
+}
+.tbl-searchResult tr {
+    height: 30px;
+    vertical-align: middle;
+    border-bottom: 1px solid #888;
+}
