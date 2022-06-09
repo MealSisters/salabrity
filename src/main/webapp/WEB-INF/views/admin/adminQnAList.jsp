@@ -27,13 +27,14 @@
                     <!-- td.col-no+td.col-title+td.col-memberId+td.col-date+td.col-readCnt -->
                     <tr>
                         <td class="col-no">4</td>
-                        <td class="col-title"><a>환불해주세요</a></td>
+                        <td class="col-title"><a href="">환불해주세요</a></td>
                         <td class="col-memberId">honggd</td>
                         <td class="col-date">2022-04-23</td>
                         <td class="col-readCnt">0</td>
                     </tr>
                     <tr>
                         <td class="col-no">3</td>
+                        <td class="col-title"><a href="">1주치 시켯는데 2주치 주시면 안되나요</a></td>
                     </tr>
                     <tr>
                         <td class="col-no">2</td>
