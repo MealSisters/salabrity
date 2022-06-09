@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-</head>
-<body>
+
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/member/myPage.css">
 
 	<aside class="sub">
 		<h3 class="my_hd">마이페이지</h3>
@@ -34,13 +29,10 @@
 				<li class="sub_inner_list">
 					<h4 class="li_head">활동정보</h4>
 				</li>
-				<li class="sub_inner_list"><a href="">작성 게시글 조회</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/boardWriteList">작성 게시글 조회</a></li>
 				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/boardQuestionList">1:1 문의</a></li>
 			</ul>
 
 
 		</ul>
 	</aside>
-
-</body>
-</html>
