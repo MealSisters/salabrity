@@ -20,17 +20,37 @@ noticeBoardEnroll.jsp
 }
 
 /* select */
-#notice-board-select {
+.notice-board-select {
 	font-size: 14px;
-	width: 20%;
-	height: 30px;
-	background: url('') no-repeat 95% 50%;
+	text-align: left;
+	padding-left: 5px;
+	width: 10%;
+	height: 27px;
+	background: url('https://cdn-icons-png.flaticon.com/512/32/32195.png') no-repeat 95% 50% / 14px 14px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 }
 
-#notice-board-select::-ms-expand {
+.notice-board-select::-ms-expand {
 	display: none;
 }
 
+/* ===================================
+noticeBoardUpdate.jsp
+======================================*/
+
+#notice-board-update-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#notice-board-update-wrap .main-title {
+	font-size: 21px;
+}
+
+#notice-board-update-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
