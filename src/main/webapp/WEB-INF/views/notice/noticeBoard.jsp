@@ -24,7 +24,7 @@
                 <tbody>
                     <tr>
                         <td>01</td>
-                        <td><a href="">공지사항1</a></td>
+                        <td><a href="<%= request.getContextPath() %>/board/noticeView">[이벤트] 가격 할인 안내</a></td>
                         <td>2022-06-08</td>
                         <td>0</td>
                     </tr>
