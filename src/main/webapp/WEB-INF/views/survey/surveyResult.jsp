@@ -11,6 +11,26 @@
 
 <div class="survey_result">
 	<div>
+	<%
+	request.setCharacterEncoding("UTF-8");
+	String gender = request.getParameter("gender");
+		if(gender.equals("male")){
+		}else{
+		}
+
+	String uniquenessArr[] = request.getParameterValues("");
+		for(String uniq : uniquenessArr){
+			int n = 0;
+			switch(n){
+				case 1: 
+						 break;
+				case 2: 
+				 		 break;
+				}
+		}
+	%>
+	<br>
+	<b><a href='javascript:history.go(-1)'>다시</a></b>
 	</div>
 </div>
 
