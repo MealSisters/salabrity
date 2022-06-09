@@ -3,7 +3,7 @@
     font-size: 25px;
 }
 .div-level1 {
-    width: 1180px;
+    width: 1160px;
     display: flex;
 }
 
@@ -21,6 +21,11 @@
 }
 
 
+.div-nonedisplay {
+    display: none;
+}
+
+
 .div-board {
     margin-top: 12px;
     margin-left: 20px;
@@ -33,6 +38,7 @@
 .tbl-searchResult {
     width: inherit;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 .tbl-searchResult thead {
     border-top: 2px solid #333;
@@ -47,14 +53,127 @@
     vertical-align: middle;
     border-bottom: 1px solid #888;
 }
-tbody .col-title {
+
+
+tbody td {
+    font-size: 13px;
+}
+.col-no, .col-readCnt {
+    width: 60px;
+}
+.col-status {
     width: 100px;
+}
+tbody .col-title {
     text-align: left;
-    padding-left: 20px;
-    overflow-x: auto;
+    padding: 1px 20px;
+    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .col-title a {
     text-decoration: none;
     color: #000;
+}
+.col-title a:hover {
+    color: #0EAE57;
+}
+
+.col-memberId {
+    width: 130px;
+}
+.col-date {
+    width: 100px;
+}
+
+
+.div-questionView {
+    margin-top: 8px;
+    margin-left: 20px;
+    width: 900px;
+}
+.postingNo-wrapper {
+    text-align: right;
+    padding: 0 10px;
+}
+.div-questionView > div {
+    width: inherit;
+    font-size: 13px;
+}
+.writer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #333;
+}
+.span-writer {
+    font-size: 15px;
+}
+.span-contentlabel {
+    margin: 0 10px;
+}
+.postinghead-wrapper {
+    padding-top: 0;
+    border-bottom: 1px solid #ddd;
+}
+.viewtitle {
+    padding-left: 10px;
+    font-size: 20px;
+    margin: 0;
+}
+.postingTextContent {
+    width: 880px;
+    height: 300px;
+    background-color: #fafafa;
+    overflow-y: scroll;
+}
+.postingAttach-wrapper { 
+    display: flex;
+    align-items: center;
+}
+.postingAttach-wrapper span {
+    font-family: 'LeferiBaseType-BoldA';
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+}
+.postingAttach-wrapper a {
+    font-size: 15px;
+    margin: 0 20px;
+}
+.div-postingTail {
+    border-bottom: 1px solid #333;
+}
+.buttons-wrapper {
+    display: flex;
+    justify-content: center;
+}
+.buttons-wrapper > div {
+    width: 104px;
+    height: 40px;
+    padding: 0;
+    margin: 0 15px;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.div-answer {
+    background-color: #116135;
+}
+.div-answer:hover {
+    background-color: #0EAE57;
+}
+.div-cancel {
+    background-color: #888;
+}
+.div-cancel:hover {
+    background-color: #AD1C0E;
+}
+.buttons-wrapper button {
+    font-size: 13px;
+    width: inherit;
+    height: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #fff;
 }
