@@ -112,7 +112,7 @@
 					<tr>
 						<td colspan="8">
 							<div class="main-product-btn">
-								<a href="#">이달의 식단 보기</a>
+								<a href="#">샐브의 식단 보기</a>
 							</div>
 						</td>
 					</tr>
