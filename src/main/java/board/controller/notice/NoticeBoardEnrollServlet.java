@@ -26,7 +26,7 @@ public class NoticeBoardEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/board/notice/noticeView");
+		response.sendRedirect(request.getContextPath() + "/board/noticeView");
 	}
 
 }
