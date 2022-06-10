@@ -18,7 +18,7 @@
 					<th>분류<sup>*</sup></th>
 					<td>
 						<div>
-							<select name="notice-board-select" id="notice-board-select" required>
+							<select name="notice-board-select" class="notice-board-select" required>
 								<option value="" selected>선택</option>
 								<option value="general">일반</option>
 								<option value="event">이벤트</option>
