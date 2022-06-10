@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <th>송장번호</th>
-                <td>샐브택배&nbsp;&nbsp;&nbsp;&nbsp;<a href="">123412341234</a></td>
+                <td>샐브택배&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://tracker.delivery/#/:carrier_id/:track_id">123412341234</a></td>
             </tr>
         </table>
     </article>

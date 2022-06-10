@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class orderViewServlet
+ * Servlet implementation class OrderList
  */
-@WebServlet("/mypage/orderView")
-public class orderViewServlet extends HttpServlet {
+@WebServlet("/mypage/orderList")
+public class OrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,6 +19,7 @@ public class orderViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/views/member/orderView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderList.jsp").forward(request, response);
 	}
+
 }
