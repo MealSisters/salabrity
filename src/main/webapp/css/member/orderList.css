@@ -59,6 +59,7 @@ section#order_list h1>p{
 	text-align: left;
 	height: 35px;
 	font-size: 13px;
+	cursor: pointer;
 }
 #order_list .row1>td{
 	border-top: 1px solid #dbdbdb;

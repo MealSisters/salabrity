@@ -89,9 +89,35 @@
 						<td class="col3">주문상태 : 구독중</td>
 						<td class="col4"> <button>1 : 1문의</button></td>
 					</tr>
-					
-
 				</table>
+				
+				
+				
+				<script>
+				const question_btns = document.querySelectorAll('#order_list tr.row2 td.col4');
+				console.log(question_btns);
+				question_btns.forEach(function (elem) {
+					elem.addEventListener('click', function () {
+						location.href = '<%= request.getContextPath() %>/mypage/boardQuestion';
+					});
+				});
+
+				const order_infoes = document.querySelectorAll('#order_list tr .col1, #order_list tr .col2,#order_list tr .col3');
+				console.log(order_infoes);
+
+				order_infoes.forEach(function (elem) {
+					elem.addEventListener('click', function () {
+						location.href = '<%= request.getContextPath() %>/mypage/orderView';
+					});
+				});
+				const cart_btns = document.querySelectorAll('#order_list tr.row1 td.col4');
+				console.log(cart_btns);
+				cart_btns.forEach(function (elem) {
+					elem.addEventListener('click', function () {
+						location.href = '<%= request.getContextPath() %>/order/cart';
+					});
+				});
+				</script>
 <%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
 			</section>
 
