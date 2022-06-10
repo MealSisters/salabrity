@@ -356,3 +356,48 @@ tbody {
 .rights a {
 	font-weight: bold;
 }
+
+/* ===================================
+tos.jsp + privacyPolicy.jsp
+======================================*/
+
+#tos-content-wrap, #policy-content-wrap {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.tos-content-list, .policy-content-list {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.tos-content-header i, .policy-content-header i {
+	color: #f8674f;
+}
+
+.list-header {
+	background-color: #f5f5f5;
+	padding: 10px;
+	font-size: 15px;
+}
+
+.list-content {
+	font-size: 14px;
+}
+
+.tos-content-list .list-content li {
+	margin: 20px;
+}
+
+.policy-content-list .list-content {
+	margin: 20px;
+}
+
+.policy-content-list .list-content li {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.policy-content-list .list-content p, .policy-content-list .list-content pre {
+	margin: 20px;
+}
