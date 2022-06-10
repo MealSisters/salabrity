@@ -67,6 +67,41 @@ input[name="qTitle"], input[name="rTitle"] {
 	height: 250px;
 }
 
+/* ===================================
+faqBoardEnroll.jsp
+======================================*/
 
+#faq-board-enroll-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
 
+#faq-board-enroll-wrap .main-title {
+	font-size: 21px;
+}
+
+#faq-board-enroll-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
+/* ===================================
+faqBoardUpdate.jsp
+======================================*/
+
+#faq-board-update-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#faq-board-update-wrap .main-title {
+	font-size: 21px;
+}
+
+#faq-board-update-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
 
