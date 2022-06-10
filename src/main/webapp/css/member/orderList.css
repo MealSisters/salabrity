@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+#content{
+    display: flex;
+	margin-bottom:50px;	
+}
+#order_list h1{
+	font-size: 20px;
+	margin: 22.2px 0 13.4px 0;
+	
+}
+.heading_wrp{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.sortbox{
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+}
+#state {
+	font-size: 12px;
+    line-height: normal;
+    height: 40px;
+    padding: 2px;
+    font-family: 'NanumSquare';
+    text-align: center;
+    border: none;
+    width: 100px;
+    outline-style: none;
+}
+
+section#order_list h1>p{
+    display: inline-block;
+    color: #777;
+    font-size: x-small;
+    padding-left: 10px;
+    font-weight: 500;
+}
+#order_list{
+    width: 75%;
+	margin: 0 auto;
+}
+#order_list{
+    width: 75%;
+	margin: 0 auto;
+}
+#order_list table {
+    border-top: 2px solid #116916;
+    border-bottom: 1px solid #dbdbdb;
+	font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+	margin: 0 0 70px 0;
+}
+#order_list td{
+	padding-left: 3px;
+	text-align: left;
+	height: 35px;
+	font-size: 13px;
+}
+#order_list .row1>td{
+	border-top: 1px solid #dbdbdb;
+	padding: 7px 3px 0 3px;
+}
+#order_list .row2{
+
+	padding: 0px 3px 4px 3px;
+}
+#order_list th{
+	width: 18%;
+}
+
+#order_list table td button{
+	background-color: white;
+	border-radius: 3px;
+	border: #116916 solid 1px;
+	padding: 6px 3px 3px 3px;
+	width: 70px;
+	font-size: 11px;
+	color: #116916;
+	margin: 2px 0;
+
+}
+#order_list table td button:hover{
+
+	border: #116916 solid 2px;
+	font-size: 12px;
+	font-weight: 900;
+	transition-duration: 0.3s;
+	width: 70px;
+}
+
+.page-bar{
+	text-align: center;
+}
