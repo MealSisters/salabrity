@@ -36,7 +36,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>			
+				</div>
 			</div>
 			<div class="cs">
 				<table>
@@ -56,7 +56,7 @@
 						</tr>
 						<tr>
 							<th rowspan="2">
-								<a href="#">1:1 문의</a>
+								<a href="<%= request.getContextPath() %>/mypage/boardQuestion">1:1 문의</a>
 							</th>
 							<td>24시간 접수 가능</td>
 						</tr>
@@ -80,8 +80,8 @@
 				</table>
 			</div>
 			<div class="rights">
-				<a href="#">이용약관</a> | <a href="#">개인정보처리방침</a>
-				<p>Copyright ⓒ 2022 All rights reserved by <strong>㈜샐러브리티</strong></p>			
+				<a href="<%= request.getContextPath() %>/tos">이용약관</a> | <a href="<%= request.getContextPath() %>/privacyPolicy">개인정보처리방침</a>
+				<p>Copyright ⓒ 2022 All rights reserved by <strong>㈜샐러브리티</strong></p>
 			</div>
 		</footer>
 	</div>
