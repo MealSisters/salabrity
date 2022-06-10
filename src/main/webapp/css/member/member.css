@@ -265,7 +265,7 @@ label {
 }
 
 .input_text {
-	padding: 0 20px;
+    padding: 0 10px;
 	width: 300px;
 	height: 35px;
 	border: 1px solid #BDBDBD;
@@ -628,7 +628,7 @@ footer {
 }
 
 .input__text {
-	padding: 0 20px;
+    padding: 0 10px;
 	width: 400px;
 	height: 35px;
 	border: 1px solid #BDBDBD;

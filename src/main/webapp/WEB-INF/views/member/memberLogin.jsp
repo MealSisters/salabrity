@@ -36,7 +36,7 @@
 		</div>
 	</form>
 </div>
-
+<!-- 
 <div class="member_sns_login">
 	<h3 class="head_log">SNS 로그인</h3>
 	<div class="member_sns_login_in">
@@ -50,6 +50,7 @@
 		</ul>
 	</div>
 </div>
+ -->
 
 
 
