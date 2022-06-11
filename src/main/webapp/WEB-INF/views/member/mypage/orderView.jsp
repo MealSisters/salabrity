@@ -9,7 +9,6 @@
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
 
      <link rel="stylesheet" href="order_view.css" />
-
 <section id="order_view">
     <h1>주문내역 상세</h1>
     <article class="order_prduct">
@@ -23,7 +22,7 @@
                     <img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="prd_img">
                 </td>
                 <td class="r2_1">베이비 식단<span>1일 2식 2주(월~금, 20회)</span></td>
-                <td rowspan="2" class="r3">1차 배송완료</td>
+
                 <td rowspan="2" class="r4"><button>장바구니 담기</button></td>
             </tr>
             <tr class="row_even">
@@ -34,7 +33,7 @@
                     <img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="prd_img">
                 </td>
                 <td class="r2_1">베이비 식단<span>1일 2식 2주(월~금, 20회)</span></td>
-                <td rowspan="2" class="r3">1차 배송완료</td>
+
                 <td rowspan="2" class="r4"><button>장바구니 담기</button></td>
             </tr>
             <tr>
@@ -66,10 +65,7 @@
                 <th>배송 요청사항</th>
                 <td>집앞에 두고 가시면 됩니다~!</td>
             </tr>
-            <tr>
-                <th>송장번호</th>
-                <td>샐브택배&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://tracker.delivery/#/:carrier_id/:track_id">123412341234</a></td>
-            </tr>
+
         </table>
     </article>
     <h2>주문정보</h2>
