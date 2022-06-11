@@ -158,10 +158,10 @@ input[type="radio"] {
     cursor: pointer;
     color: #fff;
 }
-.enrollBtn-wrapper {
+.enrollBtn-wrapper, .updateBtn-wrapper {
     background-color: #116135;
 }
-.enrollBtn-wrapper:hover {
+.enrollBtn-wrapper:hover, .updateBtn-wrapper:hover {
     background-color: #0EAE57;
 }
 .cancelBtn-wrapper {

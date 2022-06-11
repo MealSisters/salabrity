@@ -25,16 +25,13 @@
                 <input type="date" name="orderDateEnd" id="filter-orderDate-end" class="periodEnd">
             </div>
             <div class="div-searchFilter">
-                <label for="filter-shippingStatus">배송상태</label>
-                <select name="shippingState" class="filter-select">
+                <label for="filter-payStatus">배송상태</label>
+                <select name="payState" class="filter-select">
                     <option value="전체" selected>전체보기</option>
-                    <option value="입금확인중">입금확인중</option>
+                    <option value="미결제">미결제</option>
                     <option value="결제완료">결제완료</option>
-                    <option value="상품준비중">상품준비중</option>
-                    <option value="배송준비중">배송준비중</option>
-                    <option value="배송중">배송중</option>
-                    <option value="배송완료">배송완료</option>
-                    <option value="구매확정">구매확정</option>
+                    <option value="결제실패">결제실패</option>
+                    <option value="환불처리">환불처리</option>
                 </select>
             </div>
             <div class="div-searchbtn">
@@ -51,7 +48,7 @@
                     <th class="col-orderNo">주문번호</th>
                     <th class="col-memberId">아이디</th>
                     <th class="col-orderDate">주문일</th>
-                    <th class="col-shippingStatus">배송상태</th>
+                    <th class="col-payStatus">결제상태</th>
                     <th class="col-price">결제금액</th>
                     <th class="col-shippingAddr">배송지</th>
                     <th class="col-products">주문상품</th>
@@ -66,7 +63,7 @@
                     <td class="col-orderNo">0001</td>
                     <td class="col-memberId">honggd1234</td>
                     <td class="col-orderDate">2022-05-27</td>
-                    <td class="col-shippingStatus">입금확인중</td>
+                    <td class="col-payStatus">미결제</td>
                     <td class="col-price">135,800</td>
                     <td class="col-shippingAddr td-xscroll">서울특별시 강남구 청담동 어쩔로 저쩔길 티비아파트 1234번 1234 어쩌고저쩌고 11111 2222</td>
                     <td class="col-products td-xscroll">단백질듬뿍 다이어터 4주</td>
@@ -81,7 +78,7 @@
                     <td class="col-orderNo">0002</td>
                     <td class="col-memberId"></td>
                     <td class="col-orderDate"></td>
-                    <td class="col-shippingStatus"></td>
+                    <td class="col-payStatus"></td>
                     <td class="col-price"></td>
                     <td class="col-shippingAddr td-xscroll"></td>
                     <td class="col-products td-xscroll"></td>
@@ -93,7 +90,7 @@
                     <td class="col-orderNo">0003</td>
                     <td class="col-memberId"></td>
                     <td class="col-orderDate"></td>
-                    <td class="col-shippingStatus"></td>
+                    <td class="col-payStatus"></td>
                     <td class="col-price"></td>
                     <td class="col-shippingAddr td-xscroll"></td>
                     <td class="col-products td-xscroll"></td>
@@ -142,17 +139,10 @@
                 <input type="hidden" name="memberId">
                 <span>honggd1234</span>
             </div>
-            <div class="div-shippingStatusModify">
-                <label for="shippingStatusModify">배송상태</label>
-                <select name="shippingState" class="shippingStatusModify-select" data-member-id="">
-                    <option value="입금확인중" selected>입금확인중</option>
-                    <option value="결제완료">결제완료</option>
-                    <option value="상품준비중">상품준비중</option>
-                    <option value="배송준비중">배송준비중</option>
-                    <option value="배송중">배송중</option>
-                    <option value="배송완료">배송완료</option>
-                    <option value="구매확정">구매확정</option>
-                </select>
+            <div class="div-payStatusModify">
+                <label for="payStatusModify">결제상태</label>
+                <input type="hidden" name="payState">
+                <span>미결제</span>
             </div>
             <div class="div-shippingAddrModify">
                 <label>배송지</label>

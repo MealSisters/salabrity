@@ -55,7 +55,7 @@
                     </li>
                     <li data-wdCode="w1d3">
                         <div class="day-code"><span>Week1 Day3</span></div>
-                        <div class="day-menu"><span>닭가슴살볶음밥</span></div>
+                        <div class="day-menu"><a href="<%=request.getContextPath() %>/menu/menuInfo?menuNo=">닭가슴살볶음밥</a></div>
                         <div class="day-btns">
                             <div class="modifyDay-wrapper">
                                 <button class="modifyDay">수정</button>
