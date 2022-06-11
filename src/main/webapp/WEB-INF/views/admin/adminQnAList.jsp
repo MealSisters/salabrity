@@ -31,7 +31,7 @@
                     <tr>
                         <td class="col-no">4</td>
                         <td class="col-status">대기중</td>
-                        <td class="col-title"><a href="">환불해주세요</a></td>
+                        <td class="col-title"><a>환불해주세요</a></td>
                         <td class="col-memberId">honggd</td>
                         <td class="col-date">2022-04-23</td>
                         <td class="col-readCnt">0</td>
@@ -39,7 +39,7 @@
                     <tr>
                         <td class="col-no">3</td>
                         <td class="col-status">완료</td>
-                        <td class="col-title"><a href="">1주치 시켯는데 2주치 주시면 안되나요?????</a></td>
+                        <td class="col-title"><a>1주치 시켯는데 2주치 주시면 안되나요?????</a></td>
                     </tr>
                     <tr>
                         <td class="col-no">2</td>
@@ -80,5 +80,41 @@
         </div>
     </div>
 </div>
+<script>
+    window.addEventListener('load', () => {
+        addOpenPostingView();
+        addViewBtnEvent();
+    });
+
+    const addOpenPostingView = () => {
+        const titles = document.querySelectorAll("#tbl-QnAList td.col-title");
+        titles.forEach((title) => {
+            title.addEventListener('click', () => {
+                const hiddenTarget = document.querySelector(".div-board");
+                const visibleTarget = document.querySelector(".div-questionView");
+
+                hiddenTarget.classList.add('div-nonedisplay');
+                visibleTarget.classList.remove('div-nonedisplay');
+            });
+        });
+    };
+
+    const addViewBtnEvent = () => {
+        const cancelBtn = document.querySelector("button.btn-cancel");
+        cancelBtn.addEventListener('click', () => {
+            const hiddenTarget = document.querySelector(".div-questionView");
+            const visibleTarget = document.querySelector(".div-board");
+
+            hiddenTarget.classList.add('div-nonedisplay');
+            visibleTarget.classList.remove('div-nonedisplay');
+        });
+
+        const submitBtn = document.querySelector("button.btn-answer");
+        submitBtn.onclick = () => {
+            location.href = "<%= request.getContextPath() %>/board/question/questionReply?postingNo=";
+        };
+    }
+</script>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

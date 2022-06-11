@@ -11,9 +11,6 @@
 	font-weight: bold;
 }
 
-#address2 {
-	width: 300px;
-}
 
 #inputDomain, #email {
     width: 139px;
@@ -84,7 +81,8 @@
 				<label class="member_title">주소</label> <input type="text"
 					name="address1" id="address1" class="input__text">
 				<button type="button" class="btn_address">우편번호 검색</button>
-				<input type="text" name="address2" id="address2" class="input__text">
+				<input type="text" name="address2" id="address3" class="input_text">
+				<input type="text" name="address3" id="address3" class="input_text" placeholder="상세주소를 입력해주세요.">
 			</div>
 			<div class="input_box">
 				<label class="member_title">생년월일</label> <input type="text"

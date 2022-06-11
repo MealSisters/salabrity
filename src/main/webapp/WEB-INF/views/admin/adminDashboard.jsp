@@ -89,7 +89,7 @@
             </table>
         </div>
         <div>
-            <div class="div-174wrap"><a href="">Notice Board</a></div>
+            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/notice">Notice Board</a></div>
             <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/community">Other Board</a></div>
         </div>
     </div>

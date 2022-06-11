@@ -99,9 +99,30 @@
 .day-code, .day-menu {
     text-align: center;
 }
+.day-menu {
+    font-size: 14px;
+    width: 124px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.day-menu a {
+    text-decoration: none;
+    color: #000;
+}
+.day-menu a:hover {
+    color: #0EAE57;
+}
 .day-btns {
     display: flex;
     justify-content: space-evenly;
+}
+/* 관리자버튼 숨김처리 클래스 */
+.div-hidden {
+    visibility: hidden;
 }
 
 .day-btns > div {

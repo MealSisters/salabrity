@@ -71,6 +71,8 @@
 					<button type="button" class="btn_address">우편번호 검색</button>
 					<input type="text" name="address2" id="address2"
 						class="input__text">
+					<input type="text" name="address3" id="address2"
+						class="input__text" placeholder="상세주소를 입력해주세요.">
 				</div>
 
 				<div class="input_box">
