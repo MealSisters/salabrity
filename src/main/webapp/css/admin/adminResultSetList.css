@@ -102,7 +102,7 @@
 .col-price {
   width: 70px;
 }
-.col-memberName, .col-shippingStatus, .col-calorie {
+.col-memberName, .col-payStatus, .col-calorie {
   width: 80px;
 }
 .col-birth, .col-regDate, .col-orderDate {
@@ -184,13 +184,13 @@ td.td-xscroll::-webkit-scrollbar-thumb:hover {
 
 /*------------------ 수정버튼 클릭시 수정폼 노출 ------------------*/
 .div-opacityLow {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 .div-hidden {
   visibility: hidden;
 }
 .orderModifyFrm-wrapper {
-  width: 800px;
+  width: 900px;
   height: 50vh;
   position: absolute;
   top: 25vh;
@@ -213,8 +213,11 @@ td.td-xscroll::-webkit-scrollbar-thumb:hover {
   margin: 10px;
 }
 #orderModifyFrm > div {
-  width: 560px;
+  width: 700px;
   margin: 5px 0;
+}
+#orderModifyFrm > div:last-of-type {
+  margin-top: 10px;
 }
 #orderModifyFrm label {
   margin: 0 10px 0 0;

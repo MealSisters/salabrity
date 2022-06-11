@@ -5,13 +5,12 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 <div class="div-level1">
     <h1 class="pageTitle">상품정보</h1>
-    <form name="productEnrollFrm" action="">
+    <!-- 수정시 아이디,가격은 편집불가 -->
+    <form name="productUpdateFrm" action="">
         <div class="formLine-wrapper">
             <label for="prodcutId">상품ID</label>
-            <input type="text" name=productId">
-            <div class="uniqueCkeck-wrapper">
-                <button type="button" class="uniqueCkeckBtn">중복검사</button>
-            </div>
+            <p class="p-productId">golenCPT_1w</p>
+            <input type="hidden" name=productId">
         </div>
         <div class="formLine-wrapper">
             <label for="productName">상품이름</label>
@@ -119,8 +118,8 @@
                     </div>
                 </div>
                 <div class="formLine-wrapper buttons-wrapper">
-                    <div class="enrollBtn-wrapper">
-                        <button class="enrollBtn">등록</button>
+                    <div class="updateBtn-wrapper">
+                        <button class="updateBtn">수정</button>
                     </div>
                     <div class="cancelBtn-wrapper">
                         <button type="button" class="cancelBtn">취소</button>

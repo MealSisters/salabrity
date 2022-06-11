@@ -4,7 +4,11 @@
 
 .list_header {
     height: 300px;
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .list_header h1 {
@@ -89,7 +93,7 @@
 
 .item_price {
     font-weight: 900;
-    width: 70%;
+    width: 60%;
     margin: 12px 0 0 0;
     
 }
@@ -101,8 +105,9 @@
 
 .add_cart {
     display: block;
-    font-size: 1.6em;
-    margin: 0 4% 0px 0;
+    /* font-size: 1.6em; */
+    font-size: 20px;
+    margin: 10px 4% 0px 0px;
     color: #116916;
     float: right;
     position: relative;
@@ -128,3 +133,51 @@
 	text-align: center;
 }
 
+
+/*---------------------- 관리자 ----------------------*/
+.admin-headBtns {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: right;
+}
+.button-wrapper {
+    width: 74px;
+    height: 30px;
+    padding: 0;
+    margin: 0 10px;
+    background-color: #116916;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.button-wrapper button {
+    width: inherit;
+    height: inherit;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+.button-wrapper:hover {
+    background-color: #0EAE57;
+}
+.admin-bodyBtngroup {
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 0;
+}
+.admin-bodyBtngroup a {
+    color: #888;
+    transition-duration: 0.1s;
+}
+.edit_product {
+    margin-right: 5px;
+}
+.edit_product:hover {
+    color: #0EAE57;
+}
+.del_product:hover {
+    color: #AD1C0E;
+}
