@@ -316,7 +316,7 @@ create table chat (
     chat_content varchar2(1000) not null,
     
     constraint pk_chat_no primary key(chat_no),
-    constraint fk_chatroom_member_id foreign key(member_id) references member(member_id) on delete set null
+    constraint fk_chat_member_id foreign key(member_id) references member(member_id) on delete set null
 );
 create sequence seq_chat_no;
 
@@ -325,3 +325,4 @@ create sequence seq_chat_no;
 -- 샘플데이터
 -- =================================================
 
+select * from member;

@@ -1,7 +1,8 @@
 package common.utill;
 
+// 페이지바 담당자 이은지
+// css파일 별도로 link하여 사용
 public class PageBar {
-	// 페이지바 담당자 이은지
 
 	private static int PAGEBAR_SIZE = 5; // 페이지번호는 5개씩 출력
 
@@ -18,7 +19,6 @@ public class PageBar {
 	public static String getPagebar(int cPage, int numPerPage, int totalContents, String url) {
 		StringBuilder pagebar = new StringBuilder();
 
-		pagebar.append("<link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>");
 		pagebar.append("\n");
 		pagebar.append("<div class='page-bar'>");
 
@@ -50,7 +50,8 @@ public class PageBar {
 			pageNo++;
 		}
 
-		if (pageNo > totalPages) {
+		// 현재페이지가 마지막페이지 이전 && 전체페이지수가 페이지바수보다 많을때
+		if (pageNo > totalPages && totalPages > pagebarSize) {
 			// '>'버튼과 '>>'버튼 활성화
 			pagebar.append("<a href='" + url + pageNo + "'><i class='fa-solid fa-angle-right'></i></a>");
 			pagebar.append("\n");
