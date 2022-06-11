@@ -1,8 +1,19 @@
+<%@page import="member.model.dto.MemberRole"%>
+<%@page import="admin.model.service.AdminService"%>
+<%@page import="member.model.dto.Member"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
+List<Member> list = (List<Member>) request.getAttribute("list");
 String pagebar = (String) request.getAttribute("pagebar");
+
+int cPage = 1;
+if(request.getParameter("cPage")!=null) {
+	cPage = Integer.parseInt(request.getParameter("cPage"));
+}
+int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
 %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
@@ -54,66 +65,39 @@ String pagebar = (String) request.getAttribute("pagebar");
                 </tr>
             </thead>
             <tbody>
+<%
+	if(list != null && !list.isEmpty()){
+		for(Member member : list){
+%>
                 <tr>
-                    <td class="col-no">1</td>
+                    <td class="col-no"><%= startNo++ %></td>
                     <td class="col-memberRole">
-                        <select class="member-role" data-member-id="">
-                            <option value="회원" selected>회원</option>
-                            <option value="관리자">관리자</option>
+                        <select class="member-role" data-member-id="<%= member.getMemberId() %>">
+							<option value="<%=MemberRole.U%>"
+								<%=member.getMemberRole() == MemberRole.U ? "selected" : ""%>>회원</option>
+                            <option value="<%=MemberRole.A%>"
+								<%=member.getMemberRole() == MemberRole.A ? "selected" : ""%>>관리자</option>
                         </select>
                     </td>
-                    <td>honggd</td>
-                    <td>홍길동</td>
-                    <td>남</td>
-                    <td>1980-08-08</td>
-                    <td>gdgd1234@gmail.com</td>
-                    <td>010-1111-2222</td>
-                    <td>서울특별시 강남구 청담동 어쩔로 저쩔길 티비아파트 1234번 1234 어쩌고저쩌고 11111 2222</td>
-                    <td>2022-04-01</td>
+                    <td><%= member.getMemberId() %></td>
+                    <td><%= member.getMemberName() %></td>
+                    <td><%= member.getGender() != null ? member.getGender() : ""%></td>
+                    <td><%= member.getBirthday() != null ? member.getBirthday() : "" %></td>
+                    <td><%= member.getEmail()%></td>
+                    <td><%= member.getPhone()%></td>
+                    <td><%= member.getAddress()%> <%= member.getAddressDetail()%></td>
+                    <td><%= member.getEnrollDate()%></td>
                 </tr>
-                <!-- (tr>td{$})*20 -->
-                <tr>
-                    <td class="col-no">2</td>
-                </tr>
-                <tr>
-                    <td class="col-no">3</td>
-                </tr>
-                <tr>
-                    <td class="col-no">4</td>
-                </tr>
-                <tr>
-                    <td class="col-no">5</td>
-                </tr>
-                <tr>
-                    <td class="col-no">6</td>
-                </tr>
-                <tr>
-                    <td class="col-no">7</td>
-                </tr>
-                <tr>
-                    <td class="col-no">8</td>
-                </tr>
-                <tr>
-                    <td class="col-no">9</td>
-                </tr>
-                <tr>
-                    <td class="col-no">10</td>
-                </tr>
-                <tr>
-                    <td class="col-no">11</td>
-                </tr>
-                <tr>
-                    <td class="col-no">12</td>
-                </tr>
-                <tr>
-                    <td class="col-no">13</td>
-                </tr>
-                <tr>
-                    <td class="col-no">14</td>
-                </tr>
-                <tr>
-                    <td class="col-no">15</td>
-                </tr>
+<%
+		}
+	} else {
+%>
+				<tr>
+					<td colspan="11">조회된 회원이 없습니다.</td>
+				</tr>
+<%
+	}
+%>
             </tbody>
         </table>
     </div>

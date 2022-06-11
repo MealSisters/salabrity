@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
 import common.utill.PageBar;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -44,15 +45,15 @@ public class MemberListServlet extends HttpServlet {
 			param.put("end", end);
 			
 			// 업무로직
-//			List<Member> list = adminService.findAllMember(param);
+			List<Member> list = adminService.findAllMember(param);
 			
 			int totalMembers = adminService.getTotalMembers();
-			System.out.println("totalMember@MemberListServlet = " + totalMembers);
+//			System.out.println("totalMember@MemberListServlet = " + totalMembers);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMembers, url);
 			
 			// view단처리
-//		request.setAttribute("list", list);
+			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp").forward(request, response);
 		} catch (Exception e) {

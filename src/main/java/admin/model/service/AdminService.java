@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import admin.model.dao.AdminDao;
+import member.model.dto.Member;
 
 public class AdminService {
 	
@@ -21,9 +22,11 @@ public class AdminService {
 		return totalMembers;
 	}
 
-//	public List<Member> findAllMember(Map<String, Object> param) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public List<Member> findAllMember(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Member> list = adminDao.findAllMember(conn, param);
+		close(conn);
+		return list;
+	}
 
 }
