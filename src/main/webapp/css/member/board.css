@@ -79,6 +79,8 @@
 /* list th:nth-of-type(4), */
 .question_list {
 	border-collapse: collapse;
+	text-decoration: none;
+    color: #000;
 }
 
 .question_list th {
@@ -89,6 +91,13 @@
 	font-size: 13px;
 }
 
+.question_list th:nth-of-type(1), .question_list th:nth-of-type(3) {
+	width: 120px;
+}
+.question_list th:nth-of-type(2) {
+	width: 550px;
+}
+
 .question_list td {
 	border-top: 1px solid #bdbdbd;
 	border-bottom: 1px solid #bdbdbd;
@@ -96,6 +105,52 @@
 	text-align: center;
 	padding: 6px;
 	font-size: 13px;
+}
+.question_list td a {
+	 text-decoration: none;
+    color: #000;
+}
+
+.board_question_zone {
+	margin-top: 6px;
+	margin-left: 20px;
+}
+
+/* 1:1 문의 상세글 */
+.question_view_hd {
+	border-top: 1px solid black;
+}
+
+.question_view_hd h3 {
+	margin: 0px;
+	font-size:14px;
+}
+
+.question_view_info {
+	border-top: 1px solid #bdbdbd;
+	border-bottom: 1px solid #bdbdbd;
+	font-size: 13px;
+	padding: 5px;
+}
+
+.view_info_day {
+	float: right;
+}
+
+.q_cont {
+	font-size: 14px;
+}
+
+.question_view_content {
+	border-bottom: 1px solid #dbdbdb;
+}
+
+.board_question_zone_sec, .question_zone_view {
+	padding-top: 0px;
+}
+
+.view_info_name {
+	margin-left: 7px;
 }
 
 /* 1:1 문의글 작성 */
@@ -139,7 +194,7 @@
 	height: 39px;
 	background-color: #fff;
 	border: 1px solid #BDBDBD;
-   	margin-left: 5px;
+	margin-left: 5px;
 }
 
 #search_file:hover, #plus_file:hover {
@@ -200,5 +255,74 @@
 
 .upload_file {
 	padding-left: 0px;
-    padding-top: 0px;
+	padding-top: 0px;
+}
+
+/* boardWriteList 작성 글 조회 페이지 */
+.write_list {
+	border-collapse: collapse;
+}
+
+.write_list th {
+	border-top: 1px solid #000;
+	width: 300px;
+	/* line-height: 30px; */
+	padding: 6px;
+	font-size: 14px;
+}
+
+.write_list td {
+	border-top: 1px solid #bdbdbd;
+	border-bottom: 1px solid #bdbdbd;
+	/* line-height: 30px; */
+	text-align: center;
+	padding: 6px;
+	font-size: 13px;
+}
+
+.board_write_list {
+	margin-left: 15px;
+	padding-top: 0px;
+}
+
+.btn_write_search {
+	width: 50px;
+	height: 25px;
+	background-color: #116916;
+	border: #116916;
+	color: #fff;
+	font-size: 12px;
+}
+
+.btn_write_search:hover {
+	cursor: pointer;
+}
+
+#search_boardTitle {
+	display: inline-block;
+	padding-left: 0px;
+}
+
+#searchType {
+	height: 24px;
+}
+
+#searchKeyword {
+	height: 19px;
+}
+
+#search_container {
+	text-align: center;
+}
+
+.write_list tr th:nth-of-type(1), .write_list tr th:nth-of-type(4) {
+	width: 100px;
+}
+
+.write_list tr th:nth-of-type(3) {
+	width: 120px;
+}
+
+.write_list tr th:nth-of-type(2) {
+	width: 500px;
 }

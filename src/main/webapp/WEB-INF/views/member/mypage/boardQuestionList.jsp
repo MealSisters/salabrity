@@ -13,7 +13,7 @@
 		
 		<button type="button" class="btn_question" onclick="location.href='<%= request.getContextPath() %>/mypage/boardQuestion';">1:1 문의하기</button>
 		<h4 class="mypage_hd">1:1 문의</h4>
-		<div class="board_question">
+		
 			<div class="board_question_zone">
 
 
@@ -54,7 +54,7 @@
 							<tr>
 								<td>2022-06-06</td>
 
-								<td><a href="">제목입니다요</a></td>
+								<td><a href="<%= request.getContextPath() %>/mypage/boardQuestionView">[배송 문의] 배송은 언제되나요?</a></td>
 								<td>처리중</td>
 							</tr>
 						</tbody>
@@ -62,7 +62,7 @@
 				</div>
 
 
-			</div>
+		
 
 
 

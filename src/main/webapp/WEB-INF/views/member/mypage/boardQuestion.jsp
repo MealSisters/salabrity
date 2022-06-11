@@ -41,7 +41,7 @@
 						</tbody>
 					</table>
 					<div class="btn_question_box">
-						<button type="button" id="btn_del_can">취소</button>
+						<button type="button" id="btn_del_can" onclick="location.href='<%= request.getContextPath() %>/mypage/boardQuestionList';">취소</button>
 						<button id="btn_question_enroll">등록</button>
 					</div>
 			</div>
