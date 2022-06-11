@@ -14,7 +14,7 @@
 	<table class="tbl-posting-view">
 		<thead>
 			<tr>
-				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i> honggd</th>
+				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i> admin</th>
 				<th class="posting-view-reg-date">22-06-06</th>
 			</tr>
 		</thead>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td class="posting-view-board-name" colspan="2">
-					<a href="<%= request.getContextPath() %>/board/community/general">in 자유게시판</a>
+					<a href="<%= request.getContextPath() %>/board/community/hacks">in 샐브's 레시피</a>
 				</td>
 			</tr>
 			<tr>
@@ -62,15 +62,15 @@
 			love it <i class="fa-regular fa-heart"></i>
 			<!-- <i class="fa-solid fa-heart"></i> -->
 		</button>
-		<%-- 수정/삭제 버튼은 본인/관리자만 열람 가능 --%>
-		<input type="button" value="수정" id="board-update-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general/update';" />
+		<%-- 수정/삭제 버튼은 관리자만 열람 가능 --%>
+		<input type="button" value="수정" id="board-update-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksUpdate';" />
 		<input type="button" value="삭제" id="board-delete-btn" />
 	</div>
 	<div class="comment-enroll-wrap" id="comment-tap">
 		<h4>comment</h4>
 		<form
 			name="commentEnrollFrm"
-			action="<%= request.getContextPath() %>/board/community/general/comment/enroll" 
+			action="<%= request.getContextPath() %>/board/community/hacksView/commentEnroll" 
 			method="POST">
 			<input type="hidden" name="postingNo" value="" />
 			<input type="hidden" name="memberId" value="" />

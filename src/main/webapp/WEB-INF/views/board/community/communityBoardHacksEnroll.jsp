@@ -2,35 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/notice/noticeBoard.css" />
 
-<div id="notice-board-enroll-wrap">
-	<span class="main-title">공지사항</span>
+<div id="community-board-enroll-wrap">
+	<span class="main-title">게시판명</span>
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
-			name="noticeBoardEnrollFrm" 
-			action="<%= request.getContextPath() %>/board/noticeEnroll" 
+			name="hacksBoardEnrollFrm" 
+			action="<%= request.getContextPath() %>/board/community/hacksEnroll" 
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-board-enroll">
 				<tr>
-					<th>분류<sup>*</sup></th>
-					<td>
-						<div>
-							<select name="notice-board-select" class="notice-board-select" required>
-								<option value="" selected>선택</option>
-								<option value="general">일반</option>
-								<option value="event">이벤트</option>
-							</select>
-						</div>
-					</td>
-				</tr>
-				<tr>
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="관리자" readonly/>
+							<input type="text" name="memberId" value="honggd<%-- <%= loginMember.getMemberId() %> --%>" readonly/>
 						</div>
 					</td>
 				</tr>
@@ -38,7 +25,7 @@
 					<th>제목<sup>*</sup></th>
 					<td>
 						<div>
-							<input type="text" name="title" placeholder="공지사항 게시글 제목" />
+							<input type="text" name="title" placeholder="제목을 입력하세요." />
 						</div>
 					</td>
 				</tr>
@@ -46,7 +33,7 @@
 					<th>내용<sup>*</sup></th>
 					<td>
 						<div>
-							<textarea rows="5" cols="40" name="content" placeholder="공지사항 게시글 상세"></textarea>
+							<textarea rows="5" cols="40" name="content" placeholder="내용을 입력하세요."></textarea>
 						</div>
 					</td>
 				</tr>
@@ -70,10 +57,10 @@
 </div>
 <script>
 /**
- * noticeBoardEnrollFrm 유효성 검사
+ * hacksBoardEnrollFrm 유효성 검사
  */
 window.addEventListener('load', () => {
-	document.noticeBoardEnrollFrm.onsubmit = (e) => {
+	document.hacksBoardEnrollFrm.onsubmit = (e) => {
 		const frm = e.target;
 		
 		const titleVal = frm.title.value.trim();
