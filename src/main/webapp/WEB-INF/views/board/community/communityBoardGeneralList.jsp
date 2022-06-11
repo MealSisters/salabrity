@@ -12,7 +12,7 @@
 	<input type="button" value="자유게시판" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" />
 	<br /><hr />
 <%-- <% if(loginMember != null) { %> --%>
-	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general/enroll';" />	
+	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/generalEnroll';" />	
 <%-- <% } %> --%>
 	<div class="board-search-wrap">
 		<input type="text" class="board-search-text" placeholder="검색어 입력" />

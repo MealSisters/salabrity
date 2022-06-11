@@ -2,35 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/notice/noticeBoard.css" />
 
-<div id="notice-board-update-wrap">
-	<span class="main-title">공지사항</span>
+<div id="community-board-update-wrap">
+	<span class="main-title">게시판명</span>
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
-			name="noticeBoardUpdateFrm" 
-			action="<%= request.getContextPath() %>/board/noticeUpdate" 
+			name="hacksBoardUpdateFrm" 
+			action="<%= request.getContextPath() %>/board/community/hacksUpdate" 
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-board-update">
 				<tr>
-					<th>분류<sup>*</sup></th>
-					<td>
-						<div>
-							<select name="notice-board-select" class="notice-board-select" required>
-								<option value="" <%-- selected --%>>선택</option>
-								<option value="general">일반</option>
-								<option value="event" selected>이벤트</option>
-							</select>
-						</div>
-					</td>
-				</tr>
-				<tr>
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="관리자" readonly/>
+							<input type="text" name="memberId" value="admin" readonly/>
 						</div>
 					</td>
 				</tr>
@@ -38,7 +25,7 @@
 					<th>제목<sup>*</sup></th>
 					<td>
 						<div>
-							<input type="text" name="title" value="[6월의 샐브이벤트]당첨회원 발표" />
+							<input type="text" name="title" value="게시판 테스트입니다.<%-- 기존 제목 --%>" />
 						</div>
 					</td>
 				</tr>
@@ -46,7 +33,8 @@
 					<th>내용<sup>*</sup></th>
 					<td>
 						<div>
-							<textarea rows="5" cols="40" name="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique iusto amet ea ut facilis natus dolore laudantium optio recusandae ab et fuga voluptates facere molestiae cumque dolorum esse. Ad quia.</textarea>
+							<%-- 기존 내용 --%>
+							<textarea rows="5" cols="40" name="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam voluptate blanditiis dolorem molestias totam doloremque cumque ipsum at. Nobis debitis natus repellendus atque saepe dolor voluptates in consequatur commodi placeat. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio debitis sequi iusto itaque tenetur nulla doloribus nesciunt incidunt. Beatae expedita neque exercitationem tenetur nulla. Excepturi qui veritatis eius! Aliquam beatae.</textarea>
 						</div>
 					</td>
 				</tr>
@@ -55,9 +43,10 @@
 					<td>
 						<div class="board-attach-wrap">
 							<div class="existing-attach-wrap">
-								<%-- 기존에 존재하는 첨부 이미지가 있다면 추가
-								<div class="existing-attach-img"></div> --%>
-								<span class="existing-attach-name">[6월의 샐브이벤트]당첨회원 리스트.xlsx</span>
+								<div class="existing-attach-img">
+									<img src="https://img.bestrecipes.com.au/4bBXatUR/w643-h428-cfill-q90/br/2019/10/spiced-lamb-sausage-fattoush-954624-1.jpg" alt="" />
+								</div>
+								<span class="existing-attach-name">샐러드사진.jpg</span>
 								<input type="checkbox" name="delFile" id="delFile" value="" />
 								<label for="delFile">
 									<sup>
@@ -86,10 +75,10 @@
 </div>
 <script>
 /**
- * noticeBoardUpdateFrm 유효성 검사
+ * hacksBoardUpdateFrm 유효성 검사
  */
 window.addEventListener('load', () => {
-	document.noticeBoardUpdateFrm.onsubmit = (e) => {
+	document.hacksBoardUpdateFrm.onsubmit = (e) => {
 		const frm = e.target;
 		
 		const titleVal = frm.title.value.trim();
