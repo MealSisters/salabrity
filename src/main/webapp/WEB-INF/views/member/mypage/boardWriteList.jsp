@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%= request.getContextPath() %>/css/member/member.css" />
+	href="<%= request.getContextPath() %>/css/member/board.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/myPage.css" />
 
@@ -10,7 +10,7 @@
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
 
 	<div class="my_sub_content">
-		<h4 class="mypage_hd">내가 작성 게시글</h4>
+		<h4 class="mypage_hd">내가 작성한 게시글</h4>
 		
 			<div class="board_write_list">
 					<table class="write_list">

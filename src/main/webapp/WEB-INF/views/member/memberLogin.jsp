@@ -31,7 +31,7 @@
 				<li><button type="button" id="btnFindId" class="btnFindId"
 						onclick="location.href='<%= request.getContextPath() %>/member/findId';">아이디
 						찾기</button></li>
-				<li><button id="btnFindPwd" class="btnFindPwd">비밀번호 찾기</button></li>
+				<li><button type="button" id="btnFindPwd" class="btnFindPwd" onclick="location.href='<%= request.getContextPath() %>/member/findPwd';">비밀번호 찾기</button></li>
 			</ul>
 		</div>
 	</form>
