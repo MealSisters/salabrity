@@ -29,4 +29,18 @@ public class AdminService {
 		return list;
 	}
 
+	public List<Member> findMemberBy(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Member> list = adminDao.findMemberBy(conn, param);
+		close(conn);
+		return list;
+	}
+
+	public int getFilteringMembers(Map<String, Object> param) {
+		Connection conn = getConnection();
+		int totalMembers = adminDao.getFilteringMembers(conn, param);
+		close(conn);
+		return totalMembers;
+	}
+
 }

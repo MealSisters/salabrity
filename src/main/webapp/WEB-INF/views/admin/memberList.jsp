@@ -24,7 +24,15 @@ int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
 <div class="div-level1">
     <p id="filter-wrapper-title">Filter</p>
     <div id="filter-wrapper" class="div-level2">
-        <form name="memberFilterFrm" action="" onSubmit="return false;">
+        <form name="memberFilterFrm" action="<%= request.getContextPath() %>/admin/memberList">
+            <div class="div-searchFilter">
+                <label for="filter-memberRole">역할</label>
+                <select class="member-role" name="memberRole" id="filter-memberRole"">
+                    <option value="all">전체</option>
+                    <option value="U">회원</option>
+                    <option value="A">관리자</option>
+                </select>
+            </div>
             <div class="div-searchFilter">
                 <label for="filter-memberId">아이디</label>
                 <input type="text" name="memberId" id="filter-memberId">
@@ -35,12 +43,13 @@ int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
             </div>
             <div class="div-searchFilter">
                 <label for="filter-gender">성별</label>
+                <input type="radio" name="gender" id="radio-all" value="all" checked>전체
                 <input type="radio" name="gender" id="radio-male" value="male">남
                 <input type="radio" name="gender" id="radio-female" value="female">여
             </div>
             <div class="div-searchFilter">
-                <label for="filter-birthday">생년월일</label>
-                <input type="date" name="birthday" id="filter-birthday">
+                <label for="filter-phone">전화번호</label>
+                <input type="tel" name="phone" id="filter-phone">
             </div>
             <div class="div-searchbtn">
                 <button>조회</button>

@@ -90,4 +90,85 @@ public class AdminDao {
 		return member;
 	}
 
+	public List<Member> findMemberBy(Connection conn, Map<String, Object> param) {
+		List<Member> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findMemberBy");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (!param.get("memberRole").equals("all")) {
+				pstmt.setString(1, param.get("memberRole").toString());
+				pstmt.setString(2, "");
+			} else {
+				pstmt.setString(1, MemberRole.A.toString());
+				pstmt.setString(2, MemberRole.U.toString());
+			}
+			pstmt.setString(3, "%" + param.get("memberId").toString() + "%");
+			pstmt.setString(4, "%" + param.get("memberName").toString() + "%");
+			if (!param.get("gender").equals("all")) {
+				pstmt.setString(5, param.get("gender").toString());
+				pstmt.setString(6, "");
+			} else {
+				pstmt.setString(5, "F");
+				pstmt.setString(6, "M");
+			}
+			pstmt.setString(7, "%" + param.get("phone").toString() + "%");
+			pstmt.setInt(8, (int) param.get("start"));
+			pstmt.setInt(9, (int) param.get("end"));
+
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Member member = handelMemberResultSet(rset);
+				list.add(member);
+			}
+
+		} catch (Exception e) {
+			throw new AdminException("회원 검색결과 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int getFilteringMembers(Connection conn, Map<String, Object> param) {
+		int totalMembers = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getFilteringMembers");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (!param.get("memberRole").equals("all")) {
+				pstmt.setString(1, param.get("memberRole").toString());
+				pstmt.setString(2, "");
+			} else {
+				pstmt.setString(1, MemberRole.A.toString());
+				pstmt.setString(2, MemberRole.U.toString());
+			}
+			pstmt.setString(3, "%" + param.get("memberId").toString() + "%");
+			pstmt.setString(4, "%" + param.get("memberName").toString() + "%");
+			if (!param.get("gender").equals("all")) {
+				pstmt.setString(5, param.get("gender").toString());
+				pstmt.setString(6, "");
+			} else {
+				pstmt.setString(5, "F");
+				pstmt.setString(6, "M");
+			}
+			pstmt.setString(7, "%" + param.get("phone").toString() + "%");
+
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				totalMembers = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new AdminException("검색결과 회원수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMembers;
+	}
+
 }
