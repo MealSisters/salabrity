@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CommunityBoardGeneralEnrollServlet
  */
-@WebServlet("/board/community/general/enroll")
+@WebServlet("/board/community/generalEnroll")
 public class CommunityBoardGeneralEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class CommunityBoardGeneralEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardEnroll.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardGeneralEnroll.jsp")
 			.forward(request, response);
 	}
 
@@ -26,7 +26,7 @@ public class CommunityBoardGeneralEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/board/community/general/view");
+		response.sendRedirect(request.getContextPath() + "/board/community/generalView");
 	}
 
 }

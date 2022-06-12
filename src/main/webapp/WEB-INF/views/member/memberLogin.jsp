@@ -4,8 +4,6 @@
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 
-
-
 <h3 class="head_log">로그인</h3>
 <div class="form_cont">
 	<form id="formLogin">
@@ -51,6 +49,7 @@
 	</div>
 </div>
  -->
+
 
 
 

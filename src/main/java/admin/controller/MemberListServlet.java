@@ -2,6 +2,7 @@ package admin.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -43,15 +44,16 @@ public class MemberListServlet extends HttpServlet {
 			param.put("end", end);
 			
 			// 업무로직
-//		List<Member> list = adminService.findAllMember(param);
+//			List<Member> list = adminService.findAllMember(param);
 			
-			int totalMember = adminService.getTotalMember();
+			int totalMembers = adminService.getTotalMembers();
+			System.out.println("totalMember@MemberListServlet = " + totalMembers);
 			String url = request.getRequestURI();
-			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMember, url);
+			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMembers, url);
 			
 			// view단처리
 //		request.setAttribute("list", list);
-//		request.setAttribute("pagebar", pagebar);
+			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

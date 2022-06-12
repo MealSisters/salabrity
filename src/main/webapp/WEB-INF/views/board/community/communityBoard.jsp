@@ -5,7 +5,7 @@
 
 <!-- 커뮤니티게시판 메인 -->
 <div id="community-board-wrap">
-	<!-- 게시판1 테이블 -->
+	<!-- 샐브's 레시피 -->
 	<div id="community-hacks-wrap">
 		<table class="tbl-community-hacks">
 			<thead>
@@ -127,7 +127,7 @@
 			</tfoot>
 		</table>
 	</div>
-	<!-- 게시판2 테이블 -->
+	<!-- 자유게시판 -->
 	<div id="community-general-wrap">
 		<table class="tbl-community-general">
 			<thead>

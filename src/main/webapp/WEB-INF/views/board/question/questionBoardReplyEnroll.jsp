@@ -50,7 +50,6 @@
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-admin-reply">
-				
 				<tr>
 					<th>답변제목<sup>*</sup></th>
 					<td>
