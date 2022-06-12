@@ -7,35 +7,38 @@
 
 <link rel="stylesheet" href="surveyCustom.css">
 
-  <form action="surveyResult.jsp" method="post">
-  <div class="surveyContainer">
-  	<div class="h1-container">
-      <h1>맞춤 식단 찾기</h1>
-    </div>
-    
-	<div class="gender">
-		<input type="radio" name="gender" value="female" checked="checked"> 여자
-		<input type="radio" name="gender" value="male"> 남자
-    </div>
-    
-	<div class="survey_height">
-		키 <input type="number" id="height" placeholder="cm">
-	</div>
-	<div class="survey_weight">
-		몸무게 <input type="number" id="weight" placeholder="kg">
-	</div>
-    
-    <div class="Uniqueness">
-    	해당되는 사항이 있으신가요? <br>
-    	<input type="checkbox" name="uniq" value="diabetes"> 당뇨환자
-		<input type="checkbox" name="uniq" value="baby"> 유아
-    </div>
+      <form action="surveyResult.jsp" method="post">
+      <div id="surveyContainer">
+      	<div class="h1-container">
+          <h1>맞춤 식단 찾기</h1>
+        </div>
 
-	<div class="submit">
-      <input type="submit" value="GO">
-    </div>
-  </form>
-</div>
+    	<div class="gender">
+    		<input type="radio" name="gender" value="female" checked="checked"> 여자
+    		<input type="radio" name="gender" value="male"> 남자
+        </div>
+
+    	<div class="survey_height">
+    		키 <input type="number" id="height" placeholder="cm">
+    	</div>
+    	<div class="survey_weight">
+    		몸무게 <input type="number" id="weight" placeholder="kg">
+    	</div>
+
+        <div class="Uniqueness">
+        	해당되는 사항이 있으신가요?
+        <input type="checkbox" name="uniq" value="diabetes">
+        <label> 당뇨환자</label>
+    		<input type="checkbox" name="uniq" value="baby">
+        <label> 유아 </label>
+        </div>
+
+    	<div class="submit">
+          <input type="submit" value="NEXT">
+        </div>
+       </div>
+    </form>
+
 	    
 	<script type="text/javascript"> // 미선택시 메시지 미완성
 		var survey = new Survey.Model(surveyJSON);
