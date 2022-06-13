@@ -1,10 +1,30 @@
+<%@page import="member.model.dto.MemberRole"%>
+<%@page import="admin.model.service.AdminService"%>
+<%@page import="member.model.dto.Member"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
+List<Member> list = (List<Member>) request.getAttribute("list");
 String pagebar = (String) request.getAttribute("pagebar");
-%>
 
+String memberRole = request.getParameter("memberRole");
+String memberId = request.getParameter("memberId");
+String memberName = request.getParameter("memberName");
+String gender = request.getParameter("gender");
+String phone = request.getParameter("phone");
+
+int cPage = 1;
+if(request.getParameter("cPage")!=null) {
+	cPage = Integer.parseInt(request.getParameter("cPage"));
+}
+int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
+
+String msg = (String) session.getAttribute("msg");
+if(msg != null)
+		session.removeAttribute("msg");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
 
@@ -13,23 +33,32 @@ String pagebar = (String) request.getAttribute("pagebar");
 <div class="div-level1">
     <p id="filter-wrapper-title">Filter</p>
     <div id="filter-wrapper" class="div-level2">
-        <form name="memberFilterFrm" action="" onSubmit="return false;">
+        <form name="memberFilterFrm" action="<%= request.getContextPath() %>/admin/memberList">
+            <div class="div-searchFilter">
+                <label for="filter-memberRole">역할</label>
+                <select class="member-role" name="memberRole" id="filter-memberRole"">
+                    <option value="all" <%= (("all".equals(memberRole)) || (memberRole == null)) ? "selected" : "" %>>전체</option>
+                    <option value="U" <%= "U".equals(memberRole) ? "selected" : "" %>>회원</option>
+                    <option value="A" <%= "A".equals(memberRole) ? "selected" : "" %>>관리자</option>
+                </select>
+            </div>
             <div class="div-searchFilter">
                 <label for="filter-memberId">아이디</label>
-                <input type="text" name="memberId" id="filter-memberId">
+                <input type="text" name="memberId" id="filter-memberId" value="<%= memberId !=null ? memberId : "" %>">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-memberName">이름</label>
-                <input type="text" name="memberName" id="filter-memberName">
+                <input type="text" name="memberName" id="filter-memberName" value="<%= memberName !=null ? memberName : "" %>">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-gender">성별</label>
-                <input type="radio" name="gender" id="radio-male" value="male">남
-                <input type="radio" name="gender" id="radio-female" value="female">여
+                <input type="radio" name="gender" id="radio-all" value="all" <%= (("all".equals(gender)) || (gender == null)) ? "checked" : "" %>>전체
+                <input type="radio" name="gender" id="radio-male" value="M" <%= "M".equals(gender) ? "checked" : "" %>>남
+                <input type="radio" name="gender" id="radio-female" value="F" <%= "F".equals(gender) ? "checked" : "" %>>여
             </div>
             <div class="div-searchFilter">
-                <label for="filter-birthday">생년월일</label>
-                <input type="date" name="birthday" id="filter-birthday">
+                <label for="filter-phone">전화번호</label>
+                <input type="tel" name="phone" id="filter-phone" value="<%= phone !=null ? phone : "" %>">
             </div>
             <div class="div-searchbtn">
                 <button>조회</button>
@@ -54,73 +83,70 @@ String pagebar = (String) request.getAttribute("pagebar");
                 </tr>
             </thead>
             <tbody>
+<%
+	if(list != null && !list.isEmpty()){
+		for(Member member : list){
+%>
                 <tr>
-                    <td class="col-no">1</td>
+                    <td class="col-no"><%= startNo++ %></td>
                     <td class="col-memberRole">
-                        <select class="member-role" data-member-id="">
-                            <option value="회원" selected>회원</option>
-                            <option value="관리자">관리자</option>
+                        <select class="member-role" data-member-id="<%= member.getMemberId() %>">
+							<option value="<%=MemberRole.U%>"
+								<%=member.getMemberRole() == MemberRole.U ? "selected" : ""%>>회원</option>
+                            <option value="<%=MemberRole.A%>"
+								<%=member.getMemberRole() == MemberRole.A ? "selected" : ""%>>관리자</option>
                         </select>
                     </td>
-                    <td>honggd</td>
-                    <td>홍길동</td>
-                    <td>남</td>
-                    <td>1980-08-08</td>
-                    <td>gdgd1234@gmail.com</td>
-                    <td>010-1111-2222</td>
-                    <td>서울특별시 강남구 청담동 어쩔로 저쩔길 티비아파트 1234번 1234 어쩌고저쩌고 11111 2222</td>
-                    <td>2022-04-01</td>
+                    <td><%= member.getMemberId() %></td>
+                    <td><%= member.getMemberName() %></td>
+                    <td><%= member.getGender() != null ? member.getGender() : ""%></td>
+                    <td><%= member.getBirthday() != null ? member.getBirthday() : "" %></td>
+                    <td><%= member.getEmail()%></td>
+                    <td><%= member.getPhone()%></td>
+                    <td><%= member.getAddress()%> <%= member.getAddressDetail()%></td>
+                    <td><%= member.getEnrollDate()%></td>
                 </tr>
-                <!-- (tr>td{$})*20 -->
-                <tr>
-                    <td class="col-no">2</td>
-                </tr>
-                <tr>
-                    <td class="col-no">3</td>
-                </tr>
-                <tr>
-                    <td class="col-no">4</td>
-                </tr>
-                <tr>
-                    <td class="col-no">5</td>
-                </tr>
-                <tr>
-                    <td class="col-no">6</td>
-                </tr>
-                <tr>
-                    <td class="col-no">7</td>
-                </tr>
-                <tr>
-                    <td class="col-no">8</td>
-                </tr>
-                <tr>
-                    <td class="col-no">9</td>
-                </tr>
-                <tr>
-                    <td class="col-no">10</td>
-                </tr>
-                <tr>
-                    <td class="col-no">11</td>
-                </tr>
-                <tr>
-                    <td class="col-no">12</td>
-                </tr>
-                <tr>
-                    <td class="col-no">13</td>
-                </tr>
-                <tr>
-                    <td class="col-no">14</td>
-                </tr>
-                <tr>
-                    <td class="col-no">15</td>
-                </tr>
+<%
+		}
+	} else {
+%>
+				<tr>
+					<td colspan="11">조회된 회원이 없습니다.</td>
+				</tr>
+<%
+	}
+%>
             </tbody>
         </table>
     </div>
 
 	<link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
     <%= pagebar %>
-
 </div>
+<form action="<%=request.getContextPath()%>/admin/memberRoleUpdate" method="POST" name="updateMemberRoleFrm">
+	<input type="hidden" name="memberId" />
+	<input type="hidden" name="memberRole" />
+</form>
+
+<script>
+	window.addEventListener('load', (e1) => {
+		const msg = "<%= msg %>";
+		if(msg != "null")
+			alert("<%= msg %>");
+		const selectAll = document.querySelectorAll("tbody .member-role");
+		selectAll.forEach((select) => {
+			select.addEventListener('change', (e2) => {
+				const memberId = e2.target.dataset.memberId
+				const memberRole = e2.target.value;
+				
+				const frm = document.updateMemberRoleFrm;
+				frm.memberId.value = memberId;
+				frm.memberRole.value = memberRole;
+				frm.submit();
+			})
+		});
+	});
+</script>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

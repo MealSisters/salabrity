@@ -11,8 +11,8 @@
 				<li class="sub_inner_list">
 					<h4 class="li_head">쇼핑정보</h4>
 				</li>
-				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/orderView">주문/배송 조회</a></li>
-				<li class="sub_inner_list"><a href="">취소/환불 내역</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/orderList">주문 조회</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/cancelOrderList">취소 내역</a></li>
 
 			</ul>
 
@@ -21,7 +21,7 @@
 					<h4 class="li_head">회원정보</h4>
 				</li>
 				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/memberUpdate">회원 정보 변경</a></li>
-				<li class="sub_inner_list"><a href="">배송지 관리</a></li>
+				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/destination">배송지 관리</a></li>
 				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/memberDelete">회원 탈퇴</a></li>
 			</ul>
 

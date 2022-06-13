@@ -1,6 +1,9 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
 import common.utill.PageBar;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -28,6 +32,23 @@ public class MemberListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 사용자입력값 처리
+			String memberRole = request.getParameter("memberRole");
+			String memberId = request.getParameter("memberId");
+			String memberName = request.getParameter("memberName");
+			String gender = request.getParameter("gender");
+			String phone = request.getParameter("phone");
+
+			Map<String, Object> searchParam = new HashMap<>();
+			if (memberRole != null) {
+				searchParam.put("memberRole", memberRole);
+				searchParam.put("memberId", memberId);
+				searchParam.put("memberName", memberName);
+				searchParam.put("gender", gender);
+				searchParam.put("phone", phone);
+			}
+			
+			
+			
 			// 페이징 처리
 			int numPerPage = AdminService.MEMBER_NUM_PER_PAGE;
 			int cPage = 1;
@@ -44,15 +65,24 @@ public class MemberListServlet extends HttpServlet {
 			param.put("end", end);
 			
 			// 업무로직
-//			List<Member> list = adminService.findAllMember(param);
+			int totalMembers = 0;
+			List<Member> list = null;
+			if(!searchParam.isEmpty()) {
+				searchParam.put("start", start);
+				searchParam.put("end", end);
+				list = adminService.findMemberBy(searchParam);
+				totalMembers = adminService.getFilteringMembers(searchParam);				
+			} else {
+				list = adminService.findAllMember(param);
+				totalMembers = adminService.getTotalMembers();
+			}
 			
-			int totalMembers = adminService.getTotalMembers();
-			System.out.println("totalMember@MemberListServlet = " + totalMembers);
+			System.out.println("list@MemberListServlet = " + list);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMembers, url);
 			
 			// view단처리
-//		request.setAttribute("list", list);
+			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -66,7 +96,6 @@ public class MemberListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
