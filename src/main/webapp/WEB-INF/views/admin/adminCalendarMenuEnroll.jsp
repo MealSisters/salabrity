@@ -75,7 +75,7 @@
         cancelBtn.addEventListener('click', goBack );
     });
     const goBack = () => {
-        location.href = "<%= request.getContextPath() %>/admin/calendar?menuId=";
+        location.href = "<%= request.getContextPath() %>/calendar?menuId=";
     }
 </script>
 

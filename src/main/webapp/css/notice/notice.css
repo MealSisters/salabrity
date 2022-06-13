@@ -220,3 +220,42 @@ strong {
 .back_notice:hover {
 	cursor: pointer;
 }
+
+
+/* [관리자버튼] 이은지 start */
+
+.admin_buttons {
+	display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.admin_buttons > div {
+    width: 72px;
+    height: 30px;
+    padding: 0;
+    border-radius: 7px;
+    margin: 0 10px;
+    transition-duration: 0.1s;
+}
+.admin_buttons button {
+    background: none;
+    border: none;
+    width: inherit;
+    height: inherit;
+    padding: 0;
+    cursor: pointer;
+    color: #fff;
+}
+.updateBtn-wrapper {
+    background-color: #116135;
+}
+.updateBtn-wrapper:hover {
+    background-color: #0EAE57;
+}
+.cancelBtn-wrapper {
+    background-color: #888;
+}
+.cancelBtn-wrapper:hover {
+    background-color: #AD1C0E;
+}
+/* [관리자버튼] 이은지 end */

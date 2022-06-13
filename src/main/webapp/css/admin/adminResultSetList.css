@@ -105,7 +105,7 @@
 .col-memberName, .col-payStatus, .col-calorie {
   width: 80px;
 }
-.col-birth, .col-regDate, .col-orderDate {
+.col-birth, .col-regDate, .col-orderDate, #tbl-orderList th.col-buttons {
   width: 96px;
 }
 .col-phone, #tbl-menuList .col-buttons {

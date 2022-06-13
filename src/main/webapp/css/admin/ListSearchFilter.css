@@ -34,6 +34,9 @@
   width: 120px;
   height: 20px;
 }
+#filter-wrapper .div-searchFilter input[type="tel"] {
+  width: 120px;
+}
 #filter-wrapper .div-searchFilter input[type="radio"] {
   margin: -4px 4px 0 10px;
   vertical-align: middle;

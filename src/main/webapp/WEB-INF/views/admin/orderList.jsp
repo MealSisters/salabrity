@@ -53,7 +53,7 @@
                     <th class="col-shippingAddr">배송지</th>
                     <th class="col-products">주문상품</th>
                     <th class="col-orderReq">요청사항</th>
-                    <th class="col-buttons">수정/주문취소</th>
+                    <th class="col-buttons">주문취소</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,7 +69,6 @@
                     <td class="col-products td-xscroll">단백질듬뿍 다이어터 4주</td>
                     <td class="col-orderReq td-xscroll">싱싱한걸로 주세요-_-</td>
                     <td class="col-buttons">
-                        <div class="div-modify"><a class="a-modify">수정</a></div>
                         <div class="div-cancel"><a class="a-cancel">주문취소</a></div>
                     </td>
                 </tr>
@@ -125,84 +124,5 @@
     <%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
 </div>
 
-<div class="div-level1 div-hidden" id="div-secondView">
-    <div class="orderModifyFrm-wrapper">
-        <form action="" name="orderModifyFrm" id="orderModifyFrm">
-            <p>주문수정</p>
-            <div class="div-orderNoModify">
-                <label>주문번호</label>
-                <input type="hidden" name="orderNo">
-                <span>0001</span>
-            </div>
-            <div class="div-memberIdModify">
-                <label>회원아이디</label>
-                <input type="hidden" name="memberId">
-                <span>honggd1234</span>
-            </div>
-            <div class="div-payStatusModify">
-                <label for="payStatusModify">결제상태</label>
-                <input type="hidden" name="payState">
-                <span>미결제</span>
-            </div>
-            <div class="div-shippingAddrModify">
-                <label>배송지</label>
-                <div class="shippingAddrList-wrapper">
-                    <p class="shippingArreList">
-                        <input type="radio" name="shippingAddrNo" data-member-id="" data-shipping-addr-no="" value=""><span>제주특별자치도 애월읍 하르방로 귤귤길 맛있다빌라 201호</span>
-                    </p>
-                    <p class="shippingArreList">
-                        <input type="radio" name="shippingAddrNo" data-member-id="" data-shipping-addr-no="" value=""><span>서울특별시 마포구 멋쟁이로 힙스터길 1234-56</span>
-                    </p>
-                    <p class="shippingArreList">
-                        <input type="radio" name="shippingAddrNo" data-member-id="" data-shipping-addr-no="" value=""><span>서울특별시 마포구 멋쟁이로 힙스터길 1234-56</span>
-                    </p>
-                    <p class="shippingArreList">
-                        <input type="radio" name="shippingAddrNo" data-member-id="" data-shipping-addr-no="" value=""><span>서울특별시 마포구 멋쟁이로 힙스터길 1234-56</span>
-                    </p>
-                </div>
-            </div>
-            <div class="div-orderModifyFrmButtons">
-                <div>
-                    <button type="button" id="btn-submitCancel">취소</button>
-                </div>
-                <div>
-                    <button id="btn-submitOrderModifyFrm">수정</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    window.addEventListener('load', () => {
-        openModifyFrm();
-        addModifyFrmBtnEvent();
-    });
-
-    // 각 행의 수정버튼에 이벤트 추가
-    const openModifyFrm = () => {
-        const links = document.querySelectorAll(".a-modify");
-        links.forEach((link) => {
-            link.addEventListener('click', () => {
-                const hiddenTarget = document.getElementById("div-firstView");
-                const visibleTarget = document.getElementById("div-secondView");
-
-                hiddenTarget.classList.add('div-opacityLow');
-                visibleTarget.classList.remove('div-hidden');
-            });
-        });
-    }
-    // 수정폼 내의 버튼에 이벤트 추가
-    const addModifyFrmBtnEvent = () => {
-        const cancelBtn = document.querySelector("#btn-submitCancel");
-        cancelBtn.addEventListener('click', () => {
-            const hiddenTarget = document.getElementById("div-secondView");
-            const visibleTarget = document.getElementById("div-firstView");
-
-            hiddenTarget.classList.add('div-hidden');
-            visibleTarget.classList.remove('div-opacityLow');
-        });
-    }
-</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
