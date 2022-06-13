@@ -197,7 +197,12 @@
 /*-------------------- Members 영역 --------------------*/
 #div-members-chart {
   height: 200px;
-  background-color: #ddd;
+  position: relative;
+}
+#div-members-chart canvas {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 /*-------------------- 이동 아이콘 영역 --------------------*/
@@ -229,4 +234,33 @@
 }
 .div-icon i {
   width: inherit;
+}
+
+
+
+/*-------------------- 로딩 CSS 영역 --------------------*/
+@keyframes rotate-loading {
+  0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+  100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+.loading-container, .loading {
+  height: 40px;
+  position: relative;
+  width: 40px;
+  border-radius: 100%;
+}
+
+.loading-container { margin: 45px auto }
+
+.loading {
+  border: 1px solid transparent;
+  border-color: transparent #116135 transparent #116135;
+  -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
+  -moz-transform-origin: 50% 50%;
+  -o-animation: rotate-loading 1.5s linear 0s infinite normal;
+  -o-transform-origin: 50% 50%;
+  -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
+  -webkit-transform-origin: 50% 50%;
+  animation: rotate-loading 1.5s linear 0s infinite normal;
+  transform-origin: 50% 50%;
 }

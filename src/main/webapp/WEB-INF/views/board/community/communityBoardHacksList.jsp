@@ -1,6 +1,13 @@
+<%@ page import="member.model.dto.MemberRole"%>
+<%@ page import="board.model.dto.PostingExt"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	List<PostingExt> postingList = (List<PostingExt>) request.getAttribute("postingList");
+	String pagebar = (String) request.getAttribute("pagebar");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
 <div id="community-board-list-wrap">
@@ -11,9 +18,9 @@
 	<input type="button" value="샐브's 레시피" id="hacks-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks';" />
 	<input type="button" value="자유게시판" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" />
 	<br /><hr />
-<%-- <% if(loginMember != null) { %> --%>
+<% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksEnroll';" />	
-<%-- <% } %> --%>
+<% } %>
 	<div class="board-search-wrap">
 		<input type="text" class="board-search-text" placeholder="검색어 입력" />
 		<a class="board-search-btn" href="#">
@@ -33,109 +40,36 @@
 			</tr>
 		</thead>
 		<tbody>
+	<%
+		if(postingList != null && !postingList.isEmpty()) {
+			for(PostingExt posting : postingList) {
+	%>
 			<tr>
-				<td>1</td>
-				<td><a href="">test</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
+				<td><%= posting.getPostingNo() %></td>
+				<td>
+					<a href="<%= request.getContextPath() %>/board/boardView?no=<%= posting.getPostingNo() %>"><%= posting.getTitle() %></a>
+				</td>
+				<td><%= posting.getMemberId() %></td>
+				<td><%= posting.getCommentCount() %></td>
+				<td><%= posting.getLikeCount() %></td>
+				<td><%= posting.getReadCount() %></td>
+				<td><%= posting.getRegDate() %></td>
+	<%		
+		 	}
+		}
+		else {
+	%>
 			<tr>
-				<td>2</td>
-				<td><a href="">test2</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
+				<td colspan="10">조회된 게시글이 없습니다.</td>
 			</tr>
-			<tr>
-				<td>3</td>
-				<td><a href="">test3</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td><a href="">test4</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td><a href="">test5</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>6</td>
-				<td><a href="">test6</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>7</td>
-				<td><a href="">test7</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>8</td>
-				<td><a href="">test8</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>9</td>
-				<td><a href="">test9</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>10</td>
-				<td><a href="">test10</a></td>
-				<td>admin</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
+	<% 
+		}
+	%>
 		</tbody>
 	</table>
 	<%-- 은지님 page-bar 코드 --%>
 	<div class="page-bar">
-        <a href=""><i class="fa-solid fa-angles-left"></i></a>
-        <a href=""><i class="fa-solid fa-angle-left"></i></a>
-        <a href="" class="cPage">1</a>
-        <a href="">2</a>
-        <a href="">3</a>
-        <a href="">4</a>
-        <a href="">5</a>
-        <a href=""><i class="fa-solid fa-angle-right"></i></a>
-        <a href=""><i class="fa-solid fa-angles-right"></i></a>
+        <%= pagebar %>
     </div>
 </div>
 

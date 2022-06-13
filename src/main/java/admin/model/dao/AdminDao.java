@@ -17,6 +17,7 @@ import java.util.Properties;
 import admin.model.exception.AdminException;
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
+import menu.model.dto.Menu;
 
 public class AdminDao {
 
@@ -208,6 +209,60 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return enrollMembers;
+	}
+
+	public List<Menu> findAllMenu(Connection conn, Map<String, Object> param) {
+		List<Menu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findAllMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Menu menu = handelMenuResultSet(rset);
+				list.add(menu);
+			}
+		} catch (Exception e) {
+			throw new AdminException("젠체 메뉴목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	private Menu handelMenuResultSet(ResultSet rset) throws SQLException {
+		Menu menu = new Menu();
+		menu.setMenuNo(rset.getInt("menu_no"));
+		menu.setMenuId(rset.getString("menu_id"));
+		menu.setMenuName(rset.getString("menu_Name"));
+		menu.setMenuDescription(rset.getString("menu_description"));
+		menu.setIngredients(rset.getString("ingredients"));
+		menu.setCalorie(rset.getInt("calorie"));
+		return menu;
+	}
+
+	public int getTotalMenu(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getTotalMenu");
+		int totalMenu = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				totalMenu = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new AdminException("전체 메뉴 수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMenu;
 	}
 
 }

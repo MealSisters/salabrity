@@ -1,6 +1,12 @@
+<%@page import="menu.model.dto.Menu"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+List<Menu> list = (List<Menu>) request.getAttribute("list");
+String pagebar = (String) request.getAttribute("pagebar");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
 
@@ -30,7 +36,7 @@
         <div class="sort-wrapper">
             <span>정렬기준</span>
             <select name="sortBy" class="select-sort">
-                <option value="">등록일순</option>
+                <option value="">최근등록순</option>
                 <option value="">이름순</option>
                 <option value="">칼로리낮은순</option>
                 <option value="">칼로리높은순</option>
@@ -50,66 +56,36 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <!-- tr>td.col-no{$}+td.col-menuId+td.col-menuName+td.col-calorie+td.col-ingredients -->
-                    <td class="col-no">1</td>
-                    <td class="col-menuId"></td>
-                    <td class="col-menuName"></td>
-                    <td class="col-calorie"></td>
-                    <td class="col-ingredients"></td>
-                    <td class="col-buttons">
-                        <div class="div-modify"><a class="a-modify">수정</a></div>
-                        <div class="div-cancel"><a class="a-cancel">삭제</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-no">2</td>
-                    <td class="col-menuId"></td>
-                    <td class="col-menuName"></td>
-                    <td class="col-calorie"></td>
-                    <td class="col-ingredients"></td>
-                    <td class="col-buttons">
-                        <div class="div-modify"><a class="a-modify">수정</a></div>
-                        <div class="div-cancel"><a class="a-cancel">삭제</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-no">3</td>
-                    <td class="col-menuId"></td>
-                    <td class="col-menuName"></td>
-                    <td class="col-calorie"></td>
-                    <td class="col-ingredients"></td>
-                    <td class="col-buttons">
-                        <div class="div-modify"><a class="a-modify">수정</a></div>
-                        <div class="div-cancel"><a class="a-cancel">삭제</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-no">4</td>
-                    <td class="col-menuId"></td>
-                    <td class="col-menuName"></td>
-                    <td class="col-calorie"></td>
-                    <td class="col-ingredients"></td>
-                    <td class="col-buttons">
-                        <div class="div-modify"><a class="a-modify">수정</a></div>
-                        <div class="div-cancel"><a class="a-cancel">삭제</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-no">5</td>
-                    <td class="col-menuId"></td>
-                    <td class="col-menuName"></td>
-                    <td class="col-calorie"></td>
-                    <td class="col-ingredients"></td>
-                    <td class="col-buttons">
-                        <div class="div-modify"><a class="a-modify">수정</a></div>
-                        <div class="div-cancel"><a class="a-cancel">삭제</a></div>
-                    </td>
-                </tr>
+<%
+	if(list != null && !list.isEmpty()){
+		for(Menu menu : list){
+%>
+            <tr>
+                <td class="col-no"><%= menu.getMenuNo() %></td>
+                <td class="col-menuId"><%= menu.getMenuId() %></td>
+                <td class="col-menuName"><%= menu.getMenuName() %></td>
+                <td class="col-calorie"><%= menu.getCalorie() %></td>
+                <td class="col-ingredients"><%= menu.getIngredients() %></td>
+                <td class="col-buttons">
+                    <div class="div-modify"><a class="a-modify">수정</a></div>
+                    <div class="div-cancel"><a class="a-cancel">삭제</a></div>
+                </td>
+            </tr>
+<%
+        }
+	} else {
+%>
+				<tr>
+					<td colspan="6">조회된 메뉴가 없습니다.</td>
+				</tr>
+<%
+	}
+%>
             </tbody>
         </table>
     </div>
-    <%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
+    <link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
+    <%= pagebar %>
 </div>
 <script>
     window.addEventListener('load', () => {

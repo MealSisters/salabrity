@@ -30,7 +30,15 @@
     width: 174px;
 }
 .textarea-wrapper {
+	padding: 0;
+    margin-bottom: 10px;
+}
+.textarea-wrapper > div {
     align-items: flex-start;
+}
+.textarea-wrapper > span {
+	margin-left: 110px;
+    vertical-align: top;
 }
 textarea {
     resize: none;
@@ -135,6 +143,12 @@ input[type="radio"] {
 }
 .col-menuCalorie, .p-menuCalorie {
     width: 70px;
+}
+
+.inputErrMsg {
+    margin-left: 10px;
+	color: red;
+    font-size: 13px;
 }
 
 .buttons-wrapper {

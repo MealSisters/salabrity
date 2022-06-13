@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
 <div id="community-board-enroll-wrap">
-	<span class="main-title">게시판명</span>
+	<span class="main-title">샐브's 레시피</span>
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
@@ -17,7 +17,7 @@
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="honggd<%-- <%= loginMember.getMemberId() %> --%>" readonly/>
+							<input type="text" name="memberId" value="<%= loginMember.getMemberId() %>" readonly/>
 						</div>
 					</td>
 				</tr>

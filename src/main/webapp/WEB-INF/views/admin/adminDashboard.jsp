@@ -105,7 +105,10 @@
     <div id="div-Members" class="div-level2 rightdiv middlediv">
         <h1>Members</h1>
         <div id="div-members-chart">
-            <canvas id="lineChart-member"></canvas>
+        	<div class="loading-container">
+			    <div class="loading"></div>
+			</div>
+            <canvas id="barChart-member"></canvas>
         </div>
     </div>
 
@@ -133,7 +136,7 @@
         		counts.forEach((count) => {
         			memberData.push(count);
         		});
-       			const memberCanvas = document.getElementById("lineChart-member");
+       			const memberCanvas = document.getElementById("barChart-member");
        			printBarChart(memberCanvas, days, memberData);
         	},
         	error : console.log

@@ -10,10 +10,12 @@ import java.util.Map;
 
 import admin.model.dao.AdminDao;
 import member.model.dto.Member;
+import menu.model.dto.Menu;
 
 public class AdminService {
 	
 	public static final int MEMBER_NUM_PER_PAGE = 15;
+	public static final int MENU_NUM_PER_PAGE = 10;
 	private AdminDao adminDao = new AdminDao();
 	
 	public int getTotalMembers() {
@@ -64,6 +66,20 @@ public class AdminService {
 		int enrollMembers = adminDao.getEnrollMemberByDate(conn, date);
 		close(conn);
 		return enrollMembers;
+	}
+
+	public List<Menu> findAllMenu(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Menu> list = adminDao.findAllMenu(conn, param);
+		close(conn);
+		return list;
+	}
+
+	public int getTotalMenu() {
+		Connection conn = getConnection();
+		int totalMenu = adminDao.getTotalMenu(conn);
+		close(conn);
+		return totalMenu;
 	}
 
 }

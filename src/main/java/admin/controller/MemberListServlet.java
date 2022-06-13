@@ -46,9 +46,7 @@ public class MemberListServlet extends HttpServlet {
 				searchParam.put("gender", gender);
 				searchParam.put("phone", phone);
 			}
-			
-			
-			
+
 			// 페이징 처리
 			int numPerPage = AdminService.MEMBER_NUM_PER_PAGE;
 			int cPage = 1;
@@ -63,24 +61,23 @@ public class MemberListServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
-			
+
 			// 업무로직
 			int totalMembers = 0;
 			List<Member> list = null;
-			if(!searchParam.isEmpty()) {
+			if (!searchParam.isEmpty()) {
 				searchParam.put("start", start);
 				searchParam.put("end", end);
 				list = adminService.findMemberBy(searchParam);
-				totalMembers = adminService.getFilteringMembers(searchParam);				
+				totalMembers = adminService.getFilteringMembers(searchParam);
 			} else {
 				list = adminService.findAllMember(param);
 				totalMembers = adminService.getTotalMembers();
 			}
-			
-			System.out.println("list@MemberListServlet = " + list);
+
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMembers, url);
-			
+
 			// view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
@@ -89,14 +86,6 @@ public class MemberListServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }
