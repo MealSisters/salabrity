@@ -205,7 +205,7 @@ strong {
 	width: 250px;
 }
 
-/* 글 목록 버튼 */
+/* 공지사항 상세글 버튼 */
 .back_notice {
 	margin-top: 10px;
 	float: right;
@@ -214,9 +214,23 @@ strong {
 	color: #fff;
 	height: 29px;
 	width: 65px;
-    font-size: 12px;
+	font-size: 12px;
 }
 
-.back_notice:hover {
+.back_notice:hover, .update_notice, .delete_notice {
 	cursor: pointer;
+}
+
+.update_notice, .delete_notice {
+	margin-top: 10px;
+	background-color: #fff;
+	border: 1px solid #116916;
+	color: #116916;
+	height: 29px;
+	width: 65px;
+	font-size: 12px;
+}
+
+.delete_notice {
+	margin-left: 4px;
 }

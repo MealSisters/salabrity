@@ -27,6 +27,8 @@
                 <p>사가세요들</p>
                 <img src="<%= request.getContextPath() %>/images/noticeSample.png" alt="">
             </div>
+            <button class="update_notice" onclick="location.href='<%= request.getContextPath() %>/board/noticeUpdate';">수정</button>
+            <button class="delete_notice">삭제</button>
 			<button class="back_notice" onclick="location.href='<%= request.getContextPath() %>/board/notice';">글 목록</button>
 		</div>
 	</div>
