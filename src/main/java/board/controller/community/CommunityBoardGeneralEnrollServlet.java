@@ -87,11 +87,12 @@ public class CommunityBoardGeneralEnrollServlet extends HttpServlet {
 			System.out.println("posting@CommunityBoardGeneralEnrollServlet = " + posting);
 			
 			// 4. 업무 로직 (db insert)
-			int result = boardService.insertBoard(posting);
+			int result = boardService.insertPosting(posting);
 			String msg = result > 0 ? "게시글 등록에 성공했습니다." : "게시글 등록에 실패했습니다.";
 			
 			// 5. 리다이렉트
 			HttpSession session = request.getSession();
+			session.setAttribute("password", password);
 			session.setAttribute("msg", msg);
 			response.sendRedirect(request.getContextPath() + "/board/community/generalView?no=" + posting.getPostingNo());
 		} catch (Exception e) {

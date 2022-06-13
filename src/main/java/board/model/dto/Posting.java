@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Posting {
 
 	private int postingNo;
-	private String boardCode;
+	private BoardCode boardCode;
 	private String memberId;
 	private String title;
 	private String content;
@@ -19,7 +19,7 @@ public class Posting {
 		super();
 	}
 
-	public Posting(int postingNo, String boardCode, String memberId, String title, String content, Date regDate,
+	public Posting(int postingNo, BoardCode boardCode, String memberId, String title, String content, Date regDate,
 			int readCount, int likeCount, int postingLevel, int postingRef) {
 		super();
 		this.postingNo = postingNo;
@@ -42,11 +42,11 @@ public class Posting {
 		this.postingNo = postingNo;
 	}
 
-	public String getBoardCode() {
+	public BoardCode getBoardCode() {
 		return boardCode;
 	}
 
-	public void setBoardCode(String boardCode) {
+	public void setBoardCode(BoardCode boardCode) {
 		this.boardCode = boardCode;
 	}
 
