@@ -1,5 +1,9 @@
+<%@page import="member.model.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	Member loginMember = (Member) session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,13 +44,13 @@
 				<%-- 로그인 전/후 분기할 예정! --%>
 				<ul>
 					<li class="login">
-					<%-- if(loginMember == null) { --%>
+					<% if(loginMember == null) { %>
 						<%-- 로그인 전 --%>
 						<a href="<%= request.getContextPath() %>/member/login" title="로그인"><i class="fa-solid fa-user"></i></a>
-					<%-- } else { --%>
+					<% } else { %>
 						<%-- 로그인 후 --%>
-						<%-- 이 부분은 일단 주석처리해둘게요!
-						<a href="<%= request.getContextPath() %>/mypage/orderList" title="마이페이지"><i class="fa-solid fa-user"></i></a> --%>
+						<%-- 이 부분은 일단 주석처리해둘게요! --%>
+						<a href="<%= request.getContextPath() %>/mypage/orderList" title="마이페이지"><i class="fa-solid fa-user"></i></a>
 						<div class="member-nav-depth">
 							<div class="inner-member-nav">
 								<ul>
@@ -57,7 +61,7 @@
 								</ul>
 							</div>
 						</div>
-					<%-- } --%>
+					<% } %>
 					</li>
 					<li class="cart">
 						<a href="<%= request.getContextPath() %>/order/cart" title="장바구니"><i class="fa-solid fa-cart-shopping"></i></a>
