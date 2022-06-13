@@ -15,7 +15,7 @@
 <div class="gds_wrp">
 	<img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="prd_img">
 	<div class="prd_info">
-		<a href="" class="go_cal">식단캘린더로 이동</a>
+		<a href="<%= request.getContextPath() %>/calendar" class="go_cal">식단캘린더로 이동</a>
 		<div class="prd_tit_wrap">
 			<h2 class="prd_tit">식단이름</h2>
 			<h3 class="prd_sub_tit">설명</h3>
