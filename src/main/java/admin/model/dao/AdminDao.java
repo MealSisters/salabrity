@@ -171,4 +171,21 @@ public class AdminDao {
 		return totalMembers;
 	}
 
+	public int updateMemberRole(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMemberRole");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberRole().toString());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new AdminException("회원 권한 변경 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

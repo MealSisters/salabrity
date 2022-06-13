@@ -111,7 +111,7 @@
 
         const submitBtn = document.querySelector("button.btn-answer");
         submitBtn.onclick = () => {
-            location.href = "<%= request.getContextPath() %>/board/question/questionReply?postingNo=";
+            location.href = "<%= request.getContextPath() %>/admin/QnAList/answer?postingNo=";
         };
     }
 </script>

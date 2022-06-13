@@ -1,6 +1,6 @@
 package admin.model.service;
 
-import static common.JdbcTemplate.close;
+import static common.JdbcTemplate.*;
 import static common.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
@@ -41,6 +41,21 @@ public class AdminService {
 		int totalMembers = adminDao.getFilteringMembers(conn, param);
 		close(conn);
 		return totalMembers;
+	}
+
+	public int updateMemberRole(Member member) {
+		Connection conn = getConnection();
+		int result;
+		try {
+			result = adminDao.updateMemberRole(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 
 }
