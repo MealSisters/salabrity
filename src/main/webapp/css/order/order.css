@@ -1,13 +1,17 @@
 @charset "UTF-8";
 
-/*css연결 테스트
-#content h1{
-	font-size: 100px;
+/*
+	order.css
+*/
+
+#content{
+	margin: 2% 3% 0 3%;
 }
-*/#content h1 {
+
+#content h1 {
     font-size: 20px;
-    border-bottom: 4px solid darkgray;
-    padding-bottom: 10px;
+    border-bottom: 3px solid #116916;
+    padding: 0 0px 13px 10px;
 	margin-top: 0;
 	margin-bottom: 35px;
 }
@@ -15,26 +19,25 @@ div.order_list{
 	padding: 0;
 	margin-bottom: 20px;
 }
-#content .order_tbl{
-	border-top: solid;
 
+#content .order_tbl{
+	border-top: solid 2px #777;
 	border-collapse: collapse;
-	width: 100%;
+	width: 97%;
 	text-align: center;
+	margin: auto;
 }
 .order_tbl thead>tr>th{
 	padding: 7px;
-	border-top: solid 1px;
-	font-size: 15px;
-}
-.order_tbl td{ 
-	border-top: solid 1px;
-	font-size: 13px;
+	font-size: 14px;
 }
 
+.order_tbl td{ 
+	border-top: solid 1px #999;
+	font-size: 13px;
+}
 .order_tbl th{ 
-	border-top: solid 1px;
-	font-size: 15px;
+	font-size: 14px;
 	padding: 7px 0;
 }
 .order_tbl tbody>td{
@@ -55,8 +58,9 @@ div.order_list{
 }
 td.total_tit{
 	text-align: right;
-	font-size: 20px;
+	font-size: 19px;
 	padding-top: 15px;
+	padding-right: 18px
 }
 .prd_title img{
 	width: 70px;
@@ -64,88 +68,98 @@ td.total_tit{
 	margin: 0 30px 0 10px;
 }
 #content h2 {
-    font-size: 15px;
-    padding: 10px 0;
+    font-size: 18px;
+    padding: 10px 10px 20px 25px;
 	margin: 0;
 	text-align: left;
 
 }
-
-
-.ship_info{
-	position: absolute;
+.ship-info{
 	padding: 0;
 }
-.ship-header h2{
-	display: inline;
+.ship-header{
+	display: flex;
+	align-items: center;
 	padding: 0;
+}
+.ship-header div{
+	padding-top: 14px;
+	font-size: 11px;
+	padding-bottom: 20px;
+	padding-left:0;
+}
+.ship-header span{
+	color: #ef233c;
 }
 .shipping_tbl{
-	border-top: solid;
-	border-bottom: solid;
+	border-top: solid #777 2px;
 	border-collapse: collapse;
-	width: 100%;
+	width: 97%;
+	margin: auto;
 }
 #content .order_tbl_tit {
-	border-top: solid 1px;
 	font-size: 13x;
 	border-bottom: solid 1px;
 	padding: 10px;
+	border-bottom: solid 1px #999;
+}
+.shipping_tbl td.addr_chk{
+	height: 30px;
+	padding-left: 8px;
 }
 .shipping_tbl td{
-	border-top: solid 1px;
-	border-bottom: solid 1px;
+	/* border-top: solid 1px #999; */
+	border-bottom: solid 1px #999;
 	padding: 7px 0;
 	font-size: 13x;
 }
 .shipping_tbl th{
-	border-top: solid 1px;
-	border-bottom: solid 1px;
+	/* border-top: solid 1px #999; */
+	border-bottom: solid 1px #999;
 	padding: 7px 0;
 	font-size: 13x;
 }
 .addr_chk>label{
-	margin-right: 30px;
+	margin-right: 35px;
 	vertical-align: middle;
 	position: relative;
 	top: 3px;
 	font-size: 13px;
 }
-
 .shipping_tbl input{
 	outline: none;
 	border: none;
 	background-color: #eee;
 	padding: 8px;
 }
-.add1, .add2{
+.address, .address_detail{
 	width: 300px;
 	margin-top: 10px;
 }
 .shipping_tbl textarea{
-	width: 300px;
+	width: 311.5px;
 	margin-bottom: 15px;
 	resize: none;
 	outline: none;
 	border: none;
 	background-color: #eee;
 }
-.address a{
-	padding: 11px;
+button.search_zipcode{
+	padding: 8px 20px;
 	background-color: #116916;
-	border-radius: 3px;
 	color: #FFFF;
 	text-decoration: none;
-	border: solid;
+	border: none;
+	border-top: 1.2px #116916 solid;
 	font-size: 12px;
+	cursor: pointer;
+	margin-left: 5px;
 }
-
 .shipping_tbl input[type=radio]{
 	background-color: #FFFF;
-	border: solid #116916;
+	border: solid #116916 2px;
 	margin: 0;
 	vertical-align: middle;
-	
 	width: 15px;
 	height: 15px;
 	appearance: none;
@@ -155,20 +169,21 @@ td.total_tit{
 	margin: 0;
 	appearance: none;
 	background-color: #116916;
-	border: solid #116916;
-	width: 18px;
-	height: 18px;
+	/* border: solid #116916 1px; */
+	width: 15px;
+	height: 15px;
 	border-radius: 100%;
+	transition-duration: 0.4s;
 }
-
-.payment a{
+button.payment{
 	font-size: 18px;
 	display: inline-block;
-	/* border: #116916 solid; */
+	border: none;
 	border-radius: 3px;
-	padding: 10px 50px;
+	padding: 12px 50px 6px 50px;
 	background-color: #116916;
 	color: white;
+	margin: 15px 0;
 	vertical-align: middle;
 	text-decoration: none;
 }
@@ -180,7 +195,108 @@ td.total_tit{
 	margin-bottom: 18px;
 }
 .required_col{
-	color: #d66;
+	color: #ef233c;
+}
+#destination_list{
+	border: #116916 solid;
+	position: fixed;
+	background-color: #FFFF;
+	top: 200px;
+	left: 25%;
+	height: 350px;
+	overflow-y: auto;
+	z-index: -1;
+	opacity: 0;
+	border-radius: 8px;
+}
+/* ====================================== */
+/* ====================================== */
+/* ====================================== */
+#destination_list h3{
+	margin-left: 3%;
+	margin-bottom: 12px;
+	padding-left: 8px;
+	font-size: 15px;
+}
+#destination_list table {
+	border-top: #116916 solid 2px;
+	width: 94%;
+	margin: auto;
+	overflow: hidden;
+	border-collapse: collapse;
+}
+#destination_list button{
+	display: block;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	padding: 7px 25px 4px 25px;
+	color: #FFFF;
+	background-color: #116916;
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+#destination_list th,
+#destination_list td {
+	text-align: center;
+	border-bottom: 1px solid #dbdbdb;
+	font-size: 12px;
+}
+
+#destination_list th {
+	height: 30px;
+	padding-top: 6px;
+}
+
+#destination_list td {
+	height: 47px;
+}
+
+#destination_list td.col1 {
+	width: 7.5%
+}
+
+#destination_list td.col2 {
+	width: 14%;
+}
+
+#destination_list td.col3 {
+	text-align: left;
+	width: 55%;
+}
+
+#destination_list td.col4 {
+	width: 17%;
+}
+
+#destination_list td.col5 {
+	width: 8.5%;
+}
+
+
+td.col1 input[type=radio] {
+	background-color: #FFFF;
+	border: solid #116916 2px;
+	margin: 0;
+	vertical-align: middle;
+	width: 15px;
+	height: 15px;
+	appearance: none;
+	border-radius: 100%;
+	cursor: pointer;
+}
+
+td.col1 [type=radio]:checked {
+	margin: 0;
+	appearance: none;
+	background-color: #116916;
+	/* border: solid #116916 1px; */
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	transition-duration: 0.4s;
 }
 
 

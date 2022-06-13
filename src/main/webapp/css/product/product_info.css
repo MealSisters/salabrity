@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+
 .gds_wrp{
     display: flex;
     justify-content: space-around;
@@ -17,6 +19,7 @@ div.tab_wrap{
     width: 100%;
     background-color: #f1f1f1;
     padding: 0;
+	margin: auto;
 }
 ul.detail_tab{
     display: flex;
@@ -30,15 +33,19 @@ ul.detail_tab{
     vertical-align: middle;
     height: 45px;
     text-align: center;
-    width: 28%;
-    margin: 0 20px;
+    width: 25%;
+    margin: 0 10px;
     padding: 0 0px;
 }
 div .prd_detail{
     margin: 50px 0;
-    width: 100%;
-    height: 500px;
-    background-color: #f1f1f1;
+    width: 94%;
+	margin: auto;
+    /* background-color: #f1f1f1; */
+}
+.prd_detail img{
+	width: 100%;
+
 }
 .detail_tab span{
     font-family: 'LeferiPoint-BlackA';
@@ -55,18 +62,18 @@ a.go_cal{
 	font-size: 15px;
 	color: #116916;
 	text-decoration: none;
-	font-family: 'LeferiPoint-BlackA';
+
 }
 .prd_tit_wrap, .prd_opt, .prd_opt_wrp{
 	padding-left: 0;
 }
 #content .prd_tit{
 	font-size: 24px;
-	margin: 10px 0 15px 0;
+	margin: 15px 0 15px 0;
 	text-align: left;
 }
 .prd_sub_tit{
-	margin: 6px 0 7px 0;
+	margin: 6px 0 7px 5px;
 	font-size: 13px;
 	color: #999;
 }
@@ -95,7 +102,6 @@ a.go_cal{
 	display: table-cell;
 	width: 120px;
 	padding: 10px 0;
-
 	vertical-align: middle;
 
 }
@@ -106,7 +112,7 @@ a.go_cal{
 	padding: 20px 0 10px 0 ;
 }
 .total_wrap>div{
-	font-family: 'LeferiPoint-BlackA';
+	font-weight: 700;
 	padding: 10px 0;
 }
 .order_btn_wrp{
@@ -141,17 +147,16 @@ a.go_cal{
 	background-repeat: no-repeat;
 	background-position:95% 0px;
 	height: 25px;
+	padding-left: 10px;
+	padding-top: 5px;
 }
 
 .input_wrp{
-
-
 	padding: 0;
 }
 .datepicker:focus{
 	outline: none;
 }
-
 
 .quantity table{
 	margin: auto;
@@ -159,7 +164,6 @@ a.go_cal{
 	border: solid 2px #777;
 	border-collapse: collapse;
 }
-
 
 
 ul.qty_wrp {
@@ -191,3 +195,29 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 	;
 }
+.flatpickr-days, .flatpickr-innerContainer,.flatpickr-weekdays, .flatpickr-weekdaycontainer{
+	padding-left: 0;
+}
+ .flatpickr-monthDropdown-months{
+	height: 20px !important;
+} 
+.flatpickr-months, .flatpickr-current-month, .flatpickr-innerContainer{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.detail_tab2_active{
+	display: none;
+}
+.detail_tab2_active table{
+	margin: 30px 0 60px 30px;
+	border: 1px #fff solid;
+	border-collapse: collapse;
+}
+.detail_tab2_active th, .detail_tab2_active td{
+	border: 1px #fff solid;
+	height: 15px;
+	padding: 5px 15px;
+	
+}
+

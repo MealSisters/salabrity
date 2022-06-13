@@ -45,8 +45,8 @@
 	</div>
 	<div>
 		<form
-			name="questionBoardReplyEnrollFrm" 
-			action="<%= request.getContextPath() %>/board/question/questionReply" 
+			name="qnaBoardAnswerFrm" 
+			action="<%= request.getContextPath() %>/admin/QnAList/answer" 
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-admin-reply">
@@ -86,10 +86,10 @@
 </div>
 <script>
 /**
- * questionBoardReplyEnrollFrm 유효성 검사
+ * qnaBoardAnswerFrm 유효성 검사
  */
 window.addEventListener('load', () => {
-	document.questionBoardReplyEnrollFrm.onsubmit = (e) => {
+	document.qnaBoardAnswerFrm.onsubmit = (e) => {
 		const frm = e.target;
 		
 		const passwordVal = frm.password.value.trim();
