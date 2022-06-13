@@ -3,9 +3,22 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
-<% 	String msg = (String) session.getAttribute("msg");
+<%
+String msg = (String) session.getAttribute("msg");
 	if(msg != null)
-	session.removeAttribute("msg"); %>
+	session.removeAttribute("msg"); 
+	
+	String saveId = null;
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie cookie : cookies){
+			System.out.println("Cookie{" + cookie.getName() + "=" + cookie.getValue() + "}");
+			if("saveId".equals(cookie.getName())){ // 저장된 데이터 값에 대한 이름 가져오기
+				saveId = cookie.getValue(); // 이름에 저장된 데이터 가져오기
+			}
+		}
+	}
+%>
 	
 <script>
 window.onload = () => {
@@ -43,8 +56,7 @@ window.onload = () => {
 		<div class="member_login_box">
 			<div class="login_input_cont">
 				<div class="test">
-					<input type="text" id="memberId" name="memberId" value=""
-						placeholder="아이디"> 
+					<input type="text" id="memberId" name="memberId" placeholder="아이디" value="<%= saveId != null ? saveId : "" %>"> 
 					<input type="password" id="password"
 						name="password" value="" placeholder="비밀번호">
 				</div>
@@ -54,9 +66,8 @@ window.onload = () => {
 			</div>
 
 			<div class="id_chk">
-				<span class="form_element"> <input type="checkbox"
-					id="saveId" name="saveId"/> <label
-					for="saveId" class="on">아이디 저장</label>
+				<span class="form_element"> <input type="checkbox" name="saveId" id="saveId" <%= saveId != null ? "checked" : "" %>/> 
+					<label for="saveId" class="on">아이디 저장</label>
 				</span>
 			</div>
 			<ul class="idpw_list">
