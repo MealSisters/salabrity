@@ -3,15 +3,49 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
-
+<% 	String msg = (String) session.getAttribute("msg");
+	if(msg != null)
+	session.removeAttribute("msg"); %>
+	
+<script>
+window.onload = () => {
+<% if(msg != null) { %>
+	alert("<%= msg %>");
+<% } %>
+	
+	
+	<% if(loginMember == null) { %>
+	document.loginFrm.onsubmit = (e) => {
+		const memberIdVal = memberId.value;
+		const passwordVal = password.value;
+		
+		console.log(memberIdVal, passwordVal);
+		
+		if(!/^.{4,}$/.test(memberIdVal)) {
+			alert("유효한 아이디를 입력해주새요.");
+			memberId.select(); // memberId의 모든 텍스트 선택
+			return false;
+		}
+		
+		if(!/^.{4,}$/.test(passwordVal)) {
+			alert("유효한 비밀번호를 입력해주새요.");
+			password.select();
+			return false;
+		}
+	};
+	<% } %>
+};
+</script>
 <h3 class="head_log">로그인</h3>
 <div class="form_cont">
-	<form id="formLogin">
+<!-- 로그인 폼 시작 -->
+	<form id="loginFrm" name="loginFrm" method="POST" action="<%= request.getContextPath() %>/member/login">
 		<div class="member_login_box">
 			<div class="login_input_cont">
 				<div class="test">
-					<input type="text" id="_memberId" name="memberId" value=""
-						placeholder="아이디"> <input type="password" id="password"
+					<input type="text" id="memberId" name="memberId" value=""
+						placeholder="아이디"> 
+					<input type="password" id="password"
 						name="password" value="" placeholder="비밀번호">
 				</div>
 				<button type="submit" class="btn_member_login">로그인</button>
@@ -21,7 +55,7 @@
 
 			<div class="id_chk">
 				<span class="form_element"> <input type="checkbox"
-					id="saveId" name="saveId" value="y" checked="true" /> <label
+					id="saveId" name="saveId"/> <label
 					for="saveId" class="on">아이디 저장</label>
 				</span>
 			</div>

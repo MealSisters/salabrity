@@ -21,7 +21,7 @@ public class MemberLogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if(session != null)
-			session.invalidate();
+			session.invalidate(); // 무효화처리
 		
 		// 2. redirect
 		response.sendRedirect(request.getContextPath() + "/");
