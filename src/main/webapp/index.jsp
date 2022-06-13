@@ -1,32 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-		<%-- 대문이미지 슬라이드 --%>
-		<div id="main-slide-wrap">
-			<div class="main-slider">
-				<ul>
-					<li>
-						<div class="main-slide-msg">
-							<h3>Slide 1</h3>
-						</div>
-						<img src="#" alt="대문이미지1" />
-					</li>
-					<!-- <li>
-						<div class="main-slide-msg">
-							<h3>Slide 2</h3>
-						</div>
-						<img src="#" alt="대문이미지2" />
-					</li>
-					<li>
-						<div class="main-slide-msg">
-							<h3>Slide 3</h3>
-						</div>
-						<img src="#" alt="대문이미지3" />
-					</li> -->
-				</ul>
-			</div>
-		</div>
-		<hr />
+		<%-- 대문이미지 --%>
+		<div id="main-slider-wrap">
+	        <ul id="main-slider">
+	            <li>
+	                <div>
+	                    <h3>Slide 1</h3>
+	                    <span>슬라이드 1</span>
+	                </div>
+	                <img src="https://beyondtype2.org/wp-content/uploads/2019/03/BT2-HEADER-DASH-DIET.png">
+	            </li>
+	    
+	            <li>
+	                <div>
+	                    <h3>Slide 2</h3>
+	                    <span>슬라이드 2</span>
+	                </div>
+	                <img src="https://www.unic.ac.cy/medicalcentre/wp-content/uploads/sites/31/2021/01/P3217-image-e1610535947352.jpg">
+	            </li>
+	    
+	            <li>
+	                <div>
+	                    <h3>Slide 3</h3>
+	                    <span>슬라이드 3</span>
+	                </div>
+	                <img src="https://images.everydayhealth.com/images/what-is-the-dash-diet-1440x810.jpg?w=1110">
+	            </li>
+	        </ul>
+	        <div class="main-slider-btns" id="next"><span>▶</span></div>
+	        <div class="main-slider-btns" id="previous"><span>◀</span></div>
+	        <div id="main-slider-pagination-wrap">
+	            <ul></ul>
+	        </div>
+	    </div>
 		<%-- 인기상품 --%>
 		<div id="main-product-wrap">
 			<table class="tbl-main-product">
@@ -112,10 +119,10 @@
 					<tr>
 						<td colspan="8">
 							<div class="main-product-btn">
-								<a href="#">샐브의 식단 보기</a>
+								<a href="<%= request.getContextPath() %>/calendar">샐브의 식단 보기</a>
 							</div>
 						</td>
-					</tr>
+ 					</tr>
 				</tfoot>
 			</table>
 		</div>
@@ -135,8 +142,8 @@
 					<tr>
 						<td id="main-service-msg1" class="main-service-msg">간단한 설문에 응해주시면</td>
 						<td class="main-service-img" rowspan="3">
-							<a href="#">
-								<img src="#" alt="맞춤식단찾기" />
+							<a href="<%= request.getContextPath() %>/survey/surveyCustom">
+								<img src="http://physicalsolutionsli.com/wp-content/uploads/2019/10/DASH-diet-1024x689.jpg" alt="맞춤식단찾기" />
 							</a>
 						</td>
 					</tr>
@@ -146,12 +153,94 @@
 					<tr>
 						<td>
 							<div class="main-service-btn">
-								<a href="#">맞춤식단찾기</a>
+								<a href="<%= request.getContextPath() %>/survey/surveyCustom">맞춤식단찾기</a>
 							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<script>
+		/**
+		 * 대문이미지 슬라이드 처리
+		 */
+        let mainSlideWrap = document.getElementById('main-slider-wrap');
+        let slideIndex = 0;
+        let slides = document.querySelectorAll('#main-slider-wrap ul li');
+        let totalSlides = slides.length;
+        let sliderWidth = mainSlideWrap.clientWidth;
+        
+        slides.forEach((e) => {
+            e.style.width = sliderWidth + 'px';
+        });
+        
+        let slider = document.querySelector('#main-slider-wrap ul#main-slider');
+        slider.style.width = sliderWidth * totalSlides + 'px';
+		
+        let nextBtn = document.getElementById('next');
+        let prevBtn = document.getElementById('previous');
+        
+        // 다음/이전 버튼 처리
+        nextBtn.addEventListener('click', () => {
+            plusSlides(1);
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            plusSlides(-1);
+        });
+
+        // hover 처리
+        mainSlideWrap.addEventListener('mouseover', function () {
+            this.classList.add('active');
+            clearInterval(autoSlider);
+        });
+        
+        mainSlideWrap.addEventListener('mouseleave', function () {
+            this.classList.remove('active');
+            autoSlider = setInterval(() => {
+                plusSlides(1);
+            }, 3000);
+        });
+
+        const plusSlides = (n) => {
+            showSlides(slideIndex += n);
+        };
+
+        const currentSlides = (n) => {
+            showSlides(slideIndex = n);
+        };
+
+        const showSlides = (n) => {
+            slideIndex = n;
+            if(slideIndex == -1) {
+                slideIndex = totalSlides - 1;
+            }
+            else if(slideIndex === totalSlides) {
+                slideIndex = 0;
+            }
+
+            slider.style.left = -(sliderWidth * slideIndex) + 'px';
+            pagination();
+        }
+
+        // 페이징 처리
+        slides.forEach((e) => {
+            const li = document.createElement('li');
+            document.querySelector('#main-slider-pagination-wrap ul').appendChild(li);
+        });
+
+        const pagination = () => {
+            let dots = document.querySelectorAll('#main-slider-pagination-wrap ul li');
+            dots.forEach((e) => {
+                e.classList.remove('active');
+            });
+            dots[slideIndex].classList.add('active');
+        };
+        pagination();
+        
+        let autoSlider = setInterval(() => {
+            plusSlides(1);
+        }, 3000);
+		</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

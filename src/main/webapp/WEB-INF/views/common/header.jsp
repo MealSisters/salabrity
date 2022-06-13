@@ -9,11 +9,12 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/basic.css" />
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css" />
 	<script src="https://kit.fontawesome.com/97c6ec6a69.js" crossorigin="anonymous"></script>
+	<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<div id="container">
+		<!-- header 시작 -->
 		<header>
-			<%-- 변경 테스트2 --%>
 			<%-- 메인 로고 --%>
 			<div class="main-logo">
 				<a href="<%= request.getContextPath() %>" title="메인화면으로 돌아가기">
@@ -24,10 +25,10 @@
 			<%-- hover시 세부 메뉴가 드롭될 수 있도록 변경 예정! --%>
 			<nav class="main-nav">
 				<ul>					
-					<li class="diet-diagnosis"><a href="#">맞춤식단찾기</a></li>
-					<li class="diet-calendar"><a href="#">샐브의식단</a></li>
-					<li class="diete-products"><a href="<%= request.getContextPath() %>/product/productList">전체상품</a></li>
-					<li class="comminity-board"><a href="<%= request.getContextPath() %>/board/community">커뮤니티</a></li>
+					<li class="diet-survey"><a href="<%= request.getContextPath() %>/survey/surveyCustom">맞춤식단찾기</a></li>
+					<li class="diet-calendar"><a href="<%= request.getContextPath() %>/calendar">샐브의식단</a></li>
+					<li class="diet-products"><a href="<%= request.getContextPath() %>/product/productList">전체상품</a></li>
+					<li class="community-board"><a href="<%= request.getContextPath() %>/board/community">커뮤니티</a></li>
 					<li class="notice"><a href="<%= request.getContextPath() %>/board/notice">공지사항/이벤트</a></li>
 				<%-- 관리자 페이지 조건문 적용 예정! --%>
 				<%-- if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { --%>
@@ -45,14 +46,14 @@
 					<%-- } else { --%>
 						<%-- 로그인 후 --%>
 						<%-- 이 부분은 일단 주석처리해둘게요!
-						<a href="#" title="마이페이지"><i class="fa-solid fa-user"></i></a> --%>
+						<a href="<%= request.getContextPath() %>/mypage/orderList" title="마이페이지"><i class="fa-solid fa-user"></i></a> --%>
 						<div class="member-nav-depth">
 							<div class="inner-member-nav">
 								<ul>
-									<li class="shipping-info"><a href="<%= request.getContextPath() %>/mypage/orderView">쇼핑정보</a></li>
+									<li class="shipping-info"><a href="<%= request.getContextPath() %>/mypage/orderList">쇼핑정보</a></li>
 									<li class="my-info"><a href="<%= request.getContextPath() %>/mypage/memberUpdate">회원정보</a></li>
-									<li class="activity-info"><a href="#">활동정보</a></li>
-									<li class="logout"><a href="<%= request.getContextPath() %>">로그아웃</a></li>
+									<li class="activity-info"><a href="<%= request.getContextPath() %>/mypage/boardWriteList">활동정보</a></li>
+									<li class="logout"><a href="<%= request.getContextPath() %>/member/logout">로그아웃</a></li>
 								</ul>
 							</div>
 						</div>
@@ -66,5 +67,5 @@
 				</ul>
 			</nav>
 		</header>
-		
+		<!-- header 끝 -->
 		<section id="content">
