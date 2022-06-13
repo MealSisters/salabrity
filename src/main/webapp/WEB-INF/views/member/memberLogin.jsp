@@ -14,7 +14,7 @@ window.onload = () => {
 <% } %>
 	
 	
-	
+	<% if(loginMember == null) { %>
 	document.loginFrm.onsubmit = (e) => {
 		const memberIdVal = memberId.value;
 		const passwordVal = password.value;
@@ -33,7 +33,7 @@ window.onload = () => {
 			return false;
 		}
 	};
-	
+	<% } %>
 };
 </script>
 <h3 class="head_log">로그인</h3>
