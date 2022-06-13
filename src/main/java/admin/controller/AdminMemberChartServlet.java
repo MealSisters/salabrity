@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 import admin.model.service.AdminService;
 
@@ -25,21 +26,25 @@ public class AdminMemberChartServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String daysVal = request.getParameter("days");
+		try {
+			String daysVal = request.getParameter("days");
 
-		String[] week = daysVal.split(",");
-		List<Integer> dataList = new ArrayList<>();  
-		int result = 0;
-		for(int i = 0; i < week.length ; i++) {
-			result = adminService.getEnrollMemberByDate(Date.valueOf(week[i]));
-			System.out.println(week[i] + "의 result = " + result);
-			dataList.add(result);
+			String[] week = daysVal.split(",");
+			List<Integer> dataList = new ArrayList<>();  
+			int result = 0;
+			for(int i = 0; i < week.length ; i++) {
+				result = adminService.getEnrollMemberByDate(Date.valueOf(week[i]));
+				System.out.println(week[i] + "의 result = " + result);
+				dataList.add(result);
+			}
+			
+
+			response.setContentType("application/json; charset=utf-8");
+			new Gson().toJson(dataList, response.getWriter());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
-		
-
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(dataList, response.getWriter());
 	}
 
 }

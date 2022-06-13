@@ -5,21 +5,24 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 <div class="div-level1">
     <h1 class="pageTitle">메뉴정보</h1>
-    <form name="menuEnrollFrm" action="">
+    <form method="POST" name="menuEnrollFrm" action="<%=request.getContextPath()%>/admin/menuEnroll">
         <div class="formLine-wrapper">
             <label for="menuId">메뉴ID</label>
-            <input type="text" name="menuId">
+            <input type="text" name="menuId" id="menuId">
             <div class="uniqueCkeck-wrapper">
                 <button type="button" class="uniqueCkeckBtn">중복검사</button>
             </div>
+            <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper">
             <label for="menuName">메뉴이름</label>
-            <input type="text" name="menuName">
+            <input type="text" name="menuName" id="menuName">
+            <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper">
             <label for="calorie">칼로리</label>
-            <input type="number" name="calorie"><span>kcal</span>
+            <input type="number" name="calorie" id="calorie"><span>kcal</span>
+            <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper">
             <label for="menuAttach">이미지</label>
@@ -28,14 +31,21 @@
                 <button type="button">파일 선택</button>
             </div>
             <p class="upfileName"></p>
+            <span class="inputErrMsg"></span>
         </div>
-        <div class="formLine-wrapper textarea-wrapper">
-            <label for="ingredients">재료</label>
-            <textarea name="ingredients" id="" cols="130" rows="2" placeholder="각 재료를 ,(콤마)로 구분해주세요."></textarea>
+        <div class="textarea-wrapper">
+	        <div class="formLine-wrapper ingredients-wrapper">
+	            <label for="ingredients">재료</label>
+	            <textarea name="ingredients" id="ingredients" cols="120" rows="2" placeholder="각 재료를 ,(콤마)로 구분해주세요."></textarea>
+	        </div>
+            <span class="inputErrMsg"></span>
         </div>
-        <div class="formLine-wrapper textarea-wrapper">
-            <label for="menuDescription">소개</label>
-            <textarea name="menuDescription" id="" cols="130" rows="5" placeholder="메뉴를 설명해주세요."></textarea>
+        <div class="textarea-wrapper">
+	        <div class="formLine-wrapper">
+	            <label for="menuDescription">소개</label>
+	            <textarea name="menuDescription" id="menuDescription" cols="120" rows="5" placeholder="메뉴를 설명해주세요."></textarea>
+	        </div>
+            <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper buttons-wrapper">
             <div class="enrollBtn-wrapper">
@@ -73,6 +83,39 @@
             location.href = "<%= request.getContextPath() %>/admin/menuList";
         };
     };
+    
+    // 유효성검사 -> 추후 별도 파일로 분리하기
+    document.menuEnrollFrm.onsubmit = () => {
+        let result = false;
+    	if(!/^[a-zA-Z0-9_]{4,30}$/.test(menuId.value)){
+            printErrSpan("#menuId", "아이디는 영문자/숫자로 4글자 이상 30자 이하여야하며, 특수문자는 _만 사용가능합니다.");
+            result = false;
+    	} else resetMsg("#menuId");
+    	
+    	if(!/^[a-zA-Z가-힣0-9].{0,90}[^ \t\n]$/.test(menuName.value)){
+    		printErrSpan("#menuName", "적절한 이름이 아닙니다.");
+    	} else resetMsg("#menuName");
+    	
+    	if(/[\n\t]/g.test(ingredients.value)){
+    		printErrSpan(".ingredients-wrapper", "개행은 입력할 수 없습니다.");
+    	} else if (!/^.{1,800}$/.test(ingredients.value)) {
+    		printErrSpan(".ingredients-wrapper", "적절한 길이로 입력해주세요.");
+    	} else if(!/^[a-zA-Z가-힣0-9, ()]{1,800}$/.test(ingredients.value)) {
+    		printErrSpan(".ingredients-wrapper", "입력 불가능한 문자가 포함되어있습니다. *특수문자는 ,(콤마)와 소괄호만 가능");
+    	} else resetMsg(".ingredients-wrapper");
+        
+        return result;
+    };
+
+    const printErrSpan = (target, msg) => {
+        const msgSpan = document.querySelector(target).parentElement.lastElementChild;
+        msgSpan.innerHTML = msg;
+    };
+
+    const resetMsg = (target) => {
+        const msgSpan = document.querySelector(target).parentElement.lastElementChild;
+        msgSpan.innerHTML = "";
+    }
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
