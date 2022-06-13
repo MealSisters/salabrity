@@ -23,7 +23,7 @@ public class PostingExt extends Posting {
 		this.comments = comments;
 	}
 
-	public PostingExt(int postingNo, String boardCode, String memberId, String title, String content, Date regDate,
+	public PostingExt(int postingNo, BoardCode boardCode, String memberId, String title, String content, Date regDate,
 			int readCount, int likeCount, int postingLevel, int postingRef, int attachCount, int commentCount,
 			List<PostingAttach> attachments, List<PostingComment> comments) {
 		super(postingNo, boardCode, memberId, title, content, regDate, readCount, likeCount, postingLevel, postingRef);

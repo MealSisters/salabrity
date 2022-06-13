@@ -6,19 +6,19 @@ public class PostingComment {
 
 	private int commentNo;
 	private int postingNo;
-	private String boardCode;
+	private BoardCode boardCode;
 	private String memberId;
 	private String commentContent;
-	private String commentLevel;
-	private String commentRef;
+	private int commentLevel;
+	private int commentRef;
 	private Date regDate;
 	
 	public PostingComment() {
 		super();
 	}
 
-	public PostingComment(int commentNo, int postingNo, String boardCode, String memberId, String commentContent,
-			String commentLevel, String commentRef, Date regDate) {
+	public PostingComment(int commentNo, int postingNo, BoardCode boardCode, String memberId, String commentContent,
+			int commentLevel, int commentRef, Date regDate) {
 		super();
 		this.commentNo = commentNo;
 		this.postingNo = postingNo;
@@ -46,11 +46,11 @@ public class PostingComment {
 		this.postingNo = postingNo;
 	}
 
-	public String getBoardCode() {
+	public BoardCode getBoardCode() {
 		return boardCode;
 	}
 
-	public void setBoardCode(String boardCode) {
+	public void setBoardCode(BoardCode boardCode) {
 		this.boardCode = boardCode;
 	}
 
@@ -70,19 +70,19 @@ public class PostingComment {
 		this.commentContent = commentContent;
 	}
 
-	public String getCommentLevel() {
+	public int getCommentLevel() {
 		return commentLevel;
 	}
 
-	public void setCommentLevel(String commentLevel) {
+	public void setCommentLevel(int commentLevel) {
 		this.commentLevel = commentLevel;
 	}
 
-	public String getCommentRef() {
+	public int getCommentRef() {
 		return commentRef;
 	}
 
-	public void setCommentRef(String commentRef) {
+	public void setCommentRef(int commentRef) {
 		this.commentRef = commentRef;
 	}
 

@@ -6,7 +6,7 @@ public class PostingAttach {
 
 	private int postingAttachNo;
 	private int postingNo;
-	private String boardCode;
+	private BoardCode boardCode;
 	private String originalFilename;
 	private String renamedFilename;
 	private Date regDate;
@@ -15,7 +15,7 @@ public class PostingAttach {
 		super();
 	}
 
-	public PostingAttach(int postingAttachNo, int postingNo, String boardCode, String originalFilename,
+	public PostingAttach(int postingAttachNo, int postingNo, BoardCode boardCode, String originalFilename,
 			String renamedFilename, Date regDate) {
 		super();
 		this.postingAttachNo = postingAttachNo;
@@ -42,11 +42,11 @@ public class PostingAttach {
 		this.postingNo = postingNo;
 	}
 
-	public String getBoardCode() {
+	public BoardCode getBoardCode() {
 		return boardCode;
 	}
 
-	public void setBoardCode(String boardCode) {
+	public void setBoardCode(BoardCode boardCode) {
 		this.boardCode = boardCode;
 	}
 
