@@ -4,6 +4,7 @@ import static common.JdbcTemplate.*;
 import static common.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +57,13 @@ public class AdminService {
 			close(conn);
 		}
 		return result;
+	}
+
+	public int getEnrollMemberByDate(Date date) {
+		Connection conn = getConnection();
+		int enrollMembers = adminDao.getEnrollMemberByDate(conn, date);
+		close(conn);
+		return enrollMembers;
 	}
 
 }

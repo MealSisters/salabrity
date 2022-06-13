@@ -5,6 +5,7 @@ import static common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -186,6 +187,27 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int getEnrollMemberByDate(Connection conn, Date date) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getEnrollMemberByDate");
+		int enrollMembers = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setDate(1, date);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				enrollMembers = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new AdminException("가입일 기준 회원 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return enrollMembers;
 	}
 
 }

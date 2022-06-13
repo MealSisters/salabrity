@@ -197,7 +197,7 @@
 /*-------------------- Members 영역 --------------------*/
 #div-members-chart {
   height: 200px;
-  /* background-color: #ddd; */
+  background-color: #ddd;
 }
 
 /*-------------------- 이동 아이콘 영역 --------------------*/

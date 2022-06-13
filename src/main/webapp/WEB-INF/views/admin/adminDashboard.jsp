@@ -6,6 +6,7 @@
 <script src="<%= request.getContextPath() %>/js/Chart.min.js"></script>
 <script src="<%= request.getContextPath() %>/js/admin/adminchart.js"></script>
 
+<script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <div class="div-level1">
     <div id="div-summaryData" class="div-level2 leftdiv">
         <table id="tbl-summaryData">
@@ -118,16 +119,37 @@
 </div>
 <script>
     window.addEventListener('load', () => {
-        const days = ['2022-05-23', '2022-05-24', '2022-05-25', '2022-05-26', '2022-05-27', '2022-05-28'];
+        
+        const days = recent7Days();
+        const memberData = new Array();
+        $.ajax({
+        	url : "<%= request.getContextPath() %>/admin/memberChart",
+        	method : "POST",
+        	dataType : "json",
+        	data : {
+        		days : days.toString()
+       		},
+        	success(counts){
+        		counts.forEach((count) => {
+        			memberData.push(count);
+        		});
+       			const memberCanvas = document.getElementById("lineChart-member");
+       			printBarChart(memberCanvas, days, memberData);
+        	},
+        	error : console.log
+        });
+
         
         const salesCanvas = document.getElementById("lineChart-sales");
-        const salesData = [100000, 123000, 85000, 104000, 146700, 137000];
+        const salesData = [100000, 123000, 85000, 104000, 146700, 137000, 10000];
         printlineChart(salesCanvas, days, salesData);
 
-        const memberCanvas = document.getElementById("lineChart-member");
-        const memberData = [10, 3, 5, 19, 16, 7];
-        printlineChart(memberCanvas, days, memberData);
+        
+        
+        
     });
+
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
