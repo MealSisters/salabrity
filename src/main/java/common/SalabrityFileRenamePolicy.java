@@ -15,7 +15,7 @@ public class SalabrityFileRenamePolicy implements FileRenamePolicy {
 		File newFile = null;
 		
 		do {
-			SimpleDateFormat sdf = new SimpleDateFormat();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS_");
 			DecimalFormat df = new DecimalFormat("000");
 			
 			String oldName = oldFile.getName();

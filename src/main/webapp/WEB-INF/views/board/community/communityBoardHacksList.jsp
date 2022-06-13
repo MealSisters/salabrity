@@ -47,7 +47,7 @@
 			<tr>
 				<td><%= posting.getPostingNo() %></td>
 				<td>
-					<a href="<%= request.getContextPath() %>/board/boardView?no=<%= posting.getPostingNo() %>"><%= posting.getTitle() %></a>
+					<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= posting.getPostingNo() %>"><%= posting.getTitle() %></a>
 				</td>
 				<td><%= posting.getMemberId() %></td>
 				<td><%= posting.getCommentCount() %></td>

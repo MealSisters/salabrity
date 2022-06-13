@@ -5,7 +5,6 @@ import static common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -346,6 +345,65 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 첨부파일 한 건 조회
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public PostingAttach findPostingAttachByPostingAttachNo(Connection conn, int no) {
+		String sql = prop.getProperty("findPostingAttachByPostingAttachNo");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		PostingAttach attach = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				attach = handlePostingAttachResultSet(rset);
+			}
+		} catch (Exception e) {
+			throw new BoardException("첨부파일 한 건 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return attach;
+	}
+
+	/**
+	 * 게시판 카테고리 조회
+	 * @param conn
+	 * @param no 
+	 * @return
+	 */
+	public BoardCode findCurrentBoardCode(Connection conn, int no) {
+		String sql = prop.getProperty("findCurrentBoardCode");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		BoardCode boardCode = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				boardCode = BoardCode.valueOf(rset.getString("board_code"));
+			}
+		} catch (Exception e) {
+			throw new BoardException("게시판 카테고리 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return boardCode;
 	}
 
 }

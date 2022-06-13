@@ -436,6 +436,11 @@ communityBoardView.jsp
 	padding: 10px 0;
 }
 
+.posting-view-content img {
+	max-width: 600px;
+	max-height: 600px;
+}
+
 .posting-view-cnt span {
 	margin: 7px;
 }
