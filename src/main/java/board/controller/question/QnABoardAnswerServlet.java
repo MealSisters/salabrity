@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class QuestionBoardReplyEnrollServlet
  */
-@WebServlet("/board/question/questionReply")
-public class QuestionBoardReplyEnrollServlet extends HttpServlet {
+@WebServlet("/admin/QnAList/answer")
+public class QnABoardAnswerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/board/question/questionBoardReplyEnroll.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/board/question/qnaBoardAnswer.jsp")
 			.forward(request, response);
 	}
 
