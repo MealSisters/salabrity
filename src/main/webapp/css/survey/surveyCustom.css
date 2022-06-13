@@ -8,22 +8,19 @@
 
 h1 {
   display: flex;
-  margin-top: 20px;
   margin-bottom: 40px;
 }
 
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+h5  {
+  color: #666;
+  margin-bottom: 40px;
 }
 
 #surveyContainer {
   background-color: white;
+  border: 1px solid;
   border-radius: 50px;
-  width: 400px;
+  width: 800px;
   border-radius: 8px;
   overflow: hidden;
   margin: 100px auto;
@@ -37,7 +34,7 @@ body {
 }
 
 input {
-  accent-color: green;
+  accent-color: #116916;
 }
 
 .gender, .survey_height, .survey_weight, .Uniqueness {
@@ -45,4 +42,15 @@ input {
   color: #666;
   margin-bottom: 20px;
   font-weight: 600;
+}
+
+#next{
+	border: solid 1px;
+	height: 50px;
+	width: 45%;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+	color: #f1f1f1;
+	background-color: #116916;
 }
