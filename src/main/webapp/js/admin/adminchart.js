@@ -75,38 +75,50 @@ let customLegend = (chart) => {
 
 
 const printBarChart = (target, days, memberData, rgb = "#0C7475") => {
-  const context = target.getContext("2d");
-  const max = Math.max(...memberData);
+  	const context = target.getContext("2d");
+  	const max = Math.max(...memberData);
+	const plugin = {
+	  id: 'custom_canvas_background_color',
+	  beforeDraw: (chart) => {
+	      const ctx = chart.canvas.getContext('2d');
+	      ctx.save();
+	      ctx.globalCompositeOperation = 'destination-over';
+	      ctx.fillStyle = '#fff';
+	      ctx.fillRect(0, 0, chart.width, chart.height);
+	      ctx.restore();
+	  }
+	};
 
-  const lineChart = new Chart(context, {
-      type: 'bar',
-      data: { // 차트에 들어갈 데이터
-          labels: days,
-          datasets: [
-              { // 데이터(계열당 중괄호 하나)
-                  label: '가입자',
-                  lineTension: 0,
-                  backgroundColor: rgb,
-                  borderColor: 'rgba(255,255,255,0)',
-                  borderWidth: 2,
-                  data: memberData
-              }
-
-          ]
-      },
-      options: {
-          maintainAspectRatio: false,
-          legend: {
-              display: false
-          },
-          scales: {
-              yAxes: [{
-                  ticks: { suggestedMax: max+1 }
-              }]
-          }
-      }
-  })
+  	const barChart = new Chart(context, {
+      	type: 'bar',
+      	data: { // 차트에 들어갈 데이터
+          	labels: days,
+          	datasets: [
+              	{ // 데이터(계열당 중괄호 하나)
+                  	label: '가입자',
+                  	lineTension: 0,
+	                  backgroundColor: rgb,
+    	              borderColor: 'rgba(255,255,255,0)',
+        	          borderWidth: 2,
+            	      data: memberData
+              	}
+          	]
+      	},
+      	plugins: [plugin],
+	      options: {
+    	      maintainAspectRatio: false,
+        	  legend: {
+            	  display: false
+          	},
+          	scales: {
+            	  yAxes: [{
+                	  ticks: { suggestedMax: max+1 }
+             	 }]
+          	}
+      	}
+  	})
 };
+
 
 
 const recent7Days = () => {
