@@ -82,4 +82,11 @@ public class AdminService {
 		return totalMenu;
 	}
 
+	public List<Menu> findMenuById(String menuId) {
+		Connection conn = getConnection();
+		List<Menu> list = adminDao.findMenuById(conn, menuId);
+		close(conn);
+		return list;
+	}
+
 }
