@@ -146,9 +146,14 @@ td.col-buttons a {
   padding: 0 7px;
   height: inherit;
   line-height: 220%;
+  text-decoration: none;
+  color: #000;
 }
 td.col-buttons div:hover {
   cursor: pointer;
+  color: #fff;
+}
+td.col-buttons a:hover {
   color: #fff;
 }
 .div-modify:hover {

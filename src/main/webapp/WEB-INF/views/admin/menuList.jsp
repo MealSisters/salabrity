@@ -34,13 +34,15 @@ String pagebar = (String) request.getAttribute("pagebar");
             <button class="enrollBtn" type="button">신규메뉴등록</button>
         </div>
         <div class="sort-wrapper">
+        	<form action="">
             <span>정렬기준</span>
             <select name="sortBy" class="select-sort">
-                <option value="">최근등록순</option>
-                <option value="">이름순</option>
-                <option value="">칼로리낮은순</option>
-                <option value="">칼로리높은순</option>
+                <option value="recent">최근등록순</option>
+                <option value="name">이름순</option>
+                <option value="lowCal">칼로리낮은순</option>
+                <option value="highCal">칼로리높은순</option>
             </select>
+        	</form>
         </div>
     </div>
     <div class="div-level2 div-resultlist">
@@ -67,8 +69,8 @@ String pagebar = (String) request.getAttribute("pagebar");
                 <td class="col-calorie"><%= menu.getCalorie() %></td>
                 <td class="col-ingredients"><%= menu.getIngredients() %></td>
                 <td class="col-buttons">
-                    <div class="div-modify"><a class="a-modify">수정</a></div>
-                    <div class="div-cancel"><a class="a-cancel">삭제</a></div>
+                    <div class="div-modify"><a class="a-modify" href="<%= request.getContextPath() %>/admin/menuUpdate?menuNo=<%= menu.getMenuNo() %>">수정</a></div>
+                    <div class="div-cancel"><a class="a-cancel" onclick="deleteMenu(<%= menu.getMenuNo() %>);">삭제</a></div>
                 </td>
             </tr>
 <%
@@ -87,9 +89,17 @@ String pagebar = (String) request.getAttribute("pagebar");
     <link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
     <%= pagebar %>
 </div>
+<form 
+	name="deleteMenuFrm"
+	action="<%= request.getContextPath() %>/admin/menuDelete"
+	method="POST">
+	<input type="hidden" name="delMenuNo" value="" />
+</form>
+
 <script>
     window.addEventListener('load', () => {
         enrollMenu();
+        addSortEvent();
     });
     const enrollMenu = () => {
         const btn = document.querySelector(".enrollBtn");
@@ -97,6 +107,17 @@ String pagebar = (String) request.getAttribute("pagebar");
             location.href = "<%= request.getContextPath() %>/admin/menuEnroll";
         };
     }
+    
+    const deleteMenu = (menuNo) => {
+    	document.querySelector("[name=delMenuNo]").value = menuNo;
+		if(confirm("메뉴를 삭제하시겠습니까?")){
+			document.deleteMenuFrm.submit();
+		};
+	};
+	
+	const addSortEvent = () => {
+		
+	}
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
