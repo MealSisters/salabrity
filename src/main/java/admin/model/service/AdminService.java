@@ -136,8 +136,8 @@ public class AdminService {
 		int result = 0;
 		try {
 			result = adminDao.updateMenu(conn, menu);
-			
-			if(menu.getMenuAttach() != null) {
+
+			if (menu.getMenuAttach() != null) {
 				result = adminDao.insertMenuAttach(conn, menu.getMenuAttach());
 			}
 		} catch (Exception e) {
@@ -181,7 +181,7 @@ public class AdminService {
 			rollback(conn);
 			throw e;
 		} finally {
-			close(conn);			
+			close(conn);
 		}
 		return result;
 	}

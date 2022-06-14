@@ -133,7 +133,7 @@ public class AdminDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return list;
 	}
 
@@ -201,7 +201,7 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setDate(1, date);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				enrollMembers = rset.getInt(1);
 			}
 		} catch (Exception e) {
@@ -220,7 +220,7 @@ public class AdminDao {
 		String sql = prop.getProperty("findAllMenu");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			if(param.get("searchParam")!=null) {
+			if (param.get("searchParam") != null) {
 				Map<String, Object> searchParam = (Map<String, Object>) param.get("searchParam");
 				pstmt.setString(1, "%" + searchParam.get("menuId") + "%");
 				pstmt.setString(2, "%" + searchParam.get("menuName") + "%");
@@ -284,7 +284,7 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, menuId);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				Menu menu = handelMenuResultSet(rset);
 				list.add(menu);
 			}
@@ -384,7 +384,7 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				attach = handelMenuAttachResultSet(rset);
 			}
 		} catch (Exception e) {
@@ -436,7 +436,7 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuAttachNo);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				attach = handelMenuAttachResultSet(rset);
 			}
 		} catch (Exception e) {
@@ -485,13 +485,13 @@ public class AdminDao {
 		ResultSet rset = null;
 		List<Menu> list = new ArrayList<>();
 		String sql = prop.getProperty("findSortedAllMenu");
-		if(!"menu_no".equals((String) param.get("sortBy")))
+		if (!"menu_no".equals((String) param.get("sortBy")))
 			sql = sql.replace("#", (String) param.get("sortBy"));
 		else
 			sql = prop.getProperty("findAllMenu");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			if(param.get("searchParam")!=null) {
+			if (param.get("searchParam") != null) {
 				Map<String, Object> searchParam = (Map<String, Object>) param.get("searchParam");
 				pstmt.setString(1, "%" + searchParam.get("menuId") + "%");
 				pstmt.setString(2, "%" + searchParam.get("menuName") + "%");
@@ -527,7 +527,6 @@ public class AdminDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				totalMenu = rset.getInt(1);
-				System.out.println("totalMenu@dao = " + totalMenu);
 			}
 		} catch (Exception e) {
 			throw new AdminException("전체 메뉴 수 조회 오류", e);

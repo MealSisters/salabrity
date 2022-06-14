@@ -8,10 +8,12 @@
     <form name="productEnrollFrm" action="">
         <div class="formLine-wrapper">
             <label for="prodcutId">상품ID</label>
-            <input type="text" name=productId">
+            <input type="text" name="productId" id="productId">
             <div class="uniqueCkeck-wrapper">
                 <button type="button" class="uniqueCkeckBtn">중복검사</button>
             </div>
+            <span class="goodMsg"></span>
+            <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper">
             <label for="productName">상품이름</label>
@@ -162,14 +164,36 @@
         });
     };
 
-
-
     const goToProductList = () => {
         const btn = document.querySelector(".cancelBtn");
         btn.onclick = () => {
-            location.href = "<%= request.getContextPath() %>/product/productList";
+            location.href = history.go(-1);
         };
     };
+    
+    const checkIdDuplicate = () => {
+		let productId = $('#productId').val();
+		
+		$.ajax({
+			url : "<%= request.getContextPath() %>/admin/productIdCheck",
+			method : "POST",
+        	dataType : "json",
+        	data : { productId : productId },
+        	success(idCheck) {
+        		if(idCheck > 0) {
+        			document.querySelector(".goodMsg").style.display = "none";
+        			printErrSpan("#productId", "중복된 아이디입니다.");
+        			return false;
+        		} else if(menuId != "") {
+        			resetMsg("#productId")
+        			document.querySelector(".goodMsg").style.display = "block";
+        			document.querySelector(".goodMsg").innerHTML = "중복검사완료";
+        			return true;
+        		}
+        	},
+        	error : console.log
+		});
+    }
 </script>
-
+<script src="<%= request.getContextPath() %>/js/validation.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
