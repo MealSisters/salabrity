@@ -12,6 +12,7 @@
 }
 
 </style>
+
 <div class="join_main_head">
 			<h3>약관동의</h3>
 			<ul>
@@ -24,13 +25,13 @@
 				<div class="join_main_cont">
 					<div class="join_agree_box">
 						<h4 class="use_agree">이용약관동의</h4>
+						<form name="agreeFrm" method="POST" onsubmit="return checkForm(this)" action="<%= request.getContextPath() %>/member/joinAgreement">
 						<div class="join_check" >
-							<input type="checkbox" name="" id="AllAgree">
-							<label>
-							<span id="every_agree">샐러브리티의 모든 약관을 확인하고 전체 동의합니다.</span></label>
+							<input type="checkbox" name="selectall" value="selectall" id="allAgree" onclick="selectAll(this)">
+							<label><span id="every_agree">샐러브리티의 모든 약관을 확인하고 전체 동의합니다.</span></label>
 						</div>
 						<div class="join_check">
-							<input type="checkbox" name="" id=""><strong class="agree_choice">(필수)</strong>
+							<input type="checkbox" name="agree_ck" id="" onclick="checkSelectAll(this)"><strong class="agree_choice">(필수)</strong>
 							<label>
 								 이용약관</label>
 						</div>
@@ -268,7 +269,7 @@
 2. 2015년 08월 17일부터 시행되던 종전의 약관은 이 약관으로 대체됩니다.
 						</div>
 						<div class="join_check">
-							<input type="checkbox" name="" id=""><strong class="agree_choice">(필수)</strong>
+							<input type="checkbox" name="agree_ck" id="" onclick="checkSelectAll(this)"><strong class="agree_choice">(필수)</strong>
 							<label>
 								 개인 정보 수집 및 이용</label>
 						</div>
@@ -280,7 +281,7 @@
 					보유 및 이용기간 : 회원탈퇴 후 5일까지 
 			</div>
 			<div class="join_check" id="age_agree">
-							<input type="checkbox" name="" id=""><strong class="agree_choice">(필수)</strong>
+							<input type="checkbox" name="agree_ck" id="" onclick="checkSelectAll(this)"><strong class="agree_choice">(필수)</strong>
 							<label>
 								 만 14세 이상입니다.</label>
 						</div>
@@ -290,10 +291,38 @@
 						</div>
 					</div>
 					<div class="btn_box">
-						<button type="button" id="btn_next" onclick="location.href='<%= request.getContextPath() %>/member/memberEnroll';">다음단계</button>
+						<button type="submit" id="btn_next">다음단계</button>
 					</div>
+					</form>
 				</div>
 			</div>
+<script>
+
+function checkForm(join) {
+	const ck = document.agreeFrm.allAgree.checked;
+	
+	if(!ck) {
+		alert("약관에 동의해주세요.")
+		return false;
+	}
+}
+
+function checkSelectAll(checkbox) {
+	const selectall = document.querySelector('input[name="selectall"]');
+	 if(checkbox.checked === false)  {
+		    selectall.checked = false;
+		  }
+		}
+
+		function selectAll(selectAll)  {
+		  const checkboxes 
+		     = document.getElementsByName('agree_ck');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked
+		  })
+		}
+</script>
 			
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

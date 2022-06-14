@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
+import member.model.exception.MemberException;
 
 public class MemberDao {
 	private Properties prop = new Properties();
@@ -60,6 +61,34 @@ public class MemberDao {
 		
 		
 		return member;
+	}
+
+	public int insertMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPassword());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getZipcode());
+			pstmt.setString(7, member.getAddress());
+			pstmt.setString(8, member.getAddressDetail());
+			pstmt.setDate(9, member.getBirthday());
+			pstmt.setString(10, member.getGender());
+			pstmt.setString(11, member.getMemberRole().toString());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new MemberException("회원가입 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

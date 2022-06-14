@@ -34,6 +34,7 @@ public class MemberLoginServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String password = request.getParameter("password");
 		String saveId = request.getParameter("saveId");
+		
 		System.out.println("memberId@MemberLoginServlet = " + memberId);
 		System.out.println("password@MemberLoginServlet = " + password);
 		System.out.println("saveId@MemberLoginServlet = " + saveId);
@@ -43,28 +44,29 @@ public class MemberLoginServlet extends HttpServlet {
 		System.out.println("member@MemberLoginServlet = " + member);
 		
 		HttpSession session = request.getSession();
+		// saveId
+		Cookie cookie = new Cookie("saveId", memberId); // 쿠키 객체 생성
+		cookie.setPath(request.getContextPath());
+		if(saveId != null) {
+			cookie.setMaxAge(7 * 24 * 60 * 60);
+			System.out.println(cookie.getValue());
+		} else {
+			// 로그인 실패
+			cookie.setMaxAge(0); 
+		}
+		response.addCookie(cookie); // 쿠키 객체 브라우저로 보내기 
+		
 		if(member != null && password.equals(member.getPassword())) {
 			// 로그인 성공
 			session.setAttribute("loginMember", member);
 //			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/");
 			
-			// saveId
-			Cookie cookie = new Cookie("saveId", memberId); // 쿠키 객체 생성
-			cookie.setPath(request.getContextPath());
-			if(saveId != null) {
-				cookie.setMaxAge(7 * 24 * 60 * 60);
-			} else {
-				// 로그인 실패
-				cookie.setMaxAge(0); 
-			}
-			response.addCookie(cookie); // 쿠키 객체 브라우저로 보내기
 		} else {
 			session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			doGet(request, response);
+//			response.sendRedirect(request.getContextPath() + "/");
 		}
-		
-		
 		
 //		String referer = request.getHeader("Referer");
 //		response.sendRedirect(referer);

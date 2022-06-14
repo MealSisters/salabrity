@@ -27,8 +27,8 @@
 <div class="join_box" style="border-top: 1px solid #dbdbdb;">
 	<div class="join_main_box" style="border-bottom: 1px solid black;">
 		<h4 class="use_agree">회원 정보 입력 (필수)</h4>
+		<form name="memberEnrollFrm" method="POST" action="<%= request.getContextPath() %>/member/memberEnroll">
 		<div class="member_box">
-
 			<div class="input_box">
 				<label class="member_title">아이디</label> <input type="text"
 					name="memberId" id="memberId" class="input_text">
@@ -104,9 +104,9 @@
 	<div class="btn_box">
 		<button id="btn_cancle"
 			onclick="location.href='<%= request.getContextPath() %>';">취소</button>
-		<button type="button" id="btn_join"
-			onclick="location.href='<%= request.getContextPath() %>/member/joinEnd';">회원가입</button>
+		<button type="submit" id="btn_join">회원가입</button>
 	</div>
+	</form>
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
