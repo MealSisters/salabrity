@@ -35,4 +35,19 @@ public class MemberService {
 		return result;
 	}
 
+	public int deleteMember(String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.deleteMember(conn, memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

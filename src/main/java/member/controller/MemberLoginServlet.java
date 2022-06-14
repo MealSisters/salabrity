@@ -59,13 +59,13 @@ public class MemberLoginServlet extends HttpServlet {
 		if(member != null && password.equals(member.getPassword())) {
 			// 로그인 성공
 			session.setAttribute("loginMember", member);
-//			request.getRequestDispatcher("/index.jsp").forward(request, response);
+//			request.getRequestDispatcher("/index.jsp").forward(request, response); xxxx
 			response.sendRedirect(request.getContextPath() + "/");
 			
 		} else {
 			session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			doGet(request, response);
-//			response.sendRedirect(request.getContextPath() + "/");
+//			response.sendRedirect(request.getContextPath() + "/"); xxx
 		}
 		
 //		String referer = request.getHeader("Referer");

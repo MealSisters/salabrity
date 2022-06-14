@@ -40,18 +40,20 @@
 
 
 				<div class="input_box">
-					<label class="member_title">이메일</label> <input type="text"
-						name="email" id="email" class="input__text"> <span style="font-size: 12px;">@</span>
-					<input type="text" class="input__text" id="inputDomain">
-					<div class="email_select">
-						<select name="emailType" id="emailType">
-							<option value="">직접입력</option>
-							<option value="">naver.com</option>
-							<option value="">gmail.com</option>
-							<option value="">daum.net</option>
-							<option value="">hanmail.net</option>
-						</select>
-					</div>
+				<label class="member_title">이메일</label> 
+				<input type="text" name="email1" id="email1" class="input__text"> 
+				  	<span style="font-size: 12px;">@</span>
+				<input type="text" name="email2" class="input__text" id="inputDomain">
+				<div class="email_select">
+					<select name="email3" id="email3">
+						<option value="etc">직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hanmail.net">hanmail.net</option>
+					</select>
+					<input type="hidden" name="email" id="email"/>
+				</div>
 					<span class="guide"> <input type="checkbox" name="" id=""
 						class="info_ck"> 다양한 할인 혜택과 이벤트 정보 메일 수신에 동의합니다.
 					</span>
@@ -76,9 +78,10 @@
 				</div>
 
 				<div class="input_box">
-					<label class="member_title">생년월일</label> <input type="text"
-						name="birthday" id="birthday" class="input__text">
-				</div>
+				<label class="member_title">생년월일</label> <input type="date"
+					name="birthday" id="birthday" class="input_text" value="2022-12-31">
+			</div>
+				
 
 				<div class="input_box">
 					<p class="member_title">성별</p>

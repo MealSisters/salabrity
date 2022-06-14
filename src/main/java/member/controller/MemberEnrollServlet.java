@@ -34,21 +34,32 @@ public class MemberEnrollServlet extends HttpServlet {
 			String memberId = request.getParameter("memberId");
 			String password = request.getParameter("password");
 			String memberName = request.getParameter("memberName");
-			String email = request.getParameter("email");
+			
+			// 이메일 값 합치기
+			String email1 = request.getParameter("email1");
+			String email2 = request.getParameter("email2");
+			String email = email1 + "@" + email2;
+			
 			String phone = request.getParameter("phone");
 			String zipcode = request.getParameter("zipcode");
 			String address = request.getParameter("address");
 			String addressDetail = request.getParameter("addressDetail");
+			
 			String _birthday = request.getParameter("birthday");
-			System.out.println(_birthday);
 			Date birthday = null;
-			if (_birthday != null && !"".equals(_birthday))
+			if(_birthday != null && !"".equals(_birthday))
 				birthday = Date.valueOf(_birthday);
+			
 			String gender = request.getParameter("gender");
+			
 			Member member = new Member(memberId, password, memberName, gender, birthday, email, phone, zipcode, address,
 					addressDetail, null, MemberRole.U);
+			System.out.println("입력한 회원 정보 : " + member);
+			
+			
 			int result = memberService.insertMember(member);
-			response.sendRedirect(request.getContextPath() + "/WEB-INF/views/member/joinEnd.jsp");
+//			response.sendRedirect(request.getContextPath() + "/WEB-INF/views/member/joinEnd.jsp");
+			request.getRequestDispatcher("/WEB-INF/views/member/joinEnd.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
