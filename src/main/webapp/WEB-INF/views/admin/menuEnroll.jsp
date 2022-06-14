@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 <div class="div-level1">
     <h1 class="pageTitle">메뉴정보</h1>
-    <form method="POST" name="menuEnrollFrm" action="<%=request.getContextPath()%>/admin/menuEnroll">
+    <form method="POST" name="menuEnrollFrm" action="<%=request.getContextPath()%>/admin/menuEnroll" enctype="multipart/form-data">
         <div class="formLine-wrapper">
             <label for="menuId">메뉴ID</label>
             <input type="text" name="menuId" id="menuId">
@@ -112,7 +112,7 @@
     
     // 유효성검사 -> 추후 별도 파일로 분리하기
     document.menuEnrollFrm.onsubmit = () => {
-        let result = false;
+        let result = true;
     	if(!/^[a-zA-Z0-9_]{4,30}$/.test(menuId.value)){
             printErrSpan("#menuId", "아이디는 영문자/숫자로 4글자 이상 30자 이하여야하며, 특수문자는 _ 만 사용가능합니다.");
             result = false;
