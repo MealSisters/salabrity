@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="surveyCustom.css">
 
-      <form action="surveyResult.jsp" method="post" name="surveyform">
+      <form method="post" name="surveyForm">
       <div id="surveyContainer">
       	<div class="h1-container">
           <h1>나만을 위한 식단을 찾아보세요.</h1>
@@ -24,10 +24,10 @@
        	</div>
 
     	<div class="survey_height">
-    		키 <input type="number" id="height" placeholder="cm">
+    		키 <input type="number" id="height" name="heightInput" placeholder="cm">
     	</div>
     	<div class="survey_weight">
-    		몸무게 <input type="number" id="weight" placeholder="kg">
+    		몸무게 <input type="number" id="weight" name="weightInput" placeholder="kg">
     	</div>
 
         <div class="Uniqueness">
@@ -39,45 +39,34 @@
         </div>
 
     	<div class="submit">
-          <input type="submit" id="next" value="Find My Salab-Meal">
+          <input type="button" id="next" value="Find My Salab-Meal" onclick="check_onclick()">
         </div>
        </div>
     </form>
-
-	    
-	<script type="text/javascript"> // 미선택시 메시지 미완성
-		var survey = new Survey.Model(surveyJSON);
-		$("#surveyContainer").Survey({
-		    model: survey,
-		    onComplete: sendDataToServer
-		});
-				$('button.survey-btn').click(function(){
-				    var error='';
-				    $('div.surveys').each(function(){
-				        var survaysName=$(this).find('div.gender').text();
-				        var checkBtn=$(this).find('input[type="radio"]:checked');
-				        if(!checkBtn.length){
-				            error+=gender+'가 입력되지 않았습니다.\n';
-				        }
-				    });
-				    if(error) alert(error);
-				});
-	</script>
-
-<!-- <SCRIPT language="javaScript">
-
- 	function check_onclick(){
-      survey=document.surveyform;
-	   if(survey.input1.value=="" || survey.input2.value=="" || survey.input3.value=="" ){
-           if(survey.input1.value==""){
-                alert("")
-                return survey.input1.focus();
-           }else if(theForm.input2.value==""){
-                alert("")
-                return survey.input2.focus();
-     		}
-		}
-
-	</SCRIPT> -->
+    
+<!-- 유효성 검사 -->
+<script>
+	function check_onclick(){
+	    var frm = document.surveyForm;
+	      if(frm.heightInput.value=="" && frm.weightInput.value=="" ){
+	      alert("상세정보 입력여부를 확인해주세요.")
+	        frm.heightInput.focus();
+	      	return false; 
+	      }
+	      if(frm.heightInput.value==""){
+	        alert("키가 입력되지 않았습니다. 확인해주세요.")
+	        frm.heightInput.focus();
+	      	return false; 
+	      }
+	      if(frm.weightInput.value==""){
+	        alert("몸무게가 입력되지 않았습니다. 확인해주세요.")
+	        frm.weightInput.focus();
+	      	return false; 
+	      }
+	      frm.action ="surveyResult.jsp";
+	      frm.method = "post";
+	      frm.submit();
+	    }
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

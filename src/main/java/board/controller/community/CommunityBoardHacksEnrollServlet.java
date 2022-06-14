@@ -3,7 +3,6 @@ package board.controller.community;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -41,7 +40,7 @@ public class CommunityBoardHacksEnrollServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings("unchecked")
+	/* @SuppressWarnings("unchecked") */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 파일저장 경로
@@ -72,6 +71,7 @@ public class CommunityBoardHacksEnrollServlet extends HttpServlet {
 			posting.setTitle(title);
 			posting.setContent(content);
 			
+			/*
 			Enumeration<String> files = multiReq.getFileNames();
 			
 			while (files.hasMoreElements()) {
@@ -85,6 +85,30 @@ public class CommunityBoardHacksEnrollServlet extends HttpServlet {
 					posting.setAttachments(attachments);
 				}
 			}
+			
+			File upFile1 = multiReq.getFile("upFile1");
+			File upFile2 = multiReq.getFile("upFile2");
+			
+			// 첨부한 파일이 하나라도 있는 경우
+			if(upFile1 != null || upFile2 != null) {
+				List<PostingAttach> attachments = new ArrayList<>();
+				if(upFile1 != null) {
+					attachments.add(getPostingAttach(multiReq, "upFile1"));
+				}
+				if(upFile2 != null) {
+					attachments.add(getPostingAttach(multiReq, "upFile2"));
+				}
+				posting.setAttachments(attachments);
+			}
+			*/
+			
+			File upFile = multiReq.getFile("upFile");
+			if(upFile != null) {
+				List<PostingAttach> attachments = new ArrayList<>();
+				posting.setAttachments(attachments);
+				attachments.add(getPostingAttach(multiReq, "upFile"));
+			}
+			
 			System.out.println("posting@CommunityBoardGeneralEnrollServlet = " + posting);
 			
 			// 4. 업무 로직 (db insert)

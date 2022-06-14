@@ -43,7 +43,7 @@
 						<div class="board-attach-wrap">
 						    <input class="board-attach-name" value="첨부파일" placeholder="첨부파일" readonly />
 						    <label for="upFile">파일찾기</label>
-						    <input type="file" id="upFile" />
+						    <input type="file" name="upFile" id="upFile" />
 						</div>
 					</td>
 				</tr>
