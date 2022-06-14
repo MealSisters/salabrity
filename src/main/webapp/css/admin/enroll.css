@@ -145,6 +145,11 @@ input[type="radio"] {
     width: 70px;
 }
 
+.goodMsg {
+	margin-left: 10px;
+	color: #0EAE57;
+    font-size: 13px;
+}
 .inputErrMsg {
     margin-left: 10px;
 	color: red;

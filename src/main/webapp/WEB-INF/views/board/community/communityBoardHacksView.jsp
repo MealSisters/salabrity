@@ -1,6 +1,24 @@
+<%@page import="board.model.dto.PostingAttach"%>
+<%@ page import="member.model.dto.MemberRole" %>
+<%@ page import="board.model.dto.PostingComment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="board.model.dto.PostingExt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	PostingExt posting = (PostingExt) request.getAttribute("posting");
+	
+	List<PostingComment> comments = posting.getComments();
+	
+	boolean canLike = loginMember != null
+			&& !(loginMember.getMemberId().equals(posting.getMemberId())
+					|| loginMember.getMemberRole() == MemberRole.A);
+	
+	boolean canEdit = loginMember != null
+			&& (loginMember.getMemberId().equals(posting.getMemberId())
+					|| loginMember.getMemberRole() == MemberRole.A);
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
 <div id="community-board-view-wrap">
@@ -14,32 +32,51 @@
 	<table class="tbl-posting-view">
 		<thead>
 			<tr>
-				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i> admin</th>
-				<th class="posting-view-reg-date">22-06-06</th>
+				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i><%= loginMember.getMemberId() %></th>
+				<th class="posting-view-reg-date"><%= posting.getRegDate() %></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<th class="posting-view-title" colspan="2">게시판 테스트입니다.</th>
+				<th class="posting-view-title" colspan="2"><%= posting.getTitle() %></th>
 			</tr>
 			<tr>
 				<td class="posting-view-board-name" colspan="2">
 					<a href="<%= request.getContextPath() %>/board/community/hacks">in 샐브's 레시피</a>
 				</td>
 			</tr>
+	<% 
+		List<PostingAttach> attachments = posting.getAttachments();
+		if(attachments != null && !attachments.isEmpty()) {
+			for(PostingAttach attach : attachments) {
+	%>
 			<tr>
 				<td class="posting-view-content" colspan="2">
 					<div>
-						<img src="https://img.bestrecipes.com.au/4bBXatUR/w643-h428-cfill-q90/br/2019/10/spiced-lamb-sausage-fattoush-954624-1.jpg" alt="" />
+						<img src="<%= request.getContextPath() %>/upload/board/community/hacks/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
 					</div>
 					<div>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-						Nam voluptate blanditiis dolorem molestias totam doloremque cumque ipsum at. 
-						Nobis debitis natus repellendus atque saepe dolor voluptates in consequatur commodi placeat.
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-						Distinctio debitis sequi iusto itaque tenetur nulla doloribus nesciunt incidunt. 
-						Beatae expedita neque exercitationem tenetur nulla. Excepturi qui veritatis eius! Aliquam beatae.
+						<%= posting.getContent() %>
 					</div>
+				</td>
+			</tr>
+	<% 
+			}
+		}
+		else {
+	%>
+			<tr>
+				<td class="posting-view-content" colspan="2">
+					<div>
+						<%= posting.getContent() %>
+					</div>
+				</td>
+			</tr>
+	<%
+		}
+	%>
+			<tr>
+				<td class="posting-view-content" colspan="2">
 				</td>
 			</tr>
 			<tr>
@@ -50,21 +87,27 @@
 						</a>
 					</span>
 					<span class="posting-view-like-cnt">
-						<i class="fa-solid fa-heart"></i> 0
+						<i class="fa-solid fa-heart"></i> <%= posting.getLikeCount() %>
 					</span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 	<div class="board-button-wrap">
+<% if(canLike) { %>
 		<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
 		<button id="board-like-btn">
 			love it <i class="fa-regular fa-heart"></i>
 			<!-- <i class="fa-solid fa-heart"></i> -->
 		</button>
-		<%-- 수정/삭제 버튼은 관리자만 열람 가능 --%>
+<% 
+   }
+
+   if(canEdit) { 
+%>
 		<input type="button" value="수정" id="board-update-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksUpdate';" />
 		<input type="button" value="삭제" id="board-delete-btn" />
+<% } %>
 	</div>
 	<div class="comment-enroll-wrap" id="comment-tap">
 		<h4>comment</h4>

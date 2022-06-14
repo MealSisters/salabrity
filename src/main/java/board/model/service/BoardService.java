@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import board.model.dao.BoardDao;
+import board.model.dto.BoardCode;
 import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingComment;
@@ -57,11 +58,16 @@ public class BoardService {
 			int no = boardDao.findCurrentPostingNo(conn);
 			posting.setPostingNo(no);
 			System.out.println("방금 등록된 posting_no = " + no);
+			
+			BoardCode boardCode = boardDao.findCurrentBoardCode(conn, no);
+			posting.setBoardCode(boardCode);
+			System.out.println("방금 등록된 board_code = " + boardCode);
 
 			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
 			if(attachments != null && !attachments.isEmpty()) {
 				for(PostingAttach attach : attachments) {
 					attach.setPostingNo(no);
+					attach.setBoardCode(boardCode);
 					result = boardDao.insertPostingAttach(conn, attach);
 				}
 			}
@@ -112,6 +118,18 @@ public class BoardService {
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 첨부파일 한 건 조회
+	 * @param no
+	 * @return
+	 */
+	public PostingAttach findPostingAttachByPostingAttachNo(int no) {
+		Connection conn = getConnection();
+		PostingAttach attach = boardDao.findPostingAttachByPostingAttachNo(conn, no);
+		close(conn);
+		return attach;
 	}
 
 }

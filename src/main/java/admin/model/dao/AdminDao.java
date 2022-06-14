@@ -265,4 +265,26 @@ public class AdminDao {
 		return totalMenu;
 	}
 
+	public List<Menu> findMenuById(Connection conn, String menuId) {
+		List<Menu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findMenuById");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, menuId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Menu menu = handelMenuResultSet(rset);
+				list.add(menu);
+			}
+		} catch (Exception e) {
+			throw new AdminException("아이디 일치 메뉴 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }
