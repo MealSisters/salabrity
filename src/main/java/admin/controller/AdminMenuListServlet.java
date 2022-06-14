@@ -41,11 +41,27 @@ public class AdminMenuListServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
-
+		
+			String menuId = request.getParameter("menuId");
+			String menuName = request.getParameter("menuName");
+			
 			String sortBy = request.getParameter("sortBy");
+			
+			Map<String, Object> searchParam = new HashMap<>();
+			if (menuId != null)
+				searchParam.put("menuId", menuId);
+			if (menuName != null)
+				searchParam.put("menuName", menuName);
+			
+			int totalMenu = 0;
+			if (!searchParam.isEmpty()) {
+				param.put("searchParam", searchParam);
+				totalMenu = adminService.getTotalFilteredMenu(searchParam);
+			} else {
+				totalMenu = adminService.getTotalMenu();				
+			}
 
 			// 업무로직
-			int totalMenu = 0;
 			List<Menu> list = null;
 			if (sortBy != null) {
 				param.put("sortBy", sortBy);
@@ -53,7 +69,6 @@ public class AdminMenuListServlet extends HttpServlet {
 			} else {
 				list = adminService.findAllMenu(param);
 			}
-			totalMenu = adminService.getTotalMenu();
 
 			String url = request.getRequestURI();
 			String pagebar = "";
@@ -67,6 +82,7 @@ public class AdminMenuListServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request.setAttribute("sortBy", sortBy);
+			request.setAttribute("searchParam", searchParam);
 			request.getRequestDispatcher("/WEB-INF/views/admin/menuList.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

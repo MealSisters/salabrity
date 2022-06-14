@@ -96,7 +96,7 @@
 .col-gender {
   width: 40px;
 }
-.col-orderNo {
+.col-orderNo, .col-menuNo {
   width: 60px;
 }
 .col-price {

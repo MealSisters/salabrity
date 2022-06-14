@@ -220,8 +220,16 @@ public class AdminDao {
 		String sql = prop.getProperty("findAllMenu");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("start"));
-			pstmt.setInt(2, (int) param.get("end"));
+			if(param.get("searchParam")!=null) {
+				Map<String, Object> searchParam = (Map<String, Object>) param.get("searchParam");
+				pstmt.setString(1, "%" + searchParam.get("menuId") + "%");
+				pstmt.setString(2, "%" + searchParam.get("menuName") + "%");
+			} else {
+				pstmt.setString(1, "%");
+				pstmt.setString(2, "%");
+			}
+			pstmt.setInt(3, (int) param.get("start"));
+			pstmt.setInt(4, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				Menu menu = handelMenuResultSet(rset);
@@ -483,8 +491,16 @@ public class AdminDao {
 			sql = prop.getProperty("findAllMenu");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("start"));
-			pstmt.setInt(2, (int) param.get("end"));
+			if(param.get("searchParam")!=null) {
+				Map<String, Object> searchParam = (Map<String, Object>) param.get("searchParam");
+				pstmt.setString(1, "%" + searchParam.get("menuId") + "%");
+				pstmt.setString(2, "%" + searchParam.get("menuName") + "%");
+			} else {
+				pstmt.setString(1, "%");
+				pstmt.setString(2, "%");
+			}
+			pstmt.setInt(3, (int) param.get("start"));
+			pstmt.setInt(4, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				Menu menu = handelMenuResultSet(rset);
@@ -497,6 +513,29 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int getTotalFilteredMenu(Connection conn, Map<String, Object> searchParam) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getTotalFilteredMenu");
+		int totalMenu = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchParam.get("menuId") + "%");
+			pstmt.setString(2, "%" + searchParam.get("menuName") + "%");
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				totalMenu = rset.getInt(1);
+				System.out.println("totalMenu@dao = " + totalMenu);
+			}
+		} catch (Exception e) {
+			throw new AdminException("전체 메뉴 수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalMenu;
 	}
 
 }

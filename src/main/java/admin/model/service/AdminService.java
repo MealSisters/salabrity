@@ -193,4 +193,11 @@ public class AdminService {
 		return list;
 	}
 
+	public int getTotalFilteredMenu(Map<String, Object> searchParam) {
+		Connection conn = getConnection();
+		int totalMenu = adminDao.getTotalFilteredMenu(conn, searchParam);
+		close(conn);
+		return totalMenu;
+	}
+
 }

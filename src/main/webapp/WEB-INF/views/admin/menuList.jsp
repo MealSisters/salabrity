@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="menu.model.dto.Menu"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,7 +8,7 @@
 List<Menu> list = (List<Menu>) request.getAttribute("list");
 String pagebar = (String) request.getAttribute("pagebar");
 String sortBy = (String) request.getAttribute("sortBy");
-System.out.println("현재 정렬기준 : " + sortBy);
+Map<String, Object> searchParam = (Map<String, Object>) request.getAttribute("searchParam");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
@@ -17,14 +18,14 @@ System.out.println("현재 정렬기준 : " + sortBy);
 <div class="div-level1">
     <p id="filter-wrapper-title">Filter</p>
     <div id="filter-wrapper" class="div-level2">
-        <form name="menuFilterFrm" action="" onSubmit="return false;">
+        <form name="menuFilterFrm" action="" onSubmit="<%= request.getContextPath() %>/admin/memberList">
             <div class="div-searchFilter">
                 <label for="filter-menuId">메뉴ID</label>
-                <input type="text" name="menuId" id="filter-menuId">
+                <input type="text" name="menuId" id="filter-menuId" value="<%= searchParam.get("menuId") != null ? searchParam.get("menuId") : "" %>">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-menuName">메뉴이름</label>
-                <input type="text" name="menuName" id="filter-menuName">
+                <input type="text" name="menuName" id="filter-menuName" value="<%= searchParam.get("menuName") != null ? searchParam.get("menuName") : "" %>">
             </div>
             <div class="div-searchbtn">
                 <button>조회</button>
@@ -50,7 +51,7 @@ System.out.println("현재 정렬기준 : " + sortBy);
         <table id="tbl-menuList" class="tbl-searchResult">
             <thead>
                 <tr>
-                    <th class="col-no">No</th>
+                    <th class="col-menuNo">메뉴No</th>
                     <th class="col-menuId">메뉴ID</th>
                     <th class="col-menuName">메뉴이름</th>
                     <th class="col-calorie">칼로리</th>
@@ -64,7 +65,7 @@ System.out.println("현재 정렬기준 : " + sortBy);
 		for(Menu menu : list){
 %>
             <tr>
-                <td class="col-no"><%= menu.getMenuNo() %></td>
+                <td class="col-menuNo"><%= menu.getMenuNo() %></td>
                 <td class="col-menuId"><%= menu.getMenuId() %></td>
                 <td class="col-menuName"><%= menu.getMenuName() %></td>
                 <td class="col-calorie"><%= menu.getCalorie() %></td>
@@ -119,7 +120,9 @@ System.out.println("현재 정렬기준 : " + sortBy);
 	const addSortEvent = () => {
 		document.querySelector(".select-sort").addEventListener('change', (e) => {
 			const cPage = document.querySelector(".cPage").innerHTML;
-			location.href = `<%= request.getContextPath() %>/admin/menuList?sortBy=\${e.target.value}&cPage=\${cPage}`;
+			const menuId = document.querySelector("#filter-menuId").value;
+			const menuName = document.querySelector("#filter-menuName").value;
+			location.href = `<%= request.getContextPath() %>/admin/menuList?sortBy=\${e.target.value}&menuId=\${menuId}&menuName=\${menuName}&cPage=\${cPage}`;
 		});
 		
 	}
