@@ -4,7 +4,7 @@
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <style>
 #step2 {
 	color: #116916;
@@ -28,19 +28,20 @@
 			<div class="input_box">
 				<label class="member_title">아이디</label> 
 				<input type="text" name="memberId" id="memberId" class="input_text">
-				<button type="button" class="checkId">중복확인</button>
+				<button type="button" class="checkId" onclick="checkIdDuplicate();">중복확인</button>
+				<input type="hidden" id="idValid" value="0" />
 				<span class="guide">* 6자리 이상의 영문자, 숫자를 조합하여 입력해 주세요</span>
 			</div>
 			<div class="input_box">
-				<label class="member_title">비밀번호</label> <input type="password"
-					name="password" id="password" class="input_text"> <span
-					class="guide">* 비밀번호는 10자 이상이어야 하며, 숫자, 영문자, 특수문자를 모두 포함해야 합니다.
-					입력해주세요.</span>
+				<label class="member_title">비밀번호</label> 
+				<input type="password" name="password" id="password" class="input_text"> <span
+					class="guide">* 8자리 이상의 숫자, 영문자, 특수문자를 조합하여 입력해주세요.</span>
 			</div>
 			
 			  
 			<div class="input_box">
-				<label class="member_title">비밀번호 확인</label> <input type="password" id="checkPassword" class="input_text">
+				<label class="member_title">비밀번호 확인</label> 
+				<input type="password" id="checkPassword" class="input_text">
 			</div>
 			
 			
@@ -57,7 +58,7 @@
 				<input type="text" name="email2" class="input__text" id="inputDomain">
 				<div class="email_select">
 					<select name="email3" id="email3">
-						<option value="etc">직접입력</option>
+						<option value="1">직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
 						<option value="daum.net">daum.net</option>
@@ -73,8 +74,13 @@
 			</div>
 
 			<div class="input_box">
-				<label class="member_title">휴대폰 번호</label> <input type="tel"
-					name="phone" id="phone" maxlength="11" class="input_text">
+				<label class="member_title">휴대폰 번호</label> 
+				<input type="text" name="phone1" id="phone1" maxlength="3" class="input_text" value="010">
+				<span style="font-size: 12px;">-</span>
+				<input type="text" name="phone2" id="phone2" maxlength="4" class="input_text">
+				<span style="font-size: 12px;">-</span>
+				<input type="text" name="phone3" id="phone3" maxlength="4" class="input_text">
+				<input type="hidden" name="phone" id="phone" maxlength="11" class="input_text">
 					<span class="guide"> <input type="checkbox" name="" id=""
 						class="info_ck"> 다양한 할인 혜택과 이벤트 정보 메일 수신에 동의합니다.
 					</span>
@@ -82,11 +88,11 @@
 
 			<div class="input_box">
 				<label class="member_title">주소</label> 
-				<input type="text" name="zipcode" id="zipcode" class="input__text" >
+				<input type="text" name="zipcode" id="zipcode" class="input__text" readOnly>
 								
 				 <button type="button" class="btn_address" onclick="sample4_execDaumPostcode()">우편번호 검색</button>
 				 
-				<input type="text" name="address" id="address" class="input_text">
+				<input type="text" name="address" id="address" class="input_text" readOnly>
 				<input type="text" name="addressDetail" id="addressDetail" class="input_text" placeholder="상세주소를 입력해주세요.">
 			</div>
 				
@@ -113,8 +119,25 @@
 	</div>
 	</form>
 </div>
-
+<form name="checkIdDuplicateFrm" action="<%= request.getContextPath() %>/member/checkIdDuplicate">
+	<input type="hidden" name="memberId" />
+</form>
 <script>
+$(function(){		
+	$(document).ready(function(){		
+		$('select[name=email3]').change(function() {			
+			if($(this).val()=="1"){				
+				$('#inputDomain').val("");	                      
+				 $("#inputDomain").attr("readonly",false);
+				} else {				
+					$('#inputDomain').val($(this).val());				
+					$("#inputDomain").attr("readonly", true);			
+					}		
+			});	
+		});
+});
+
+
 function sample4_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -142,35 +165,59 @@ function sample4_execDaumPostcode() {
 }
 
 // 회원가입폼 유효성 검사
-<%--
-passwordCheck.onblur = () => {
+const checkIdDuplicate = () => {
+	const title = "checkIdDuplicatePopup";
+	const spec = "width=300px, height=200px";
+	const popup = open("", title, spec);
+	
+	const frm = document.checkIdDuplicateFrm;
+	frm.target = title;
+	frm.memberId.value = memberId.value;
+	frm.submit();
+};
+
+checkPassword.onblur = () => {
 	if(password.value !== checkPassword.value){
 		alert("비밀번호가 일치하지 않습니다.");
+		password.select();
 		return false;
 	}	
 	return true;
-}
-
---%>
+};
+	
 document.memberEnrollFrm.onsubmit = () => {
 	// ID는 6자리 이상의 영문 혹은 숫자
 	if(!/^[A-Za-z0-9]{6,}/.test(memberId.value)){
 		alert("아이디는 대소문자/숫자로 6글자 이상이어야 합니다.");
 		return false;
 	}
-	<%--
+	// 중복검사여부 체크
+	if(idValid.value !== "1") {
+		alert("아이디 중복검사 해주세요.");
+		return false;
+	}
+	
 	// pw는 대소문자, 숫자, 특수문자를 모두 포함하여 10자리 이상 입력해주세요.
 	if(!/^(?=.*?[A-za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(password.value)){
-		alert("비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.");
+		alert("비밀번호는 숫자/대문자/소문자/특수문자를 조합하여 8글자 이상이어야 합니다.");
+		return false;
+	}
+	if(!checkPassword.onblur()){
 		return false;
 	}
 
-	if(!passwordCheck.onblur()){
+	
+	// 이름
+	if(!/^[가-힣]{2,}$/.test(memberName.value)){
+		alert("이름은 한글로 2글자 이상 입력해주세요.");
 		return false;
 	}
-	--%>
 	
-	
+	// 상세주소
+	if(!/^[가-힣]{1,}$/.test(addressDetail.value)){
+		alert("상세주소를 입력해주세요.");
+		return false;
+	}
 	
 	
 }

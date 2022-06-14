@@ -1,7 +1,7 @@
 package member.controller;
 
-import java.io.IOException;
 import java.sql.Date;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.utill.pwdEncrypt;
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
 import member.model.service.MemberService;
@@ -32,15 +33,18 @@ public class MemberEnrollServlet extends HttpServlet {
 		try {
 			// 입력 값
 			String memberId = request.getParameter("memberId");
-			String password = request.getParameter("password");
+			String password = pwdEncrypt.encrypt(request.getParameter("password"), memberId);
 			String memberName = request.getParameter("memberName");
 			
-			// 이메일 값 합치기
 			String email1 = request.getParameter("email1");
 			String email2 = request.getParameter("email2");
 			String email = email1 + "@" + email2;
 			
-			String phone = request.getParameter("phone");
+			String phone1 = request.getParameter("phone1");
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			String phone = phone1 + phone2 + phone3;
+			
 			String zipcode = request.getParameter("zipcode");
 			String address = request.getParameter("address");
 			String addressDetail = request.getParameter("addressDetail");

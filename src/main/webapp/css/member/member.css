@@ -641,8 +641,13 @@ label {
 	height: 11px;
 }
 
+#phone1, #phone2, #phone3 {
+	width : 91px;
+	
+}
+
 #email2, #email1 {
-	width: 133px;
+	width: 141px;
 }
 
 #inputDomain {
