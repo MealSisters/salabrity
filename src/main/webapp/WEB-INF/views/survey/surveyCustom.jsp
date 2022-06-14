@@ -47,7 +47,8 @@
 <!-- 유효성 검사 -->
 <script>
 	function check_onclick(){
-	    var frm = document.surveyForm;
+	    const frm = document.surveyForm;
+
 	      if(frm.heightInput.value=="" && frm.weightInput.value=="" ){
 	      alert("상세정보 입력여부를 확인해주세요.")
 	        frm.heightInput.focus();
@@ -67,6 +68,7 @@
 	      frm.method = "post";
 	      frm.submit();
 	    }
+	}
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
