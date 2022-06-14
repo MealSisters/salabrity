@@ -1,4 +1,4 @@
-package board.controller.community;
+package board.controller.community.general;
 
 import java.io.File;
 import java.io.IOException;

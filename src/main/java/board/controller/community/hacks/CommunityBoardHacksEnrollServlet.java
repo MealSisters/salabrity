@@ -1,4 +1,4 @@
-package board.controller.community;
+package board.controller.community.hacks;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class CommunityBoardHacksEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardHacksEnroll.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/board/community/hacks/communityBoardHacksEnroll.jsp")
 			.forward(request, response);
 	}
 
@@ -43,22 +43,16 @@ public class CommunityBoardHacksEnrollServlet extends HttpServlet {
 	/* @SuppressWarnings("unchecked") */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 파일저장 경로
-			String saveDirectory = getServletContext().getRealPath("/upload/board/community/hacks");
-			System.out.println("saveDirectory = " + saveDirectory);
-			
-			// 최대 파일 업로드 크기 : 10MB
-			int maxPostSize = 1024 * 1024 * 10;
-			
-			// 인코딩
-			String encoding = "utf-8";
-			
-			// 파일명 재지정 정책 객체
-			FileRenamePolicy policy = new SalabrityFileRenamePolicy();
-			
 			// MultipartRequest객체 생성
+			// 파일저장 경로
+			String saveDirectory = getServletContext().getRealPath("/upload/board/community/hacks");			
+			
 			MultipartRequest multiReq = 
-					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
+					new MultipartRequest(request, 
+							saveDirectory, 
+							1024 * 1024 * 10, 
+							"utf-8", 
+							new SalabrityFileRenamePolicy());
 			
 			// 사용자 입력값 처리
 			String memberId = multiReq.getParameter("memberId");
@@ -71,44 +65,24 @@ public class CommunityBoardHacksEnrollServlet extends HttpServlet {
 			posting.setTitle(title);
 			posting.setContent(content);
 			
-			/*
-			Enumeration<String> files = multiReq.getFileNames();
-			
-			while (files.hasMoreElements()) {
-				String fileName = files.nextElement();
-				File file = multiReq.getFile(fileName);
-				
-				// 첨부한 파일이 하나라도 있는 경우
-				if (file != null) {
-					List<PostingAttach> attachments = new ArrayList<>();
-					attachments.add(getPostingAttach(multiReq, "upFile"));
-					posting.setAttachments(attachments);
-				}
-			}
-			
-			File upFile1 = multiReq.getFile("upFile1");
-			File upFile2 = multiReq.getFile("upFile2");
+			File attach1 = multiReq.getFile("attach1");
+			File attach2 = multiReq.getFile("attach2");
+			File attach3 = multiReq.getFile("attach3");
 			
 			// 첨부한 파일이 하나라도 있는 경우
-			if(upFile1 != null || upFile2 != null) {
+			if(attach1 != null || attach2 != null || attach3 != null) {
 				List<PostingAttach> attachments = new ArrayList<>();
-				if(upFile1 != null) {
-					attachments.add(getPostingAttach(multiReq, "upFile1"));
+				if(attach1 != null) {
+					attachments.add(getPostingAttach(multiReq, "attach1"));
 				}
-				if(upFile2 != null) {
-					attachments.add(getPostingAttach(multiReq, "upFile2"));
+				if(attach2 != null) {
+					attachments.add(getPostingAttach(multiReq, "attach2"));
 				}
+				if(attach3 != null) {
+					attachments.add(getPostingAttach(multiReq, "attach3"));
+				}				
 				posting.setAttachments(attachments);
 			}
-			*/
-			
-			File upFile = multiReq.getFile("upFile");
-			if(upFile != null) {
-				List<PostingAttach> attachments = new ArrayList<>();
-				posting.setAttachments(attachments);
-				attachments.add(getPostingAttach(multiReq, "upFile"));
-			}
-			
 			System.out.println("posting@CommunityBoardGeneralEnrollServlet = " + posting);
 			
 			// 4. 업무 로직 (db insert)
