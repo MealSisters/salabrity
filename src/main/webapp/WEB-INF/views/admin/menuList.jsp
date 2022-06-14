@@ -6,6 +6,8 @@
 <%
 List<Menu> list = (List<Menu>) request.getAttribute("list");
 String pagebar = (String) request.getAttribute("pagebar");
+String sortBy = (String) request.getAttribute("sortBy");
+System.out.println("현재 정렬기준 : " + sortBy);
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
@@ -37,10 +39,9 @@ String pagebar = (String) request.getAttribute("pagebar");
         	<form action="">
             <span>정렬기준</span>
             <select name="sortBy" class="select-sort">
-                <option value="recent">최근등록순</option>
-                <option value="name">이름순</option>
-                <option value="lowCal">칼로리낮은순</option>
-                <option value="highCal">칼로리높은순</option>
+                <option value="menu_no" <%= (sortBy==null || "menu_no".equals(sortBy)) ? "selected" : "" %>>최근등록순</option>
+                <option value="menu_name" <%= "menu_name".equals(sortBy) ? "selected" : "" %>>이름순</option>
+                <option value="calorie" <%= "calorie".equals(sortBy) ? "selected" : "" %>>칼로리낮은순</option>
             </select>
         	</form>
         </div>
@@ -116,6 +117,10 @@ String pagebar = (String) request.getAttribute("pagebar");
 	};
 	
 	const addSortEvent = () => {
+		document.querySelector(".select-sort").addEventListener('change', (e) => {
+			const cPage = document.querySelector(".cPage").innerHTML;
+			location.href = `<%= request.getContextPath() %>/admin/menuList?sortBy=\${e.target.value}&cPage=\${cPage}`;
+		});
 		
 	}
 </script>

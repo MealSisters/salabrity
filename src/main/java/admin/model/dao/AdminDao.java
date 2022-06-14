@@ -472,4 +472,31 @@ public class AdminDao {
 		return result;
 	}
 
+	public List<Menu> findSortedAllMenu(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Menu> list = new ArrayList<>();
+		String sql = prop.getProperty("findSortedAllMenu");
+		if(!"menu_no".equals((String) param.get("sortBy")))
+			sql = sql.replace("#", (String) param.get("sortBy"));
+		else
+			sql = prop.getProperty("findAllMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Menu menu = handelMenuResultSet(rset);
+				list.add(menu);
+			}
+		} catch (Exception e) {
+			throw new AdminException("정렬된 메뉴목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }

@@ -63,6 +63,7 @@
     window.addEventListener('load', () => {
         upFile();
         goToMenuList();
+        menuEnrollFrmValid();
     });
 
     const upFile = () => {
@@ -102,7 +103,7 @@
         		} else if(menuId != "") {
         			resetMsg("#menuId")
         			document.querySelector(".goodMsg").style.display = "block";
-        			document.querySelector(".goodMsg").innerHTML = "Good";
+        			document.querySelector(".goodMsg").innerHTML = "중복검사완료";
         			return true;
         		}
         	},

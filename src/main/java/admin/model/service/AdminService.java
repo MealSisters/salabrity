@@ -186,4 +186,11 @@ public class AdminService {
 		return result;
 	}
 
+	public List<Menu> findSortedAllMenu(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Menu> list = adminDao.findSortedAllMenu(conn, param);
+		close(conn);
+		return list;
+	}
+
 }

@@ -50,7 +50,7 @@ if(document.menuEnrollFrm != null) {
 			result = false;
 		} else resetMsg("#calorie");
 		
-		const menuAttach = document.querySelector("#menuAttach");
+		// const menuAttach = document.querySelector("#menuAttach");
 		if(menuAttach.files.length == 0) {
 			printErrSpan("#menuAttach", "메뉴 이미지를 추가해주세요.");
 		} else resetMsg("#menuAttach");

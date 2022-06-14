@@ -41,19 +41,32 @@ public class AdminMenuListServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
-			
+
+			String sortBy = request.getParameter("sortBy");
+
 			// 업무로직
 			int totalMenu = 0;
 			List<Menu> list = null;
-			list = adminService.findAllMenu(param);
+			if (sortBy != null) {
+				param.put("sortBy", sortBy);
+				list = adminService.findSortedAllMenu(param);
+			} else {
+				list = adminService.findAllMenu(param);
+			}
 			totalMenu = adminService.getTotalMenu();
 
 			String url = request.getRequestURI();
-			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMenu, url);
+			String pagebar = "";
+			if (sortBy != null) {
+				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalMenu, url + "?sortBy=" + sortBy);
+			} else {
+				pagebar = PageBar.getPagebar(cPage, numPerPage, totalMenu, url);
+			}
 
 			// view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
+			request.setAttribute("sortBy", sortBy);
 			request.getRequestDispatcher("/WEB-INF/views/admin/menuList.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
