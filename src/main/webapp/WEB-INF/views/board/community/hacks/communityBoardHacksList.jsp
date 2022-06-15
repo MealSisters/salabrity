@@ -6,6 +6,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<PostingExt> postingList = (List<PostingExt>) request.getAttribute("postingList");
+	
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
+
 	String pagebar = (String) request.getAttribute("pagebar");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
@@ -22,10 +26,49 @@
 	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksEnroll';" />	
 <% } %>
 	<div class="board-search-wrap">
-		<input type="text" class="board-search-text" placeholder="검색어 입력" />
-		<a class="board-search-btn" href="#">
-			<i class="fa-solid fa-magnifying-glass"></i>
-		</a>
+		<form action="<%=request.getContextPath()%>/board/community/hacksSearch">
+			<select name="searchType">
+		<% if(searchType != null && searchType.equals("title")) { %>
+				<option value="title" selected>제목</option>
+		<%
+		   }
+		   else {
+		%>
+				<option value="title">제목</option>
+		<% } %>
+		
+		<% if(searchType != null && searchType.equals("content")) { %>
+				<option value="content" selected>내용</option>
+		<% }
+		   else {
+		%>
+				<option value="content">내용</option>
+		<% } %>
+		
+		<% if(searchType != null && searchType.equals("member_id")) { %>
+				<option value="member_id" selected>작성자</option>
+		<% }
+		   else { 
+		%>
+				<option value="member_id">작성자</option>
+		<% } %>
+			</select>
+			
+			<input type="hidden" name="searchType" value="title"/>
+			<input type="hidden" name="searchType" value="content"/>
+			<input type="hidden" name="searchType" value="member_id"/>
+			
+		<% if(searchKeyword == null) { %>
+			<input type="text" class="board-search-text" name="searchKeyword" placeholder="검색어 입력" required>
+		<% } 
+		   else { 
+		%>
+			<input type="text" class="board-search-text" name="searchKeyword" placeholder="검색어 입력" required value="<%= searchKeyword %>">
+		<% } %>
+			<button type="submit" class="board-search-btn">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
+		</form>
 	</div>
 	<table class="tbl-community-list">
 		<thead>
@@ -41,7 +84,7 @@
 		</thead>
 		<tbody>
 	<%
-		if(postingList != null && !postingList.isEmpty()) {
+		if(postingList != null && !postingList.isEmpty() && searchKeyword != "") {
 			for(PostingExt posting : postingList) {
 	%>
 			<tr>
@@ -72,5 +115,4 @@
         <%= pagebar %>
     </div>
 </div>
-
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

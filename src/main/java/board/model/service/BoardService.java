@@ -15,6 +15,8 @@ import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingComment;
 import board.model.dto.PostingExt;
+import board.model.dto.PostingLike;
+import member.model.dto.Member;
 
 public class BoardService {
 	
@@ -254,4 +256,75 @@ public class BoardService {
 		return result;
 	}
 
+	/**
+	 * 게시글 검색
+	 * @param pageParam 
+	 * @param param
+	 * @return
+	 */
+	public List<PostingExt> searchBy(Map<String, Object> pageParam, Map<String, String> param) {
+		Connection conn = getConnection();
+		List<PostingExt> postingList = boardDao.searchBy(conn, pageParam, param);
+		close(conn);
+		return postingList;
+	}
+
+	/**
+	 * 좋아요 여부 체크
+	 * @param postingNo
+	 * @param boardCode
+	 * @param memberId
+	 * @return
+	 */
+	public PostingLike likeCheck(int postingNo, BoardCode boardCode, String memberId) {
+		Connection conn = getConnection();
+		PostingLike like = boardDao.likeCheck(conn, postingNo, boardCode, memberId);
+		close(conn);
+		return like;
+	}
+
+	/**
+	 * 좋아요수 증가
+	 * @param postingNo
+	 * @param boardCode
+	 * @param memberId
+	 * @return
+	 */
+	public Object updateLikeCount(int postingNo, BoardCode boardCode, String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+	      
+		try {
+			result = boardDao.updateLikeCount(conn, postingNo, boardCode, memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+		
+	}
+
+	/**
+	 * 좋아요 상태 등록
+	 * @param like
+	 */
+	public void setPostingLike(PostingLike like) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = boardDao.setPostingLike(conn, like);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+	}
+	
 }

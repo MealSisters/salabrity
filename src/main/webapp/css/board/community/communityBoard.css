@@ -7,7 +7,7 @@ communityBoard.jsp
 #community-board-wrap a {
 	text-decoration: none;
 	color: black;
-	cursor: position;
+	cursor: pointer;
 }
 
 #community-board-wrap .hacks-title a,
@@ -145,7 +145,6 @@ communityBoardList.jsp
 	border: 1px solid #116916;
 	border-radius: 30px;
 	transition: 0.4s;
-	width: 10px;
 	float: right;
 }
 
@@ -155,18 +154,20 @@ communityBoardList.jsp
 }
 
 .board-search-btn {
-	text-decoration: none;
 	float: right;
 	width: 10px;
 	height: 10px;
+	border: 0;
 	border-radius: 50%;
 	display: flex;
+	background-color: white;
 	justify-content: center;
 	align-items: center;
 	color: #116916;
+	cursor: pointer;
 }
 
-.board-search-text {
+.board-search-wrap select, .board-search-text {
 	display: flex;
 	padding: 0;
 	width: 0px;
@@ -179,7 +180,11 @@ communityBoardList.jsp
 	transition: .4s;
 }
 
-.board-search-wrap:hover > .board-search-text {
+.board-search-wrap:hover select {
+	width: 60px;
+}
+
+.board-search-wrap:hover .board-search-text {
 	width: 200px;
 	padding: 0 5px;
 }
