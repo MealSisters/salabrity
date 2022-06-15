@@ -9,7 +9,7 @@ import java.util.Base64.Encoder;
 public class PwdEncrypt {
 	
 //	public static void main(String[] args) {
-//		System.out.println(encrypt("1234", "honggd"));
+//		System.out.println(encrypt("1234", "asdf"));
 //	}
 
 	public static String encrypt(String password, String salt) {

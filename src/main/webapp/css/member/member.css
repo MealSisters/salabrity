@@ -7,7 +7,7 @@
 /* login 페이지 */
 .head_log {
 	text-align: center;
-	font-size: 22px;
+	font-size: 20px;
 	margin-bottom: -2px;
 }
 
@@ -22,8 +22,8 @@
 }
 
 .login_input_cont input {
-	width: 325px;
-	height: 50px;
+    width: 316px;
+    height: 44px;
 	border: 1px solid #dbdbdb;
 	
 	text-indent: 15px;
@@ -36,12 +36,12 @@
 }
 
 .btn_member_login {
-	width: 330px;
-	height: 55px;
+	width: 321px;
+    height: 53px;
 	line-height: 55px;
 	background: #116916;
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -50,13 +50,13 @@
 }
 
 .btn_member_join {
-	width: 330px;
-	height: 55px;
+	width: 321px;
+    height: 53px;
 	line-height: 55px;
 	border: 1px solid #116916;
 	background: #116916;
 	color: #f1f1f1;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -95,6 +95,7 @@
 .member_sns_login {
 	width: 300px;
 	margin: 0 auto;
+	margin-top : 10px;
 }
 
 .member_sns_login_in li {
@@ -127,6 +128,7 @@
 	color: #000;
 	cursor: pointer;
 	border: none;
+	font-size: 13px;
 }
 
 .btnFindId {
@@ -144,7 +146,7 @@
 }
 
 .on {
-	font-size: 13px;
+	font-size: 12px;
 }
 
 #saveId {
@@ -392,8 +394,8 @@ label {
 }
 
 .find_input_box {
-	width: 311px;
-	height: 50px;
+	    width: 302px;
+    height: 44px;
 	border: 1px solid #dbdbdb;
 	
 	margin-bottom: 14px;
@@ -410,8 +412,8 @@ label {
 }
 
 .btn_find_id {
-	width: 330px;
-	height: 55px;
+	width: 321px;
+    height: 53px;
 	line-height: 55px;
 	background: #116916;
 	color: #fff;
@@ -422,8 +424,8 @@ label {
 }
 
 .btn_find, .btn_find_log {
-	width: 330px;
-	height: 55px;
+	width: 321px;
+    height: 53px;
 	line-height: 55px;
 	border: 1px solid #116916;
 	background: #116916;
