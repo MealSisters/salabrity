@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
+import member.model.exception.MemberException;
 
 public class MemberDao {
 	private Properties prop = new Properties();
@@ -60,6 +61,51 @@ public class MemberDao {
 		
 		
 		return member;
+	}
+
+	public int insertMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPassword());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getGender());
+			pstmt.setDate(5, member.getBirthday());
+			pstmt.setString(6, member.getEmail());
+			pstmt.setString(7, member.getPhone());
+			pstmt.setString(8, member.getZipcode());
+			pstmt.setString(9, member.getAddress());
+			pstmt.setString(10, member.getAddressDetail());
+			pstmt.setString(11, member.getMemberRole().toString());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new MemberException("회원가입 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteMember(Connection conn, String memberId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember"); 
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원탈퇴 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

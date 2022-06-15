@@ -1,0 +1,61 @@
+package board.controller.community.hacks;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import board.model.dto.BoardCode;
+import board.model.dto.PostingAttach;
+import board.model.service.BoardService;
+
+/**
+ * Servlet implementation class CommunityBoardHacksDeleteServlet
+ */
+@WebServlet("/board/community/hacksDelete")
+public class CommunityBoardHacksDeleteServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private BoardService boardService = new BoardService();
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			// 1. 사용자 입력값 처리
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			// 2. 업무 로직
+			// 첨부파일 존재시 삭제
+			List<PostingAttach> attachments = boardService.findByPostingNo(no).getAttachments();
+			if(attachments != null && !attachments.isEmpty()) {
+				for(PostingAttach attach : attachments) {
+					String delDirectory = getServletContext().getRealPath("/upload/board/community/hacks");
+					File delFilename = new File(delDirectory, attach.getRenamedFilename());
+					if(delFilename.exists()) {
+						delFilename.delete();
+						System.out.println("> " + attach.getRenamedFilename() + "파일 삭제!");
+					}
+				}
+			}
+			
+			// posting테이블 레코드 삭제
+			int result = boardService.deletePosting(no);
+			
+			// 3. 리다이렉트
+			HttpSession session = request.getSession();
+			session.setAttribute("msg", "게시물 삭제가 완료되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/board/community/hacks");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+}

@@ -82,6 +82,7 @@ public class PageBar {
 
 		url += "&cPage=";
 
+
 		if (pageNo != 1) {
 			// '<<'버튼과 '<'버튼 활성화
 			pagebar.append("<a href='" + url + "1'><i class='fa-solid fa-angles-left'></i></a>");

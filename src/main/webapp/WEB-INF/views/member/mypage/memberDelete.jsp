@@ -6,6 +6,7 @@
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/myPage.css" />
 
+
 <div class="my_page_content">
 
 <%@ include file="/WEB-INF/views/common/myPageSidebar.jsp" %>
@@ -26,6 +27,7 @@
 						중인 주문건이 있는 경우 탈퇴가 불가능합니다.</strong> <span>모든 상품의 주문 상태가 거래 확정, 반품 확정,
 						취소 완료일 경우에만 탈퇴가 가능합니다.</span></li>
 			</ul>
+			
 			<div class="del_comment">
 				<div class="del_flex" id="del_flex_com">
 					<strong class="del_com_strong">탈퇴사유</strong>
@@ -48,13 +50,20 @@
 			</div>
 			<div class="btn_del_box">
 				<button id="btn_del_can">취소</button>
-				<button type="button" id="btn_del">탈퇴하기</button>
+				<button type="button" id="btn_del" onclick="deleteMember();">탈퇴하기</button>
 			</div>
 		</div>
-
-
 	</div>
 </div>
-
+<form name="memberDelFrm" method="POST" action="<%= request.getContextPath() %>/mypage/memberDelete">
+<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>" />
+</form>
+<script>
+const deleteMember = () => {
+	if(confirm("정말로 탈퇴하시겠습니까?")){
+		document.memberDelFrm.submit();
+	}
+}
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 

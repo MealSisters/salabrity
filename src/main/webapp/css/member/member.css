@@ -641,24 +641,33 @@ label {
 	height: 11px;
 }
 
-#inputDomain, #email {
-	width: 133px;
+#phone1, #phone2, #phone3 {
+	width : 91px;
+	
+}
+
+#email2, #email1 {
+	width: 141px;
+}
+
+#inputDomain {
+    width: 139px;
 }
 
 .email_select {
 	display: inline;
 }
 
-#emailType {
+#email3 {
 	height: 35px;
 	border: 1px solid #BDBDBD;
 }
 
-#address1 {
+#zipcode {
 	width: 140px;
 }
 
-#address2, #address3 {
+#address, #addressDetail {
 	display: block;
 	margin-top: 15px;
 	margin-left: 135px;
