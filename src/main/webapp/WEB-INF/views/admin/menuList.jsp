@@ -40,7 +40,7 @@ Map<String, Object> searchParam = (Map<String, Object>) request.getAttribute("se
         	<form action="">
             <span>정렬기준</span>
             <select name="sortBy" class="select-sort">
-                <option value="menu_no" <%= (sortBy==null || "menu_no".equals(sortBy)) ? "selected" : "" %>>최근등록순</option>
+                <option value="menu_no" <%= (sortBy==null || "menu_no".equals(sortBy)) ? "selected" : "" %>>메뉴번호순</option>
                 <option value="menu_name" <%= "menu_name".equals(sortBy) ? "selected" : "" %>>이름순</option>
                 <option value="calorie" <%= "calorie".equals(sortBy) ? "selected" : "" %>>칼로리낮은순</option>
             </select>

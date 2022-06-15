@@ -67,7 +67,7 @@ public class AdminMenuListServlet extends HttpServlet {
 				param.put("sortBy", sortBy);
 				list = menuService.findSortedAllMenu(param);
 			} else {
-				list = menuService.findAllMenu(param);
+				list = menuService.findTopNAllMenu(param);
 			}
 
 			String url = request.getRequestURI();

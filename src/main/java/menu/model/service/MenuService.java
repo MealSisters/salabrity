@@ -19,9 +19,9 @@ public class MenuService {
 	public static final int MENU_NUM_PER_PAGE = 10;
 	private MenuDao menuDao = new MenuDao();
 	
-	public List<Menu> findAllMenu(Map<String, Object> param) {
+	public List<Menu> findTopNAllMenu(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Menu> list = menuDao.findAllMenu(conn, param);
+		List<Menu> list = menuDao.findTopNAllMenu(conn, param);
 		close(conn);
 		return list;
 	}
@@ -145,5 +145,12 @@ public class MenuService {
 		int totalMenu = menuDao.getTotalFilteredMenu(conn, searchParam);
 		close(conn);
 		return totalMenu;
+	}
+
+	public List<Menu> findAllMenu() {
+		Connection conn = getConnection();
+		List<Menu> list = menuDao.findAllMenu(conn);
+		close(conn);
+		return list;
 	}
 }

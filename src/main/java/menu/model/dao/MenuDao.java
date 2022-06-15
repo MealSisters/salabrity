@@ -14,17 +14,17 @@ import java.util.Map;
 import java.util.Properties;
 
 import admin.model.dao.AdminDao;
-import admin.model.exception.AdminException;
 import menu.model.dto.Menu;
 import menu.model.dto.MenuAttach;
 import menu.model.dto.MenuExt;
+import menu.model.exception.MenuException;
 
 public class MenuDao {
 	
 	private Properties prop = new Properties();
 	
 	public MenuDao() {
-		String filename = AdminDao.class.getResource("/sql/menu-query.properties").getPath();
+		String filename = MenuDao.class.getResource("/sql/menu-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (IOException e) {
@@ -32,11 +32,11 @@ public class MenuDao {
 		}
 	}
 	
-	public List<Menu> findAllMenu(Connection conn, Map<String, Object> param) {
+	public List<Menu> findTopNAllMenu(Connection conn, Map<String, Object> param) {
 		List<Menu> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("findAllMenu");
+		String sql = prop.getProperty("findTopNAllMenu");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (param.get("searchParam") != null) {
@@ -55,7 +55,7 @@ public class MenuDao {
 				list.add(menu);
 			}
 		} catch (Exception e) {
-			throw new AdminException("젠체 메뉴목록 조회 오류", e);
+			throw new MenuException("젠체 메뉴목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -86,7 +86,7 @@ public class MenuDao {
 				totalMenu = rset.getInt(1);
 			}
 		} catch (Exception e) {
-			throw new AdminException("전체 메뉴 수 조회 오류", e);
+			throw new MenuException("전체 메뉴 수 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -108,7 +108,7 @@ public class MenuDao {
 				list.add(menu);
 			}
 		} catch (Exception e) {
-			throw new AdminException("아이디 일치 메뉴 조회 오류", e);
+			throw new MenuException("아이디 일치 메뉴 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -129,7 +129,7 @@ public class MenuDao {
 			pstmt.setInt(5, menu.getCalorie());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new AdminException("메뉴 등록 오류", e);
+			throw new MenuException("메뉴 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -147,7 +147,7 @@ public class MenuDao {
 			while (rset.next())
 				menuNo = rset.getInt(1);
 		} catch (Exception e) {
-			throw new AdminException("최근 등록 메뉴 고유번호 조회 오류", e);
+			throw new MenuException("최근 등록 메뉴 고유번호 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -166,7 +166,7 @@ public class MenuDao {
 			pstmt.setString(3, attach.getRenamedFileName());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new AdminException("메뉴 첨부파일 등록 오류", e);
+			throw new MenuException("메뉴 첨부파일 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -186,7 +186,7 @@ public class MenuDao {
 				menu = handelMenuResultSet(rset);
 			}
 		} catch (Exception e) {
-			throw new AdminException("메뉴번호를 이용한 메뉴 조회 오류", e);
+			throw new MenuException("메뉴번호를 이용한 메뉴 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -207,7 +207,7 @@ public class MenuDao {
 				attach = handelMenuAttachResultSet(rset);
 			}
 		} catch (Exception e) {
-			throw new AdminException("메뉴번호를 이용한 첨부파일 조회 오류", e);
+			throw new MenuException("메뉴번호를 이용한 첨부파일 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -239,7 +239,7 @@ public class MenuDao {
 			pstmt.setInt(5, menu.getMenuNo());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new AdminException("메뉴정보 업데이트 오류", e);
+			throw new MenuException("메뉴정보 업데이트 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -259,7 +259,7 @@ public class MenuDao {
 				attach = handelMenuAttachResultSet(rset);
 			}
 		} catch (Exception e) {
-			throw new AdminException("고유번호를 이용한 첨부파일 조회 오류", e);
+			throw new MenuException("고유번호를 이용한 첨부파일 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -276,7 +276,7 @@ public class MenuDao {
 			pstmt.setInt(1, menuAttachNo);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new AdminException("첨부파일 삭제 오류", e);
+			throw new MenuException("첨부파일 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -292,7 +292,7 @@ public class MenuDao {
 			pstmt.setInt(1, menuNo);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new AdminException("메뉴정보 삭제 오류", e);
+			throw new MenuException("메뉴정보 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -326,7 +326,7 @@ public class MenuDao {
 				list.add(menu);
 			}
 		} catch (Exception e) {
-			throw new AdminException("정렬된 메뉴목록 조회 오류", e);
+			throw new MenuException("정렬된 메뉴목록 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -348,11 +348,33 @@ public class MenuDao {
 				totalMenu = rset.getInt(1);
 			}
 		} catch (Exception e) {
-			throw new AdminException("전체 메뉴 수 조회 오류", e);
+			throw new MenuException("전체 메뉴 수 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		return totalMenu;
+	}
+
+	public List<Menu> findAllMenu(Connection conn) {
+		List<Menu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findAllMenu");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Menu menu = handelMenuResultSet(rset);
+				list.add(menu);
+			}
+		} catch (Exception e) {
+			throw new MenuException("전체 메뉴 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }
