@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import admin.model.dao.AdminDao;
 import product.model.dto.Product;
 import product.model.dto.ProductAttach;
 import product.model.dto.ProductExt;
 import product.model.dto.ProductMenu;
 import product.model.dto.ProductTarget;
+import product.model.dto.Thumbnail;
 import product.model.exception.ProductException;
 
 public class ProductDao {
@@ -148,7 +148,164 @@ public class ProductDao {
 		}
 		return result;
 	}
+
+	public ProductExt findProductByNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ProductExt product = null;
+		String sql = prop.getProperty("findProductByNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				product = handelProductResultSet(rset);
+			}
+		} catch (Exception e) {
+			throw new ProductException("상품번호를 이용한 상품조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return product;
+	}
+
+	public List<ProductAttach> findProductAttachsByProductNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ProductAttach> list = new ArrayList<>();
+		String sql = prop.getProperty("findProductAttachsByProductNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				ProductAttach attach = handelAttachResultSet(rset);
+				list.add(attach);
+			}
+		} catch (Exception e) {
+			throw new ProductException("상품번호를 이용한 첨부파일조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	private ProductAttach handelAttachResultSet(ResultSet rset) throws SQLException {
+		ProductAttach attach = new ProductAttach();
+		attach.setProductAttachNo(rset.getInt("product_attach_no"));
+		attach.setProductNo(rset.getInt("product_no"));
+		attach.setThumbnail(Thumbnail.valueOf(rset.getString("thumbnail")));
+		attach.setOriginalFileName(rset.getString("original_filename"));
+		attach.setRenamedFileName(rset.getString("renamed_filename"));
+		attach.setRegDate(rset.getDate("reg_date"));
+		return attach;
+	}
+
+	public List<ProductMenu> findProductMenusByProductNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ProductMenu> list = new ArrayList<>();
+		String sql = prop.getProperty("findProductMenusByProductNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				ProductMenu pm = handelProductMenuResultSet(rset);
+				list.add(pm);
+			}
+		} catch (Exception e) {
+			throw new ProductException("상품번호를 이용한 상품-메뉴 연결정보 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	private ProductMenu handelProductMenuResultSet(ResultSet rset) throws SQLException {
+		ProductMenu pm = new ProductMenu();
+		pm.setProductNo(rset.getInt("product_no"));
+		pm.setMenuNo(rset.getInt("menu_no"));
+		return pm;
+	}
+
+	public int updateProduct(Connection conn, ProductExt product) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateProduct");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product.getProductName());
+			pstmt.setString(2, product.getProductTarget().toString());
+			pstmt.setString(3, product.getProductdescription());
+			pstmt.setInt(4, product.getSubscriptionPeriod());
+			pstmt.setInt(5, product.getProductNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("메뉴정보 수정 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteProductMenu(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteProductMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("상품-메뉴 연결정보 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ProductAttach findAttachByNo(Connection conn, int productAttachNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ProductAttach attach = new ProductAttach();
+		String sql = prop.getProperty("productAttachNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productAttachNo);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				attach = handelAttachResultSet(rset);
+			}
+		} catch (SQLException e) {
+			throw new ProductException("첨부파일 고유번호를 이용한 첨부파일 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return attach;
+	}
+
+	public int deleteProductAttach(Connection conn, int productAttachNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteProductAttach");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productAttachNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("첨부파일 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
+
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 
 }

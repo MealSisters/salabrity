@@ -37,11 +37,15 @@ public class AdminProductEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			List<Menu> menuList = menuService.findAllMenu();
 
-		List<Menu> menuList = menuService.findAllMenu();
-
-		request.setAttribute("menuList", menuList);
-		request.getRequestDispatcher("/WEB-INF/views/admin/productEnroll.jsp").forward(request, response);
+			request.setAttribute("menuList", menuList);
+			request.getRequestDispatcher("/WEB-INF/views/admin/productEnroll.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
