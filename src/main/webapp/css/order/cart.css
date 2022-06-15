@@ -1,229 +1,201 @@
 @charset "UTF-8";
 
-#content {
-	width: 90%;
+.gds_wrp{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+.prd_img{
+    width: 450px;
+    height: 450px;
+}
+.prd_info{
+    width: 450px;
+    height: 450px;
+	padding: 0 0 10px 0;
+}
+div.tab_wrap{
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 0;
 	margin: auto;
 }
-
-#content h1 {
-	font-size: 20px;
-	padding-bottom: 20px;
-	/* border-bottom: 2px solid darkgray; */
+ul.detail_tab{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    width: 45%;
+    margin: auto;
+}
+.detail_tab li{
+    font-size: 14px;
+    vertical-align: middle;
+    height: 45px;
+    text-align: center;
+    width: 25%;
+    margin: 0 10px;
+    padding: 0 0px;
+}
+div .prd_detail{
+    margin: 50px 0;
+    width: 94%;
+	margin: auto;
+    /* background-color: #f1f1f1; */
+}
+.prd_detail img{
 	width: 100%;
-	margin: auto;
 
 }
-
-#content .heading {
-	display: flex;
-	padding-right: 0;
-
+.detail_tab span{
+    font-family: 'LeferiPoint-BlackA';
+	font-size: 1.2em;
+    position: relative;
+    top: 30%;
+}
+.detail_tab1{
+    border-bottom: #116916 solid;
 }
 
-.chk_opt {
-	padding: 0;
-}
+a.go_cal{
+	float: right;
+	font-size: 15px;
+	color: #116916;
+	text-decoration: none;
 
-.chk_opt ul {
-	width:150px;
-	list-style: none;
+}
+.prd_tit_wrap, .prd_opt, .prd_opt_wrp{
 	padding-left: 0;
-	margin-left: 0;
 }
-
-.chk_opt ul>li {
-	display: inline;
+#content .prd_tit{
+	font-size: 24px;
+	margin: 15px 0 15px 0;
+	text-align: left;
 }
-
-.chk_opt li>div {
-	display: inline-block;
-	font-weight: 900;
-
-}
-
-
-table.cart_list {
-
-	border-top: solid 3px #116916;
-	border-bottom: solid 1px #808080;
-	border-collapse: collapse;
-	width: 100%;
-
+.prd_sub_tit{
+	margin: 6px 0 7px 5px;
 	font-size: 13px;
-	margin: auto;
+	color: #999;
 }
 
-#cart_container {
-	padding: 0;
-}
-
-.img_wrp {
-	padding: 0;
-}
-
-.v_line {
-	height: 28px;
-	position: relative;
-	top: 7px;
-}
-
-.cart_list tr>td {
-	border-top: solid 1px gray;
-	text-align: center;
-	margin: auto;
-	font-size: 13px;
-
-}table.cart_list th{
-	height: 38px;
-}
-
-.fa-square-check {
-	font-size: 20px;
-}
-
-.fa-file-image {
-	font-size: 42px;
-
-}
-
-.cart_col {
-	padding: 0 10px;
-}
-.quantity {
-	margin: auto;
-}
-.quantity table {
-	margin: auto;
-	width: 90px;
-	border: solid 1px gray;
-	border-collapse: collapse;
-}
-.quantity_table tr>td>span {
-	display: inline-block;
-	width: 26px;
-	
-}
-
-.quantity_table tr>td {
-	border: solid 1px gray;
-
-	height: 25px;
-	text-align: center;
-	width: 26px
-}
-
-.cart_list ul {
-	list-style: none;
+.prd_opt_wrp{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
 	display: table;
+	width: 100%;
 }
-
-.cart_list ul>li {
+.prd_opt{
+	display: table-row;
+	height: 25px;
+}
+.opt{
 	display: table-cell;
+	padding: 0;
+	margin: 15px;
 	vertical-align: middle;
-	padding: 0 20px;
+	font-size: 16px;
+}
+.opt_title{
+	height: 35px;
+	font-size: 16px;
+	font-family: 'LeferiPoint-BlackA';
+	display: table-cell;
+	width: 120px;
+	padding: 10px 0;
+	vertical-align: middle;
+
+}
+.total_wrap{
+	font-size: 22px;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 0 10px 0 ;
+}
+.total_wrap>div{
+	font-weight: 700;
+	padding: 10px 0;
+}
+.order_btn_wrp{
+
+	display: flex;
+	padding: 0;
+	justify-content: space-between;
+}
+.order_btn_wrp a{
+	border: solid 1px #ccc;
+	display: block;
+	height: 32px;
+	width: 43%;
+	font-size: 18px;
+	padding: 13px 10px 5px 10px;
+	text-align: center;
+	text-decoration: none;
+}
+.btn_order{
+	color: #222;
+}
+.btn_add_cart{
+	color: #f1f1f1;
+	background-color: #116916;
 }
 
-.datepicker {
+.datepicker{
+	width: 90%;
+	font-size: 13px;
+	border: solid 2px #777;
 	background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' %3F%3E%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='none' height='256' width='256'/%3E%3Crect fill='none' height='176' rx='8' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='12' width='176' x='40' y='40'/%3E%3Cline fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='12' x1='176' x2='176' y1='24' y2='56'/%3E%3Cline fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='12' x1='80' x2='80' y1='24' y2='56'/%3E%3Cline fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='12' x1='40' x2='216' y1='88' y2='88'/%3E%3Cpolyline fill='none' points='164 128 117.3 172 92 148' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='12'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
-	background-position: 95% 0px;
-	height: 20px;
-	width: 135px;
-	padding-left: 15px;
+	background-position:95% 0px;
+	height: 25px;
+	padding-left: 10px;
 	padding-top: 5px;
-	font-size: 11px;
-	border: #808080 solid 1px;
 }
-.order_container {
-	display: flex;
-	float: right;
-	margin: 0px;
+
+.input_wrp{
 	padding: 0;
-
+}
+.datepicker:focus{
+	outline: none;
 }
 
-.order_container a {
-	display: block;
-	font-size: 20px;
-	width: 150px;
-	background-color: #116916;
-	margin: 10px;
-	padding-top: 5px;
-	text-align: center;
-	border-radius: 3px;
-	color: white;
-	width: 150px;
-	margin-top: 20px;
+.quantity table{
+	margin: auto;
+	width :  100px;
+	border: solid 2px #777;
+	border-collapse: collapse;
 }
 
-.cal {
-	padding-top: 0;
-	margin: 0;
-	display: flex;
-	justify-content: space-between
+ .quantity_minus, .quantity_plus{
+			cursor: pointer;
+		}
+ul.qty_wrp {
+	list-style: none;
+	display: table;
+	padding: 0;
+	text-align: center; 
+	
 }
-
-div.total {
-	margin-top: 18px;
-	margin-left: 15px;
-	font-size: 18px;
-}
-
-div.order_container>a {
-	text-decoration: none;
+.qty_wrp li{
+	height: 25px;
+	border: solid 2px #777;
+	display: table-cell;
+	width :  30px;
 	vertical-align: middle;
-	padding: 11px 3px 6px 3px;
-	font-size: 16px;
-	margin-right: 0;
-	margin-left: 5px;
-	/* border: solid; */
+	text-align: center;
 }
-.vertical_bar{
-	font-weight: 100px;
-	font-size: 13px;
+.qty input{
+	border: solid 2px #777;
+	border: none;
+	width: 25px;
+	outline:none;
+	text-align: center;
+	height: 25px;
 }
-
-#total_price {
-	font-family: 'LeferiBaseType-BoldA';
-
-}
-
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
-	margin: 0;
+    margin: 0;
+	;
 }
-
-input[type="number"] {
-	outline: none;
-	border: none;
-	width: 35px;
-	text-align: center;
-}
-
-input[type="checkbox"]{
-	display: none;
-  }
-input[type="checkbox"] + label{
-	display: inline-block;
-
-	width: 15px;
-	height: 15px;
-	
-	border:2px solid #116916;
-	border-radius: 50px;
-	position: relative;
-	cursor: pointer;
-	top: 4px;
-  }
-input[type="checkbox"]:checked + label{
-border: none;
-	width: 19px;
-	height: 19px;
-	transition-duration: 0.2s;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23116916' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath d='M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z'/%3E%3C/svg%3E");
-
-  }
 .flatpickr-days, .flatpickr-innerContainer,.flatpickr-weekdays, .flatpickr-weekdaycontainer{
 	padding-left: 0;
 }
@@ -234,7 +206,18 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 	padding-top: 0;
 	padding-bottom: 0;
 }
- .numInputWrapper{
- 	display:none !important;
- }
- 
+
+.detail_tab2_active{
+	display: none;
+}
+.detail_tab2_active table{
+	margin: 30px 0 60px 30px;
+	border: 1px #fff solid;
+	border-collapse: collapse;
+}
+.detail_tab2_active th, .detail_tab2_active td{
+	border: 1px #fff solid;
+	height: 15px;
+	padding: 5px 15px;
+	
+}
