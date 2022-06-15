@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-import admin.model.service.AdminService;
 import common.SalabrityFileRenamePolicy;
 import menu.model.dto.MenuAttach;
 import menu.model.dto.MenuExt;
+import menu.model.service.MenuService;
 
 /**
  * Servlet implementation class AdminMenuUpdateServlet
@@ -23,7 +23,7 @@ import menu.model.dto.MenuExt;
 @WebServlet("/admin/menuUpdate")
 public class AdminMenuUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminService adminService = new AdminService();
+	private MenuService menuService = new MenuService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class AdminMenuUpdateServlet extends HttpServlet {
 		try {
 			int menuNo = Integer.parseInt(request.getParameter("menuNo"));
 
-			MenuExt menu = adminService.findByMenuNo(menuNo);
+			MenuExt menu = menuService.findByMenuNo(menuNo);
 
 			request.setAttribute("menu", menu);
 			request.getRequestDispatcher("/WEB-INF/views/admin/menuUpdate.jsp").forward(request, response);
@@ -83,15 +83,15 @@ public class AdminMenuUpdateServlet extends HttpServlet {
 				attach.setRenamedFileName(renamedFilename);
 				menu.setMenuAttach(attach);
 			}
-			int result = adminService.updateMenu(menu);
+			int result = menuService.updateMenu(menu);
 			
 			// 신규 파일 존재하면 기존파일 삭제
 			if(file!=null) {
-				MenuAttach attach = adminService.findAttachByNo(originAttachNo);
+				MenuAttach attach = menuService.findAttachByNo(originAttachNo);
 				File delFile = new File(saveDirectory, attach.getRenamedFileName());
 				if (delFile.exists())
 					delFile.delete();
-				result = adminService.deleteMenuAttach(originAttachNo);
+				result = menuService.deleteMenuAttach(originAttachNo);
 			}
 			response.sendRedirect(request.getContextPath() + "/admin/menuList");
 		} catch (Exception e) {

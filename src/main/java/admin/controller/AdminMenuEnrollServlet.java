@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-import admin.model.service.AdminService;
 import common.SalabrityFileRenamePolicy;
 import menu.model.dto.MenuAttach;
 import menu.model.dto.MenuExt;
+import menu.model.service.MenuService;
 
 /**
  * Servlet implementation class adminMenuEnrollServlet
@@ -23,7 +23,7 @@ import menu.model.dto.MenuExt;
 @WebServlet("/admin/menuEnroll")
 public class AdminMenuEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminService adminService = new AdminService();
+	private MenuService menuService = new MenuService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -68,7 +68,7 @@ public class AdminMenuEnrollServlet extends HttpServlet {
 				attach.setRenamedFileName(renamedFilename);
 				menu.setMenuAttach(attach);
 			}
-			int result = adminService.insertMenu(menu);
+			int result = menuService.insertMenu(menu);
 
 			response.sendRedirect(request.getContextPath() + "/admin/menuList");
 		} catch (Exception e) {
