@@ -165,7 +165,9 @@ a.go_cal{
 	border-collapse: collapse;
 }
 
-
+ .quantity_minus, .quantity_plus{
+			cursor: pointer;
+		}
 ul.qty_wrp {
 	list-style: none;
 	display: table;
