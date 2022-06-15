@@ -253,5 +253,5 @@ if(menus != null) {
         };
     };
 </script>
-
+<script src="<%= request.getContextPath() %>/js/validation.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -176,4 +176,36 @@ if(document.productEnrollFrm != null) {
 		return result;
 	}
 }
+
+if(document.productUpdateFrm != null) {
+	document.productUpdateFrm.onsubmit = () => {
+		let result = true;
+
+		if(productName.value == "" || productName.value.charAt(0) == " "){
+			printErrSpan("#productName", "공백으로 시작할 수 없습니다.");
+			result = false;
+		} else if(!/^.{1,80}$/.test(productName.value)){
+			printErrSpan("#productName", "80자 이내로 입력해주세요.");
+			result = false;
+		} else resetMsg("#productName");
+
+		if(productDescription.value == "" || /[\s]/.test(productDescription.value.charAt(0))){
+			printErrSpan(".description-wrapper", "공백으로 시작할 수 없습니다.");
+			result = false;
+		} else if(!/^(.|[\t\n]){0,80}$/.test(productDescription.value)) {
+			printErrSpan(".description-wrapper", "80자 이내로 입력해주세요.");
+			result = false;
+		} else resetMsg(".description-wrapper");
+
+		const checkedMenu = document.querySelectorAll("[name=menuNo]:checked");
+		if(checkedMenu.length == 0) {
+			document.querySelector(".menuList-wrapper .inputErrMsg").innerHTML = "구성메뉴를 선택해주세요";
+			result = false;
+		} else {
+			document.querySelector(".menuList-wrapper .inputErrMsg").innerHTML = "";
+		}
+
+		return result;
+	}
+}
 /*-------------------- 이은지 end --------------------*/
