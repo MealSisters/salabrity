@@ -1,16 +1,15 @@
+<%@ page import= "java.util.List, mypage.model.dto.Destination, java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
 <%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/destination.css">
+<% List<Destination> list = (List<Destination>) request.getAttribute("list"); %>
 
 
-		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 <section id="destination">
     <div class="heading">
@@ -22,20 +21,21 @@
             <h1>새 배송지 추가</h1>
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <form action="">
+        <form action="<%= request.getContextPath() %>/mypage/destination/enroll" method="post">
+        <input type="hidden" name="member_id" value="<%= loginMember.getMemberId() %>" />
             <label for="shipping_person">받으실분</label><br>
             <input type="text" name="shipping_person" id="shipping_person"><br>
             <label for="telephone">연락처</label><br>
             <input type="text" name="telephone" id="telephone"><br>
             <label for="zipcode">우편번호</label>
             <div class="zipcode_wrp">
-                <input type="text" name="zipcode" id="zipcode" disabled>
-                <button class="search_zipcode" type="button">우편번호 찾기</button><br>
+            <input type="text" name="zipcode" id="zipcode" readonly>
+            <button class="search_zipcode" type="button">우편번호 찾기</button><br>
             </div>
             <label for="address">주소</label><br>
-            <input type="text" name="address" id="address" disabled><br>
+            <input type="text" name="address" id="address"  readonly><br>
             <label for="address_detail">상세주소</label><br>
-            <input type="text" name="address_detail" id="address_detail"><br>
+            <input type="text" name="address_detail" id="address_detail" ><br>
             <div class="submit_wrp">
                 <button type="submit" class="submit">등록</button>
             </div>
@@ -52,41 +52,46 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-                <td class="col5"><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-                <td class="col5"><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-                <td class="col5"><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-                <td class="col5"><i class="fa-regular fa-trash-can"></i></td>
-            </tr>
+<%
+        	if(list != null && !list.isEmpty()){
+        		for(Destination destination : list){
+        			String checked = "";
+        			if(destination.getIsDefault().equals("Y")){
+        				checked = "checked";
+        			}
+        			String telephone = destination.getTelephone().substring(0, 3) + "-" +
+        				destination.getTelephone().substring(3, 7) + "-" + destination.getTelephone().substring(7);
+        			
+%>        			
+            <tr id= "<%= destination.getShippingAddressNo()%>">
+                <td class="col1">
+               	 		<input type="radio" name="default" id="<%= destination.getShippingAddressNo()%>" <%= checked %>>
+                </td>
+                <td class="col2"><%= destination.getShippingPerson() %></td>
+                <td class="col3">(<%= destination.getZipcode() %>)<%= destination.getAddress() %> <%= destination.getAddressDetail() %></td>
+                <td class="col4"><%= telephone %></td>
+                <td class="col5">
+          	
+                	<i class="fa-regular fa-trash-can isDefaultValue<%=destination.getIsDefault()%>"></i></td>
 
-        </tbody>
+            </tr>
+<% 
+        		}
+        	} else {
+%>
+	<tr>
+		<td colspan="5">등록된 배송지가 없습니다.</td>
+	</tr>
+<%       
+        	}    
+ %>
+    </tbody>
 
     </table>
 </section>
 
 <script>
+//배송지 추가 클릭시 이벤트
     const add_destination = document.querySelector('.address_add');
     console.log(add_destination);
     add_destination.addEventListener('click', function () {
@@ -95,20 +100,27 @@
         document.querySelector("#address_section").style.zIndex = "1";
 
     });
-
+//우편번호
     const zipcode = document.querySelector('.search_zipcode');
     console.log(zipcode);
     zipcode.addEventListener('click', function () {
 
         new daum.Postcode({
             oncomplete: function (data) {
-                document.getElementById("address").value = data.address;
+				if(data.buildingName !== ""){
+					document.getElementById("address").value = data.address + ' (' + data.buildingName + ')';
+				}else{
+					document.getElementById("address").value = data.address;
+
+				}
                 document.getElementById("zipcode").value = data.zonecode;
+				document.getElementById("address_detail").focus;
             }
         }).open();
 
     });
 
+    //X버튼
     const cancel = document.querySelector('i.fa-xmark');
     cancel.addEventListener('click', function () {
         document.getElementById("shipping_person").value = "";
@@ -118,7 +130,64 @@
         document.getElementById("address_detail").value = "";
         document.querySelector("#address_section").style.opacity = "0";
         document.querySelector("#address_section").style.zIndex = "-1";
-
     });
+    
+	const radios = document.querySelectorAll('input[type=radio]');
+
+	radios.forEach(function(radio) {
+		radio.addEventListener('click', function () {
+			console.log(radio.parentNode.parentNode.id);
+			$.ajax({
+				type : "POST",
+				async : true,
+				data : {shippingAddressNo : radio.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
+				url : "<%=request.getContextPath()%>/mypage/destination/defaultUpdate",
+				success : function(data){
+					alert('요청성공');
+					location.reload();
+				},
+				error : function(data){
+					console.log('요청실패');
+				}
+
+			});
+			
+		});
+
+	});
+	
+	//휴지통 아이콘 클릭시 이벤트
+	const isDefaultValueNs= document.querySelectorAll('.isDefaultValueN');
+
+	isDefaultValueNs.forEach(function(isDefaultValueN) {
+		isDefaultValueN.addEventListener('click', function () {
+			console.log(isDefaultValueN.parentNode.parentNode.id);
+			$.ajax({
+				type : "POST",
+				async : true,
+				data : {shippingAddressNo : isDefaultValueN.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
+				url : "<%=request.getContextPath()%>/mypage/destination/delFlagUpdate",
+				success : function(data){
+					alert('요청성공');
+					location.reload();
+				},
+				error : function(data){
+					console.log('요청실패');
+				}
+
+			});
+			
+		});
+
+	});
+
+
+	const isDefaultValueY= document.querySelector('.isDefaultValueY');
+	isDefaultValueY.addEventListener('click', function () {
+
+			alert('기본 배송지는 삭제할 수 없습니다.')	
+		});
+
+
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
