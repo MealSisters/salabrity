@@ -1,11 +1,18 @@
 package mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import member.model.dto.Member;
+import mypage.model.dto.Destination;
+import mypage.model.service.DestinationService;
 
 /**
  * Servlet implementation class DestinationServlet
@@ -13,12 +20,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/mypage/destination")
 public class DestinationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private DestinationService destinationService = new DestinationService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/mypage/destination.jsp").forward(request, response);
+		// 2. 업무로직
+		try {
+			HttpSession session = request.getSession();
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			String memberId = loginMember.getMemberId();
+			
+			List<Destination> list = destinationService.findById(memberId);
+			System.out.println("list = " + list);
+			request.setAttribute("list", list);
+			// 3. view단 처리
+			request.getRequestDispatcher("/WEB-INF/views/member/mypage/destination.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }
