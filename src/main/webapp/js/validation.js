@@ -147,6 +147,14 @@ if(document.productEnrollFrm != null) {
 			result = false;
 		} else resetMsg("#productPrice");
 
+		if(productDescription.value == "" || /[\s]/.test(productDescription.value.charAt(0))){
+			printErrSpan(".description-wrapper", "공백으로 시작할 수 없습니다.");
+			result = false;
+		} else if(!/^(.|[\t\n]){0,80}$/.test(productDescription.value)) {
+			printErrSpan(".description-wrapper", "80자 이내로 입력해주세요.");
+			result = false;
+		} else resetMsg(".description-wrapper");
+
 		if(thumbnail.files.length == 0) {
 			printErrSpan("#thumbnail", "메뉴 이미지를 추가해주세요.");
 			result = false;

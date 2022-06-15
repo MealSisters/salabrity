@@ -14,7 +14,9 @@ import java.util.Properties;
 
 import admin.model.dao.AdminDao;
 import product.model.dto.Product;
+import product.model.dto.ProductAttach;
 import product.model.dto.ProductExt;
+import product.model.dto.ProductMenu;
 import product.model.dto.ProductTarget;
 import product.model.exception.ProductException;
 
@@ -70,7 +72,82 @@ public class ProductDao {
 		}
 		return list;
 	}
-	
+
+	public int insertProduct(Connection conn, ProductExt product) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertProduct");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product.getProductId());
+			pstmt.setString(2, product.getProductName());
+			pstmt.setInt(3, product.getProductPrice());
+			pstmt.setString(4, product.getProductdescription());
+			pstmt.setString(5, product.getProductTarget().toString());
+			pstmt.setInt(6, product.getSubscriptionPeriod());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("상품 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int findCurrentProductNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int productNo = 0;
+		String sql = prop.getProperty("findCurrentProductNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				productNo = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new ProductException("최근 등록 상품 고유번호 조회 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return productNo;
+	}
+
+	public int insertProductAttachment(Connection conn, ProductAttach attach) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertProductAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attach.getProductNo());
+			pstmt.setString(2, attach.getThumbnail().toString());
+			pstmt.setString(3, attach.getOriginalFileName());
+			pstmt.setString(4, attach.getRenamedFileName());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("상품 첨부파일 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertProductMenu(Connection conn, ProductMenu pm) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertProductMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pm.getProductNo());
+			pstmt.setInt(2, pm.getMenuNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("메뉴-상품 연결정보 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 
