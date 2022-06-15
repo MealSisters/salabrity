@@ -28,7 +28,7 @@ public class PageBar {
 		int pagebarEnd = pagebarStart + pagebarSize - 1;
 		int pageNo = pagebarStart;
 
-		url += "cPage=";
+		url += "?cPage=";
 
 		if (pageNo != 1) {
 			// '<<'버튼과 '<'버튼 활성화

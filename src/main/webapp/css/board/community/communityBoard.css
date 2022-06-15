@@ -217,6 +217,10 @@ communityBoardList.jsp
 	width: 100px;
 }
 
+.tbl-community-list th:nth-of-type(2) {
+	width: 50%;
+}
+
 .tbl-community-list th:nth-of-type(3),
 .tbl-community-list th:nth-of-type(7) {
 	width: 170px;
@@ -338,22 +342,26 @@ input[name="title"] {
 }
 
 /* button */
-.board-attach-wrap .board-attach-name {
+.attach-btn-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 2px;
+    margin-left: 10px;
+    background-color: #116916;
+    font-size: 13px;
+}
+
+.board-attach-wrap .attach-name {
     display: inline-block;
     vertical-align: middle;
     width: 25%;
     color: gray;
-}
-
-.board-attach-wrap label[for=upFile] {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 8px;
-    margin-left: 10px;
-    color: white;
-    background-color: #116916;
-    cursor: pointer;
     font-size: 13px;
+    height: 30px;
+    border-bottom: 1px dashed gray;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .board-attach-wrap input[type="file"] {
@@ -363,6 +371,14 @@ input[name="title"] {
     border: 0;
     padding: 0;
     overflow: hidden;
+}
+
+.attach-btn-wrap button {
+    height: 30px;
+    color: white;
+    background: none;
+    border: none;
+	cursor: pointer;
 }
 
 .board-button-wrap {
@@ -489,6 +505,7 @@ communityBoardView.jsp
 .comment-enroll-wrap {
 	margin: 0 auto;
 	text-align: center;
+	table-layout: fixed;
 }
 
 .comment-enroll-wrap h4 {
@@ -504,8 +521,37 @@ communityBoardView.jsp
 	vertical-align: middle;
 }
 
-#comment-enroll-btn {
+.comment-enroll-btn {
 	display: inline;
+	border: none;
+	padding: 10px 25px;
+	height: 87px;
+	vertical-align: middle;
+	color: white;
+    background-color: #116916;
+    cursor: pointer;
+}
+
+.comment-reply-wrap {
+	text-align: left;
+	text-align: center;
+}
+
+.comment-reply-wrap form {
+	width: 100%;
+	
+}
+
+.comment-reply-wrap textarea {
+	resize: none;
+	height: 80px;
+	width: 85%;
+	vertical-align: middle;
+}
+
+.comment-reply-btn {
+	display: inline;
+	margin-left: 4px;
 	border: none;
 	padding: 10px 25px;
 	height: 87px;
@@ -528,6 +574,7 @@ communityBoardView.jsp
 .tbl-posting-comment-view th,
 .tbl-posting-comment-view td {
 	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
 	height: 60px;
 	padding: 10px;
 }

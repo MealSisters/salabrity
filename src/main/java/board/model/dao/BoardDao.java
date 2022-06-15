@@ -5,6 +5,7 @@ import static common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -201,10 +202,11 @@ public class BoardDao {
 	 * 게시글 한 건 조회 - posting테이블의 posting_no컬럼
 	 * @param conn
 	 * @param no
+	 * @param boardCode 
 	 * @return
 	 */
-	public PostingExt findbyPostingNo(Connection conn, int no) {
-		String sql = prop.getProperty("findbyPostingNo");
+	public PostingExt findByPostingNo(Connection conn, int no) {
+		String sql = prop.getProperty("findByPostingNo");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		PostingExt posting = null;
@@ -230,6 +232,7 @@ public class BoardDao {
 	 * 첨부파일 조회 - posting_attach테이블의 posting_no컬럼
 	 * @param conn
 	 * @param no
+	 * @param boardCode 
 	 * @return
 	 */
 	public List<PostingAttach> findPostingAttachByPostingNo(Connection conn, int no) {
@@ -277,6 +280,7 @@ public class BoardDao {
 	 * 댓글 목록 조회 - posting_comment테이블의 posting_no컬럼
 	 * @param conn
 	 * @param no
+	 * @param boardCode 
 	 * @return
 	 */
 	public List<PostingComment> findPostingCommentByPostingNo(Connection conn, int no) {
@@ -404,6 +408,134 @@ public class BoardDao {
 		}
 		
 		return boardCode;
+	}
+
+	/**
+	 * 게시글 삭제
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public int deletePosting(Connection conn, int no) {
+		String sql = prop.getProperty("deletePosting");
+		PreparedStatement pstmt = null;
+		int result = 0;
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("게시글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 게시글 수정
+	 * @param conn
+	 * @param posting
+	 * @return
+	 */
+	public int updatePosting(Connection conn, PostingExt posting) {
+		String sql = prop.getProperty("updatePosting");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, posting.getTitle());
+			pstmt.setString(2, posting.getContent());
+			pstmt.setInt(3, posting.getPostingNo());
+			pstmt.setString(4, posting.getBoardCode().toString());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("게시글 수정 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 첨부파일 삭제
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public int deletePostingAttach(Connection conn, int no) {
+		String sql = prop.getProperty("deletePostingAttach");
+		PreparedStatement pstmt = null;
+		int result = 0;
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("첨부파일 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 댓글 등록
+	 * @param conn
+	 * @param pc
+	 * @return
+	 */
+	public int insertPostingComment(Connection conn, PostingComment pc) {
+		String sql = prop.getProperty("insertPostingComment");
+		PreparedStatement pstmt = null;
+		int result = 0;
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pc.getPostingNo());
+			pstmt.setString(2, pc.getBoardCode().toString());
+			pstmt.setString(3, pc.getMemberId());
+			pstmt.setString(4, pc.getCommentContent());
+			pstmt.setInt(5, pc.getCommentLevel());
+			pstmt.setObject(6, pc.getCommentRef() == 0 ? null : pc.getCommentRef());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("댓글 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 댓글 삭제
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public int deletePostingComment(Connection conn, int no) {
+		String sql = prop.getProperty("deletePostingComment");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("댓글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

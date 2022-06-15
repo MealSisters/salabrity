@@ -87,9 +87,9 @@ public class BoardService {
 	 * @param no
 	 * @return
 	 */
-	public PostingExt findbyPostingNo(int no) {
+	public PostingExt findByPostingNo(int no) {
 		Connection conn = getConnection();
-		PostingExt posting = boardDao.findbyPostingNo(conn, no);
+		PostingExt posting = boardDao.findByPostingNo(conn, no);
 		List<PostingAttach> attachments = boardDao.findPostingAttachByPostingNo(conn, no);
 		List<PostingComment> comments = boardDao.findPostingCommentByPostingNo(conn, no);
 		posting.setAttachments(attachments);
@@ -130,6 +130,128 @@ public class BoardService {
 		PostingAttach attach = boardDao.findPostingAttachByPostingAttachNo(conn, no);
 		close(conn);
 		return attach;
+	}
+
+	/**
+	 * 게시글 삭제
+	 * @param no
+	 * @return
+	 */
+	public int deletePosting(int no) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = boardDao.deletePosting(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 게시글 수정
+	 * @param posting
+	 * @return
+	 */
+	public int updatePosting(PostingExt posting) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			// 1. board 수정
+			result = boardDao.updatePosting(conn, posting); 
+			
+			// 2. attachment에 등록
+			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
+			if(attachments != null && !attachments.isEmpty()) {
+				for(PostingAttach attach : attachments) {
+					attach.setPostingNo(posting.getPostingNo());
+					attach.setBoardCode(posting.getBoardCode());
+					result = boardDao.insertPostingAttach(conn, attach);
+				}
+			}
+			
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 첨부파일 삭제
+	 * @param no
+	 * @return
+	 */
+	public int deletePostingAttach(int no) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = boardDao.deletePostingAttach(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 댓글 등록
+	 * @param pc
+	 * @return
+	 */
+	public int insertPostingComment(PostingComment pc) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = boardDao.insertPostingComment(conn, pc);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 댓글 삭제
+	 * @param commentNo
+	 * @return
+	 */
+	public int deletePostingComment(int no) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = boardDao.deletePostingComment(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
 	}
 
 }

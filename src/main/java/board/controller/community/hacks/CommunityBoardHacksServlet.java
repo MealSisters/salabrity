@@ -1,4 +1,4 @@
-package board.controller.community;
+package board.controller.community.hacks;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			request.setAttribute("postingList", postingList);
 			request.setAttribute("pagebar", pagebar);
 	
-			request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardHacksList.jsp")
+			request.getRequestDispatcher("/WEB-INF/views/board/community/hacks/communityBoardHacksList.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

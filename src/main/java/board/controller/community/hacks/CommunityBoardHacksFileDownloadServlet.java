@@ -1,4 +1,4 @@
-package board.controller.community;
+package board.controller.community.hacks;
 
 import java.io.IOException;
 

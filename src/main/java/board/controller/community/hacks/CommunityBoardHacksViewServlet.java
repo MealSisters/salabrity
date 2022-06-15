@@ -1,4 +1,4 @@
-package board.controller.community;
+package board.controller.community.hacks;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.dto.BoardCode;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 
@@ -59,7 +60,7 @@ public class CommunityBoardHacksViewServlet extends HttpServlet {
 			}
 			
 			// 게시글 조회
-			PostingExt posting = boardService.findbyPostingNo(no);
+			PostingExt posting = boardService.findByPostingNo(no);
 			
 			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
@@ -69,7 +70,7 @@ public class CommunityBoardHacksViewServlet extends HttpServlet {
 			
 			// 3. view단 위임
 			request.setAttribute("posting", posting);
-			request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoardHacksView.jsp")
+			request.getRequestDispatcher("/WEB-INF/views/board/community/hacks/communityBoardHacksView.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
