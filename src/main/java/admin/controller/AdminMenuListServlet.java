@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import admin.model.service.AdminService;
 import common.utill.PageBar;
 import menu.model.dto.Menu;
+import menu.model.service.MenuService;
 
 /**
  * Servlet implementation class AdminMenuListServlet
@@ -21,7 +21,7 @@ import menu.model.dto.Menu;
 @WebServlet("/admin/menuList")
 public class AdminMenuListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminService adminService = new AdminService();
+	private MenuService menuService = new MenuService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,7 +29,7 @@ public class AdminMenuListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 페이징 처리
-			int numPerPage = AdminService.MENU_NUM_PER_PAGE;
+			int numPerPage = MenuService.MENU_NUM_PER_PAGE;
 			int cPage = 1;
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -56,18 +56,18 @@ public class AdminMenuListServlet extends HttpServlet {
 			int totalMenu = 0;
 			if (!searchParam.isEmpty()) {
 				param.put("searchParam", searchParam);
-				totalMenu = adminService.getTotalFilteredMenu(searchParam);
+				totalMenu = menuService.getTotalFilteredMenu(searchParam);
 			} else {
-				totalMenu = adminService.getTotalMenu();				
+				totalMenu = menuService.getTotalMenu();				
 			}
 
 			// 업무로직
 			List<Menu> list = null;
 			if (sortBy != null) {
 				param.put("sortBy", sortBy);
-				list = adminService.findSortedAllMenu(param);
+				list = menuService.findSortedAllMenu(param);
 			} else {
-				list = adminService.findAllMenu(param);
+				list = menuService.findTopNAllMenu(param);
 			}
 
 			String url = request.getRequestURI();

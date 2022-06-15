@@ -1,4 +1,4 @@
-package product.model.dao;
+package product.model.exception;
 
 public class ProductException extends RuntimeException {
 

@@ -71,7 +71,7 @@
         fileInput.addEventListener('change', (e) => {
             const fileNameTag = document.querySelector("p.upfileName");
             fileNameTag.innerHTML = e.target.files[0].name;
-            
+            resetElemetMsg(fileInput);
         });
         const btn = document.querySelector(".upfileBtn-wrapper button");
         btn.addEventListener('click', () => {

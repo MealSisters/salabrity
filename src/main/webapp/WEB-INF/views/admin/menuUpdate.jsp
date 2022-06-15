@@ -4,7 +4,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	MenuExt menu = (MenuExt) request.getAttribute("menu");
-	System.out.println(menu);
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 

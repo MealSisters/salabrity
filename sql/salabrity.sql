@@ -58,7 +58,7 @@
 create table product (
 	product_no number,
 	product_id varchar2(30) not null,
-	product_name varchar2(100) not null,
+	product_name varchar2(255) not null,
 	product_price number not null,
 	product_description varchar2(255) not null,
 	product_target varchar2(20) not null,
@@ -150,7 +150,7 @@ create table member (
 	phone char(11) not null,
     zipcode char(5) not null,
 	address varchar2(255) not null,
-	address_detail varchar2(255) not null,
+	address_detail varchar2(255),
 	enroll_date date default sysdate,
 	member_role char(1) default 'U',
     

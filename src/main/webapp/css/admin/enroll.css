@@ -22,6 +22,9 @@
     font-family: 'LeferiBaseType-BoldA';
     width: 100px;
 }
+.formLine-wrapper .label-includeMsgspan {
+	width: 500px;
+}
 .formLine-wrapper > p {
     margin: 10px 16px;
 }
@@ -127,13 +130,21 @@ input[type="file"] {
     font-family: 'LeferiBaseType-BoldA';
     font-size: 15px;
     background-color: #ddd;
+    padding: 6px;
 }
 .menuList-top div{
     padding: 0;
 }
+.menuList-top p {
+	margin: 10px 0 5px;
+}
 
 .menu-wrapper {
     font-size: 13px;
+    padding: 6px;
+}
+.menu-wrapper > p {
+	margin: 5px 0;
 }
 .col-radio, .menu-radio {
     width: 35px;

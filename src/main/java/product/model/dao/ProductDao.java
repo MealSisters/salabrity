@@ -16,13 +16,14 @@ import admin.model.dao.AdminDao;
 import product.model.dto.Product;
 import product.model.dto.ProductExt;
 import product.model.dto.ProductTarget;
+import product.model.exception.ProductException;
 
 public class ProductDao {
 	
 	private Properties prop = new Properties();
 	
 	public ProductDao() {
-		String filename = AdminDao.class.getResource("/sql/product-query.properties").getPath();
+		String filename = ProductDao.class.getResource("/sql/product-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (IOException e) {

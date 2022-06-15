@@ -26,6 +26,11 @@ const resetMsg = (target) => {
     msgSpan.innerHTML = "";
 };
 
+const resetElemetMsg = (target) => {
+	const msgSpan = target.parentElement.lastElementChild;
+	msgSpan.innerHTML = "";
+}
+
 // 메뉴 등록 유효성검사
 if(document.menuEnrollFrm != null) {
 	document.menuEnrollFrm.onsubmit = () => {
@@ -117,5 +122,50 @@ if(document.menuUpdateFrm != null) {
 		
 		return result;
 	};
+}
+
+if(document.productEnrollFrm != null) {
+	document.productEnrollFrm.onsubmit = () => {
+		let result = true;
+		if(!/^[a-zA-Z0-9_]{4,30}$/.test(productId.value)){
+			printErrSpan("#productId", "아이디는 영문자/숫자로 4글자 이상 30자 이하여야하며, 특수문자는 _ 만 사용가능합니다.");
+			result = false;
+		} else if (checkIdDuplicate() != false){
+			resetMsg("#productId");
+		}
+		
+		if(productName.value == "" || productName.value.charAt(0) == " "){
+			printErrSpan("#productName", "공백으로 시작할 수 없습니다.");
+			result = false;
+		} else if(!/^.{1,80}$/.test(productName.value)){
+			printErrSpan("#productName", "80자 이내로 입력해주세요.");
+			result = false;
+		} else resetMsg("#productName");
+
+		if(productPrice.value < 0) {
+			printErrSpan("#productPrice", "음수는 입력할 수 없습니다.");
+			result = false;
+		} else resetMsg("#productPrice");
+
+		if(thumbnail.files.length == 0) {
+			printErrSpan("#thumbnail", "메뉴 이미지를 추가해주세요.");
+			result = false;
+		} else resetMsg("#thumbnail");
+
+		if(detailimg1.files.length == 0) {
+			printErrSpan("#detailimg1", "상세 이미지를 추가해주세요.")
+			result = false;
+		} else resetMsg("#detailimg1");
+
+		const checkedMenu = document.querySelectorAll("[name=menuNo]:checked");
+		if(checkedMenu.length == 0) {
+			document.querySelector(".menuList-wrapper .inputErrMsg").innerHTML = "구성메뉴를 선택해주세요";
+			result = false;
+		} else {
+			document.querySelector(".menuList-wrapper .inputErrMsg").innerHTML = "";
+		}
+
+		return result;
+	}
 }
 /*-------------------- 이은지 end --------------------*/

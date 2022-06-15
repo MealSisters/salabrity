@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import admin.model.service.AdminService;
 import menu.model.dto.Menu;
+import menu.model.service.MenuService;
 
 /**
  * Servlet implementation class MenuNameCheckServlet
@@ -20,7 +21,7 @@ import menu.model.dto.Menu;
 @WebServlet("/admin/menuIdCheck")
 public class MenuIdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AdminService adminService = new AdminService();
+	private MenuService menuService = new MenuService();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,7 +31,7 @@ public class MenuIdCheckServlet extends HttpServlet {
 			String inputId = request.getParameter("menuId");
 
 			int idCheck = 0;
-			List<Menu> list = adminService.findMenuById(inputId);
+			List<Menu> list = menuService.findMenuById(inputId);
 			if (!list.isEmpty())
 				idCheck = list.size();
 
