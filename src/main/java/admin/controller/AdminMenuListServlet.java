@@ -41,19 +41,48 @@ public class AdminMenuListServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
+		
+			String menuId = request.getParameter("menuId");
+			String menuName = request.getParameter("menuName");
 			
-			// 업무로직
+			String sortBy = request.getParameter("sortBy");
+			
+			Map<String, Object> searchParam = new HashMap<>();
+			if (menuId != null)
+				searchParam.put("menuId", menuId);
+			if (menuName != null)
+				searchParam.put("menuName", menuName);
+			
 			int totalMenu = 0;
+			if (!searchParam.isEmpty()) {
+				param.put("searchParam", searchParam);
+				totalMenu = adminService.getTotalFilteredMenu(searchParam);
+			} else {
+				totalMenu = adminService.getTotalMenu();				
+			}
+
+			// 업무로직
 			List<Menu> list = null;
-			list = adminService.findAllMenu(param);
-			totalMenu = adminService.getTotalMenu();
+			if (sortBy != null) {
+				param.put("sortBy", sortBy);
+				list = adminService.findSortedAllMenu(param);
+			} else {
+				list = adminService.findAllMenu(param);
+			}
 
 			String url = request.getRequestURI();
-			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMenu, url);
+			String pagebar = "";
+			if (sortBy != null) {
+				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalMenu, url + "?sortBy=" + sortBy);
+			} else {
+				pagebar = PageBar.getPagebar(cPage, numPerPage, totalMenu, url);
+			}
 
 			// view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
+			request.setAttribute("sortBy", sortBy);
+			request.setAttribute("searchParam", searchParam);
 			request.getRequestDispatcher("/WEB-INF/views/admin/menuList.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

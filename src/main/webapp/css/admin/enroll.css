@@ -25,6 +25,9 @@
 .formLine-wrapper > p {
     margin: 10px 16px;
 }
+.updateFrm .formLine-wrapper > .p-static {
+	margin: 10px 0;
+}
 .formLine-wrapper > input {
     margin-right: 10px;
     width: 174px;

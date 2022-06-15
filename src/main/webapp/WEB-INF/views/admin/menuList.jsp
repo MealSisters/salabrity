@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="menu.model.dto.Menu"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,8 @@
 <%
 List<Menu> list = (List<Menu>) request.getAttribute("list");
 String pagebar = (String) request.getAttribute("pagebar");
+String sortBy = (String) request.getAttribute("sortBy");
+Map<String, Object> searchParam = (Map<String, Object>) request.getAttribute("searchParam");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
@@ -15,14 +18,14 @@ String pagebar = (String) request.getAttribute("pagebar");
 <div class="div-level1">
     <p id="filter-wrapper-title">Filter</p>
     <div id="filter-wrapper" class="div-level2">
-        <form name="menuFilterFrm" action="" onSubmit="return false;">
+        <form name="menuFilterFrm" action="" onSubmit="<%= request.getContextPath() %>/admin/memberList">
             <div class="div-searchFilter">
                 <label for="filter-menuId">메뉴ID</label>
-                <input type="text" name="menuId" id="filter-menuId">
+                <input type="text" name="menuId" id="filter-menuId" value="<%= searchParam.get("menuId") != null ? searchParam.get("menuId") : "" %>">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-menuName">메뉴이름</label>
-                <input type="text" name="menuName" id="filter-menuName">
+                <input type="text" name="menuName" id="filter-menuName" value="<%= searchParam.get("menuName") != null ? searchParam.get("menuName") : "" %>">
             </div>
             <div class="div-searchbtn">
                 <button>조회</button>
@@ -34,20 +37,21 @@ String pagebar = (String) request.getAttribute("pagebar");
             <button class="enrollBtn" type="button">신규메뉴등록</button>
         </div>
         <div class="sort-wrapper">
+        	<form action="">
             <span>정렬기준</span>
             <select name="sortBy" class="select-sort">
-                <option value="">최근등록순</option>
-                <option value="">이름순</option>
-                <option value="">칼로리낮은순</option>
-                <option value="">칼로리높은순</option>
+                <option value="menu_no" <%= (sortBy==null || "menu_no".equals(sortBy)) ? "selected" : "" %>>최근등록순</option>
+                <option value="menu_name" <%= "menu_name".equals(sortBy) ? "selected" : "" %>>이름순</option>
+                <option value="calorie" <%= "calorie".equals(sortBy) ? "selected" : "" %>>칼로리낮은순</option>
             </select>
+        	</form>
         </div>
     </div>
     <div class="div-level2 div-resultlist">
         <table id="tbl-menuList" class="tbl-searchResult">
             <thead>
                 <tr>
-                    <th class="col-no">No</th>
+                    <th class="col-menuNo">메뉴No</th>
                     <th class="col-menuId">메뉴ID</th>
                     <th class="col-menuName">메뉴이름</th>
                     <th class="col-calorie">칼로리</th>
@@ -61,14 +65,14 @@ String pagebar = (String) request.getAttribute("pagebar");
 		for(Menu menu : list){
 %>
             <tr>
-                <td class="col-no"><%= menu.getMenuNo() %></td>
+                <td class="col-menuNo"><%= menu.getMenuNo() %></td>
                 <td class="col-menuId"><%= menu.getMenuId() %></td>
                 <td class="col-menuName"><%= menu.getMenuName() %></td>
                 <td class="col-calorie"><%= menu.getCalorie() %></td>
                 <td class="col-ingredients"><%= menu.getIngredients() %></td>
                 <td class="col-buttons">
-                    <div class="div-modify"><a class="a-modify">수정</a></div>
-                    <div class="div-cancel"><a class="a-cancel">삭제</a></div>
+                    <div class="div-modify"><a class="a-modify" href="<%= request.getContextPath() %>/admin/menuUpdate?menuNo=<%= menu.getMenuNo() %>">수정</a></div>
+                    <div class="div-cancel"><a class="a-cancel" onclick="deleteMenu(<%= menu.getMenuNo() %>);">삭제</a></div>
                 </td>
             </tr>
 <%
@@ -87,9 +91,17 @@ String pagebar = (String) request.getAttribute("pagebar");
     <link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
     <%= pagebar %>
 </div>
+<form 
+	name="deleteMenuFrm"
+	action="<%= request.getContextPath() %>/admin/menuDelete"
+	method="POST">
+	<input type="hidden" name="delMenuNo" value="" />
+</form>
+
 <script>
     window.addEventListener('load', () => {
         enrollMenu();
+        addSortEvent();
     });
     const enrollMenu = () => {
         const btn = document.querySelector(".enrollBtn");
@@ -97,6 +109,23 @@ String pagebar = (String) request.getAttribute("pagebar");
             location.href = "<%= request.getContextPath() %>/admin/menuEnroll";
         };
     }
+    
+    const deleteMenu = (menuNo) => {
+    	document.querySelector("[name=delMenuNo]").value = menuNo;
+		if(confirm("메뉴를 삭제하시겠습니까?")){
+			document.deleteMenuFrm.submit();
+		};
+	};
+	
+	const addSortEvent = () => {
+		document.querySelector(".select-sort").addEventListener('change', (e) => {
+			const cPage = document.querySelector(".cPage").innerHTML;
+			const menuId = document.querySelector("#filter-menuId").value;
+			const menuName = document.querySelector("#filter-menuName").value;
+			location.href = `<%= request.getContextPath() %>/admin/menuList?sortBy=\${e.target.value}&menuId=\${menuId}&menuName=\${menuName}&cPage=\${cPage}`;
+		});
+		
+	}
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

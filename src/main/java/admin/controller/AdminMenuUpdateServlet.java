@@ -18,10 +18,10 @@ import menu.model.dto.MenuAttach;
 import menu.model.dto.MenuExt;
 
 /**
- * Servlet implementation class adminMenuEnrollServlet
+ * Servlet implementation class AdminMenuUpdateServlet
  */
-@WebServlet("/admin/menuEnroll")
-public class AdminMenuEnrollServlet extends HttpServlet {
+@WebServlet("/admin/menuUpdate")
+public class AdminMenuUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminService adminService = new AdminService();
 
@@ -29,7 +29,17 @@ public class AdminMenuEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/admin/menuEnroll.jsp").forward(request, response);
+		try {
+			int menuNo = Integer.parseInt(request.getParameter("menuNo"));
+
+			MenuExt menu = adminService.findByMenuNo(menuNo);
+
+			request.setAttribute("menu", menu);
+			request.getRequestDispatcher("/WEB-INF/views/admin/menuUpdate.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
@@ -44,19 +54,23 @@ public class AdminMenuEnrollServlet extends HttpServlet {
 			MultipartRequest multiReq = 
 					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 			
+			int menuNo = Integer.parseInt(multiReq.getParameter("menuNo"));
 			String menuId = multiReq.getParameter("menuId");
 			String menuName = multiReq.getParameter("menuName");
 			String menuDescription = multiReq.getParameter("menuDescription");
 			String ingredients = multiReq.getParameter("ingredients");
 			int calorie = Integer.parseInt(multiReq.getParameter("calorie"));
+			int originAttachNo = Integer.parseInt(multiReq.getParameter("originAttachNo"));
 			
 			MenuExt menu = new MenuExt();
+			menu.setMenuNo(menuNo);
 			menu.setMenuId(menuId);
 			menu.setMenuName(menuName);
 			menu.setMenuDescription(menuDescription);
 			menu.setIngredients(ingredients);
 			menu.setCalorie(calorie);
 			File file = multiReq.getFile("menuAttach");
+			
 			if(file!=null) {
 				MenuAttach attach = new MenuAttach();
 				String originalFilename = multiReq.getOriginalFileName("menuAttach"); // 업로드한 파일명
@@ -64,12 +78,21 @@ public class AdminMenuEnrollServlet extends HttpServlet {
 //			System.out.println("orgin = " + originalFilename);
 //			System.out.println("renamed = " + renamedFilename);
 				
+				attach.setMenuNo(menuNo);
 				attach.setOriginalFileName(originalFilename);
 				attach.setRenamedFileName(renamedFilename);
 				menu.setMenuAttach(attach);
 			}
-			int result = adminService.insertMenu(menu);
-
+			int result = adminService.updateMenu(menu);
+			
+			// 신규 파일 존재하면 기존파일 삭제
+			if(file!=null) {
+				MenuAttach attach = adminService.findAttachByNo(originAttachNo);
+				File delFile = new File(saveDirectory, attach.getRenamedFileName());
+				if (delFile.exists())
+					delFile.delete();
+				result = adminService.deleteMenuAttach(originAttachNo);
+			}
 			response.sendRedirect(request.getContextPath() + "/admin/menuList");
 		} catch (Exception e) {
 			e.printStackTrace();
