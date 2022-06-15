@@ -4,8 +4,6 @@
 	font-family: 'LeferiBaseType-RegularA';
 }
 
-/* 검색 키워드 "페이지" */
-
 /* login 페이지 */
 .head_log {
 	text-align: center;
@@ -682,6 +680,18 @@ label {
 	margin-left: 10px;
 }
 
-.btn_address:hover {
+.btn_address:hover, .btn_password:hover {
 	cursor: pointer;
+}
+
+.point {
+	color : red;
+}
+
+.btn_password {
+	height: 35px;
+	background-color: #fff;
+	border: 1px solid #BDBDBD;
+	font-size: 12px;
+	width: 100px;
 }

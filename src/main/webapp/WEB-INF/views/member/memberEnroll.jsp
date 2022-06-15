@@ -11,6 +11,7 @@
 	font-weight: bold;
 }
 
+
 </style>
 <div class="join_main_head">
 	<h3>정보입력</h3>
@@ -22,37 +23,40 @@
 </div>
 <div class="join_box" style="border-top: 1px solid #dbdbdb;">
 	<div class="join_main_box" style="border-bottom: 1px solid black;">
-		<h4 class="use_agree">회원 정보 입력 (필수)</h4>
+		
+		<h4 class="use_agree">회원 정보 입력&nbsp;
+		<span style="font-size:12px; font-weight: normal;"><span class="point">*</span>&nbsp;표시는 필수 입력 항목입니다.</span></h4>
+		
 		<form name="memberEnrollFrm" method="POST" action="<%= request.getContextPath() %>/member/memberEnroll">
 		<div class="member_box">
 			<div class="input_box">
-				<label class="member_title">아이디</label> 
+				<label class="member_title">아이디&nbsp;<span class="point">*</span></label>
 				<input type="text" name="memberId" id="memberId" class="input_text">
 				<button type="button" class="checkId" onclick="checkIdDuplicate();">중복확인</button>
 				<input type="hidden" id="idValid" value="0" />
 				<span class="guide">* 6자리 이상의 영문자, 숫자를 조합하여 입력해 주세요</span>
 			</div>
 			<div class="input_box">
-				<label class="member_title">비밀번호</label> 
+				<label class="member_title">비밀번호&nbsp;<span class="point">*</span></label> 
 				<input type="password" name="password" id="password" class="input_text"> <span
 					class="guide">* 8자리 이상의 숫자, 영문자, 특수문자를 조합하여 입력해주세요.</span>
 			</div>
 			
 			  
 			<div class="input_box">
-				<label class="member_title">비밀번호 확인</label> 
+				<label class="member_title">비밀번호 확인&nbsp;<span class="point">*</span></label> 
 				<input type="password" id="checkPassword" class="input_text">
 			</div>
 			
 			
 			<div class="input_box">
-				<label class="member_title">이름</label> <input type="text"
+				<label class="member_title">이름&nbsp;<span class="point">*</span></label> <input type="text"
 					name="memberName" id="memberName" class="input_text">
 
 			</div>
 
 			<div class="input_box">
-				<label class="member_title">이메일</label> 
+				<label class="member_title">이메일&nbsp;<span class="point">*</span></label> 
 				<input type="text" name="email1" id="email1" class="input__text"> 
 				  	<span style="font-size: 12px;">@</span>
 				<input type="text" name="email2" class="input__text" id="inputDomain">
@@ -74,7 +78,7 @@
 			</div>
 
 			<div class="input_box">
-				<label class="member_title">휴대폰 번호</label> 
+				<label class="member_title">휴대폰 번호&nbsp;<span class="point">*</span></label> 
 				<input type="text" name="phone1" id="phone1" maxlength="3" class="input_text" value="010">
 				<span style="font-size: 12px;">-</span>
 				<input type="text" name="phone2" id="phone2" maxlength="4" class="input_text">
@@ -87,7 +91,7 @@
 			</div>
 
 			<div class="input_box">
-				<label class="member_title">주소</label> 
+				<label class="member_title">주소&nbsp;<span class="point">*</span></label> 
 				<input type="text" name="zipcode" id="zipcode" class="input__text" readOnly>
 								
 				 <button type="button" class="btn_address" onclick="sample4_execDaumPostcode()">우편번호 검색</button>
@@ -96,9 +100,11 @@
 				<input type="text" name="addressDetail" id="addressDetail" class="input_text" placeholder="상세주소를 입력해주세요.">
 			</div>
 				
+				
+				
 			<div class="input_box">
 				<label class="member_title">생년월일</label> <input type="date"
-					name="birthday" id="birthday" class="input_text" value="2022-12-31">
+					name="birthday" id="birthday" class="input_text">
 			</div>
 			<div class="input_box">
 				<p class="member_title">성별</p>
@@ -109,7 +115,7 @@
 						value="F"> <label for="female" class="checkbox_label">여성</label>
 				</div>
 			</div>
-
+				
 		</div>
 	</div>
 	<div class="btn_box">
@@ -187,13 +193,13 @@ checkPassword.onblur = () => {
 	
 document.memberEnrollFrm.onsubmit = () => {
 	// ID는 6자리 이상의 영문 혹은 숫자
-	if(!/^[A-Za-z0-9]{6,}/.test(memberId.value)){
-		alert("아이디는 대소문자/숫자로 6글자 이상이어야 합니다.");
+	if(!/[A-Za-z0-9]{6,}/.test(memberId.value)){
+		alert("아이디는 대소문자/숫자를 조합하여 6글자 이상이어야 합니다.");
 		return false;
 	}
 	// 중복검사여부 체크
 	if(idValid.value !== "1") {
-		alert("아이디 중복검사 해주세요.");
+		alert("아이디 중복검사는 필수 항목입니다.");
 		return false;
 	}
 	
@@ -206,20 +212,46 @@ document.memberEnrollFrm.onsubmit = () => {
 		return false;
 	}
 
-	
 	// 이름
 	if(!/^[가-힣]{2,}$/.test(memberName.value)){
-		alert("이름은 한글로 2글자 이상 입력해주세요.");
+		alert("이름은 2글자 이상이어야 합니다.");
 		return false;
 	}
 	
-	// 상세주소
-	if(!/^[가-힣]{1,}$/.test(addressDetail.value)){
-		alert("상세주소를 입력해주세요.");
+	// phone
+	if(!/^[0-9]{3}$/.test(phone1.value)){
+		alert("유효하지 않은 전화번호입니다.");
 		return false;
 	}
 	
+	if(!/^[0-9]{3,4}$/.test(phone2.value)){
+		alert("유효하지 않은 전화번호입니다.");
+		return false;
+	}
+
+	if(!/^[0-9]{4}$/.test(phone3.value)){
+		alert("유효하지 않은 전화번호입니다.");
+		return false;
+	}
 	
+	// 이메일 
+	if(!/[A-Za-z0-9]{1,}/.test(email1.value)){
+		alert("이메일을 다시 입력해주세요.");
+		return false;
+	}
+	
+	if(!/[A-Za-z]{1,}/.test(inputDomain.value)){
+		alert("이메일을 다시 입력해주세요.");
+		return false;
+	}
+	
+	// 주소
+	if(!/^[0-9]{5}$/.test(zipcode.value)){
+		alert("주소를 입력해주세요.");
+		return false;
+	}
+	
+
 }
 </script>
 

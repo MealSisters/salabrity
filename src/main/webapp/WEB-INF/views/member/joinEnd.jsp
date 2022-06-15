@@ -26,7 +26,7 @@
 				<h4 id="end">회원가입 완료!</h4>
 				<div class="finish">
 
-					<span>홍길동님의 회원가입이 성공적으로 완료되었습니다.</span>
+					<span>회원가입이 성공적으로 완료되었습니다.</span>
 					<span style="display:inline-block">* 회원가입 확인 및 수정은 마이페이지 > 회원 정보 수정에서 가능합니다.</span>
 				</div>
 			</div>
