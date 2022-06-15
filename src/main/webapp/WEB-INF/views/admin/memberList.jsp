@@ -21,9 +21,6 @@ if(request.getParameter("cPage")!=null) {
 }
 int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
 
-String msg = (String) session.getAttribute("msg");
-if(msg != null)
-		session.removeAttribute("msg");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>

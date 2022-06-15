@@ -3,7 +3,23 @@
     pageEncoding="UTF-8"%>
 <% 
 	Member loginMember = (Member) session.getAttribute("loginMember");
+
+	String msg = (String) session.getAttribute("msg");
+	if(msg != null)
+	session.removeAttribute("msg"); 
+	
+	String saveId = null;
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie cookie : cookies){
+			//System.out.println("Cookie{" + cookie.getName() + "=" + cookie.getValue() + "}");
+			if("saveId".equals(cookie.getName())){ // 저장된 데이터 값에 대한 이름 가져오기
+				saveId = cookie.getValue(); // 이름에 저장된 데이터 가져오기
+			}
+		}
+	}
 %>
+
 <!DOCTYPE html>
 <html>
 <head>

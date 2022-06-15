@@ -20,12 +20,14 @@ public class JoinAgreement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.getRequestDispatcher("/WEB-INF/views/member/joinAgreement.jsp")
 			.forward(request, response);
 		
-
+	}
 	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp").forward(request, response);
+//		response.sendRedirect("/WEB-INF/views/member/memberEnroll.jsp");
 	}
 
 }
