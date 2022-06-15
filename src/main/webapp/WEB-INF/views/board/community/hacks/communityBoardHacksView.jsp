@@ -98,11 +98,20 @@
 	</table>
 	<div class="board-button-wrap">
 <% if(canLike) { %>
-		<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
-		<button id="board-like-btn">
-			love it <i class="fa-regular fa-heart"></i>
-			<!-- <i class="fa-solid fa-heart"></i> -->
-		</button>
+		<form 
+			name="hacksBoardLikeBtnFrm" 
+			action="<%= request.getContextPath() %>/board/community/hacksLike" 
+			method="POST">
+			<input type="hidden" name="likeUpMember" value="<%= loginMember.getMemberId() %>" />
+			<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />
+			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
+			<input type="hidden" name="likeCount" value="<%= posting.getLikeCount() %>" />
+			<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
+			<button id="board-like-btn">
+				love it <i class="fa-regular fa-heart"></i>
+				<!-- <i class="fa-solid fa-heart"></i> -->
+			</button>
+		</form>
 <% 
    }
 
@@ -193,6 +202,45 @@
 </form>
 <script>
 /**
+ * 좋아요 기능
+ */
+$(function() {
+	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	$("#board-like-btn").click(function() {
+		$.ajax({
+			url: "/expro/RecUpdate.do",
+			type: "POST",
+			data: {
+			no: ${posting.posting_no},
+			id: '${id}'
+		},
+		success: function () {
+			recCount();
+		},
+	})
+})
+
+// 게시글 추천수
+function recCount() {
+	$.ajax({
+		url: "/expro/RecCount.do",
+	          type: "POST",
+	          data: {
+	              no: ${content.board_no}
+	          },
+	          success: function (count) {
+	          	$(".rec_count").html(count);
+	          },
+	})
+};
+recCount();
+
+
+/* document.querySelector("#board-like-btn").addEventListener('click', (e) => {
+	document.hacksBoardLikeBtnFrm.submit();
+}); */
+
+/**
  * 댓글 삭제
  */
 document.querySelectorAll("#comment-delete-btn").forEach((button) => {
@@ -211,6 +259,7 @@ document.querySelectorAll("#comment-delete-btn").forEach((button) => {
 		}
 	};
 });
+
 /**
  * 답글폼 동적 생성
  */
