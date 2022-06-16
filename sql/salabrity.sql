@@ -79,7 +79,7 @@ create sequence seq_product_no;
 create table product_attach (
 	product_attach_no number,
 	product_no number not null,
-	thumbnail char(2) not null,
+	thumbnail varchar2(2) not null,
 	original_filename varchar2(255),
 	renamed_filename varchar2(255),
 	reg_date date default sysdate,
@@ -173,7 +173,7 @@ create table board_category (
 create table posting (
 	posting_no number,
 	board_code varchar2(3) not null,
-	member_id varchar2(15) not null,
+	member_id varchar2(15) null,
 	title varchar2(1000) not null,
 	content varchar2(4000) not null,
     reg_date date default sysdate,
@@ -209,7 +209,7 @@ create table posting_comment (
 	comment_no number,
 	posting_no number not null,
 	board_code varchar2(3) not null,
-	member_id varchar2(15) not null,
+	member_id varchar2(15) null,
 	comment_content varchar2(2000) not null,
     comment_level number default 1,
 	comment_ref number,
@@ -245,7 +245,7 @@ create sequence seq_shipping_address_no;
 
 create table cart (
 	cart_no number,
-	member_id varchar2(15) not null,
+	member_id varchar2(15) null,
 	product_no number not null,
 	quantity number default 1,
 	order_flag char(1) default 'N', -- 주문전에는 N, 주문하고나면 Y
@@ -260,8 +260,8 @@ create sequence seq_cart_no;
 
 create table buy (
 	merchant_uid number,
-	member_id varchar2(15) not null,
-	shipping_address_no number not null,
+	member_id varchar2(15) null,
+	shipping_address_no number null,
     pay_method varchar2(15) not null,
     amount number not null,
     buyer_email varchar2(200) not null,
@@ -312,7 +312,7 @@ create sequence seq_chatroom_no;
 create table chat (
     chat_no number,
     chatroom_no number not null,
-    member_id varchar2(15) not null,
+    member_id varchar2(15) null,
     chat_content varchar2(1000) not null,
     
     constraint pk_chat_no primary key(chat_no),
@@ -326,3 +326,19 @@ create sequence seq_chat_no;
 -- =================================================
 
 select * from member;
+
+
+
+-- =================================================
+-- 트리거
+-- =================================================
+create or replace trigger trig_product_delflag_y
+    after
+    update of del_flag on product
+    for each row
+begin
+    if :new.del_flag = 'Y' then
+        delete from product_menu where product_no = (:new.product_no);
+    end if;
+end;
+/

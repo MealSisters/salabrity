@@ -1,8 +1,8 @@
-<%@ page import="board.model.dto.PostingLike" %>
 <%@ page import="board.model.dto.PostingAttach" %>
+<%@ page import="board.model.dto.PostingLike" %>
 <%@ page import="member.model.dto.MemberRole" %>
 <%@ page import="board.model.dto.PostingComment" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List"%>
 <%@ page import="board.model.dto.PostingExt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<td class="posting-view-board-name" colspan="2">
-					<a href="<%= request.getContextPath() %>/board/community/hacks">in 샐브's 레시피</a>
+					<a href="<%= request.getContextPath() %>/board/community/general">in 자유게시판</a>
 				</td>
 			</tr>
 	<% 
@@ -56,7 +56,7 @@
 			<tr>
 				<td class="posting-view-content" colspan="2">
 					<div>
-						<img src="<%= request.getContextPath() %>/upload/board/community/hacks/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
+						<img src="<%= request.getContextPath() %>/upload/board/community/general/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
 					</div>
 	<% 
 			}
@@ -102,8 +102,8 @@
 	<div class="board-button-wrap">
 <% if(canLike) { %>
 		<form 
-			name="hacksLikeUpFrm"
-			action="<%= request.getContextPath() %>/board/community/hacksLike" 
+			name="generalLikeUpFrm"
+			action="<%= request.getContextPath() %>/board/community/generalLike" 
 			method="POST" >
 			<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>" />
 			<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
@@ -134,11 +134,11 @@
    if(canEdit) { 
 %>
 		<%-- 수정/삭제 버튼은 본인/관리자만 열람 가능 --%>
-		<input type="button" value="수정" id="board-update-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksUpdate?no=<%= posting.getPostingNo() %>';" />
-		<input type="button" value="삭제" id="board-delete-btn" onclick="deleteHacksBoard();" />
+		<input type="button" value="수정" id="board-update-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/generalUpdate?no=<%= posting.getPostingNo() %>';" />
+		<input type="button" value="삭제" id="board-delete-btn" onclick="deleteGeneralBoard();" />
 		<form 
-			name="hacksBoardDeleteFrm" 
-			action="<%= request.getContextPath() %>/board/community/hacksDelete" 
+			name="generalBoardDeleteFrm" 
+			action="<%= request.getContextPath() %>/board/community/generalDelete" 
 			method="POST">
 			<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
@@ -149,7 +149,7 @@
 		<h4>comment</h4>
 		<form
 			name="commentEnrollFrm"
-			action="<%= request.getContextPath() %>/board/community/hacksView/commentEnroll" 
+			action="<%= request.getContextPath() %>/board/community/generalView/commentEnroll" 
 			method="POST">
 			<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
@@ -157,7 +157,7 @@
 			<input type="hidden" name="commentLevel" value="1" />
 			<input type="hidden" name="commentRef" value="0" />
 			<textarea name="commentContent" cols="60" rows="3" placeholder="권리침해, 욕설 및 특정 대상을 비하하는 내용을 게시할 경우 이용약관 및 관련 법률에 의해 제재될 수 있습니다."></textarea>
-			<button type="submit" class="comment-enroll-btn">등록</button>
+			<button type="submit" id="comment-enroll-btn">등록</button>
 		</form>
 	</div>
 <% if(comments != null && !comments.isEmpty()) { %>
@@ -211,7 +211,7 @@
 </div>
 <form
 	name="commentDeleteFrm"
-	action="<%= request.getContextPath() %>/board/community/hacksView/commentDelete" 
+	action="<%= request.getContextPath() %>/board/community/generalView/commentDelete" 
 	method="POST">
 	<input type="hidden" name="commentNo" />
 	<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
@@ -222,7 +222,7 @@
  * 좋아요 기능
  */
 document.querySelector("#board-like-btn").addEventListener('click', () => {
-	document.hacksLikeUpFrm.submit();
+	document.generalLikeUpFrm.submit();
 });
 
 /**
@@ -265,7 +265,7 @@ document.querySelectorAll("#comment-reply-btn").forEach((button) => {
         
         const frm = document.createElement("form");
         frm.name = "commentEnrollFrm";
-        frm.action = "<%= request.getContextPath() %>/board/community/hacksView/commentEnroll";
+        frm.action = "<%= request.getContextPath() %>/board/community/generalView/commentEnroll";
         frm.method = "POST";
         frm.onsubmit = commentSubmitHandler;
 
@@ -363,7 +363,7 @@ const loginAlert = () => {
 /**
  * 게시물 삭제
  */
-const deleteHacksBoard = () => {
+const deleteGeneralBoard = () => {
 	const bool = confirm("게시물을 삭제하시겠습니까?");
 	
 	if(!bool) {
@@ -371,7 +371,7 @@ const deleteHacksBoard = () => {
 		return;
 	}
 	else {
-		document.hacksBoardDeleteFrm.submit();
+		document.generalBoardDeleteFrm.submit();
 	}
 };
 </script>

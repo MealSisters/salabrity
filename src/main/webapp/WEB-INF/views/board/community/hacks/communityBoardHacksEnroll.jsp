@@ -8,7 +8,7 @@
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
-			name="hacksBoardEnrollFrm" 
+			name="boardEnrollFrm" 
 			action="<%= request.getContextPath() %>/board/community/hacksEnroll" 
 			method="POST" 
 			enctype="multipart/form-data">
@@ -72,32 +72,6 @@
 	</div>
 </div>
 <script>
-/**
- * hacksBoardEnrollFrm 유효성 검사
- */
-window.addEventListener('load', () => {
-	document.hacksBoardEnrollFrm.onsubmit = (e) => {
-		const frm = e.target;
-		
-		const titleVal = frm.title.value.trim();
-		if(!/^.+$/.test(titleVal)) {
-			alert("제목을 입력해주세요.");
-			frm.title.select();
-			return false;
-		}
-		
-		const contentVal = frm.content.value.trim();
-		if(!/^(.|\n)+$/.test(contentVal)) {
-			alert("내용을 입력해주세요.");
-			frm.content.select();
-			return false;
-		}
-		
-		return true;
-	}
-	
-});
-
 window.addEventListener('load', () => {
 	getAttachs();
 });
@@ -134,5 +108,5 @@ const upFile = (attach, attachName, attachBtn) => {
     });
 };
 </script>
-
+<script src="<%= request.getContextPath() %>/js/validation.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
