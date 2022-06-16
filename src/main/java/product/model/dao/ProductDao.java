@@ -381,8 +381,8 @@ public class ProductDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				List<ProductAttach> attachs = new ArrayList<>();
-				ProductExt product = handelProductResultSet(rset);
-				ProductAttach attach = handelAttachResultSet(rset);
+				ProductExt product = handleProductResultSet(rset);
+				ProductAttach attach = handleAttachResultSet(rset);
 				attachs.add(attach);
 				product.setAttachs(attachs);
 				list.add(product);

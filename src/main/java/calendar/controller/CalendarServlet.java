@@ -32,10 +32,10 @@ public class CalendarServlet extends HttpServlet {
 		try {
 			List<CalendarExt> calList = calendarService.findRecentProductCal();
 
-			List<ProductExt> productAll = productService.findProductsAll();
+//			List<ProductExt> productAll = productService.findProductsAll();
 			ProductExt recentProduct = null;
-			if(productAll != null && !productAll.isEmpty())
-				recentProduct = productAll.get(0);
+//			if(productAll != null && !productAll.isEmpty())
+//				recentProduct = productAll.get(0);
 			
 			ProductExt productHere = null;
 			Map<String, CalendarExt> calMap = new HashMap<>();
@@ -49,7 +49,7 @@ public class CalendarServlet extends HttpServlet {
 
 			request.setAttribute("productHere", productHere);
 			request.setAttribute("recentProduct", recentProduct);
-			request.setAttribute("productList", productAll);			
+//			request.setAttribute("productList", productAll);			
 			request.setAttribute("calMap", calMap);
 			request.getRequestDispatcher("/WEB-INF/views/calendar/calendar.jsp").forward(request, response);
 		} catch (Exception e) {
