@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.dto.Member;
+
 /**
  * 
  */
 @WebFilter({
-	""
+	"/mypage/memberUpdate",
+	"/mypage/memberDelete"
+	
 })
 public class LoginFilter implements Filter {
 
@@ -42,13 +46,13 @@ public class LoginFilter implements Filter {
 		HttpServletResponse httpRes = (HttpServletResponse) response;
 		
 		HttpSession session = httpReq.getSession();
-//		Member loginMember = (Member) session.getAttribute("loginMember");
-//		
-//		if(loginMember == null) {
-//			session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
-//			httpRes.sendRedirect(httpReq.getContextPath() + "/");
-//			return; // 조기리턴
-//		}
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		if(loginMember == null) {
+			session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
+			httpRes.sendRedirect(httpReq.getContextPath() + "/");
+			return; // 조기리턴
+		}
 		chain.doFilter(request, response);
 	}
 

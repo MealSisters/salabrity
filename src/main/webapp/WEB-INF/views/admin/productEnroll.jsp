@@ -27,7 +27,7 @@ List<Menu> menuList = (List<Menu>) request.getAttribute("menuList");
         </div>
         <div class="formLine-wrapper">
             <label for="productPrice">가격</label>
-            <input type="number" name="productPrice" id="productPrice"><span>원</span>
+            <input type="number" name="productPrice" id="productPrice" value="0"><span>원</span>
             <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper">
@@ -46,6 +46,13 @@ List<Menu> menuList = (List<Menu>) request.getAttribute("menuList");
                     <input type="radio" class="targer-radio" name="productTarget" value="ordinary" checked><span>일반인</span>
                 </div>
             </div>
+            <span class="inputErrMsg"></span>
+        </div>
+        <div class="textarea-wrapper">
+	        <div class="formLine-wrapper description-wrapper">
+	            <label for="productDescription">소개</label>
+	            <textarea name="productDescription" id="productDescription" cols="120" rows="2" placeholder="상품을 설명해주세요."></textarea>
+	        </div>
             <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper thumbnail-wrapper">

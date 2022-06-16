@@ -1,4 +1,5 @@
-<%@page import="board.model.dto.PostingAttach" %>
+<%@ page import="board.model.dto.PostingLike" %>
+<%@ page import="board.model.dto.PostingAttach" %>
 <%@ page import="member.model.dto.MemberRole" %>
 <%@ page import="board.model.dto.PostingComment" %>
 <%@ page import="java.util.List" %>
@@ -18,6 +19,8 @@
 	boolean canEdit = loginMember != null
 			&& (loginMember.getMemberId().equals(posting.getMemberId())
 					|| loginMember.getMemberRole() == MemberRole.A);
+	
+	PostingLike like = (PostingLike) request.getAttribute("like");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
@@ -99,17 +102,22 @@
 	<div class="board-button-wrap">
 <% if(canLike) { %>
 		<form 
-			name="hacksBoardLikeBtnFrm" 
+			name="hacksLikeUpFrm"
 			action="<%= request.getContextPath() %>/board/community/hacksLike" 
-			method="POST">
-			<input type="hidden" name="likeUpMember" value="<%= loginMember.getMemberId() %>" />
-			<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />
+			method="POST" >
+			<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>" />
+			<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
-			<input type="hidden" name="likeCount" value="<%= posting.getLikeCount() %>" />
 			<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
 			<button id="board-like-btn">
-				love it <i class="fa-regular fa-heart"></i>
-				<!-- <i class="fa-solid fa-heart"></i> -->
+<%-- 		<% if(like.getStatus().equals("Y")) { %> --%>
+				love it&nbsp;<i class="fa-solid fa-heart"></i>
+<%-- 		<% 
+		   }
+		   else {
+		%>
+				love it&nbsp;<i class="fa-regular fa-heart"></i>
+		<% } %> --%>
 			</button>
 		</form>
 <% 
@@ -204,41 +212,9 @@
 /**
  * 좋아요 기능
  */
-$(function() {
-	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-	$("#board-like-btn").click(function() {
-		$.ajax({
-			url: "/expro/RecUpdate.do",
-			type: "POST",
-			data: {
-			no: ${posting.posting_no},
-			id: '${id}'
-		},
-		success: function () {
-			recCount();
-		},
-	})
-})
-
-// 게시글 추천수
-function recCount() {
-	$.ajax({
-		url: "/expro/RecCount.do",
-	          type: "POST",
-	          data: {
-	              no: ${content.board_no}
-	          },
-	          success: function (count) {
-	          	$(".rec_count").html(count);
-	          },
-	})
-};
-recCount();
-
-
-/* document.querySelector("#board-like-btn").addEventListener('click', (e) => {
-	document.hacksBoardLikeBtnFrm.submit();
-}); */
+document.querySelector("#board-like-btn").addEventListener('click', () => {
+	document.hacksLikeUpFrm.submit();
+});
 
 /**
  * 댓글 삭제

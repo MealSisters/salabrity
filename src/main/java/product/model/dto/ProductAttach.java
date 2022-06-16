@@ -6,8 +6,8 @@ public class ProductAttach {
 	private int productAttachNo;
 	private int productNo;
 	private Thumbnail thumbnail;
-	private String originalFilename;
-	private String renamedFilename;
+	private String originalFileName;
+	private String renamedFileName;
 	private Date regDate;
 
 	public ProductAttach() {
@@ -15,14 +15,14 @@ public class ProductAttach {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductAttach(int productAttachNo, int productNo, Thumbnail thumbnail, String originalFilename,
-			String renamedFilename, Date regDate) {
+	public ProductAttach(int productAttachNo, int productNo, Thumbnail thumbnail, String originalFileName,
+			String renamedFileName, Date regDate) {
 		super();
 		this.productAttachNo = productAttachNo;
 		this.productNo = productNo;
 		this.thumbnail = thumbnail;
-		this.originalFilename = originalFilename;
-		this.renamedFilename = renamedFilename;
+		this.originalFileName = originalFileName;
+		this.renamedFileName = renamedFileName;
 		this.regDate = regDate;
 	}
 
@@ -50,20 +50,20 @@ public class ProductAttach {
 		this.thumbnail = thumbnail;
 	}
 
-	public String getOriginalFilename() {
-		return originalFilename;
+	public String getOriginalFileName() {
+		return originalFileName;
 	}
 
-	public void setOriginalFilename(String originalFilename) {
-		this.originalFilename = originalFilename;
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
 	}
 
-	public String getRenamedFilename() {
-		return renamedFilename;
+	public String getRenamedFileName() {
+		return renamedFileName;
 	}
 
-	public void setRenamedFilename(String renamedFilename) {
-		this.renamedFilename = renamedFilename;
+	public void setRenamedFileName(String renamedFileName) {
+		this.renamedFileName = renamedFileName;
 	}
 
 	public Date getRegDate() {
@@ -77,7 +77,7 @@ public class ProductAttach {
 	@Override
 	public String toString() {
 		return "ProductAttach [productAttachNo=" + productAttachNo + ", productNo=" + productNo + ", thumbnail="
-				+ thumbnail + ", originalFilename=" + originalFilename + ", renamedFilename=" + renamedFilename
+				+ thumbnail + ", originalFileName=" + originalFileName + ", renamedFileName=" + renamedFileName
 				+ ", regDate=" + regDate + "]";
 	}
 
