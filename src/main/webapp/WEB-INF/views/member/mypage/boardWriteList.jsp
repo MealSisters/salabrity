@@ -1,3 +1,5 @@
+<%@page import="board.model.dto.Posting"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -5,7 +7,11 @@
 	href="<%= request.getContextPath() %>/css/member/board.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/myPage.css" />
-
+<%
+	List<Posting> list = (List<Posting>) request.getAttribute("list");
+	String type = request.getParameter("searchType");
+	String word = request.getParameter("searchKeyword");
+%>
 <div class="my_page_content">
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
 
@@ -23,24 +29,24 @@
 							</tr>
 						</thead>
 						<tbody>
+						<% if (list == null || list.isEmpty()) { %>
+							<tr><td colspan="5">조회된 게시글이 없습니다.</td></tr>
 							<tr>
-								<td>1</td>
-								<td>제목입니다요</td>
-								<td>2022-06-09</td>
-								<td>0</td>
+							<% } else { 
+								for(Posting p : list) {
+							%>
+								<td><%= p.getPostingNo() %></td>
+								
+								<td>
+								<a href="<%= request.getContextPath() %>/mypage/boardWriteList?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
+								</td>
+								
+								<td><%= p.getRegDate() %></td>
+								<td><%= p.getReadCount() %></td>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>제목입니다요</td>
-								<td>2022-06-09</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>제목입니다요</td>
-								<td>2022-06-09</td>
-								<td>0</td>
-							</tr>
+							<% } 
+							}
+							%>
 						</tbody>
 					</table>
 				</div>

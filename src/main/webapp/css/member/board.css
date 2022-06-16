@@ -238,17 +238,17 @@
 	border: 1px solid #116916;
 }
 
-.tbl_question {
+.tbl_question_enroll {
 	margin-left: 40px;
 }
 
-.tbl_question th {
+.tbl_question_enroll th {
 	line-height: 45px;
 	padding-right: 30px;
 	font-size: 13px;
 }
 
-.tbl_question {
+.tbl_question_enroll {
 	border-collapse: separate;
 	border-spacing: 0 10px;
 }
