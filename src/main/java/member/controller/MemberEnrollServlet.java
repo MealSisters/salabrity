@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.utill.pwdEncrypt;
+import common.utill.PwdEncrypt;
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
 import member.model.service.MemberService;
@@ -33,7 +33,7 @@ public class MemberEnrollServlet extends HttpServlet {
 		try {
 			// 입력 값
 			String memberId = request.getParameter("memberId");
-			String password = pwdEncrypt.encrypt(request.getParameter("password"), memberId);
+			String password = PwdEncrypt.encrypt(request.getParameter("password"), memberId);
 			String memberName = request.getParameter("memberName");
 			
 			String email1 = request.getParameter("email1");

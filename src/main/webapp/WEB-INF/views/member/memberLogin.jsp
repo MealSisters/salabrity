@@ -19,13 +19,13 @@ window.onload = () => {
 		
 		console.log(memberIdVal, passwordVal);
 		
-		if(!/^.{4,}$/.test(memberIdVal)) {
+		if(!/^.{3,}$/.test(memberIdVal)) {
 			alert("유효한 아이디를 입력해주세요.");
 			memberId.select(); // memberId의 모든 텍스트 선택
 			return false;
 		}
 		
-		if(!/^.{4,}$/.test(passwordVal)) {
+		if(!/^.{3,}$/.test(passwordVal)) {
 			alert("유효한 비밀번호를 입력해주세요.");
 			password.select();
 			return false;

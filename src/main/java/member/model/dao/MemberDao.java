@@ -84,7 +84,7 @@ public class MemberDao {
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			throw new MemberException("회원가입 오류", e);
+			throw new MemberException("회원 가입 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -101,7 +101,50 @@ public class MemberDao {
 			pstmt.setString(1, memberId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new MemberException("회원탈퇴 오류", e);
+			throw new MemberException("회원 탈퇴 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setString(2, member.getGender());
+			pstmt.setDate(3, member.getBirthday());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getZipcode());
+			pstmt.setString(7, member.getAddress());
+			pstmt.setString(8, member.getAddressDetail());
+			pstmt.setString(9, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원 정보 수정 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updatePassword(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updatePassword");
+		try {
+			pstmt = conn.prepareCall(sql);
+			pstmt.setString(1, member.getPassword());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new MemberException("비밀번호 수정 오류", e);
 		} finally {
 			close(pstmt);
 		}
