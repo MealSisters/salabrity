@@ -108,7 +108,7 @@ console.log("<%= memberId %>");
 			$.ajax({
 				type : "POST",
 				async : true,
-				data : {shippingAddressNo : $(event.target).prev().val(), memberId : "<%=memberId%>"},
+				data : {productNo : $(event.target).prev().val(), memberId : "<%=memberId%>"},
 				url : "<%=request.getContextPath()%>/order/cart/insertCart",
 				success : function(data){
 					alert('요청성공');
