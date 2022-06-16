@@ -181,3 +181,7 @@
 .del_product:hover {
     color: #AD1C0E;
 }
+.product_list{
+	margin-top: 60px;
+}
+
