@@ -110,9 +110,41 @@ public class ProductService {
 
 	public int deleteProductAttach(int productAttachNo) {
 		Connection conn = getConnection();
-		int result = productDao.deleteProductAttach(conn, productAttachNo);
-		close(conn);
+		int result = 0;
+		try {
+			result = productDao.deleteProductAttach(conn, productAttachNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);			
+		}
 		return result;
+	}
+
+	public List<ProductAttach> findProductAttachsByProductNo(int productNo) {
+		Connection conn = getConnection();
+		List<ProductAttach> attachs = productDao.findProductAttachsByProductNo(conn, productNo);
+		close(conn);
+		return attachs;
+	}
+
+	public int deleteProduct(int productNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			// 첨부파일은 남겨두기
+			result = productDao.updateDelflagY(conn, productNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return 0;
 	}
 	
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
