@@ -118,7 +118,7 @@
 <script>
 <% String memberId = loginMember != null ? loginMember.getMemberId() : ""; %>
 console.log("<%= memberId %>");
-
+		//장바구니
 		$(".fa-cart-plus").click((e) => {
 			if("<%=memberId%>" !== ""){
 			//console.log($(event.target).parents("span"));
@@ -126,11 +126,12 @@ console.log("<%= memberId %>");
 			$.ajax({
 				type : "POST",
 				async : true,
-				data : {productNo : $(event.target).prev().val(), memberId : "<%=memberId%>"},
+
+				data : {productNo: $(event.target).prev().val(), memberId : "<%=memberId%>", quantity : 1},
+
 				url : "<%=request.getContextPath()%>/order/cart/insertCart",
 				success : function(data){
 					alert('요청성공');
-					location.reload();
 				},
 				error : function(data){
 					alert('요청실패');
@@ -143,6 +144,9 @@ console.log("<%= memberId %>");
 		
 			}
 		});
+		
+		
+		
 
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
