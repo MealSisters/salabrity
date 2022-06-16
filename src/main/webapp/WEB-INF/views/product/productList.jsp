@@ -118,7 +118,7 @@
 <script>
 <% String memberId = loginMember != null ? loginMember.getMemberId() : ""; %>
 console.log("<%= memberId %>");
-
+		//장바구니
 		$(".fa-cart-plus").click((e) => {
 			if("<%=memberId%>" !== ""){
 			//console.log($(event.target).parents("span"));
@@ -144,6 +144,9 @@ console.log("<%= memberId %>");
 		
 			}
 		});
+		
+		
+		
 
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
