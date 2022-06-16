@@ -1,22 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import = "product.model.dto.ProductExt" %>
+<%@ page import="product.model.dto.Thumbnail"%>
+<%@ page import="java.util.List"%>
+<%@ page import = "product.model.dto.ProductAttach" %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%
+	ProductExt product = (ProductExt) request.getAttribute("product");
+	List<ProductAttach> attachments= product.getAttachs();
+	ProductAttach thumbnailImg = null;
+	ProductAttach detailImg1 = null;
+	ProductAttach detailImg2 = null;
+	for(ProductAttach attachment : attachments){
+		if(attachment.getThumbnail() == Thumbnail.Y)
+			thumbnailImg = attachment;
+		else if (attachment.getThumbnail() == Thumbnail.N1)
+			detailImg1 = attachment;
+		else if (attachment.getThumbnail() == Thumbnail.N2)
+			detailImg2 = attachment;
+	}
+	System.out.println("thumbnail = " + thumbnailImg);
+	System.out.println("detailImg1" + detailImg1);
+
+	
+
+%>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/product/product_info.css">
-
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <div class="gds_wrp">
-    <img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="prd_img">
+    <img src="<%= request.getContextPath() %>/images/product/<%= thumbnailImg.getRenamedFileName()
+    %>" alt="<%= thumbnailImg.getOriginalFileName() %>" class="prd_img"/>
     <div class="prd_info">
         <a href="<%= request.getContextPath() %>/calendar" class="go_cal">식단캘린더로 이동</a>
         <div class="prd_tit_wrap">
-            <h2 class="prd_tit">식단이름</h2>
-            <h3 class="prd_sub_tit">설명</h3>
+            <h2 class="prd_tit"><%=product.getProductName() %></h2>
+            <h3 class="prd_sub_tit"><%=product.getProductdescription() %></h3>
         </div>
         <div class="prd_opt_wrp">
             <div class="prd_opt">
@@ -24,7 +47,6 @@
                 <div class="opt">
                     <ul class="qty_wrp">
                         <li class="qty_minus"><span class="quantity_minus"><i class="fa-solid fa-minus"></i></span>
-
                         <li class="qty"><input type="number" value="1"></li>
                         <li class="qty_plus"><span class="quantity_plus"><i class="fa-solid fa-plus"></i></span></li>
                     </ul>
@@ -41,7 +63,7 @@
         </div>
         <div class="total_wrap">
             <div class="total_tit">총 주문금액</div>
-            <div class="total_price">100,000원</div>
+            <div class="total_price"><%=product.getProductPrice() %></div>
         </div>
         <div class="order_btn_wrp">
             <a href="<%= request.getContextPath()%>/order/order" class="btn_order">주문하기</a>
@@ -57,7 +79,17 @@
 </div>
 <div class="prd_detail">
     <div class="detail_tab1_active">
-        <img src="#" alt="상품상세사진" class="detail_img">
+        <img src="<%= request.getContextPath() %>/images/product/<%= detailImg1.getRenamedFileName()
+    %>" alt="<%= detailImg1.getOriginalFileName() %>" class="detail_img"/>
+    <%
+    	if(detailImg2 != null ){
+    %>
+   	 <img src="<%= request.getContextPath() %>/images/product/<%= detailImg2.getRenamedFileName()
+    %>" alt="<%= detailImg2.getOriginalFileName() %>" class="detail_img"/>
+    <%
+    }
+    %>
+    
         <h3>상품정보 제공고시</h3>
         <p>상품상세 참조</p>
     </div>

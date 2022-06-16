@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+<%@ page import = "product.model.dto.ProductExt" %>
+<%@ page import="product.model.dto.Thumbnail"%>
+<%@ page import="java.util.List"%>
+<%@ page import = "product.model.dto.ProductAttach" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/product/productList.css">
+<% 
+	List<ProductExt> list = (List<ProductExt>) request.getAttribute("list");
+%>
 <!-- 이은지 start -->
 <div class="list_header" style="background-image: url(<%= request.getContextPath() %>/images/productList_headimg.jpg);">
 <!-- 이은지 end -->
@@ -27,122 +33,27 @@
 
 
 <div class="product_list">
+<%
+	for(ProductExt product : list){
+		ProductAttach attach = product.getAttachs().get(0);
+%>
+	<div class="item">
 
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
+	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>">
+	    <img src="<%= request.getContextPath() %>/images/product/<%= attach.getRenamedFileName()%>" alt="<%= attach.getOriginalFileName() %>" class="item_img">
+	    </a>
+	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_tit"><%= product.getProductName() %></a>
+	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_dsc"><%= product.getProductdescription() %></a>
+	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_price"><%= product.getProductPrice() %></a>
+	    <span class="add_cart"><input type="hidden" value="<%= product.getProductNo() %>" /><i class="fa-solid fa-cart-plus"></i></span>
+	</div>
+<%		
+	}
+%>
 
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
+
 </div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-<div class="item">
-    <a href="<%= request.getContextPath() %>/product/productInfo"><img src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="" class="item_img"></a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_tit">당뇨케어식단</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_dsc">1일 2식 2주(월~금, 20회)</a>
-    <a href="<%= request.getContextPath() %>/product/productInfo" class="item_price">100,000원</a>
-    <a href="<%= request.getContextPath() %>/order/cart" class="add_cart"><i class="fa-solid fa-cart-plus"></i></a>
-</div>
-</div>
-<%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
+
 
 <!-- 이은지 start -->
 <!-- member 작업 끝나면 분기처리 예정 -->
@@ -186,5 +97,34 @@
 </script>
 <% } %>
 <!-- 이은지 end -->
+<script>
+<% String memberId = loginMember != null ? loginMember.getMemberId() : ""; %>
+console.log("<%= memberId %>");
 
+		$(".fa-cart-plus").click((e) => {
+			if("<%=memberId%>" !== ""){
+			//console.log($(event.target).parents("span"));
+		//	alert($(event.target).prev().val());
+			$.ajax({
+				type : "POST",
+				async : true,
+				data : {shippingAddressNo : $(event.target).prev().val(), memberId : "<%=memberId%>"},
+				url : "<%=request.getContextPath()%>/order/cart/insertCart",
+				success : function(data){
+					alert('요청성공');
+					location.reload();
+				},
+				error : function(data){
+					alert('요청실패');
+				}
+
+			});
+			}
+			else{
+				alert("로그인 후 이용 가능");
+		
+			}
+		});
+
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
