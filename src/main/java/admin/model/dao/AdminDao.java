@@ -65,7 +65,7 @@ public class AdminDao {
 			pstmt.setInt(2, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				Member member = handelMemberResultSet(rset);
+				Member member = handleMemberResultSet(rset);
 				list.add(member);
 			}
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class AdminDao {
 		return list;
 	}
 
-	private Member handelMemberResultSet(ResultSet rset) throws SQLException {
+	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
 		Member member = new Member();
 		member.setMemberId(rset.getString("member_id"));
 		member.setPassword(rset.getString("password"));
@@ -123,7 +123,7 @@ public class AdminDao {
 
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				Member member = handelMemberResultSet(rset);
+				Member member = handleMemberResultSet(rset);
 				list.add(member);
 			}
 

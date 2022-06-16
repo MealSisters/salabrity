@@ -2,8 +2,6 @@ package board.controller.community.hacks;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.FileRenamePolicy;
 
+import board.BoardUtil;
 import board.model.dto.BoardCode;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
-import common.SalabrityFileRenamePolicy;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardGeneralUpdateServlet
  */
 @WebServlet("/board/community/hacksUpdate")
@@ -50,19 +48,12 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 2. MultipartRequest객체 생성		
+			// 0. MultipartRequest객체 생성		
 			// 파일저장 경로
 			String saveDirectory = getServletContext().getRealPath("/upload/board/community/hacks");
-
-			MultipartRequest multiReq =
-					new MultipartRequest(
-							request, 
-							saveDirectory, 
-							1024 * 1024 * 10, 
-							"utf-8", 
-							new SalabrityFileRenamePolicy());
+			MultipartRequest multiReq = BoardUtil.getMultipartRequest(request, saveDirectory);
 			
-			// 3. 사용자 입력값 처리
+			// 1. 사용자 입력값 처리
 			int no = Integer.parseInt(multiReq.getParameter("no"));
 			BoardCode boardCode = BoardCode.valueOf(multiReq.getParameter("boardCode"));
 			String memberId = multiReq.getParameter("memberId");
@@ -76,27 +67,9 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 			posting.setTitle(title);
 			posting.setContent(content);
 			
-			// 업로드 파일
-			File attach1 = multiReq.getFile("attach1");
-			File attach2 = multiReq.getFile("attach2");
-			File attach3 = multiReq.getFile("attach3");
+			BoardUtil.getPostingAttach(multiReq, posting);
 			
-			// 첨부파일 처리
-			if(attach1 != null || attach2 != null || attach3 != null) {
-				List<PostingAttach> attachments = new ArrayList<>();
-				if(attach1 != null) {
-					attachments.add(getPostingAttach(multiReq, no, "attach1"));
-				}
-				if(attach2 != null) {
-					attachments.add(getPostingAttach(multiReq, no, "attach2"));
-				}
-				if(attach3 != null) {
-					attachments.add(getPostingAttach(multiReq, no, "attach3"));
-				}
-				posting.setAttachments(attachments);
-			}
-			
-			// 4. 업무 로직
+			// 2. 업무 로직
 			int result = boardService.updatePosting(posting);
 			String msg = result > 0 ? "게시글 수정에 성공했습니다." : "게시글 수정에 실패했습니다.";
 						
@@ -117,7 +90,7 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 				}
 			}
 			
-			// 5. 리다이렉트
+			// 3. 리다이렉트
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", msg);
 			response.sendRedirect(request.getContextPath() + "/board/community/hacksView?no=" + no);
@@ -126,16 +99,6 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 			throw e;
 		}
 		
-	}
-	
-	private PostingAttach getPostingAttach(MultipartRequest multiReq, int postingNo, String name) {
-		PostingAttach attach = new PostingAttach();
-		attach.setPostingNo(postingNo);
-		String originalFilename = multiReq.getOriginalFileName(name); // 업로드한 파일명
-		String renamedFilename = multiReq.getFilesystemName(name); // 저장된 파일명
-		attach.setOriginalFilename(originalFilename);
-		attach.setRenamedFilename(renamedFilename);
-		return attach;
 	}
 
 }

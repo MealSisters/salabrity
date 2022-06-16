@@ -56,8 +56,15 @@
 
 
 <!-- 이은지 start -->
-<!-- member 작업 끝나면 분기처리 예정 -->
-<% if(true) { %>
+<!-- 목록조회구현끝나면 각버튼에 상품번호따올수있게 수정하기 -->
+<form 
+	name="deleteProductFrm"
+	action="<%= request.getContextPath() %>/admin/productDelete"
+	method="POST">
+	<input type="hidden" name="delProductNo" value="" />
+</form>
+
+<% if(true) { %> <!-- member 작업 끝나면 분기처리 예정 -->
 <script>
     window.addEventListener('load', (e) => {
         addProductManageBtn();
@@ -72,17 +79,26 @@
         header_desc.insertAdjacentHTML('afterEnd', headAdminDiv);
 
         const cartBtns = document.querySelectorAll(".add_cart");
-        const div = `<div class="admin-bodyBtngroup">
-        <a href="<%= request.getContextPath() %>/admin/productUpdate" class="edit_product"><i class="fa-solid fa-pen"></i></a>
-        <a href="" onclick="deleteProduct()" class="del_product"><i class="fa-solid fa-trash-can"></i></a>
-    </div>`;
         cartBtns.forEach((cartBtn) => {
+	        const div = `<div class="admin-bodyBtngroup">
+				        	<a href="<%= request.getContextPath() %>/admin/productUpdate?productNo=<%  %>" class="edit_product"><i class="fa-solid fa-pen"></i></a>
+				        	<a onclick="deleteProduct(<%  %>);" class="del_product"><i class="fa-solid fa-trash-can"></i></a>
+				    	</div>`;
+				    	
             cartBtn.insertAdjacentHTML('beforeBegin', div);
         });
 
         addAdminBtnEvent();
     }
 
+    const deleteProduct = (productNo) => {
+    	document.querySelector("[name=delProductNo]").value = productNo;
+		if(confirm(`\${productNo}번 상품을 삭제하시겠습니까?`)){
+			document.deleteProductFrm.submit();
+		};
+	};
+	
+	
     const addAdminBtnEvent = () => {
         const menuListBtn = document.querySelector(".menuList-btn");
         menuListBtn.onclick = () => {
@@ -93,7 +109,9 @@
         addProductBtn.onclick = () => {
             location.href = "<%= request.getContextPath() %>/admin/productEnroll";
         };
+
     }
+    
 </script>
 <% } %>
 <!-- 이은지 end -->

@@ -11,7 +11,6 @@ public class Posting {
 	private String content;
 	private Date regDate;
 	private int readCount;
-	private int likeCount;
 	private int postingLevel;
 	private int postingRef;
 	
@@ -20,7 +19,7 @@ public class Posting {
 	}
 
 	public Posting(int postingNo, BoardCode boardCode, String memberId, String title, String content, Date regDate,
-			int readCount, int likeCount, int postingLevel, int postingRef) {
+			int readCount, int postingLevel, int postingRef) {
 		super();
 		this.postingNo = postingNo;
 		this.boardCode = boardCode;
@@ -29,7 +28,6 @@ public class Posting {
 		this.content = content;
 		this.regDate = regDate;
 		this.readCount = readCount;
-		this.likeCount = likeCount;
 		this.postingLevel = postingLevel;
 		this.postingRef = postingRef;
 	}
@@ -90,14 +88,6 @@ public class Posting {
 		this.readCount = readCount;
 	}
 
-	public int getLikeCount() {
-		return likeCount;
-	}
-
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
-	}
-
 	public int getPostingLevel() {
 		return postingLevel;
 	}
@@ -117,8 +107,8 @@ public class Posting {
 	@Override
 	public String toString() {
 		return "Posting [postingNo=" + postingNo + ", boardCode=" + boardCode + ", memberId=" + memberId + ", title="
-				+ title + ", content=" + content + ", regDate=" + regDate + ", readCount=" + readCount + ", likeCount="
-				+ likeCount + ", postingLevel=" + postingLevel + ", postingRef=" + postingRef + "]";
+				+ title + ", content=" + content + ", regDate=" + regDate + ", readCount=" + readCount
+				+ ", postingLevel=" + postingLevel + ", postingRef=" + postingRef + "]";
 	}
 	
 }

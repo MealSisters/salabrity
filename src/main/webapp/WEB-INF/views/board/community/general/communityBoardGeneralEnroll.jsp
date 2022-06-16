@@ -1,29 +1,23 @@
-<%@ page import="board.model.dto.PostingAttach" %>
-<%@ page import="java.util.List" %>
-<%@ page import="board.model.dto.PostingExt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%
-	PostingExt posting = (PostingExt) request.getAttribute("posting");
-%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
-<div id="community-board-update-wrap">
-	<span class="main-title">샐브's 레시피</span>
+<div id="community-board-enroll-wrap">
+	<span class="main-title">자유게시판</span>
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
-		<form
-			name="boardUpdateFrm" 
-			action="<%= request.getContextPath() %>/board/community/hacksUpdate" 
+		<form 
+			name="boardEnrollFrm"
+			action="<%= request.getContextPath() %>/board/community/generalEnroll" 
 			method="POST" 
 			enctype="multipart/form-data">
-			<table class="tbl-board-update">
+			<table class="tbl-board-enroll">
 				<tr>
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="<%= posting.getMemberId() %>" readonly/>
+							<input type="text" name="memberId" value="<%= loginMember.getMemberId() %>" readonly/>
 						</div>
 					</td>
 				</tr>
@@ -31,7 +25,7 @@
 					<th>제목<sup>*</sup></th>
 					<td>
 						<div>
-							<input type="text" name="title" value="<%= posting.getTitle() %>" />
+							<input type="text" name="title" placeholder="제목을 입력하세요." />
 						</div>
 					</td>
 				</tr>
@@ -39,41 +33,13 @@
 					<th>내용<sup>*</sup></th>
 					<td>
 						<div>
-							<textarea rows="5" cols="40" name="content"><%= posting.getContent() %></textarea>
+							<textarea rows="5" cols="40" name="content" placeholder="내용을 입력하세요."></textarea>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
-					<td>
-			<% 
-				List<PostingAttach> attachments = posting.getAttachments();
-				if(attachments != null && !attachments.isEmpty()) {
-					for(int i = 0; i < attachments.size(); i++) {
-						PostingAttach attach = attachments.get(i);
-			%>
-						<div class="board-attach-wrap">
-							<div class="existing-attach-wrap">								
-								<div class="existing-attach-img">
-									<img src="<%= request.getContextPath() %>/upload/board/community/hacks/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
-								</div>
-								<span class="existing-attach-name"><%= attach.getOriginalFilename() %></span>
-								<input type="checkbox" name="delFile" id="delFile<%= i + 1 %>" value="<%= attach.getPostingAttachNo() %>" />
-								<label for="delFile<%= i + 1 %>">
-									<sup>
-										<svg width="30" height="15" xmlns="http://w3.org/2000/svg" version="1.1" viewbox="0 0 80 40">
-								            <polyline class="st1" points="9.06 20.89 25.85 35.74 50.46 9.35"/>
-								        </svg>									
-								        <span>클릭시 삭제됩니다.</span>
-									</sup>
-								</label>
-								<!-- <span class="attach-del-check">체크시 삭제됩니다.</span> -->
-							</div>
-						</div>
-			<% 
-					}
-				}
-			%>	
+					<td>					
 						<div class="board-attach-wrap" id="board-attach1-wrap">
 				            <p class="attach-name"></p>
 				            <input type="file" name="attach1" id="attach1" />
@@ -99,10 +65,8 @@
 				</tr>
 			</table>
 			<div class="board-button-wrap">
-				<input type="submit" value="수정" id="board-update-btn" />
-				<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />
-				<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
-				<input type="reset" value="취소" id="board-back-btn" onclick="history.go(-1);" />
+				<input type="submit" value="등록" id="board-enroll-btn" />
+				<input type="reset" value="취소" id="board-reset-btn" />
 			</div>
 		</form>
 	</div>
