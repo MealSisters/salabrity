@@ -241,10 +241,13 @@ communityBoardList.jsp
 }
 
 /* buttom */
+.community-hacks-link, .community-general-link {
+	text-decoration: none;
+}
+
 #hacks-btn, #general-btn {
 	border: none;
 	padding: 5px;
-	border-radius: 10px;
 	background-color: white;
 	font-size: 15px;
 	font-weight: bold;
@@ -252,6 +255,10 @@ communityBoardList.jsp
 
 #hacks-btn:hover, #general-btn:hover {
 	color: #116916;
+}
+
+.active {
+	color: #f8674f;	
 }
 
 #board-post-btn {

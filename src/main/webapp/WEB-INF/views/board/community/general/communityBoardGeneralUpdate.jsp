@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
 <div id="community-board-update-wrap">
-	<span class="main-title">샐브's 레시피</span>
+	<span class="main-title">자유게시판</span>
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
 			name="boardUpdateFrm" 
-			action="<%= request.getContextPath() %>/board/community/hacksUpdate" 
+			action="<%= request.getContextPath() %>/board/community/generalUpdate" 
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-board-update">
@@ -67,7 +67,6 @@
 								        <span>클릭시 삭제됩니다.</span>
 									</sup>
 								</label>
-								<!-- <span class="attach-del-check">체크시 삭제됩니다.</span> -->
 							</div>
 						</div>
 			<% 

@@ -51,7 +51,7 @@ public class MenuDao {
 			pstmt.setInt(4, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				Menu menu = handelMenuResultSet(rset);
+				Menu menu = handleMenuResultSet(rset);
 				list.add(menu);
 			}
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class MenuDao {
 		return list;
 	}
 
-	private MenuExt handelMenuResultSet(ResultSet rset) throws SQLException {
+	private MenuExt handleMenuResultSet(ResultSet rset) throws SQLException {
 		MenuExt menu = new MenuExt();
 		menu.setMenuNo(rset.getInt("menu_no"));
 		menu.setMenuId(rset.getString("menu_id"));
@@ -104,7 +104,7 @@ public class MenuDao {
 			pstmt.setString(1, menuId);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				Menu menu = handelMenuResultSet(rset);
+				Menu menu = handleMenuResultSet(rset);
 				list.add(menu);
 			}
 		} catch (Exception e) {
@@ -183,7 +183,7 @@ public class MenuDao {
 			pstmt.setInt(1, menuNo);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				menu = handelMenuResultSet(rset);
+				menu = handleMenuResultSet(rset);
 			}
 		} catch (Exception e) {
 			throw new MenuException("메뉴번호를 이용한 메뉴 조회 오류", e);
@@ -204,7 +204,7 @@ public class MenuDao {
 			pstmt.setInt(1, menuNo);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				attach = handelMenuAttachResultSet(rset);
+				attach = handleMenuAttachResultSet(rset);
 			}
 		} catch (Exception e) {
 			throw new MenuException("메뉴번호를 이용한 첨부파일 조회 오류", e);
@@ -215,7 +215,7 @@ public class MenuDao {
 		return attach;
 	}
 
-	private MenuAttach handelMenuAttachResultSet(ResultSet rset) throws SQLException {
+	private MenuAttach handleMenuAttachResultSet(ResultSet rset) throws SQLException {
 		MenuAttach attach;
 		attach = new MenuAttach();
 		attach.setMenuAttachNo(rset.getInt("menu_attach_no"));
@@ -256,7 +256,7 @@ public class MenuDao {
 			pstmt.setInt(1, menuAttachNo);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				attach = handelMenuAttachResultSet(rset);
+				attach = handleMenuAttachResultSet(rset);
 			}
 		} catch (Exception e) {
 			throw new MenuException("고유번호를 이용한 첨부파일 조회 오류", e);
@@ -322,7 +322,7 @@ public class MenuDao {
 			pstmt.setInt(4, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				Menu menu = handelMenuResultSet(rset);
+				Menu menu = handleMenuResultSet(rset);
 				list.add(menu);
 			}
 		} catch (Exception e) {
@@ -366,7 +366,7 @@ public class MenuDao {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				Menu menu = handelMenuResultSet(rset);
+				Menu menu = handleMenuResultSet(rset);
 				list.add(menu);
 			}
 		} catch (Exception e) {

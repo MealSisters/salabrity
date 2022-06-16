@@ -16,7 +16,6 @@ import board.model.dto.PostingAttach;
 import board.model.dto.PostingComment;
 import board.model.dto.PostingExt;
 import board.model.dto.PostingLike;
-import member.model.dto.Member;
 
 public class BoardService {
 	
@@ -91,11 +90,14 @@ public class BoardService {
 	 */
 	public PostingExt findByPostingNo(int no) {
 		Connection conn = getConnection();
-		PostingExt posting = boardDao.findByPostingNo(conn, no);
 		List<PostingAttach> attachments = boardDao.findPostingAttachByPostingNo(conn, no);
 		List<PostingComment> comments = boardDao.findPostingCommentByPostingNo(conn, no);
+		List<PostingLike> likes = boardDao.findPostingLikeByPostingNo(conn, no);
+		PostingExt posting = boardDao.findByPostingNo(conn, no);
 		posting.setAttachments(attachments);
 		posting.setComments(comments);
+		posting.setLikes(likes);
+		System.out.println("service@posting=" + posting);
 		close(conn);
 		return posting;
 	}	
