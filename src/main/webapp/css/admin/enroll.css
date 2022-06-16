@@ -28,6 +28,9 @@
 .formLine-wrapper > p {
     margin: 10px 16px;
 }
+.formLine-wrapper > p.p-productId, .formLine-wrapper > p.p-productPrice {
+	margin: 10px 5px 10px 0;
+}
 .updateFrm .formLine-wrapper > .p-static {
 	margin: 10px 0;
 }
@@ -56,7 +59,15 @@ textarea {
     border-radius: 7px;
     transition-duration: 0.1s;
 }
-.uniqueCkeckBtn, .upfileBtn-wrapper button {
+.delBtn-wrapper {
+	margin: 0 0 0 5px;
+	padding: 0;
+    height: 25px;
+    background-color: #888;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.uniqueCkeckBtn, .upfileBtn-wrapper button, .delBtn-wrapper button {
     height: inherit;
     line-height: 200%;
     cursor: pointer;
@@ -200,6 +211,6 @@ input[type="radio"] {
 .cancelBtn-wrapper {
     background-color: #888;
 }
-.cancelBtn-wrapper:hover {
+.cancelBtn-wrapper:hover, .delBtn-wrapper:hover {
     background-color: #AD1C0E;
 }
