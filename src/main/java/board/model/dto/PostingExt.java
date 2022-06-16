@@ -9,28 +9,31 @@ public class PostingExt extends Posting {
 	private int commentCount;
 	private List<PostingAttach> attachments;
 	private List<PostingComment> comments;
+	private List<PostingLike> likes;
 	
 	public PostingExt() {
 		super();
 	}
 
-	public PostingExt(int attachCount, int commentCount, List<PostingAttach> attachments,
-			List<PostingComment> comments) {
+	public PostingExt(int attachCount, int commentCount, List<PostingAttach> attachments, List<PostingComment> comments,
+			List<PostingLike> likes) {
 		super();
 		this.attachCount = attachCount;
 		this.commentCount = commentCount;
 		this.attachments = attachments;
 		this.comments = comments;
+		this.likes = likes;
 	}
 
 	public PostingExt(int postingNo, BoardCode boardCode, String memberId, String title, String content, Date regDate,
 			int readCount, int likeCount, int postingLevel, int postingRef, int attachCount, int commentCount,
-			List<PostingAttach> attachments, List<PostingComment> comments) {
+			List<PostingAttach> attachments, List<PostingComment> comments, List<PostingLike> likes) {
 		super(postingNo, boardCode, memberId, title, content, regDate, readCount, likeCount, postingLevel, postingRef);
 		this.attachCount = attachCount;
 		this.commentCount = commentCount;
 		this.attachments = attachments;
 		this.comments = comments;
+		this.likes = likes;
 	}
 
 	public int getAttachCount() {
@@ -65,10 +68,19 @@ public class PostingExt extends Posting {
 		this.comments = comments;
 	}
 
+	public List<PostingLike> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<PostingLike> likes) {
+		this.likes = likes;
+	}
+
 	@Override
 	public String toString() {
 		return "PostingExt [attachCount=" + attachCount + ", commentCount=" + commentCount + ", attachments="
-				+ attachments + ", comments=" + comments + ", toString()=" + super.toString() + "]";
+				+ attachments + ", comments=" + comments + ", likes=" + likes + ", toString()=" + super.toString()
+				+ "]";
 	}
 	
 }

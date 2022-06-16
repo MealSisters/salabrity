@@ -19,7 +19,9 @@ import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingComment;
 import board.model.dto.PostingExt;
+import board.model.dto.PostingLike;
 import board.model.exception.BoardException;
+import member.model.exception.MemberException;
 
 public class BoardDao {
 	
@@ -531,6 +533,139 @@ public class BoardDao {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new BoardException("댓글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 게시글 검색
+	 * @param conn
+	 * @param pageParam 
+	 * @param param
+	 * @return
+	 */
+	public List<PostingExt> searchBy(Connection conn, Map<String, Object> pageParam, Map<String, String> param) {
+		String sql = prop.getProperty("searchBy");
+		sql = sql.replace("#", param.get("searchType"));
+		System.out.println("sql = " + sql);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<PostingExt> postingList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) pageParam.get("start"));
+			pstmt.setInt(2, (int) pageParam.get("end"));
+			pstmt.setString(3, "%" + param.get("searchKeyword") + "%");
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				PostingExt posting = handlePostingResultSet(rset);
+				posting.setAttachCount(rset.getInt("attach_count")); // 첨부파일 개수
+				posting.setCommentCount(rset.getInt("comment_count")); // 댓글 개수
+				postingList.add(posting);
+			}
+		} catch (Exception e) {
+			throw new MemberException("게시물 검색 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return postingList;
+	}
+
+	/**
+	 * 좋아요 여부 체크
+	 * @param conn
+	 * @param likeUpMember
+	 * @param postingNo
+	 * @return
+	 */
+	public PostingLike likeCheck(Connection conn, int postingNo, BoardCode boardCode, String memberId) {
+		String sql = prop.getProperty("likeCheck");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		PostingLike like = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postingNo);
+			pstmt.setString(2, boardCode.toString());
+			pstmt.setString(3, memberId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				like = new PostingLike();
+				like.setPostingNo(rset.getInt("posting_no"));
+				like.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				like.setMemberId(rset.getString("member_id"));
+				like.setStatus(rset.getString("status"));
+			}
+		} catch (Exception e) {
+			throw new MemberException("좋아요 여부 체크 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return like;
+	}
+
+	/**
+	 * 좋아요수 증가
+	 * @param conn
+	 * @param likeUpMember
+	 * @param postingNo
+	 * @return
+	 */
+	public int updateLikeCount(Connection conn, int postingNo, BoardCode boardCode, String memberId) {
+		String sql = prop.getProperty("updateLikeCount");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postingNo);
+			pstmt.setString(2, boardCode.toString());
+			pstmt.setString(3, memberId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("좋아요수 증가 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 좋아요 상태 등록
+	 * @param conn
+	 * @param like
+	 * @return
+	 */
+	public int setPostingLike(Connection conn, PostingLike like) {
+		String sql = "";
+		if(like.getStatus().equals("Y")) {
+			sql = prop.getProperty("setPostingLikeY");
+		}else {
+			sql = prop.getProperty("setPostingLikeN");
+		}
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, like.getPostingNo());
+			pstmt.setString(2, like.getBoardCode().toString());
+			pstmt.setString(3, like.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("좋아요 상태 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}

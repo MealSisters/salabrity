@@ -16,10 +16,10 @@ import board.model.service.BoardService;
 import common.utill.PageBar;
 
 /**
- * Servlet implementation class CommunityBoardHacksServlet
+ * Servlet implementation class CommunityBoardHacksSearchServlet
  */
-@WebServlet("/board/community/hacks")
-public class CommunityBoardHacksServlet extends HttpServlet {
+@WebServlet("/board/community/hacksSearch")
+public class CommunityBoardHacksSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -28,7 +28,7 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 사용자 입력값 처리
+			// 0. 페이징 처리
 			int numPerPage = boardService.Num_PER_PAGE;
 			int cPage = 1;
 			
@@ -38,17 +38,26 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 				// 예외발생시 현재 페이지는 1로 처리
 			}
 			
-			Map<String, Object> param = new HashMap<>();
+			Map<String, Object> pageParam = new HashMap<>();
 			int start = (cPage - 1) * numPerPage + 1;
 			int end = cPage * numPerPage;
-			param.put("start", start);
-			param.put("end", end);
-					
+			pageParam.put("start", start);
+			pageParam.put("end", end);
+
+			// 1. 사용자 입력값 처리
+			String searchType = request.getParameter("searchType");
+			String searchKeyword = request.getParameter("searchKeyword");
+			
+			Map<String, String> param = new HashMap<>();
+			param.put("searchType", searchType);
+			param.put("searchKeyword", searchKeyword);
+			System.out.println("param = " + param);
+			
 			// 2. 업무 로직
 			// 2.a. content 영역
-			List<PostingExt> postingList = boardService.findAllPostingList(param);
+			List<PostingExt> postingList = boardService.searchBy(pageParam, param);
 			System.out.println("postingList = " + postingList);
-			
+
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings();
 			String url = request.getRequestURI();
@@ -58,14 +67,12 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);
 			request.setAttribute("pagebar", pagebar);
-	
 			request.getRequestDispatcher("/WEB-INF/views/board/community/hacks/communityBoardHacksList.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
 
 }
