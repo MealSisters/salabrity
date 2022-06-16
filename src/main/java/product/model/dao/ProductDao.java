@@ -323,6 +323,27 @@ public class ProductDao {
 		return result;
 	}
 	
+	public List<ProductExt> findProductsAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ProductExt> list = new ArrayList<>();
+		String sql = prop.getProperty("findProductsAllOrderByRegDate");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				ProductExt product = handleProductResultSet(rset);
+				list.add(product);
+			}
+		} catch (Exception e) {
+			throw new ProductException("판매중인 상품 목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 

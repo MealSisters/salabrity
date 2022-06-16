@@ -118,7 +118,7 @@
 				<tr>
 					<td colspan="6">
 						<div class="hacks-btn">
-							<a href="<%= request.getContextPath() %>/board/community/hacks">
+							<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=C1">
 								샐브's 레시피 더보기　<i class="fa-solid fa-rectangle-list"></i>
 							</a>
 						</div>
