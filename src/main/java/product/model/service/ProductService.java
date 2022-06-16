@@ -116,5 +116,13 @@ public class ProductService {
 	}
 	
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
-
+	public List<ProductExt> findAllProduct() {
+		Connection conn = getConnection();
+		List<ProductExt> list = productDao.findAllProduct(conn);
+System.out.println("Service@"+list);
+		close(conn);
+		return list;
+		
+		
+	}
 }
