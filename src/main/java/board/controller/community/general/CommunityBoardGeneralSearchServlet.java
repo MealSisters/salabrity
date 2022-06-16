@@ -1,4 +1,4 @@
-package board.controller.community.hacks;
+package board.controller.community.general;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.dto.BoardCode;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 import common.utill.PageBar;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardHacksServlet
+ * Servlet implementation class CommunityBoardGeneralSearchServlet
  */
-@WebServlet("/board/community/hacks")
-public class CommunityBoardHacksServlet extends HttpServlet {
+@WebServlet("/board/community/generalSearch")
+public class CommunityBoardGeneralSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -30,7 +29,7 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 사용자 입력값 처리
+			// 0. 페이징 처리
 			int numPerPage = boardService.Num_PER_PAGE;
 			int cPage = 1;
 			
@@ -40,19 +39,25 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 				// 예외발생시 현재 페이지는 1로 처리
 			}
 			
-			Map<String, Object> param = new HashMap<>();
+			Map<String, Object> pageParam = new HashMap<>();
 			int start = (cPage - 1) * numPerPage + 1;
 			int end = cPage * numPerPage;
-			param.put("start", start);
-			param.put("end", end);
+			pageParam.put("start", start);
+			pageParam.put("end", end);
+
+			// 1. 사용자 입력값 처리
+			String searchType = request.getParameter("searchType");
+			String searchKeyword = request.getParameter("searchKeyword");
 			
-			BoardCode boardCode = BoardCode.valueOf(request.getParameter("boardCode"));
+			Map<String, String> param = new HashMap<>();
+			param.put("searchType", searchType);
+			param.put("searchKeyword", searchKeyword);
+			System.out.println("param = " + param);
 			
 			// 2. 업무 로직
 			// 2.a. content 영역
-			List<PostingExt> postingList = boardService.findAllPostingList(param, boardCode);
-			System.out.println("list@postingList = " + postingList);
-			
+			List<PostingExt> postingList = boardService.searchBy(pageParam, param);
+
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings();
 			String url = request.getRequestURI();
@@ -62,8 +67,7 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);
 			request.setAttribute("pagebar", pagebar);
-	
-			request.getRequestDispatcher("/WEB-INF/views/board/community/hacks/communityBoardHacksList.jsp")
+			request.getRequestDispatcher("/WEB-INF/views/board/community/general/communityBoardGeneralList.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

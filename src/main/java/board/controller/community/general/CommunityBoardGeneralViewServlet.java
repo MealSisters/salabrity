@@ -13,6 +13,7 @@ import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardGeneralViewServlet
  */
 @WebServlet("/board/community/generalView")
@@ -52,7 +53,7 @@ public class CommunityBoardGeneralViewServlet extends HttpServlet {
 			if(!hasRead) {
 				int result = boardService.updateReadCount(no);
 				Cookie cookie = new Cookie("postingCookie", postingCookieVal + "|" + no + "|");
-				cookie.setPath(request.getContextPath() + "/board/community/hacksView");
+				cookie.setPath(request.getContextPath() + "/board/community/generalView");
 				cookie.setMaxAge(365 * 24 * 60 * 60);
 				response.addCookie(cookie);
 				System.out.println("> 신규 postingCookie 생성");
