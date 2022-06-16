@@ -43,32 +43,26 @@
         </div>
        </div>
     </form>
+
+   	<div class="result">
+   	</div>
     
 <!-- 유효성 검사 -->
 <script>
 	function check_onclick(){
 	    const frm = document.surveyForm;
-
 	      if(frm.heightInput.value=="" && frm.weightInput.value=="" ){
 	      alert("상세정보 입력여부를 확인해주세요.")
-	        frm.heightInput.focus();
-	      	return false; 
-	      }
-	      if(frm.heightInput.value==""){
+	        return frm.heightInput.focus();
+	      }if(frm.heightInput.value==""){
 	        alert("키가 입력되지 않았습니다. 확인해주세요.")
-	        frm.heightInput.focus();
-	      	return false; 
-	      }
-	      if(frm.weightInput.value==""){
+	        return frm.heightInput.focus();
+	      }if(frm.weightInput.value==""){
 	        alert("몸무게가 입력되지 않았습니다. 확인해주세요.")
-	        frm.weightInput.focus();
-	      	return false; 
+	        return frm.weightInput.focus();
 	      }
-	      frm.action ="surveyResult.jsp";
-	      frm.method = "post";
-	      frm.submit();
 	    }
-	}
 </script>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
