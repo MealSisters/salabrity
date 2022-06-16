@@ -59,7 +59,9 @@ public class BoardDao {
 				PostingExt posting = handlePostingResultSet(rset);
 				posting.setAttachCount(rset.getInt("attach_count")); // 첨부파일 개수
 				posting.setCommentCount(rset.getInt("comment_count")); // 댓글 개수
+				posting.setLikeCount(rset.getInt("like_count")); // 좋아요 개수
 				postingList.add(posting);
+				System.out.println("boardDao@64=" + posting);
 			}
 		} catch (Exception e) {
 			throw new BoardException("게시판 목록 조회 오류", e);
@@ -86,9 +88,12 @@ public class BoardDao {
 		posting.setContent(rset.getString("content"));
 		posting.setRegDate(rset.getDate("reg_date"));
 		posting.setReadCount(rset.getInt("read_count"));
-		posting.setLikeCount(rset.getInt("like_count"));
 		posting.setPostingLevel(rset.getInt("posting_level"));
 		posting.setPostingRef(rset.getInt("posting_ref"));
+		posting.setAttachCount(rset.getInt("attach_count"));
+		posting.setCommentCount(rset.getInt("comment_count"));
+		posting.setLikeCount(rset.getInt("like_count"));
+		System.out.println("boardDao93@posting=" + posting);
 		return posting;
 	}
 
@@ -216,9 +221,11 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
+			System.out.println("boardDao221@no=" + no);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				posting = handlePostingResultSet(rset);
+				System.out.println("boardDao@223=" + posting);
 			}
 		} catch (Exception e) {
 			throw new BoardException("게시글 한 건 조회 오류", e);
@@ -327,6 +334,53 @@ public class BoardDao {
 		pc.setCommentRef(rset.getInt("comment_ref"));
 		pc.setRegDate(rset.getDate("reg_date"));
 		return pc;
+	}
+	
+
+	/**
+	 * 좋아요 목록 조회 - posting_like테이블의 posting_no컬럼
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public List<PostingLike> findPostingLikeByPostingNo(Connection conn, int no) {
+		String sql = prop.getProperty("findPostingLikeByPostingNo");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		List<PostingLike> likes = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				PostingLike like = handlePostingLikeResultSet(rset);
+				likes.add(like);
+			}
+		} catch (Exception e) {
+			throw new BoardException("좋아요 목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return likes;
+	}
+
+	/**
+	 * 좋아요 ResultSet 관리
+	 * @param rset
+	 * @return
+	 * @throws SQLException 
+	 */
+	private PostingLike handlePostingLikeResultSet(ResultSet rset) throws SQLException {
+		PostingLike like = new PostingLike();
+		like.setPostingNo(rset.getInt("posting_no"));
+		like.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+		like.setMemberId(rset.getString("member_id"));
+		like.setStatus(rset.getString("status"));
+		return like;
 	}
 
 	/**
@@ -566,6 +620,7 @@ public class BoardDao {
 				PostingExt posting = handlePostingResultSet(rset);
 				posting.setAttachCount(rset.getInt("attach_count")); // 첨부파일 개수
 				posting.setCommentCount(rset.getInt("comment_count")); // 댓글 개수
+				posting.setLikeCount(rset.getInt("like_count")); // 좋아요 개수
 				postingList.add(posting);
 			}
 		} catch (Exception e) {
@@ -581,7 +636,7 @@ public class BoardDao {
 	/**
 	 * 좋아요 여부 체크
 	 * @param conn
-	 * @param likeUpMember
+	 * @param memberId
 	 * @param postingNo
 	 * @return
 	 */
@@ -617,7 +672,7 @@ public class BoardDao {
 	/**
 	 * 좋아요수 증가
 	 * @param conn
-	 * @param likeUpMember
+	 * @param memberId
 	 * @param postingNo
 	 * @return
 	 */

@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.dto.BoardCode;
+import board.BoardUtil;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardGeneralViewServlet
  */
 @WebServlet("/board/community/hacksView")
@@ -61,12 +62,7 @@ public class CommunityBoardHacksViewServlet extends HttpServlet {
 			
 			// 게시글 조회
 			PostingExt posting = boardService.findByPostingNo(no);
-			
-			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
-			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
-			
-			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
-			System.out.println(posting);
+			BoardUtil.getReplacePostingContent(posting);
 			
 			// 3. view단 위임
 			request.setAttribute("posting", posting);

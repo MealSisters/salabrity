@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import mypage.model.dto.Destination;
+import mypage.model.exception.DestinationException;
 import product.model.dto.Product;
 import product.model.dto.ProductAttach;
 import product.model.dto.ProductExt;
@@ -35,7 +37,7 @@ public class ProductDao {
 
 	/*-------------------------------------- 이은지 start --------------------------------------*/
 	
-	private ProductExt handelProductResultSet(ResultSet rset) throws SQLException {
+	private ProductExt handleProductResultSet(ResultSet rset) throws SQLException {
 		ProductExt product = new ProductExt();
 		product.setProductNo(rset.getInt("product_no"));
 		product.setProductId(rset.getString("product_id"));
@@ -61,7 +63,7 @@ public class ProductDao {
 			pstmt.setString(1, productId);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				ProductExt product = handelProductResultSet(rset);
+				ProductExt product = handleProductResultSet(rset);
 				list.add(product);
 			}
 		} catch (Exception e) {
@@ -159,7 +161,7 @@ public class ProductDao {
 			pstmt.setInt(1, productNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				product = handelProductResultSet(rset);
+				product = handleProductResultSet(rset);
 			}
 		} catch (Exception e) {
 			throw new ProductException("상품번호를 이용한 상품조회 오류", e);
@@ -180,7 +182,7 @@ public class ProductDao {
 			pstmt.setInt(1, productNo);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				ProductAttach attach = handelAttachResultSet(rset);
+				ProductAttach attach = handleAttachResultSet(rset);
 				list.add(attach);
 			}
 		} catch (Exception e) {
@@ -192,7 +194,7 @@ public class ProductDao {
 		return list;
 	}
 
-	private ProductAttach handelAttachResultSet(ResultSet rset) throws SQLException {
+	private ProductAttach handleAttachResultSet(ResultSet rset) throws SQLException {
 		ProductAttach attach = new ProductAttach();
 		attach.setProductAttachNo(rset.getInt("product_attach_no"));
 		attach.setProductNo(rset.getInt("product_no"));
@@ -213,7 +215,7 @@ public class ProductDao {
 			pstmt.setInt(1, productNo);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				ProductMenu pm = handelProductMenuResultSet(rset);
+				ProductMenu pm = handleProductMenuResultSet(rset);
 				list.add(pm);
 			}
 		} catch (Exception e) {
@@ -225,7 +227,7 @@ public class ProductDao {
 		return list;
 	}
 
-	private ProductMenu handelProductMenuResultSet(ResultSet rset) throws SQLException {
+	private ProductMenu handleProductMenuResultSet(ResultSet rset) throws SQLException {
 		ProductMenu pm = new ProductMenu();
 		pm.setProductNo(rset.getInt("product_no"));
 		pm.setMenuNo(rset.getInt("menu_no"));
@@ -278,7 +280,7 @@ public class ProductDao {
 			pstmt.setInt(1, productAttachNo);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				attach = handelAttachResultSet(rset);
+				attach = handleAttachResultSet(rset);
 			}
 		} catch (SQLException e) {
 			throw new ProductException("첨부파일 고유번호를 이용한 첨부파일 조회 오류", e);
@@ -304,8 +306,96 @@ public class ProductDao {
 		}
 		return result;
 	}
+
+	public int updateDelflagY(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateDelflagY");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("삭제상품처리 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
+
+
+//	public ProductExt findByNo(Connection conn, int no) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		ProductExt product = null;
+//		String sql = prop.getProperty("findByNo");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1,no);
+//			rset = pstmt.executeQuery();
+//			while (rset.next()) {
+//				product = handelProductResultSet(rset);
+//			}
+//		} catch (Exception e) {
+//			throw new ProductException("상품 1개 조회 오류", e);
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return product;
+//	}
+//
+//	public List<ProductAttach> findProductAttachachmentsByProductNo (Connection conn, int no) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		List<ProductAttach> attachments= new ArrayList<>();
+//		String sql = prop.getProperty("findProductAttachachmentsByProductNo ");
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, no);
+//			rset = pstmt.executeQuery();
+//			while (rset.next()) {
+//				ProductAttach attach = handelAttachResultSet(rset);
+//				attachments.add(attach);
+//			}
+//		} catch (Exception e) {
+//			throw new ProductException("상품번호 일치 첨부파일 조회 오류", e);
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return attachments;
+//	}
+
+	public List<ProductExt>findAllProduct(Connection conn) {
+		String sql = prop.getProperty("findAllProduct");
+		PreparedStatement pstmt = null;
+		List<ProductExt> list = new ArrayList<>();
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				List<ProductAttach> attachs = new ArrayList<>();
+				ProductExt product = handleProductResultSet(rset);
+				ProductAttach attach = handleAttachResultSet(rset);
+				attachs.add(attach);
+				product.setAttachs(attachs);
+				list.add(product);
+			}
+			System.out.println("Dao@"+ list);
+		} catch (Exception e) {
+			throw new DestinationException("상품목록 조회 오류", e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
 
 }

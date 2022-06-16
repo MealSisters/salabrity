@@ -10,6 +10,49 @@
 /*-------------------- 김지은 end --------------------*/
 
 /*------------------- 박수진 start -------------------*/
+if(document.boardEnrollFrm != null) {
+	document.boardEnrollFrm.onsubmit = (e) => {
+		const frm = e.target;
+		
+		const titleVal = frm.title.value.trim();
+		if(!/^.+$/.test(titleVal)) {
+			alert("제목을 입력해주세요.");
+			frm.title.select();
+			return false;
+		}
+		
+		const contentVal = frm.content.value.trim();
+		if(!/^(.|\n)+$/.test(contentVal)) {
+			alert("내용을 입력해주세요.");
+			frm.content.select();
+			return false;
+		}
+		
+		return true;
+	}
+}
+
+if(document.boardUpdateFrm != null) {
+	document.boardUpdateFrm.onsubmit = (e) => {
+		const frm = e.target;
+		
+		const titleVal = frm.title.value.trim();
+		if(!/^.+$/.test(titleVal)) {
+			alert("제목을 입력해주세요.");
+			frm.title.select();
+			return false;
+		}
+		
+		const contentVal = frm.content.value.trim();
+		if(!/^(.|\n)+$/.test(contentVal)) {
+			alert("내용을 입력해주세요.");
+			frm.content.select();
+			return false;
+		}
+		
+		return true;
+	}
+}
 /*-------------------- 박수진 end --------------------*/
 
 /*------------------- 유혜리 start -------------------*/
