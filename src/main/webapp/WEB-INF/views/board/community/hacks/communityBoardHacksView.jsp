@@ -1,3 +1,4 @@
+<%@ page import="board.model.dto.BoardCode" %>
 <%@ page import="board.model.dto.PostingLike" %>
 <%@ page import="board.model.dto.PostingAttach" %>
 <%@ page import="member.model.dto.MemberRole" %>
@@ -29,13 +30,17 @@
 		<div class="main-title">Community</div>
 		<div class="main-sub-title">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</div>
 	</div>
-	<input type="button" value="샐브's 레시피" id="hacks-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks';" />
-	<input type="button" value="자유게시판" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" />
+	<a class="community-hacks-link" href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
+		<button type="button" class="community-btn" id="hacks-btn">샐브's 레시피</button>
+	</a>
+	<a class="community-general-link" href="<%= request.getContextPath() %>/board/community/general?boardCode=<%= BoardCode.C2 %>">
+		<button type="button" class="community-btn" id="general-btn">자유게시판</button>
+	</a>
 	<br /><hr />
 	<table class="tbl-posting-view">
 		<thead>
 			<tr>
-				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i><%= posting.getMemberId() %></th>
+				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i>&nbsp;<%= posting.getMemberId() %></th>
 				<th class="posting-view-reg-date"><%= posting.getRegDate() %></th>
 			</tr>
 		</thead>
@@ -45,7 +50,7 @@
 			</tr>
 			<tr>
 				<td class="posting-view-board-name" colspan="2">
-					<a href="<%= request.getContextPath() %>/board/community/hacks">in 샐브's 레시피</a>
+					<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">in 샐브's 레시피</a>
 				</td>
 			</tr>
 	<% 
@@ -109,7 +114,7 @@
 			<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
 			<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
-			<button id="board-like-btn">
+			<button type="submit" id="board-like-btn">
 	<% 
 		List<PostingLike> likes = posting.getLikes();
 		for(int i = 0; i < likes.size(); i++) {
@@ -135,7 +140,7 @@
 %>
 		<%-- 수정/삭제 버튼은 본인/관리자만 열람 가능 --%>
 		<input type="button" value="수정" id="board-update-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksUpdate?no=<%= posting.getPostingNo() %>';" />
-		<input type="button" value="삭제" id="board-delete-btn" onclick="deleteHacksBoard();" />
+		<input type="submit" value="삭제" id="board-delete-btn" onclick="deleteHacksBoard();" />
 		<form 
 			name="hacksBoardDeleteFrm" 
 			action="<%= request.getContextPath() %>/board/community/hacksDelete" 
@@ -219,10 +224,35 @@
 </form>
 <script>
 /**
- * 좋아요 기능
+ * 게시물 삭제
  */
-document.querySelector("#board-like-btn").addEventListener('click', () => {
-	document.hacksLikeUpFrm.submit();
+const deleteHacksBoard = () => {
+	const bool = confirm("게시물을 삭제하시겠습니까?");
+	
+	if(!bool) {
+		alert('게시물 삭제를 취소합니다.');
+		return;
+	}
+	else {
+		document.hacksBoardDeleteFrm.submit();
+	}
+};
+
+/**
+ * 현재페이지 접속시 css 적용
+ */
+function communityMenuActive() {
+    if($('a').hasClass('community-hacks-link')) {
+        $('#hacks-btn').addClass('active');
+        $('#general-btn').removeClass('active');
+    }
+}
+
+/**
+ * communityMenuActive() 호출
+ */
+$(document).ready(function() {
+	communityMenuActive();
 });
 
 /**
@@ -361,18 +391,12 @@ const loginAlert = () => {
 };
 
 /**
- * 게시물 삭제
+ * 좋아요 기능
  */
-const deleteHacksBoard = () => {
-	const bool = confirm("게시물을 삭제하시겠습니까?");
-	
-	if(!bool) {
-		alert('게시물 삭제를 취소합니다.');
-		return;
-	}
-	else {
-		document.hacksBoardDeleteFrm.submit();
-	}
+window.onload = () => {
+	document.querySelector("#board-like-btn").addEventListener('click', () => {
+		document.generalLikeUpFrm.submit();
+	});
 };
 </script>
 

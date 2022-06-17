@@ -55,7 +55,7 @@
 						<div class="board-attach-wrap">
 							<div class="existing-attach-wrap">								
 								<div class="existing-attach-img">
-									<img src="<%= request.getContextPath() %>/upload/board/community/hacks/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
+									<img src="<%= request.getContextPath() %>/upload/board/community/general/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
 								</div>
 								<span class="existing-attach-name"><%= attach.getOriginalFilename() %></span>
 								<input type="checkbox" name="delFile" id="delFile<%= i + 1 %>" value="<%= attach.getPostingAttachNo() %>" />
