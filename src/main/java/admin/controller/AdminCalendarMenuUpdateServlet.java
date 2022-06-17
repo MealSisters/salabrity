@@ -20,10 +20,10 @@ import product.model.dto.ProductMenu;
 import product.model.service.ProductService;
 
 /**
- * Servlet implementation class AdminMenuEnrollServlet
+ * Servlet implementation class AdminCalendarMenuUpdateServlet
  */
-@WebServlet("/admin/calendarMenuEnroll")
-public class AdminCalendarMenuEnrollServlet extends HttpServlet {
+@WebServlet("/admin/calendarMenuUpdate")
+public class AdminCalendarMenuUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
 	private MenuService menuService = new MenuService();
@@ -44,11 +44,12 @@ public class AdminCalendarMenuEnrollServlet extends HttpServlet {
 				MenuExt canSelect = menuService.findByMenuNo(menu.getMenuNo());
 				canSelectMenus.add(canSelect);
 			}
+			Calendar calendar = calendarService.findCalByProductNoAndwdCode(productNo, dataDate);
 			
 			request.setAttribute("menuList", canSelectMenus);
-			request.setAttribute("dataDate", dataDate);
+			request.setAttribute("calendar", calendar);
 			request.setAttribute("product", product);
-			request.getRequestDispatcher("/WEB-INF/views/admin/adminCalendarMenuEnroll.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/admin/adminCalendarMenuUpdate.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -60,23 +61,21 @@ public class AdminCalendarMenuEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			int calNo = Integer.parseInt(request.getParameter("calNo"));
 			int productNo = Integer.parseInt(request.getParameter("productNo"));
 			int menuNo = Integer.parseInt(request.getParameter("menuNo"));
-			WeekDayCode weekDayCode = WeekDayCode.valueOf(request.getParameter("data-wdCode"));
 			
 			Calendar calendar = new Calendar();
-			calendar.setProductNo(productNo);
+			calendar.setCalNo(calNo);
 			calendar.setMenuNo(menuNo);
-			calendar.setWeekDayCode(weekDayCode);
 			
-			int result = calendarService.insertCalendar(calendar);
+			int result = calendarService.updateCalendar(calendar);
 			
 			response.sendRedirect(request.getContextPath() + "/calendar?productNo=" + productNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
 
 }

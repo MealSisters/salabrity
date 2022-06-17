@@ -1,4 +1,4 @@
-package board.controller.community.hacks;
+package board.controller.community.general;
 
 import java.io.IOException;
 
@@ -12,10 +12,10 @@ import board.model.service.BoardService;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardHacksCommentDeleteServlet
+ * Servlet implementation class CommunityBoardGeneralCommentDeleteServlet
  */
-@WebServlet("/board/community/hacksView/commentDelete")
-public class CommunityBoardHacksCommentDeleteServlet extends HttpServlet {
+@WebServlet("/board/community/generalView/commentDelete")
+public class CommunityBoardGeneralCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -34,7 +34,7 @@ public class CommunityBoardHacksCommentDeleteServlet extends HttpServlet {
 			
 			// 3. 리다이렉트
 			request.getSession().setAttribute("msg", msg);
-			response.sendRedirect(request.getContextPath() + "/board/community/hacksView?no=" + postingNo);
+			response.sendRedirect(request.getContextPath() + "/board/community/generalView?no=" + postingNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

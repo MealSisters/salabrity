@@ -1,4 +1,4 @@
-package board.controller.community.hacks;
+package board.controller.community.general;
 
 import java.io.IOException;
 
@@ -13,15 +13,15 @@ import board.model.service.BoardService;
 import common.utill.FileDownload;
 
 /**
- * @author 박수진
- * Servlet implementation class CommunityBoardHacksFileDownloadServlet
+ * Servlet implementation class CommunityBoardGeneralFileDownloadServlet
  */
-@WebServlet("/board/community/hacksFileDownload")
-public class CommunityBoardHacksFileDownloadServlet extends HttpServlet {
+@WebServlet("/board/community/generalFileDownload")
+public class CommunityBoardGeneralFileDownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
 	/**
+	 * @author 박수진
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class CommunityBoardHacksFileDownloadServlet extends HttpServlet {
 		PostingAttach attach = boardService.findPostingAttachByPostingAttachNo(no);
 		System.out.println(attach);
 		
-		String saveDirectory = getServletContext().getRealPath("/upload/board/community/hacks");
+		String saveDirectory = getServletContext().getRealPath("/upload/board/community/general");
 		String originalFilename = attach.getOriginalFilename();
 		String renamedFilename = attach.getRenamedFilename();
 		

@@ -1,3 +1,4 @@
+<%@ page import="board.model.dto.BoardCode" %>
 <%@ page import="member.model.dto.MemberRole" %>
 <%@ page import="board.model.dto.PostingExt" %>
 <%@ page import="java.util.List" %>
@@ -19,20 +20,18 @@
 		<div class="main-title">Community</div>
 		<div class="main-sub-title">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</div>
 	</div>
-	<a class="community-hacks-link" href="<%= request.getContextPath() %>/board/community/hacks">
+	<a class="community-hacks-link" href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
 		<button type="button" class="community-btn" id="hacks-btn">샐브's 레시피</button>
 	</a>
-	<a class="community-general-link" href="<%= request.getContextPath() %>/board/community/general">
+	<a class="community-general-link" href="<%= request.getContextPath() %>/board/community/general?boardCode=<%= BoardCode.C2 %>">
 		<button type="button" class="community-btn" id="general-btn">자유게시판</button>
 	</a>
-	<%-- <input type="button" value="샐브's 레시피" id="hacks-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks';" />
-	<input type="button" value="자유게시판" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" /> --%>
 	<br /><hr />
 <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksEnroll';" />	
 <% } %>
 	<div class="board-search-wrap">
-		<form action="<%=request.getContextPath()%>/board/community/hacksSearch">
+		<form action="<%=request.getContextPath()%>/board/community/hacksSearch?boardCode=<%= BoardCode.C1 %>">
 			<select name="searchType">
 		<% if(searchType != null && searchType.equals("title")) { %>
 				<option value="title" selected>제목</option>
@@ -103,6 +102,7 @@
 				<td><%= posting.getLikeCount() %></td>
 				<td><%= posting.getReadCount() %></td>
 				<td><%= posting.getRegDate() %></td>
+			</tr>
 	<%		
 		 	}
 		}
@@ -122,37 +122,21 @@
     </div>
 </div>
 <script>
-/* $(function() {
-	$('.community-btn').click(function() {
-		
-		$('.community-link').addClass('')
-			$(this).removeClass()
-	})
-});
-
-function communityMenuActive(){
-    if($('a').hasClass('#community-hacks-link')) {
-        $(‘해당 메뉴#1 css 위치').addClass(‘메뉴에 색을 변화시킬 css 클래스');
-    }
-    else if($('a').hasClass("community-general-link")) {
-        $(‘해당 메뉴#2 css 위치').addClass('메뉴에 색을 변화시킬 css 클래스');
-    }
-}
-
+/**
+ * 현재페이지 접속시 css 적용
+ */
 function communityMenuActive() {
-    if($('a').hasClass('#community-hacks-link')) {
+    if($('a').hasClass('community-hacks-link')) {
         $('#hacks-btn').addClass('active');
         $('#general-btn').removeClass('active');
     }
-    else if($('a').hasClass('community-general-link')) {
-        $('#general-btn').addClass('active');
-        $('#hacks-btn').removeClass('active');
-    }
 }
 
-// 함수 호출
+/**
+ * communityMenuActive() 호출
+ */
 $(document).ready(function() {
 	communityMenuActive();
-}); */
+});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

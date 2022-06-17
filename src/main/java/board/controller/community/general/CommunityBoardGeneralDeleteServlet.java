@@ -1,4 +1,4 @@
-package board.controller.community.hacks;
+package board.controller.community.general;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,10 +17,10 @@ import board.model.service.BoardService;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardHacksDeleteServlet
+ * Servlet implementation class CommunityBoardGeneralDeleteServlet
  */
-@WebServlet("/board/community/hacksDelete")
-public class CommunityBoardHacksDeleteServlet extends HttpServlet {
+@WebServlet("/board/community/generalDelete")
+public class CommunityBoardGeneralDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -36,7 +36,7 @@ public class CommunityBoardHacksDeleteServlet extends HttpServlet {
 			// 2. 업무 로직
 			// 첨부파일 존재시 삭제
 			List<PostingAttach> attachments = boardService.findByPostingNo(no).getAttachments();
-			String path = "/upload/board/community/hacks";
+			String path = "/upload/board/community/general";
 			deletePostingAttach(attachments, path);
 			
 			// posting테이블 레코드 삭제
@@ -45,7 +45,7 @@ public class CommunityBoardHacksDeleteServlet extends HttpServlet {
 			// 3. 리다이렉트
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", "게시물 삭제가 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/board/community/hacks?boardCode=" + boardCode);
+			response.sendRedirect(request.getContextPath() + "/board/community/general?boardCode=" + boardCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

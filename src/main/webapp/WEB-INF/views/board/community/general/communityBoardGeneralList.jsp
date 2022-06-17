@@ -1,6 +1,18 @@
+<%@ page import="board.model.dto.BoardCode" %>
+<%@ page import="member.model.dto.MemberRole" %>
+<%@ page import="board.model.dto.PostingExt" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	List<PostingExt> postingList = (List<PostingExt>) request.getAttribute("postingList");
+	
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
+
+	String pagebar = (String) request.getAttribute("pagebar");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 
 <div id="community-board-list-wrap">
@@ -8,17 +20,58 @@
 		<div class="main-title">Community</div>
 		<div class="main-sub-title">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</div>
 	</div>
-	<input type="button" value="샐브's 레시피" id="hacks-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacks';" />
-	<input type="button" value="자유게시판" id="general-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/general';" />
+	<a class="community-hacks-link" href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
+		<button type="button" class="community-btn" id="hacks-btn">샐브's 레시피</button>
+	</a>
+	<a class="community-general-link" href="<%= request.getContextPath() %>/board/community/general?boardCode=<%= BoardCode.C2 %>">
+		<button type="button" class="community-btn" id="general-btn">자유게시판</button>
+	</a>
 	<br /><hr />
-<%-- <% if(loginMember != null) { %> --%>
 	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/generalEnroll';" />	
-<%-- <% } %> --%>
 	<div class="board-search-wrap">
-		<input type="text" class="board-search-text" placeholder="검색어 입력" />
-		<a class="board-search-btn" href="#">
-			<i class="fa-solid fa-magnifying-glass"></i>
-		</a>
+		<form action="<%=request.getContextPath()%>/board/community/generalSearch?boardCode=<%= BoardCode.C2 %>">
+			<select name="searchType">
+		<% if(searchType != null && searchType.equals("title")) { %>
+				<option value="title" selected>제목</option>
+		<%
+		   }
+		   else {
+		%>
+				<option value="title">제목</option>
+		<% } %>
+		
+		<% if(searchType != null && searchType.equals("content")) { %>
+				<option value="content" selected>내용</option>
+		<% }
+		   else {
+		%>
+				<option value="content">내용</option>
+		<% } %>
+		
+		<% if(searchType != null && searchType.equals("member_id")) { %>
+				<option value="member_id" selected>작성자</option>
+		<% }
+		   else { 
+		%>
+				<option value="member_id">작성자</option>
+		<% } %>
+			</select>
+			
+			<input type="hidden" name="searchType" value="title"/>
+			<input type="hidden" name="searchType" value="content"/>
+			<input type="hidden" name="searchType" value="member_id"/>
+			
+		<% if(searchKeyword == null) { %>
+			<input type="text" class="board-search-text" name="searchKeyword" placeholder="검색어 입력" required>
+		<% } 
+		   else { 
+		%>
+			<input type="text" class="board-search-text" name="searchKeyword" placeholder="검색어 입력" required value="<%= searchKeyword %>">
+		<% } %>
+			<button type="submit" class="board-search-btn">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
+		</form>
 	</div>
 	<table class="tbl-community-list">
 		<thead>
@@ -33,110 +86,55 @@
 			</tr>
 		</thead>
 		<tbody>
+	<%
+		if(postingList != null && !postingList.isEmpty() && searchKeyword != "") {
+			for(PostingExt posting : postingList) {
+	%>
 			<tr>
-				<td>1</td>
-				<td><a href="">test</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
+				<td><%= posting.getPostingNo() %></td>
+				<td>
+					<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= posting.getPostingNo() %>"><%= posting.getTitle() %></a>
+				</td>
+				<td><%= posting.getMemberId() %></td>
+				<td><%= posting.getCommentCount() %></td>
+				<td><%= posting.getLikeCount() %></td>
+				<td><%= posting.getReadCount() %></td>
+				<td><%= posting.getRegDate() %></td>
 			</tr>
+	<%		
+		 	}
+		}
+		else {
+	%>
 			<tr>
-				<td>2</td>
-				<td><a href="">test2</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
+				<td colspan="10">조회된 게시글이 없습니다.</td>
 			</tr>
-			<tr>
-				<td>3</td>
-				<td><a href="">test3</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td><a href="">test4</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td><a href="">test5</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>6</td>
-				<td><a href="">test6</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>7</td>
-				<td><a href="">test7</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>8</td>
-				<td><a href="">test8</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>9</td>
-				<td><a href="">test9</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
-			<tr>
-				<td>10</td>
-				<td><a href="">test10</a></td>
-				<td>honggd</td>
-				<td>3</td>
-				<td>1</td>
-				<td>123</td>
-				<td>22-06-05</td>
-			</tr>
+	<% 
+		}
+	%>
 		</tbody>
 	</table>
 	<%-- 은지님 page-bar 코드 --%>
 	<div class="page-bar">
-        <a href=""><i class="fa-solid fa-angles-left"></i></a>
-        <a href=""><i class="fa-solid fa-angle-left"></i></a>
-        <a href="" class="cPage">1</a>
-        <a href="">2</a>
-        <a href="">3</a>
-        <a href="">4</a>
-        <a href="">5</a>
-        <a href=""><i class="fa-solid fa-angle-right"></i></a>
-        <a href=""><i class="fa-solid fa-angles-right"></i></a>
+        <%= pagebar %>
     </div>
 </div>
+<script>
+/**
+ * 현재페이지 접속시 css 적용
+ */
+function communityMenuActive() {
+    if($('a').hasClass('community-general-link')) {
+        $('#general-btn').addClass('active');
+        $('#hacks-btn').removeClass('active');
+    }
+}
 
+/**
+ * communityMenuActive() 호출
+ */
+$(document).ready(function() {
+	communityMenuActive();
+});
+</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

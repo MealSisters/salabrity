@@ -1,4 +1,4 @@
-package board.controller.community.hacks;
+package board.controller.community.general;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -17,8 +17,8 @@ import board.model.service.BoardService;
  * @author 박수진
  * Servlet implementation class CommunityBoardHacksCommentServlet
  */
-@WebServlet("/board/community/hacksView/commentEnroll")
-public class CommunityBoardHacksCommentEnrollServlet extends HttpServlet {
+@WebServlet("/board/community/generalView/commentEnroll")
+public class CommunityBoardGeneralCommentEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -41,7 +41,7 @@ public class CommunityBoardHacksCommentEnrollServlet extends HttpServlet {
 			int result = boardService.insertPostingComment(pc);
 			
 			// 3. 리다이렉트
-			response.sendRedirect(request.getContextPath() + "/board/community/hacksView?no=" + postingNo);
+			response.sendRedirect(request.getContextPath() + "/board/community/generalView?no=" + postingNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
