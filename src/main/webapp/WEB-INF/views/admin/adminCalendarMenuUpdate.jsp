@@ -1,3 +1,4 @@
+<%@page import="calendar.model.dto.Calendar"%>
 <%@page import="calendar.model.dto.WeekDayCode"%>
 <%@page import="menu.model.dto.MenuExt"%>
 <%@page import="product.model.dto.ProductMenu"%>
@@ -9,15 +10,15 @@
 <%
 	ProductExt product = (ProductExt) request.getAttribute("product");
 	List<MenuExt> menuList = (List<MenuExt>) request.getAttribute("menuList");
-	WeekDayCode dataDate = (WeekDayCode) request.getAttribute("dataDate");
+	Calendar calendar = (Calendar) request.getAttribute("calendar");
+	WeekDayCode dataDate = calendar.getWeekDayCode();
 	String dateCode = dataDate.toString();
-	System.out.println("check! " + dataDate);
 %>
-
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 <div class="div-level1">
-    <h1 class="pageTitle">캘린더 등록</h1>
-    <form method="POST" name="calendarEnrollFrm" action="<%=request.getContextPath()%>/admin/calendarMenuEnroll">
+    <h1 class="pageTitle">캘린더 수정</h1>
+    <form method="POST" name="calendarUpdateFrm" action="<%=request.getContextPath()%>/admin/calendarMenuUpdate">
+    	<input type="hidden" name="calNo" value="<%= calendar.getCalNo() %>">
         <div class="formLine-wrapper">
             <label for="">상품이름</label>
             <p class="fixed-data productName"><%= product.getProductName() %></p>
@@ -26,7 +27,6 @@
         <div class="formLine-wrapper">
             <label for="data-wdCode">선택일자</label>
             <p class="fixed-data cal-date">Week<%= dateCode.charAt(1) %> Day<%= dateCode.charAt(3) %></p>
-            <input type="hidden" name="data-wdCode" value="<%= dataDate %>">
         </div>
         <div class="formLine-wrapper">
             <div class="menuList-wrapper">
@@ -42,7 +42,7 @@
 	for(MenuExt menu : menuList) {
 %>
 					<div class="menu-wrapper">
-                        <input type="radio" class="menu-radio" name="menuNo" value="<%= menu.getMenuNo() %>">
+                        <input type="radio" class="menu-radio" name="menuNo" value="<%= menu.getMenuNo() %>" <%= calendar.getMenuNo()==menu.getMenuNo() ? "checked" : "" %>>
                         <p class="p-menuName"><%= menu.getMenuName() %></p>
                         <p class="p-menuId"><%= menu.getMenuId() %></p>
                         <p class="p-menuCalorie"><%= menu.getCalorie() %></p>
@@ -54,8 +54,8 @@
             </div>
         </div>
         <div class="formLine-wrapper buttons-wrapper">
-            <div class="enrollBtn-wrapper">
-                <button type="submit" class="enrollBtn">등록</button>
+            <div class="updateBtn-wrapper">
+                <button type="submit" class="updateBtn">수정</button>
             </div>
             <div class="cancelBtn-wrapper">
                 <button class="cancelBtn">취소</button>
@@ -73,7 +73,7 @@
         location.href = "<%= request.getContextPath() %>/calendar?productNo=<%= product.getProductNo()%>";
     }
     
-    document.calendarEnrollFrm.onsubmit = () => {
+    document.calendarUpdateFrm.onsubmit = () => {
     	let result = true;
     	const checkedMenu = document.querySelectorAll("[name=menuNo]:checked");
 		if(checkedMenu.length == 0) {

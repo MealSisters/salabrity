@@ -15,7 +15,7 @@ import board.model.service.BoardService;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardGeneralViewServlet
+ * Servlet implementation class CommunityBoardHacksViewServlet
  */
 @WebServlet("/board/community/hacksView")
 public class CommunityBoardHacksViewServlet extends HttpServlet {

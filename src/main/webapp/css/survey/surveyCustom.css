@@ -8,7 +8,6 @@
 
 h1 {
   display: flex;
-  margin-bottom: 40px;
 }
 
 h5  {
@@ -44,13 +43,19 @@ input {
   font-weight: 600;
 }
 
-#next{
-	border: solid 1px;
+#next {
+	border: solid 1px #116916;
 	height: 50px;
 	width: 45%;
+	border-radius: 20px;
 	font-size: 18px;
 	text-align: center;
 	text-decoration: none;
 	color: #f1f1f1;
 	background-color: #116916;
+}
+
+#next:hover {
+	color: #116916;
+	background-color: #f1f1f1;
 }

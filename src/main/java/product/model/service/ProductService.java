@@ -146,6 +146,13 @@ public class ProductService {
 		
 		return 0;
 	}
+
+	public List<ProductExt> findProductsAll() {
+		Connection conn = getConnection();
+		List<ProductExt> list = productDao.findProductsAll(conn);
+		close(conn);
+		return list;
+	}
 	
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 	public List<ProductExt> findAllProduct() {
@@ -157,4 +164,6 @@ System.out.println("Service@"+list);
 		
 		
 	}
+
+	
 }
