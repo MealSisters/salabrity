@@ -76,7 +76,10 @@ public class OrderListServlet extends HttpServlet {
 			List<BuyExt> list = null;
 			if (!searchParam.isEmpty()) {
 				// 검색어 있을때 페이징에 필요한 값들
-				list = buyService.findMemberByParam(searchParam);
+				searchParam.put("start", start);
+				searchParam.put("end", end);
+				list = buyService.findBuyByParam(searchParam);
+				totalOrders = buyService.getFilteringBuy(searchParam);
 			} else {
 				// 검색어 없을때
 				list = buyService.findAllBuyExt(param);
@@ -92,6 +95,7 @@ public class OrderListServlet extends HttpServlet {
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalOrders, url);
 
+			request.setAttribute("searchParam", searchParam);
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/admin/orderList.jsp").forward(request, response);

@@ -5,6 +5,7 @@ import static common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import buy.model.dto.BuyExt;
 import buy.model.dto.PayStatement;
 import buy.model.dto.ProductBuyExt;
 import buy.model.exception.BuyException;
+import member.model.dto.MemberRole;
 
 public class BuyDao {
 
@@ -139,12 +141,93 @@ public class BuyDao {
 		return pbe;
 	}
 
-	public List<BuyExt> findMemberByParam(Connection conn, Map<String, Object> searchParam) {
+	public List<BuyExt> findBuyByParam(Connection conn, Map<String, Object> searchParam) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<BuyExt> list = new ArrayList<>();
-		String sql = prop.getProperty("findMemberByParam");
-		return null;
+		String sql = prop.getProperty("findBuyByParam");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchParam.get("merchantUid").toString() + "%");
+			pstmt.setString(2, "%" + searchParam.get("memberId").toString() + "%");
+			if (searchParam.get("orderDateStart") != null) {
+				pstmt.setDate(3, Date.valueOf(searchParam.get("orderDateStart").toString()));
+			} else {
+				pstmt.setDate(3, Date.valueOf("1000-01-01"));
+			}
+			if (searchParam.get("orderDateEnd") != null) {
+				pstmt.setDate(4, Date.valueOf(searchParam.get("orderDateEnd").toString()));
+			} else {
+				pstmt.setDate(4, Date.valueOf("5000-01-01"));
+			}
+			if (searchParam.get("payStatement") != null) {
+				pstmt.setString(5, searchParam.get("payStatement").toString());
+				pstmt.setString(6, "");
+				pstmt.setString(7, "");
+				pstmt.setString(8, "");
+			} else {
+				pstmt.setString(5, PayStatement.cancelled.toString());
+				pstmt.setString(6, PayStatement.faild.toString());
+				pstmt.setString(7, PayStatement.paid.toString());
+				pstmt.setString(8, PayStatement.ready.toString());
+			}
+			pstmt.setInt(9, (int) searchParam.get("start"));
+			pstmt.setInt(10, (int) searchParam.get("end"));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				BuyExt buy = handleBuyExtResultSet(rset);
+				list.add(buy);
+			}
+		} catch (Exception e) {
+			throw new BuyException("구매정보 검색결과 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getFilteringBuy(Connection conn, Map<String, Object> searchParam) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalBuys = 0;
+		String sql = prop.getProperty("getFilteringBuy");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchParam.get("merchantUid").toString() + "%");
+			pstmt.setString(2, "%" + searchParam.get("memberId").toString() + "%");
+			if (searchParam.get("orderDateStart") != null) {
+				pstmt.setDate(3, Date.valueOf(searchParam.get("orderDateStart").toString()));
+			} else {
+				pstmt.setDate(3, Date.valueOf("1000-01-01"));
+			}
+			if (searchParam.get("orderDateEnd") != null) {
+				pstmt.setDate(4, Date.valueOf(searchParam.get("orderDateEnd").toString()));
+			} else {
+				pstmt.setDate(4, Date.valueOf("5000-01-01"));
+			}
+			if (searchParam.get("payStatement") != null) {
+				pstmt.setString(5, searchParam.get("payStatement").toString());
+				pstmt.setString(6, "");
+				pstmt.setString(7, "");
+				pstmt.setString(8, "");
+			} else {
+				pstmt.setString(5, PayStatement.cancelled.toString());
+				pstmt.setString(6, PayStatement.faild.toString());
+				pstmt.setString(7, PayStatement.paid.toString());
+				pstmt.setString(8, PayStatement.ready.toString());
+			}
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				totalBuys = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new BuyException("구매정보 검색결과 수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalBuys;
 	}
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/

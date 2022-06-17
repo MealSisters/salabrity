@@ -38,11 +38,18 @@ public class BuyService {
 		return list;
 	}
 
-	public List<BuyExt> findMemberByParam(Map<String, Object> searchParam) {
+	public List<BuyExt> findBuyByParam(Map<String, Object> searchParam) {
 		Connection conn = getConnection();
-		List<BuyExt> list = buyDao.findMemberByParam(conn, searchParam);
+		List<BuyExt> list = buyDao.findBuyByParam(conn, searchParam);
 		close(conn);
 		return list;
+	}
+
+	public int getFilteringBuy(Map<String, Object> searchParam) {
+		Connection conn = getConnection();
+		int totalBuys = buyDao.getFilteringBuy(conn, searchParam);
+		close(conn);
+		return totalBuys;
 	}
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
