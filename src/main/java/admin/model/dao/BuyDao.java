@@ -138,5 +138,13 @@ public class BuyDao {
 		return pbe;
 	}
 
+	public List<BuyExt> findMemberByParam(Connection conn, Map<String, Object> searchParam) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<BuyExt> list = new ArrayList<>();
+		String sql = prop.getProperty("findMemberByParam");
+		return null;
+	}
+
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 }

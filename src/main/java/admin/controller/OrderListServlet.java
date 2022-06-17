@@ -76,7 +76,9 @@ public class OrderListServlet extends HttpServlet {
 			List<BuyExt> list = null;
 			if (!searchParam.isEmpty()) {
 				// 검색어 있을때 페이징에 필요한 값들
+				list = buyService.findMemberByParam(searchParam);
 			} else {
+				// 검색어 없을때
 				list = buyService.findAllBuyExt(param);
 				totalOrders = buyService.getTotalBuys();
 			}

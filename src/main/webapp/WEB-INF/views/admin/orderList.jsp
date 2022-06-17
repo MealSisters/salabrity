@@ -108,17 +108,17 @@
                     <td class="col-products td-xscroll"><%= sumName %></td>
                     <td class="col-orderReq td-xscroll"><%= buy.getRequestTerm()!=null ? buy.getRequestTerm() : "" %></td>
 <%
-	if(!status.equals("결제실패") && !status.equals("환불처리")){
+			if(!status.equals("결제실패") && !status.equals("환불처리")){
 %>
                     <td class="col-buttons">
                         <div class="div-cancel"><a class="a-cancel">주문취소</a></div>
                     </td>
 <%
-	} else {
+			} else {
 %>
 					<td><div><a>취소불가</a></div></td>
 <%
-	}
+			}
 %>
                 </tr>
 <%

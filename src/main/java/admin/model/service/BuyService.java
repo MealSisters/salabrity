@@ -38,5 +38,12 @@ public class BuyService {
 		return list;
 	}
 
+	public List<BuyExt> findMemberByParam(Map<String, Object> searchParam) {
+		Connection conn = getConnection();
+		List<BuyExt> list = buyDao.findMemberByParam(conn, searchParam);
+		close(conn);
+		return list;
+	}
+
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 }
