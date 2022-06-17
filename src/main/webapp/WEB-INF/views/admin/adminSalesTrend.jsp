@@ -1,3 +1,4 @@
+<%@page import="admin.model.service.AdminService"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="admin.model.dto.SalesTrend"%>
@@ -7,7 +8,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	final int MIN_PERIOD = 7;
+	int MIN_PERIOD = AdminService.CHART_MIN_PERIOD;
 
 	/*------------------------------- 라인 차트 영역 -------------------------------*/
 	List<SalesTrend> totalSalesList = (List<SalesTrend>) request.getAttribute("salesData");

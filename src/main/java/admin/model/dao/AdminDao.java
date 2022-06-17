@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -275,6 +276,52 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public List<Map<Date, Integer>> getEnrollMemberByPeriod(Connection conn, Map<String, Date> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Map<Date, Integer>> mapList = new ArrayList<>();
+		String sql = prop.getProperty("getEnrollMemberByPeriod");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setDate(1, param.get("startDate"));
+			pstmt.setDate(2, param.get("endDate"));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Map<Date, Integer> map = new HashMap<>();
+				Date date = rset.getDate(1);
+				Integer count = rset.getInt(2);
+				map.put(date, count);
+				mapList.add(map);
+			}
+		} catch (SQLException e) {
+			throw new AdminException("최고 매출 상품정보 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return mapList;
+	}
+
+	public int getTodayPosting(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalPosting = 0;
+		String sql = prop.getProperty("getTodayPosting");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				totalPosting = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new AdminException("오늘 등록 게시글 수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalPosting;
 	}
 
 	

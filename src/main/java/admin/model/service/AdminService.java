@@ -18,6 +18,7 @@ public class AdminService {
 
 	public static final int MEMBER_NUM_PER_PAGE = 15;
 	public static final int ORDER_NUM_PER_PAGE = 15;
+	public static final int CHART_MIN_PERIOD = 7;
 	private AdminDao adminDao = new AdminDao();
 
 	public int getTotalMembers() {
@@ -82,6 +83,20 @@ public class AdminService {
 		List<SalesTrend> list = adminDao.findTopSalesTrend(conn, param);
 		close(conn);
 		return list;
+	}
+
+	public List<Map<Date, Integer>> getEnrollMemberByPeriod(Map<String, Date> param) {
+		Connection conn = getConnection();
+		List<Map<Date, Integer>> map = adminDao.getEnrollMemberByPeriod(conn, param);
+		close(conn);
+		return map;
+	}
+
+	public int getTodayPosting() {
+		Connection conn = getConnection();
+		int todayPosting = adminDao.getTodayPosting(conn);
+		close(conn);
+		return todayPosting;
 	}
 
 	
