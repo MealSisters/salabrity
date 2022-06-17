@@ -27,7 +27,7 @@ public class AdminMenuDeleteServlet extends HttpServlet {
 		try {
 			int menuNo = Integer.parseInt(request.getParameter("delMenuNo"));
 			
-			String saveDirectory = getServletContext().getRealPath("/images/menu");
+			String saveDirectory = getServletContext().getRealPath("/upload/menu");
 			MenuAttach attach = menuService.findAttachByMenuNo(menuNo);
 			File delFile = new File(saveDirectory, attach.getRenamedFileName());
 			if (delFile.exists()) {

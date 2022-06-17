@@ -37,7 +37,7 @@ public class AdminMenuEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String saveDirectory = getServletContext().getRealPath("/images/menu");
+			String saveDirectory = getServletContext().getRealPath("/upload/menu");
 			int maxPostSize = 1024 * 1024 * 10; // 메뉴 썸네일은 최대 10MB
 			String encoding = "utf-8";
 			FileRenamePolicy policy = new SalabrityFileRenamePolicy();

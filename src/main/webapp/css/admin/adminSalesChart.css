@@ -23,14 +23,16 @@ table {
 table td {
   padding: 5px 0;
   text-align: center;
+  vertical-align: bottom;
 }
 table tr:first-of-type td{
-  height: 60px;
+  height: 40px;
 }
 .div-searchfilter {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 0;
 }
 .div-searchfilter > * {
   margin: 0 3px;
@@ -60,6 +62,15 @@ table tr:first-of-type td{
 }
 .div-searchfilter button:hover {
   background-color: #0EAE57;
+}
+table .td-errMsg {
+	padding: 0;
+}
+.td-errMsg p.p-errMsg {
+	margin: 0;
+	color: #AD1C0E;
+	font-size: 13px;
+	margin-bottom: 10px;
 }
 /*---------------------- 라인차트 영역 ----------------------*/
 #div-lineChart {
