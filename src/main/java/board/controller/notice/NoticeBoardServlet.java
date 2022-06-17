@@ -1,4 +1,4 @@
-package board.controller.community.general;
+package board.controller.notice;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,10 +18,10 @@ import common.utill.PageBar;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardGeneralServlet
+ * Servlet implementation class NoticeBoardServlet
  */
-@WebServlet("/board/community/general")
-public class CommunityBoardGeneralServlet extends HttpServlet {
+@WebServlet("/board/notice")
+public class NoticeBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -61,9 +61,8 @@ public class CommunityBoardGeneralServlet extends HttpServlet {
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);
 			request.setAttribute("pagebar", pagebar);
-	
-			request.getRequestDispatcher("/WEB-INF/views/board/community/general/communityBoardGeneralList.jsp")
-			.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/board/notice/noticeBoard.jsp")
+				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

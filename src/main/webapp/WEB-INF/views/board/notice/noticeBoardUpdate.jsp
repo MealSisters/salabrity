@@ -1,6 +1,12 @@
+<%@ page import="board.model.dto.PostingAttach" %>
+<%@ page import="java.util.List" %>
+<%@ page import="board.model.dto.PostingExt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	PostingExt posting = (PostingExt) request.getAttribute("posting");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/notice/noticeBoard.css" />
 
@@ -9,7 +15,7 @@
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
-			name="noticeBoardUpdateFrm" 
+			name="boardUpdateFrm" 
 			action="<%= request.getContextPath() %>/board/noticeUpdate" 
 			method="POST" 
 			enctype="multipart/form-data">
@@ -18,10 +24,27 @@
 					<th>분류<sup>*</sup></th>
 					<td>
 						<div>
-							<select name="notice-board-select" class="notice-board-select" required>
-								<option value="" <%-- selected --%>>선택</option>
+							<select name="noticeBoardSelect" class="notice-board-select" required>
+								<option value="">선택</option>
 								<option value="general">일반</option>
+								<option value="event">이벤트</option>
+							<%-- <% if(noticeBoardSelect != null && noticeBoardSelect.equals("general")) { %>
+								<option value="general" selected>일반</option>
+							<%
+							   }
+							   else {
+							%>
+								<option value="general">일반</option>
+							<% } %>
+							
+							<% if(noticeBoardSelect != null && noticeBoardSelect.equals("event")) { %>
 								<option value="event" selected>이벤트</option>
+							<%
+							   }
+							   else {
+							%>
+								<option value="event">이벤트</option>
+							<% } %> --%>
 							</select>
 						</div>
 					</td>
@@ -30,7 +53,7 @@
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="관리자" readonly/>
+							<input type="text" name="memberId" value="<%= posting.getMemberId() %>" readonly/>
 						</div>
 					</td>
 				</tr>
@@ -38,7 +61,7 @@
 					<th>제목<sup>*</sup></th>
 					<td>
 						<div>
-							<input type="text" name="title" value="[6월의 샐브이벤트]당첨회원 발표" />
+							<input type="text" name="title" value="<%= posting.getTitle() %>" />
 						</div>
 					</td>
 				</tr>
@@ -46,20 +69,27 @@
 					<th>내용<sup>*</sup></th>
 					<td>
 						<div>
-							<textarea rows="5" cols="40" name="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique iusto amet ea ut facilis natus dolore laudantium optio recusandae ab et fuga voluptates facere molestiae cumque dolorum esse. Ad quia.</textarea>
+							<textarea rows="5" cols="40" name="content"><%= posting.getContent() %></textarea>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
 					<td>
+			<% 
+				List<PostingAttach> attachments = posting.getAttachments();
+				if(attachments != null && !attachments.isEmpty()) {
+					for(int i = 0; i < attachments.size(); i++) {
+						PostingAttach attach = attachments.get(i);
+			%>
 						<div class="board-attach-wrap">
-							<div class="existing-attach-wrap">
-								<%-- 기존에 존재하는 첨부 이미지가 있다면 추가
-								<div class="existing-attach-img"></div> --%>
-								<span class="existing-attach-name">[6월의 샐브이벤트]당첨회원 리스트.xlsx</span>
-								<input type="checkbox" name="delFile" id="delFile" value="" />
-								<label for="delFile">
+							<div class="existing-attach-wrap">								
+								<div class="existing-attach-img">
+									<img src="<%= request.getContextPath() %>/upload/board/notice/<%= attach.getRenamedFilename() %>" alt="<%= attach.getOriginalFilename() %>" />
+								</div>
+								<span class="existing-attach-name"><%= attach.getOriginalFilename() %></span>
+								<input type="checkbox" name="delFile" id="delFile<%= i + 1 %>" value="<%= attach.getPostingAttachNo() %>" />
+								<label for="delFile<%= i + 1 %>">
 									<sup>
 										<svg width="30" height="15" xmlns="http://w3.org/2000/svg" version="1.1" viewbox="0 0 80 40">
 								            <polyline class="st1" points="9.06 20.89 25.85 35.74 50.46 9.35"/>
@@ -67,18 +97,40 @@
 								        <span>클릭시 삭제됩니다.</span>
 									</sup>
 								</label>
-								<!-- <span class="attach-del-check">체크시 삭제됩니다.</span> -->
 							</div>
-							<br />
-						    <input class="board-attach-name" value="첨부파일" placeholder="첨부파일" readonly />
-						    <label for="upFile">파일찾기</label>
-						    <input type="file" id="upFile" />
 						</div>
+			<% 
+					}
+				}
+			%>	
+						<div class="board-attach-wrap" id="board-attach1-wrap">
+				            <p class="attach-name"></p>
+				            <input type="file" name="attach1" id="attach1" />
+				            <div class="attach-btn-wrap">
+				                <button type="button">파일찾기</button>
+				            </div>
+				        </div>
+						<div class="board-attach-wrap" id="board-attach2-wrap">
+				            <p class="attach-name"></p>
+				            <input type="file" name="attach2" id="attach2" />
+				            <div class="attach-btn-wrap">
+				                <button type="button">파일찾기</button>
+				            </div>
+				        </div>
+						<div class="board-attach-wrap" id="board-attach3-wrap">
+				            <p class="attach-name"></p>
+				            <input type="file" name="attach3" id="attach3" />
+				            <div class="attach-btn-wrap">
+				                <button type="button">파일찾기</button>
+				            </div>
+				        </div>
 					</td>
 				</tr>
 			</table>
 			<div class="board-button-wrap">
 				<input type="submit" value="수정" id="board-update-btn" />
+				<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />
+				<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
 				<input type="reset" value="취소" id="board-back-btn" onclick="history.go(-1);" />
 			</div>
 		</form>
@@ -86,38 +138,36 @@
 </div>
 <script>
 /**
- * noticeBoardUpdateFrm 유효성 검사
+ * 첨부파일 가져오기
  */
-window.addEventListener('load', () => {
-	document.noticeBoardUpdateFrm.onsubmit = (e) => {
-		const frm = e.target;
-		
-		const titleVal = frm.title.value.trim();
-		if(!/^.+$/.test(titleVal)) {
-			alert("제목을 입력해주세요.");
-			frm.title.select();
-			return false;
-		}
-		
-		const contentVal = frm.content.value.trim();
-		if(!/^(.|\n)+$/.test(contentVal)) {
-			alert("내용을 입력해주세요.");
-			frm.content.select();
-			return false;
-		}
-		
-		return true;
-	}
-});
+const getAttachs = () => {
+    const attach1 = document.querySelector("#attach1");
+    const attach1Name = document.querySelector("#board-attach1-wrap p.attach-name");
+    const attach1Btn = document.querySelector("#board-attach1-wrap button");
+    upFile(attach1, attach1Name, attach1Btn);
+    
+    const attach2 = document.querySelector("#attach2");
+    const attach2Name = document.querySelector("#board-attach2-wrap p.attach-name");
+    const attach2Btn = document.querySelector("#board-attach2-wrap button");
+    upFile(attach2, attach2Name, attach2Btn);
+    
+    const attach3 = document.querySelector("#attach3");
+    const attach3Name = document.querySelector("#board-attach3-wrap p.attach-name");
+    const attach3Btn = document.querySelector("#board-attach3-wrap button");
+    upFile(attach3, attach3Name, attach3Btn);
+};
 
 /**
  * 첨부파일명 변경
  */
-const upFile = document.querySelector("#upFile");
-upFile.addEventListener('change', () => {
-	const upFileName = upFile.files[0].name; // value=fakepath
-	document.querySelector(".board-attach-name").value = upFileName;
-});
+const upFile = (attach, attachName, attachBtn) => {
+	attach.addEventListener('change', (e) => {
+		attachName.innerHTML = e.target.files[0].name;
+    });
+	attachBtn.addEventListener('click', () => {
+		attach.click();
+    });
+};
 </script>
-
+<script src="<%= request.getContextPath() %>/js/validation.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

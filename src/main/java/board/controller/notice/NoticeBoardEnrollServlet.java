@@ -6,13 +6,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+
+import board.BoardUtil;
+import board.model.dto.BoardCode;
+import board.model.dto.PostingExt;
+import board.model.service.BoardService;
 
 /**
+ * @author 박수진
  * Servlet implementation class NoticeBoardEnrollServlet
  */
 @WebServlet("/board/noticeEnroll")
 public class NoticeBoardEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private BoardService boardService = new BoardService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +36,40 @@ public class NoticeBoardEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/board/noticeView");
+		try {
+			// 0. MultipartRequest객체 생성
+			// 파일저장 경로
+			String saveDirectory = getServletContext().getRealPath("/upload/board/notice");			
+			MultipartRequest multiReq = BoardUtil.getMultipartRequest(request, saveDirectory);
+			
+			// 1. 사용자 입력값 처리
+			String memberId = multiReq.getParameter("memberId");
+			String title = multiReq.getParameter("title");
+			String content = multiReq.getParameter("content");
+			String noticeBoardSelect = multiReq.getParameter("noticeBoardSelect");
+			
+			PostingExt posting = new PostingExt();
+			posting.setBoardCode(BoardCode.N);
+			posting.setMemberId(memberId);
+			posting.setTitle(title);
+			posting.setContent(content);
+			
+			BoardUtil.getPostingAttach(multiReq, posting);
+			
+			// 2. 업무 로직 (db insert)
+			int result = boardService.insertPosting(posting);
+			String msg = result > 0 ? "게시글 등록에 성공했습니다." : "게시글 등록에 실패했습니다.";
+			
+			// 3. 리다이렉트
+			HttpSession session = request.getSession();
+			session.setAttribute("msg", msg);
+			session.setAttribute("noticeBoardSelect", noticeBoardSelect); // general event
+			System.out.println("noticeEnroll@noticeBoardSelect=" + noticeBoardSelect);
+			response.sendRedirect(request.getContextPath() + "/board/noticeView?no=" + posting.getPostingNo() + "&noticeBoardSelect=" + noticeBoardSelect);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }
