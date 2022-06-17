@@ -51,7 +51,6 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			// 2. 업무 로직
 			// 2.a. content 영역
 			List<PostingExt> postingList = boardService.findAllPostingList(param, boardCode);
-			System.out.println("list@postingList = " + postingList);
 			
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings();
