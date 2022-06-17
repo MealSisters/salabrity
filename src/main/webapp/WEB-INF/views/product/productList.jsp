@@ -56,7 +56,6 @@
 
 
 <!-- 이은지 start -->
-<!-- 목록조회구현끝나면 각버튼에 상품번호따올수있게 수정하기 -->
 <form 
 	name="deleteProductFrm"
 	action="<%= request.getContextPath() %>/admin/productDelete"
@@ -80,9 +79,10 @@
 
         const cartBtns = document.querySelectorAll(".add_cart");
         cartBtns.forEach((cartBtn) => {
+        	const productNo = cartBtn.firstElementChild.value;
 	        const div = `<div class="admin-bodyBtngroup">
-				        	<a href="<%= request.getContextPath() %>/admin/productUpdate?productNo=<%  %>" class="edit_product"><i class="fa-solid fa-pen"></i></a>
-				        	<a onclick="deleteProduct(<%  %>);" class="del_product"><i class="fa-solid fa-trash-can"></i></a>
+				        	<a href="<%= request.getContextPath() %>/admin/productUpdate?productNo=\${productNo}" class="edit_product"><i class="fa-solid fa-pen"></i></a>
+				        	<a onclick="deleteProduct(\${productNo});" class="del_product"><i class="fa-solid fa-trash-can"></i></a>
 				    	</div>`;
 				    	
             cartBtn.insertAdjacentHTML('beforeBegin', div);
