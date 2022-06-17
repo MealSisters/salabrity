@@ -1,6 +1,28 @@
+<%@page import="buy.model.dto.ProductBuyExt"%>
+<%@page import="buy.model.dto.ProductBuy"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="buy.model.dto.BuyExt"%>
+<%@page import="admin.model.service.AdminService"%>
+<%@page import="buy.model.dto.Buy"%>
+<%@page import="buy.model.dto.PayStatement"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	List<BuyExt> list = (List<BuyExt>) request.getAttribute("list");
+	String pagebar = (String) request.getAttribute("pagebar");
+	
+	int cPage = 1;
+	if(request.getParameter("cPage")!=null) {
+		cPage = Integer.parseInt(request.getParameter("cPage"));
+	}
+	int startNo = (cPage-1)*AdminService.ORDER_NUM_PER_PAGE + 1;
+
+	
+	System.out.println("orderList@jsp = ");
+%>
+<link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
 
@@ -9,10 +31,10 @@
 <div class="div-level1" id="div-firstView">
     <p id="filter-wrapper-title">Filter</p>
     <div id="filter-wrapper" class="div-level2">
-        <form name="orderFilterFrm" action="" onSubmit="return false;">
+        <form name="orderFilterFrm" action="">
             <div class="div-searchFilter">
                 <label for="filter-orderNo">주문번호</label>
-                <input type="text" name="orderNo" id="filter-orderNo">
+                <input type="text" name="merchantUid" id="filter-orderNo">
             </div>
             <div class="div-searchFilter">
                 <label for="filter-memberId">아이디</label>
@@ -25,13 +47,13 @@
                 <input type="date" name="orderDateEnd" id="filter-orderDate-end" class="periodEnd">
             </div>
             <div class="div-searchFilter">
-                <label for="filter-payStatus">배송상태</label>
-                <select name="payState" class="filter-select">
-                    <option value="전체" selected>전체보기</option>
-                    <option value="미결제">미결제</option>
-                    <option value="결제완료">결제완료</option>
-                    <option value="결제실패">결제실패</option>
-                    <option value="환불처리">환불처리</option>
+                <label for="filter-payStatus">결제상태</label>
+                <select name="payStatement" class="filter-select">
+                    <option value="all" selected>전체보기</option>
+                    <option value="ready">미결제</option>
+                    <option value="paid">결제완료</option>
+                    <option value="faild">결제실패</option>
+                    <option value="cancelled">환불처리</option>
                 </select>
             </div>
             <div class="div-searchbtn">
@@ -57,71 +79,63 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- (tr>td.col-no{$}+td.col-orderNo{000$}+td.col-memberId+td.col-orderDate+td.col-shippingStatus+td.col-price+td.col-shippingAddr.td-xscroll+td.col-products.td-xscroll+td.col-orderReq.td-xscroll+td.col-buttons) -->
+<%
+	if(list != null && !list.isEmpty()){
+		for(BuyExt buy : list){
+			String status = buy.getPayStatement().toString();
+			switch(status){
+			case "ready" : status = "미결제"; break;
+			case "paid" : status = "결제완료"; break;
+			case "faild" : status = "결제실패"; break;
+			case "cancelled" : status = "환불처리"; break;
+			}
+			List<ProductBuyExt> pbeList = buy.getList();
+			String sumName = "";
+			for(ProductBuyExt pbe : pbeList){
+				if(!sumName.equals(""))
+					sumName += ", ";
+				sumName += pbe.getProductName();
+			}
+%>
                 <tr>
-                    <td class="col-no">1</td>
-                    <td class="col-orderNo">0001</td>
-                    <td class="col-memberId">honggd1234</td>
-                    <td class="col-orderDate">2022-05-27</td>
-                    <td class="col-payStatus">미결제</td>
-                    <td class="col-price">135,800</td>
-                    <td class="col-shippingAddr td-xscroll">서울특별시 강남구 청담동 어쩔로 저쩔길 티비아파트 1234번 1234 어쩌고저쩌고 11111 2222</td>
-                    <td class="col-products td-xscroll">단백질듬뿍 다이어터 4주</td>
-                    <td class="col-orderReq td-xscroll">싱싱한걸로 주세요-_-</td>
+                    <td class="col-no"><%= startNo++ %></td>
+                    <td class="col-orderNo"><%= buy.getMerchantUid() %></td>
+                    <td class="col-memberId"><%= buy.getMemberId() %></td>
+                    <td class="col-orderDate"><%= buy.getBuyDate() %></td>
+                    <td class="col-payStatus"><%= status %></td>
+                    <td class="col-price"><%= buy.getAmount() %></td>
+                    <td class="col-shippingAddr td-xscroll"><%= buy.getBuyerAddr() %></td>
+                    <td class="col-products td-xscroll"><%= sumName %></td>
+                    <td class="col-orderReq td-xscroll"><%= buy.getRequestTerm()!=null ? buy.getRequestTerm() : "" %></td>
+<%
+	if(!status.equals("결제실패") && !status.equals("환불처리")){
+%>
                     <td class="col-buttons">
                         <div class="div-cancel"><a class="a-cancel">주문취소</a></div>
                     </td>
+<%
+	} else {
+%>
+					<td><div><a>취소불가</a></div></td>
+<%
+	}
+%>
                 </tr>
-                <tr>
-                    <td class="col-no">2</td>
-                    <td class="col-orderNo">0002</td>
-                    <td class="col-memberId"></td>
-                    <td class="col-orderDate"></td>
-                    <td class="col-payStatus"></td>
-                    <td class="col-price"></td>
-                    <td class="col-shippingAddr td-xscroll"></td>
-                    <td class="col-products td-xscroll"></td>
-                    <td class="col-orderReq td-xscroll"></td>
-                    <td class="col-buttons"></td>
-                </tr>
-                <tr>
-                    <td class="col-no">3</td>
-                    <td class="col-orderNo">0003</td>
-                    <td class="col-memberId"></td>
-                    <td class="col-orderDate"></td>
-                    <td class="col-payStatus"></td>
-                    <td class="col-price"></td>
-                    <td class="col-shippingAddr td-xscroll"></td>
-                    <td class="col-products td-xscroll"></td>
-                    <td class="col-orderReq td-xscroll"></td>
-                    <td class="col-buttons"></td>
-                </tr>
-                <tr>
-                    <td class="col-no">4</td>
-                </tr>
-                <tr>
-                    <td class="col-no">5</td>
-                </tr>
-                <tr>
-                    <td class="col-no">6</td>
-                </tr>
-                <tr>
-                    <td class="col-no">7</td>
-                </tr>
-                <tr>
-                    <td class="col-no">8</td>
-                </tr>
-                <tr>
-                    <td class="col-no">9</td>
-                </tr>
-                <tr>
-                    <td class="col-no">10</td>
-                </tr>
+<%
+		}
+	} else {
+%>
+				<tr>
+					<td colspan="10">조회된 주문기록이 없습니다.</td>
+				</tr>
+<%
+	}
+%>
             </tbody>
         </table>
     </div>
 
-    <%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
+    <%= pagebar %>
 </div>
 
 

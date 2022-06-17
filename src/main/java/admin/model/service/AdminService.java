@@ -19,6 +19,7 @@ import menu.model.dto.MenuExt;
 public class AdminService {
 
 	public static final int MEMBER_NUM_PER_PAGE = 15;
+	public static final int ORDER_NUM_PER_PAGE = 15;
 	private AdminDao adminDao = new AdminDao();
 
 	public int getTotalMembers() {
