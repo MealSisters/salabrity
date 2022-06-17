@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	String noticeBoardSelect = (String) request.getAttribute("noticeBoardSelect");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/notice/noticeBoard.css" />
 
@@ -9,7 +12,7 @@
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
-			name="noticeBoardEnrollFrm" 
+			name="boardEnrollFrm" 
 			action="<%= request.getContextPath() %>/board/noticeEnroll" 
 			method="POST" 
 			enctype="multipart/form-data">
@@ -18,11 +21,13 @@
 					<th>분류<sup>*</sup></th>
 					<td>
 						<div>
-							<select name="notice-board-select" class="notice-board-select" required>
+							<select name="noticeBoardSelect" class="notice-board-select" required>
 								<option value="" selected>선택</option>
 								<option value="general">일반</option>
 								<option value="event">이벤트</option>
 							</select>
+							<input type="hidden" name="noticeBoardSelect" value="general" />
+							<input type="hidden" name="noticeBoardSelect" value="event" />
 						</div>
 					</td>
 				</tr>
@@ -30,7 +35,7 @@
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="관리자" readonly/>
+							<input type="text" name="memberId" value="<%= loginMember.getMemberId() %>" readonly/>
 						</div>
 					</td>
 				</tr>
@@ -38,7 +43,7 @@
 					<th>제목<sup>*</sup></th>
 					<td>
 						<div>
-							<input type="text" name="title" placeholder="공지사항 게시글 제목" />
+							<input type="text" name="title" placeholder="제목을 입력하세요." />
 						</div>
 					</td>
 				</tr>
@@ -46,18 +51,34 @@
 					<th>내용<sup>*</sup></th>
 					<td>
 						<div>
-							<textarea rows="5" cols="40" name="content" placeholder="공지사항 게시글 상세"></textarea>
+							<textarea rows="5" cols="40" name="content" placeholder="내용을 입력하세요."></textarea>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
 					<td>
-						<div class="board-attach-wrap">
-						    <input class="board-attach-name" value="첨부파일" placeholder="첨부파일" readonly />
-						    <label for="upFile">파일찾기</label>
-						    <input type="file" id="upFile" />
-						</div>
+						<div class="board-attach-wrap" id="board-attach1-wrap">
+				            <p class="attach-name"></p>
+				            <input type="file" name="attach1" id="attach1" />
+				            <div class="attach-btn-wrap">
+				                <button type="button">파일찾기</button>
+				            </div>
+				        </div>
+						<div class="board-attach-wrap" id="board-attach2-wrap">
+				            <p class="attach-name"></p>
+				            <input type="file" name="attach2" id="attach2" />
+				            <div class="attach-btn-wrap">
+				                <button type="button">파일찾기</button>
+				            </div>
+				        </div>
+						<div class="board-attach-wrap" id="board-attach3-wrap">
+				            <p class="attach-name"></p>
+				            <input type="file" name="attach3" id="attach3" />
+				            <div class="attach-btn-wrap">
+				                <button type="button">파일찾기</button>
+				            </div>
+				        </div>
 					</td>
 				</tr>
 			</table>
@@ -69,39 +90,41 @@
 	</div>
 </div>
 <script>
-/**
- * noticeBoardEnrollFrm 유효성 검사
- */
 window.addEventListener('load', () => {
-	document.noticeBoardEnrollFrm.onsubmit = (e) => {
-		const frm = e.target;
-		
-		const titleVal = frm.title.value.trim();
-		if(!/^.+$/.test(titleVal)) {
-			alert("제목을 입력해주세요.");
-			frm.title.select();
-			return false;
-		}
-		
-		const contentVal = frm.content.value.trim();
-		if(!/^(.|\n)+$/.test(contentVal)) {
-			alert("내용을 입력해주세요.");
-			frm.content.select();
-			return false;
-		}
-		
-		return true;
-	}
+	getAttachs();
 });
+
+/**
+ * 첨부파일 가져오기
+ */
+const getAttachs = () => {
+    const attach1 = document.querySelector("#attach1");
+    const attach1Name = document.querySelector("#board-attach1-wrap p.attach-name");
+    const attach1Btn = document.querySelector("#board-attach1-wrap button");
+    upFile(attach1, attach1Name, attach1Btn);
+    
+    const attach2 = document.querySelector("#attach2");
+    const attach2Name = document.querySelector("#board-attach2-wrap p.attach-name");
+    const attach2Btn = document.querySelector("#board-attach2-wrap button");
+    upFile(attach2, attach2Name, attach2Btn);
+    
+    const attach3 = document.querySelector("#attach3");
+    const attach3Name = document.querySelector("#board-attach3-wrap p.attach-name");
+    const attach3Btn = document.querySelector("#board-attach3-wrap button");
+    upFile(attach3, attach3Name, attach3Btn);
+};
 
 /**
  * 첨부파일명 변경
  */
-const upFile = document.querySelector("#upFile");
-upFile.addEventListener('change', () => {
-	const upFileName = upFile.files[0].name; // value=fakepath
-	document.querySelector(".board-attach-name").value = upFileName;
-});
+const upFile = (attach, attachName, attachBtn) => {
+	attach.addEventListener('change', (e) => {
+		attachName.innerHTML = e.target.files[0].name;
+    });
+	attachBtn.addEventListener('click', () => {
+		attach.click();
+    });
+};
 </script>
-
+<script src="<%= request.getContextPath() %>/js/validation.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

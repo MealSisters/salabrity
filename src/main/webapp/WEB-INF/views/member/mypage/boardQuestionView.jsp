@@ -1,3 +1,5 @@
+<%@page import="board.model.dto.Posting"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -5,7 +7,9 @@
 	href="<%=request.getContextPath()%>/css/member/myPage.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/board.css" />
-
+<%
+List<Posting> list = (List<Posting>) request.getAttribute("list");
+%>
 <div class="my_page_content">
 
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
@@ -16,9 +20,10 @@
 		<h4 class="mypage_hd">1:1 문의</h4>
 		<div class="board_question_zone_sec">
 
+
 			<div class="question_zone_view">
 				<div class="question_view_hd">
-					<h3>[배송 문의] 배송은 언제되나요?</h3>
+					<h3>f</h3>
 				</div>
 
 				<div class="question_view_info">
