@@ -21,35 +21,6 @@
 			enctype="multipart/form-data">
 			<table class="tbl-board-update">
 				<tr>
-					<th>분류<sup>*</sup></th>
-					<td>
-						<div>
-							<select name="noticeBoardSelect" class="notice-board-select" required>
-								<option value="">선택</option>
-								<option value="general">일반</option>
-								<option value="event">이벤트</option>
-							<%-- <% if(noticeBoardSelect != null && noticeBoardSelect.equals("general")) { %>
-								<option value="general" selected>일반</option>
-							<%
-							   }
-							   else {
-							%>
-								<option value="general">일반</option>
-							<% } %>
-							
-							<% if(noticeBoardSelect != null && noticeBoardSelect.equals("event")) { %>
-								<option value="event" selected>이벤트</option>
-							<%
-							   }
-							   else {
-							%>
-								<option value="event">이벤트</option>
-							<% } %> --%>
-							</select>
-						</div>
-					</td>
-				</tr>
-				<tr>
 					<th>작성자</th>
 					<td>
 						<div>

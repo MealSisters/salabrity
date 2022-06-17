@@ -30,7 +30,7 @@ public class CommunityBoardGeneralSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 0. 페이징 처리
-			int numPerPage = boardService.Num_PER_PAGE;
+			int numPerPage = boardService.NUM_PER_PAGE;
 			int cPage = 1;
 			
 			try {

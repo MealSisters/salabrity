@@ -46,7 +46,6 @@ public class NoticeBoardEnrollServlet extends HttpServlet {
 			String memberId = multiReq.getParameter("memberId");
 			String title = multiReq.getParameter("title");
 			String content = multiReq.getParameter("content");
-			String noticeBoardSelect = multiReq.getParameter("noticeBoardSelect");
 			
 			PostingExt posting = new PostingExt();
 			posting.setBoardCode(BoardCode.N);
@@ -63,9 +62,7 @@ public class NoticeBoardEnrollServlet extends HttpServlet {
 			// 3. 리다이렉트
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", msg);
-			session.setAttribute("noticeBoardSelect", noticeBoardSelect); // general event
-			System.out.println("noticeEnroll@noticeBoardSelect=" + noticeBoardSelect);
-			response.sendRedirect(request.getContextPath() + "/board/noticeView?no=" + posting.getPostingNo() + "&noticeBoardSelect=" + noticeBoardSelect);
+			response.sendRedirect(request.getContextPath() + "/board/noticeView?no=" + posting.getPostingNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
