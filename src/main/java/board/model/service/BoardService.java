@@ -27,9 +27,9 @@ public class BoardService {
 	 * @param param
 	 * @return
 	 */
-	public List<PostingExt> findAllPostingList(Map<String, Object> param) {
+	public List<PostingExt> findAllPostingList(Map<String, Object> param, BoardCode boardCode) {
 		Connection conn = getConnection();
-		List<PostingExt> postingList = boardDao.findAllPostingList(conn, param);
+		List<PostingExt> postingList = boardDao.findAllPostingList(conn, param, boardCode);
 		close(conn);
 		return postingList;
 	}

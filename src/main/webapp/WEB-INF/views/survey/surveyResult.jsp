@@ -6,11 +6,10 @@
 	
 <link rel="stylesheet" href="surveyResult.css">
 
-<script type="text/javascript">
-</script>
+<script type="text/javascript"></script>
 
 <div class="survey_result">
-	<div>
+
 	<%
 	request.setCharacterEncoding("UTF-8");
 	
@@ -24,7 +23,7 @@
 				// location.replace("");
 				break;
 			case 2: 
-			 		 break;
+ 		 		break;
 			}
 	}
 	
@@ -51,12 +50,13 @@
 	  // 체중조절식단
 	 }
 	}
-	
 	%>
 	
+	<div class="survey_result_warp"></div>
+	<div class="survey_result"></div>
 	
-	<br>
-	<b><a href='javascript:history.go(-1)'>다시</a></b>
+	<div>
+	<input type="button" id="foward" value="GO BACK" onclick="location.href='javascript:history.go(-1)'">
 	</div>
 </div>
 

@@ -1,4 +1,4 @@
-package board.controller.community.hacks;
+package board.controller.community.general;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,10 +16,10 @@ import board.model.service.BoardService;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardHacksLikeServlet
+ * Servlet implementation class CommunityBoardGeneralLikeServlet
  */
-@WebServlet("/board/community/hacksLike")
-public class CommunityBoardHacksLikeServlet extends HttpServlet {
+@WebServlet("/board/community/generalLike")
+public class CommunityBoardGeneralLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 	
@@ -42,7 +42,7 @@ public class CommunityBoardHacksLikeServlet extends HttpServlet {
 			}
 			
 			request.setAttribute("like", like);
-			response.sendRedirect(request.getContextPath() + "/board/community/hacksView?no=" + postingNo);
+			response.sendRedirect(request.getContextPath() + "/board/community/generalView?no=" + postingNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
