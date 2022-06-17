@@ -26,7 +26,7 @@ public class MypageDao {
 	
 	public MypageDao() {
 		String fileName = MypageDao.class.getResource("/sql/mypage-query.properties").getPath();
-		System.out.println("fileName@mypageDao = " + fileName);
+//		System.out.println("fileName@mypageDao = " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
@@ -52,7 +52,6 @@ public class MypageDao {
 				p.setRegDate(rset.getDate("reg_date"));
 				p.setMemberId(rset.getString("member_id"));
 				list.add(p);
-				System.out.println("dao");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -178,6 +177,88 @@ public class MypageDao {
 		
 		
 		return list;
+	}
+
+
+	public List<Posting> searchMyWriteList(Connection conn, String memberId, Map<String, String> param, int start, int end) {
+		List<Posting> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchMyWriteList");
+		sql = setSql(sql, param.get("searchType"), param.get("searchKeyword"));
+//		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rset.next()) {
+				Posting posting = new Posting();
+				posting.setPostingNo(rset.getInt("posting_no"));
+				posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				posting.setMemberId(rset.getString("member_id"));
+				posting.setTitle(rset.getString("title"));
+				posting.setContent(rset.getString("content"));
+				posting.setRegDate(rset.getDate("reg_date"));
+				posting.setReadCount(rset.getInt("read_count"));
+				posting.setPostingLevel(rset.getInt("posting_level"));
+				posting.setPostingRef(rset.getInt("posting_ref"));
+				list.add(posting);
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MypageException("작성 게시글 검색 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+	private String setSql(String sql, String searchType, String searchKeyword) {
+		switch(searchType) {
+		case "member_id"	: sql = sql.replace("#", " member_id like '%"+searchKeyword+"%'"); break;
+		case "title"	: sql = sql.replace("#", " title like '%"+searchKeyword+"%'"); break;
+		case "content"	: sql = sql.replace("#", " content like '%"+searchKeyword+"%'"); break;
+		}
+		return sql;
+	}
+
+
+	public int searchMyBoardListCount(Connection conn, String memberId, Map<String, String> param) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchMyBoardListCount");
+		sql = setSql(sql, param.get("searchType"), param.get("searchKeyword"));
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalContents = rset.getInt("cnt");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MypageException("검색 페이지 조회 실패", e);
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
 	}
 	
 	

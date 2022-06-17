@@ -88,6 +88,22 @@ public class MypageService {
 	}
 
 
+	public List<Posting> searchMyWriteList(String memberId, Map<String, String> param, int start, int end) {
+		Connection conn = getConnection();
+		List<Posting> list = mypageDao.searchMyWriteList(conn, memberId, param, start, end);
+		close(conn);
+		return list;
+	}
+
+
+	public int searchMyWriteListCount(String memberId, Map<String, String> param) {
+		Connection conn = getConnection();
+		int totalContents = mypageDao.searchMyBoardListCount(conn, memberId, param);
+		close(conn);
+		return totalContents;
+	}
+
+
 
 
 }

@@ -12,6 +12,7 @@
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 	int cPage = (int)request.getAttribute("cPage");
+	
 %>
 <style>
 .page-bar a {
@@ -62,7 +63,7 @@
 					<input type="hidden" name="memberId" />
 						<select id="searchType">
 							<option value="title" <%= "title".equals(searchType)?"selected":"" %>>제목</option> <!-- boardTitle -->
-							<option value="content">내용</option>
+						
 						</select>
 						<div id="search_boardTitle">
 							<form action="<%= request.getContextPath() %>/mypage/finder">
