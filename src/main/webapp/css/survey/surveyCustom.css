@@ -44,7 +44,7 @@ input {
 }
 
 #next {
-	border: solid 1px #116916;
+	border: none;
 	height: 50px;
 	width: 45%;
 	border-radius: 20px;

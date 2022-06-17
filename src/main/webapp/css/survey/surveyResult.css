@@ -2,31 +2,66 @@
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+.survey_result {
+  background-color: white;
+  border: 1px solid;
+  border-radius: 50px;
+  width: 800px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 100px auto;
+  padding: 80px;
+  transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+}
 
 .survey_result_warp {
-	display: flex;
-	border-collapse: collapse;
+	display: center;
+  text-align: center;
+	border-bottom: 1px solid #000;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
 }
 
-
-.survey_result {
-	border-top: 1px solid #000;
+.survey_detail {
 	background-color: #fbfbfb;
+  margin-top: 20px;
 }
 
-.foward {
-	border: solid 1px #116916;
-	height: 50px;
-	width: 45%;
-	border-radius: 20px;
-	font-size: 18px;
+
+#foward {
+	height: 40px;
+	width: 20%;
+  border:none;
+  border-radius: 20px;
+	font-size: 16px;
 	text-align: center;
 	text-decoration: none;
 	color: #f1f1f1;
 	background-color: #116916;
+  float: right;
 }
 
-.foward:hover {
+#foward:hover {
+	color: #116916;
+	background-color: #f1f1f1;
+}
+
+#detail {
+  height: 40px;
+	width: 20%;
+  border:none;
+  border-radius: 20px;
+	font-size: 16px;
+	text-align: center;
+	text-decoration: none;
+	color: #f1f1f1;
+	background-color: #116916;
+  float: right;
+  margin-right: 10px;
+}
+
+#detail:hover {
 	color: #116916;
 	background-color: #f1f1f1;
 }
