@@ -3,7 +3,6 @@ package admin.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.model.dto.SalesTrend;
 import admin.model.service.AdminService;
+import board.model.dto.Posting;
 
 /**
  * Servlet implementation class AdminDashboardServlet
@@ -29,6 +29,8 @@ public class AdminDashboardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* -------------------------------------------- 최근 문의글 테이블 -------------------------------------------- */
+		List<Posting> questionList = adminService.findRecentQuestion();
 		
 		/* ------------------------------------------ 최근 sales추이 데이터 ------------------------------------------ */
 		int MIN_PERIOD = AdminService.CHART_MIN_PERIOD;
@@ -107,6 +109,7 @@ public class AdminDashboardServlet extends HttpServlet {
 		
 		
 		/* ---------------------------------------------- view단 처리 ---------------------------------------------- */
+		request.setAttribute("questionList", questionList);
 		request.setAttribute("todayDataMap", todayDataMap);
 		request.setAttribute("memberData", enrollMemberCount);
 		request.setAttribute("salesTrendData", salesData);

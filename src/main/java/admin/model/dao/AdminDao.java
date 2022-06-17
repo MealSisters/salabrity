@@ -17,6 +17,7 @@ import java.util.Properties;
 
 import admin.model.dto.SalesTrend;
 import admin.model.exception.AdminException;
+import board.model.dto.Posting;
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
 
@@ -322,6 +323,30 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return totalPosting;
+	}
+
+	public List<Posting> findRecentQuestion(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Posting> list = new ArrayList<>();
+		String sql = prop.getProperty("findRecentQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Posting posting = new Posting();
+				posting.setPostingNo(rset.getInt("posting_no"));
+				posting.setRegDate(rset.getDate("reg_date"));
+				posting.setTitle(rset.getString("title"));
+				list.add(posting);
+			}
+		} catch (Exception e) {
+			throw new AdminException("최근등록 문의글 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import admin.model.dao.AdminDao;
 import admin.model.dto.SalesTrend;
+import board.model.dto.Posting;
 import member.model.dto.Member;
 
 public class AdminService {
@@ -97,6 +98,13 @@ public class AdminService {
 		int todayPosting = adminDao.getTodayPosting(conn);
 		close(conn);
 		return todayPosting;
+	}
+
+	public List<Posting> findRecentQuestion() {
+		Connection conn = getConnection();
+		List<Posting> list = adminDao.findRecentQuestion(conn);
+		close(conn);
+		return list;
 	}
 
 	

@@ -1,3 +1,4 @@
+<%@page import="board.model.dto.Posting"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
+	List<Posting> questionList = (List<Posting>) request.getAttribute("questionList");
 	Map<String, Object> todayDataMap = (Map<String, Object>) request.getAttribute("todayDataMap");
 	String salesTrendData = (String) request.getAttribute("salesTrendData");
 	Integer[] memberData = (Integer[]) request.getAttribute("memberData");
@@ -79,31 +81,26 @@
                     </tr>
                 </thead>
                 <tbody>
+<%
+	final int MAX = 5;
+	int size = questionList.size();
+	for(Posting posting : questionList) {
+%>
                     <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
+                        <td><%= posting.getPostingNo() %></td>
+                        <td><%= posting.getRegDate() %></td>
+                        <td><%= posting.getTitle() %></td>
                     </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
+<%
+	}
+	for(int i = 0; i < MAX-size ; i++){
+%>
+					<tr>
+                        <td></td><td></td><td></td>
                     </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
-                    </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
-                    </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
-                    </tr>
+<%
+	} 
+%>
                 </tbody>
             </table>
         </div>
