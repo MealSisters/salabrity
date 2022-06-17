@@ -27,8 +27,6 @@ public class SalesTrendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 사용자입력값 처리
-		// 업무로직
 		long miliseconds = System.currentTimeMillis();
         Date endDate = new Date(miliseconds);
 		Date startDate = new Date(miliseconds - (1000 * 60 * 60 * 24 * 6));
@@ -36,8 +34,15 @@ public class SalesTrendServlet extends HttpServlet {
 		param.put("startDate", startDate);
 		param.put("endDate", endDate);
 		
+		// 라인차트
 		List<SalesTrend> totalSalesData = adminService.findSalesTrend(param);
 		System.out.println("totalSalesData@servlet = " + totalSalesData);
+		
+		// 파이차트
+		Map<String, Date> pieParam = new HashMap<>();
+		pieParam.put("startDate", startDate);
+		pieParam.put("endDate", endDate);
+		
 		
 		// view단처리
 		request.setAttribute("period", param);

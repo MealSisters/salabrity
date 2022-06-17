@@ -8,6 +8,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	final int MIN_PERIOD = 7;
+
+	/*------------------------------- 라인 차트 영역 -------------------------------*/
 	List<SalesTrend> totalSalesList = (List<SalesTrend>) request.getAttribute("salesData");
 	Map<String, Date> period = (Map<String, Date>) request.getAttribute("period");
 	
@@ -80,13 +82,13 @@
 	
 	System.out.println("salesData = " + salesData);
 	System.out.println("dateData = " + dateData);
-	/*------------------------------- 차트 구분 -------------------------------*/
-	
-	
-	
-	
-	
+	/*------------------------------- 라인 차트 영역 -------------------------------*/	
 %>
+<%
+	/*------------------------------- 파이 차트 영역 -------------------------------*/	
+	/*------------------------------- 파이 차트 영역 -------------------------------*/	
+%>
+
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminSalesChart.css">
 <script src="<%= request.getContextPath() %>/js/Chart.min.js"></script>
 <script src="<%= request.getContextPath() %>/js/admin/adminchart.js"></script>
