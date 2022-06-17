@@ -1,8 +1,8 @@
+<%@ page import="board.model.dto.BoardCode" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
-
 <!-- 커뮤니티게시판 메인 -->
 <div id="community-board-wrap">
 	<!-- 샐브's 레시피 -->
@@ -17,7 +17,7 @@
 				</tr>
 				<tr class="hacks-title">
 					<th colspan="6">
-						<a href="<%= request.getContextPath() %>/board/community/hacks">
+						<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
 							<i class="fa-solid fa-caret-right"></i>샐브's 레시피
 						</a>
 					</th>
@@ -118,7 +118,7 @@
 				<tr>
 					<td colspan="6">
 						<div class="hacks-btn">
-							<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=C1">
+							<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
 								샐브's 레시피 더보기　<i class="fa-solid fa-rectangle-list"></i>
 							</a>
 						</div>
@@ -133,7 +133,7 @@
 			<thead>
 				<tr class="general-title">
 					<th colspan="6">
-						<a href="<%= request.getContextPath() %>/board/community/general">
+						<a href="<%= request.getContextPath() %>/board/community/general?boardCode=<%= BoardCode.C2 %>">
 							<i class="fa-solid fa-caret-right"></i>자유게시판
 						</a>
 					</th>
@@ -233,7 +233,7 @@
 				<tr>
 					<td colspan="6">
 						<div class="general-btn">
-							<a href="<%= request.getContextPath() %>/board/community/general">
+							<a href="<%= request.getContextPath() %>/board/community/general?boardCode=<%= BoardCode.C2 %>">
 								자유게시판 더보기　<i class="fa-solid fa-rectangle-list"></i>
 							</a>
 						</div>
@@ -243,5 +243,4 @@
 		</table>
 	</div>
 </div>
-
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

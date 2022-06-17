@@ -44,7 +44,7 @@ public class BoardDao {
 	 * @param param
 	 * @return
 	 */
-	public List<PostingExt> findAllPostingList(Connection conn, Map<String, Object> param) {
+	public List<PostingExt> findAllPostingList(Connection conn, Map<String, Object> param, BoardCode boardCode) {
 		String sql = prop.getProperty("findAllPostingList");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -54,6 +54,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (int) param.get("start"));
 			pstmt.setInt(2, (int) param.get("end"));
+			pstmt.setString(3, boardCode.toString());
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				PostingExt posting = handlePostingResultSet(rset);
