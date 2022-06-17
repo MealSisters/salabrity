@@ -244,6 +244,39 @@ public class AdminDao {
 		return list;
 	}
 
+	public List<SalesTrend> findTopSalesTrend(Connection conn, Map<String, Date> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SalesTrend> list = new ArrayList<>();
+		String sql = prop.getProperty("findTopSalesTrend");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (param.get("startDate") != null) {
+				pstmt.setDate(1, param.get("startDate"));
+			} else {
+				pstmt.setDate(1, Date.valueOf("1000-01-01"));
+			}
+			if (param.get("endDate") != null) {
+				pstmt.setDate(2, param.get("endDate"));
+			} else {
+				pstmt.setDate(2, Date.valueOf("5000-01-01"));
+			}
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				SalesTrend st = new SalesTrend();
+				st.setProductName(rset.getString("product_name"));
+				st.setAmount(rset.getInt("sales"));
+				list.add(st);
+			}
+		} catch (SQLException e) {
+			throw new AdminException("최고 매출 상품정보 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
 
 }

@@ -77,5 +77,12 @@ public class AdminService {
 		return list;
 	}
 
+	public List<SalesTrend> findTopSalesTrend(Map<String, Date> param) {
+		Connection conn = getConnection();
+		List<SalesTrend> list = adminDao.findTopSalesTrend(conn, param);
+		close(conn);
+		return list;
+	}
+
 	
 }
