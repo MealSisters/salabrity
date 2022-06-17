@@ -18,7 +18,7 @@ import board.model.service.BoardService;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardGeneralEnrollServlet
+ * Servlet implementation class CommunityBoardHacksEnrollServlet
  */
 @WebServlet("/board/community/hacksEnroll")
 public class CommunityBoardHacksEnrollServlet extends HttpServlet {

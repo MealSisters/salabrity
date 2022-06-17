@@ -20,7 +20,7 @@ import board.model.service.BoardService;
 
 /**
  * @author 박수진
- * Servlet implementation class CommunityBoardGeneralUpdateServlet
+ * Servlet implementation class CommunityBoardHacksUpdateServlet
  */
 @WebServlet("/board/community/hacksUpdate")
 public class CommunityBoardHacksUpdateServlet extends HttpServlet {
@@ -74,21 +74,7 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 			String msg = result > 0 ? "게시글 수정에 성공했습니다." : "게시글 수정에 실패했습니다.";
 						
 			// 첨부 파일 삭제 처리
-			String[] delFiles = multiReq.getParameterValues("delFile");
-			if(delFiles != null) {
-				for(String temp : delFiles) {
-					int attachNo = Integer.parseInt(temp);
-					PostingAttach attach = boardService.findPostingAttachByPostingAttachNo(attachNo);
-								
-					// a. 저장된 파일에 대한 처리 - 파일 삭제
-					File delFile = new File(saveDirectory, attach.getRenamedFilename());
-					if(delFile.exists()) delFile.delete();
-								
-					// b. db record에 대한 처리 - db record 삭제
-					result = boardService.deletePostingAttach(attachNo);
-					System.out.println("> " + attachNo +"번 첨부파일 삭제!");
-				}
-			}
+			deletePostingAttach(saveDirectory, multiReq);
 			
 			// 3. 리다이렉트
 			HttpSession session = request.getSession();
@@ -99,6 +85,25 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 			throw e;
 		}
 		
+	}
+
+	public void deletePostingAttach(String saveDirectory, MultipartRequest multiReq) {
+		int result;
+		String[] delFiles = multiReq.getParameterValues("delFile");
+		if(delFiles != null) {
+			for(String temp : delFiles) {
+				int attachNo = Integer.parseInt(temp);
+				PostingAttach attach = boardService.findPostingAttachByPostingAttachNo(attachNo);
+							
+				// a. 저장된 파일에 대한 처리 - 파일 삭제
+				File delFile = new File(saveDirectory, attach.getRenamedFilename());
+				if(delFile.exists()) delFile.delete();
+							
+				// b. db record에 대한 처리 - db record 삭제
+				result = boardService.deletePostingAttach(attachNo);
+				System.out.println("> " + attachNo +"번 첨부파일 삭제!");
+			}
+		}
 	}
 
 }
