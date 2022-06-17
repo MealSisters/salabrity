@@ -9,7 +9,7 @@ import java.util.Base64.Encoder;
 public class PwdEncrypt {
 	
 //	public static void main(String[] args) {
-//		System.out.println(encrypt("1234", "asdf"));
+//		System.out.println(encrypt("1234", "admin"));
 //	}
 
 	public static String encrypt(String password, String salt) {
@@ -22,7 +22,6 @@ public class PwdEncrypt {
 			byte[] saltBytes = salt.getBytes("utf-8");
 			md.update(saltBytes); 
 			encrypted = md.digest(input); 
-//			System.out.println(new String(encrypted)); // ��!gs�'"S�@)>�䘽����Ê��U�y_�m�=$邾��$�{�E�V8��iWH��
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
