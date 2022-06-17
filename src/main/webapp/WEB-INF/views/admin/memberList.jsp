@@ -1,6 +1,5 @@
 <%@page import="member.model.dto.MemberRole"%>
 <%@page import="admin.model.service.AdminService"%>
-<%@page import="member.model.dto.Member"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,6 +21,7 @@ if(request.getParameter("cPage")!=null) {
 int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
 
 %>
+<link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
 
@@ -100,8 +100,8 @@ int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
                     <td><%= member.getBirthday() != null ? member.getBirthday() : "" %></td>
                     <td><%= member.getEmail()%></td>
                     <td><%= member.getPhone()%></td>
-                    <td><%= member.getAddress()%> <%= member.getAddressDetail()%></td>
-                    <td><%= member.getEnrollDate()%></td>
+                    <td><%= member.getAddress()%> <%= member.getAddressDetail() != null ? member.getAddressDetail() : "" %></td>
+                    <td><%= member.getEnrollDate() %></td>
                 </tr>
 <%
 		}
@@ -117,7 +117,7 @@ int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
         </table>
     </div>
 
-	<link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
+	
     <%= pagebar %>
 </div>
 <form action="<%=request.getContextPath()%>/admin/memberRoleUpdate" method="POST" name="updateMemberRoleFrm">
