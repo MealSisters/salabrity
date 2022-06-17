@@ -1,4 +1,4 @@
-package admin.model.exception;
+package buy.model.exception;
 
 public class BuyException extends RuntimeException {
 

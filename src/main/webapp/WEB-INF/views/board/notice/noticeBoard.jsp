@@ -8,8 +8,7 @@
 <%
 	List<PostingExt> postingList = (List<PostingExt>) request.getAttribute("postingList");
 	String pagebar = (String) request.getAttribute("pagebar");
-	
-	String noticeBoardSelect = (String) request.getAttribute("noticeBoardSelect");
+	BoardCode boardCode= (BoardCode) request.getAttribute("boardCode");
 %>
 <!-- 수진 end -->
 <link rel="stylesheet"
@@ -24,10 +23,9 @@
     <div class="notice_wrap">
     <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 		<button type="button" class="btn_notice_enroll" onclick="location.href='<%= request.getContextPath() %>/board/noticeEnroll';">등록</button>
+		<input type="hidden" name="boardCode" value="<%= boardCode %>" />
 	<% } %>
 <%@ include file="/WEB-INF/views/common/noticePagebar.jsp" %>
-		<input type="hidden" name="noticeBoardSelect" value="general" />
-		<input type="hidden" name="noticeBoardSelect" value="event" />
         <div class="notice_cont"> <!-- FAQ랑 같이 사용 -->
             <table class="tbl_notice">
                 <thead>
@@ -52,32 +50,6 @@
                         <td><%= posting.getRegDate() %></td>
                         <td><%= posting.getReadCount() %></td>
                     </tr>
-        <!-- 수진 end -->
-                   <%--  <tr>
-                        <td><%= posting.getPostingNo() %></td>
-                        <td><a href="<%= request.getContextPath() %>/board/noticeView">[이벤트] 가격 할인 안내</a></td>
-                        <td>2022-06-08</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>02</td>
-                        <td><a href="">공지사항2</a></td>
-                        <td>2022-06-08</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>03</td>
-                        <td><a href="">공지사항3</a></td>
-                        <td>2022-06-08</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>04</td>
-                        <td><a href="">공지사항4</a></td>
-                        <td>2022-06-08</td>
-                        <td>0</td>
-                    </tr> --%>
-        <!-- 수진 start -->
 		<%		
 			 	}
 			}

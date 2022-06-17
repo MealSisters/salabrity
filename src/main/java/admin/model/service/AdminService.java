@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import admin.model.dao.AdminDao;
+import admin.model.dto.SalesTrend;
 import member.model.dto.Member;
-import menu.model.dto.Menu;
-import menu.model.dto.MenuAttach;
-import menu.model.dto.MenuExt;
 
 public class AdminService {
 
@@ -70,6 +68,13 @@ public class AdminService {
 		int enrollMembers = adminDao.getEnrollMemberByDate(conn, date);
 		close(conn);
 		return enrollMembers;
+	}
+
+	public List<SalesTrend> findSalesTrend(Map<String, Date> param) {
+		Connection conn = getConnection();
+		List<SalesTrend> list = adminDao.findSalesTrend(conn, param);
+		close(conn);
+		return list;
 	}
 
 	

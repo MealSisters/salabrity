@@ -12,7 +12,7 @@
     <h3>메뉴정보</h3>
     <div class="div-level2">
         <div class="img-wrapper">
-            <img src="<%= request.getContextPath() %>/images/menu/<%= attach.getRenamedFileName() %>" alt="">
+            <img src="<%= request.getContextPath() %>/upload/menu/<%= attach.getRenamedFileName() %>" alt="">
         </div>
         <div class="menuInfo-wrapper">
             <div class="mainInfo-wrapper">
