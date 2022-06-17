@@ -1,3 +1,5 @@
+<%@page import="board.model.dto.Posting"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -5,7 +7,9 @@
 	href="<%=request.getContextPath()%>/css/member/myPage.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/board.css" />
-
+<%
+	List<Posting> list = (List<Posting>) request.getAttribute("list");
+%>
 <div class="my_page_content">
 
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
@@ -31,9 +35,8 @@
 						</div>
 
 						<div class="date_check_calendar">
-							<input type="text" name="regDate" id="" class="ck_calendar"
-								value="2022-06-08"> <span>~</span> <input type="text"
-								name="regDate" id="" class="ck_calendar" value="2022-06-31">
+							<input type="text" name="regDate" id="" class="ck_calendar" value="2022-06-08"> <span>~</span> 
+							<input type="text" name="regDate" id="" class="ck_calendar" value="2022-06-31">
 							<button type="submit" class="btn_date_check">
 								<span>조회</span>
 							</button>
@@ -42,29 +45,37 @@
 				</div>
 
 				<div class="board_question_list">
+				
 					<table class="question_list">
 						<thead>
 							<tr>
 								<th>문의날짜</th>
 								<th>제목</th>
-								<th>문의상태</th>
+								<th>작성자</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>2022-06-06</td>
+						<% if(list == null || list.isEmpty()) {%>
+						<tr>
+							<td colspan="4">작성한 게시글이 없습니다.</td>
+						</tr>
+						<% } else { 
+							for(Posting p : list) {
+						%>
+						<tr>
+								<td><%= p.getRegDate() %></td>
 
-								<td><a href="<%= request.getContextPath() %>/mypage/boardQuestionView">[배송 문의] 배송은 언제되나요?</a></td>
-								<td>처리중</td>
+								<td>
+								<a href="<%= request.getContextPath() %>/mypage/boardQuestionView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
+								</td>
+								<td><%= loginMember.getMemberName() %></td>
 							</tr>
+							<% }
+							
+						} %>
 						</tbody>
 					</table>
 				</div>
-
-
-		
-
-
 
 		</div>
 	</div>

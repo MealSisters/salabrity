@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import board.model.service.BoardService;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardHacksCommentDeleteServlet
  */
 @WebServlet("/board/community/hacksView/commentDelete")

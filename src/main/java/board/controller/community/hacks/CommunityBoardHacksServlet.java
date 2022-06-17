@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.dto.BoardCode;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 import common.utill.PageBar;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardHacksServlet
  */
 @WebServlet("/board/community/hacks")
@@ -43,11 +45,12 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
-					
+			
+			BoardCode boardCode = BoardCode.valueOf(request.getParameter("boardCode"));
+			
 			// 2. 업무 로직
 			// 2.a. content 영역
-			List<PostingExt> postingList = boardService.findAllPostingList(param);
-			System.out.println("list@postingList = " + postingList);
+			List<PostingExt> postingList = boardService.findAllPostingList(param, boardCode);
 			
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings();
@@ -65,7 +68,6 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
 
 }

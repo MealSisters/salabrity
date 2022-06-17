@@ -13,6 +13,7 @@ import board.model.service.BoardService;
 import common.utill.FileDownload;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardHacksFileDownloadServlet
  */
 @WebServlet("/board/community/hacksFileDownload")

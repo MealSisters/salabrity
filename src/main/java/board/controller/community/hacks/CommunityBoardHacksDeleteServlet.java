@@ -16,6 +16,7 @@ import board.model.dto.PostingAttach;
 import board.model.service.BoardService;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardHacksDeleteServlet
  */
 @WebServlet("/board/community/hacksDelete")
@@ -30,20 +31,13 @@ public class CommunityBoardHacksDeleteServlet extends HttpServlet {
 		try {
 			// 1. 사용자 입력값 처리
 			int no = Integer.parseInt(request.getParameter("no"));
+			BoardCode boardCode = BoardCode.valueOf(request.getParameter("boardCode"));
 			
 			// 2. 업무 로직
 			// 첨부파일 존재시 삭제
 			List<PostingAttach> attachments = boardService.findByPostingNo(no).getAttachments();
-			if(attachments != null && !attachments.isEmpty()) {
-				for(PostingAttach attach : attachments) {
-					String delDirectory = getServletContext().getRealPath("/upload/board/community/hacks");
-					File delFilename = new File(delDirectory, attach.getRenamedFilename());
-					if(delFilename.exists()) {
-						delFilename.delete();
-						System.out.println("> " + attach.getRenamedFilename() + "파일 삭제!");
-					}
-				}
-			}
+			String path = "/upload/board/community/hacks";
+			deletePostingAttach(attachments, path);
 			
 			// posting테이블 레코드 삭제
 			int result = boardService.deletePosting(no);
@@ -51,10 +45,23 @@ public class CommunityBoardHacksDeleteServlet extends HttpServlet {
 			// 3. 리다이렉트
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", "게시물 삭제가 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/board/community/hacks");
+			response.sendRedirect(request.getContextPath() + "/board/community/hacks?boardCode=" + boardCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
+		}
+	}
+
+	public void deletePostingAttach(List<PostingAttach> attachments, String path) {
+		if(attachments != null && !attachments.isEmpty()) {
+			for(PostingAttach attach : attachments) {
+				String delDirectory = getServletContext().getRealPath(path);
+				File delFilename = new File(delDirectory, attach.getRenamedFilename());
+				if(delFilename.exists()) {
+					delFilename.delete();
+					System.out.println("> " + attach.getRenamedFilename() + "파일 삭제!");
+				}
+			}
 		}
 	}
 

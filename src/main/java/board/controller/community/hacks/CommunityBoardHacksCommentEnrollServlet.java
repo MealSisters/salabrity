@@ -14,6 +14,7 @@ import board.model.dto.PostingComment;
 import board.model.service.BoardService;
 
 /**
+ * @author 박수진
  * Servlet implementation class CommunityBoardHacksCommentServlet
  */
 @WebServlet("/board/community/hacksView/commentEnroll")
@@ -35,7 +36,6 @@ public class CommunityBoardHacksCommentEnrollServlet extends HttpServlet {
 			String commentContent = request.getParameter("commentContent");
 			
 			PostingComment pc = new PostingComment(0, postingNo, boardCode, memberId, commentContent, commentLevel, commentRef, null);
-			System.out.println("PostingComment" + pc);
 			
 			// 2. 업무 로직
 			int result = boardService.insertPostingComment(pc);
