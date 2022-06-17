@@ -66,7 +66,7 @@
 			</table>
 			<div class="board-button-wrap">
 				<input type="submit" value="등록" id="board-enroll-btn" />
-				<input type="reset" value="취소" id="board-reset-btn" />
+				<input type="button" value="취소" id="board-reset-btn" onclick="history.go(-1);" />
 			</div>
 		</form>
 	</div>
