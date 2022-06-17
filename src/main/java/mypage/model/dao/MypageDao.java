@@ -15,6 +15,7 @@ import static common.JdbcTemplate.close;
 
 import board.model.dto.BoardCode;
 import board.model.dto.Posting;
+import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
 import member.model.dto.Member;
 import member.model.exception.MemberException;
@@ -64,19 +65,18 @@ public class MypageDao {
 	}
 
 
-	public int insertQuestion(Connection conn, PostingExt posting) {
+	public int insertQuestion(Connection conn, Posting posting) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("insertQuestion");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, posting.getBoardCode().toString());
-			pstmt.setString(2, posting.getMemberId());
-			pstmt.setString(3, posting.getTitle());
-			pstmt.setString(4, posting.getContent());
+			pstmt.setString(1, posting.getMemberId());
+			pstmt.setString(2, posting.getTitle());
+			pstmt.setString(3, posting.getContent());
 			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new MypageException("1:1 문의 등록 오류", e);
 		} finally {
 			close(pstmt);
@@ -259,6 +259,49 @@ public class MypageDao {
 		}
 		
 		return totalContents;
+	}
+
+
+	public int findCurrentQuestionNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int no = 0;
+		String sql = prop.getProperty("findCurrentQuestionNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next())
+				no = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new MypageException("게시글 번호 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return no;
+	}
+
+
+	public int insertAttachment(Connection conn, PostingAttach attach) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attach.getPostingNo());
+			pstmt.setString(2, attach.getOriginalFilename());
+			pstmt.setString(3, attach.getRenamedFilename());
+			result = pstmt.executeUpdate();
+			System.out.println("제발좀"+result);
+		} catch (Exception e) {
+			throw new MypageException("첨부파일 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 	
 	

@@ -24,7 +24,7 @@
 							<tr>
 								<th>제목</th>
 								<td><input type="text" name="title" id="p_title"></td>
-								<input type="hidden" name="memberId"/>
+								<td><input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>"/></td>
 							</tr>
 							<tr>
 								<th>내용</th>
@@ -34,7 +34,7 @@
 								<th>첨부파일</th>
 								<td>
 									<div class="upload_file">
-										<input type="file" name="upFile1" id="upFile2">
+										<input type="file" name="upFile1" id="upFile1">
 										<input type="file" name="upFile1" id="upFile2">
 									<!--  	<div class="btn_upload_box">
 											<button type="button" id="search_file">찾아보기</button>

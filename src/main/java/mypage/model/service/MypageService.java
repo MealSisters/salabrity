@@ -31,17 +31,30 @@ public class MypageService {
 	}
 
 
-	public int insertQuestion(PostingExt posting) {
+	public int insertQuestion(Posting posting) {
 		int result = 0;
 		Connection conn = getConnection();
 		
 		try {
+			
+			// 각 각 등록
+			
 			// posting에 등록
-			result = mypageDao.insertQuestion(conn, posting);
+			result = mypageDao.insertQuestion(conn, posting); // nextval
+			
+			// 2. pk 가져오기
+			int no = mypageDao.findCurrentQuestionNo(conn); // currval
+			posting.setPostingNo(no);
+			System.out.println("등록된 posting no" + no);
 			
 			// attachment에 등록
 			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
-			
+			if(attachments != null && !attachments.isEmpty()) {
+				for(PostingAttach attach : attachments) {
+					attach.setPostingNo(no);
+					result = mypageDao.insertAttachment(conn, attach);
+				}
+			}
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
