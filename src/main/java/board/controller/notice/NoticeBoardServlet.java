@@ -31,7 +31,7 @@ public class NoticeBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 1. 사용자 입력값 처리
-			int numPerPage = boardService.Num_PER_PAGE;
+			int numPerPage = boardService.NUM_PER_PAGE;
 			int cPage = 1;
 			
 			try {
@@ -56,7 +56,6 @@ public class NoticeBoardServlet extends HttpServlet {
 			int totalPostingContents = boardService.getTotalPostings();
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
-			System.out.println("pagebar = " + pagebar);
 			
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);

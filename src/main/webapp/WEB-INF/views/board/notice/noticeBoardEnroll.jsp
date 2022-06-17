@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%
-	String noticeBoardSelect = (String) request.getAttribute("noticeBoardSelect");
-%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/notice/noticeBoard.css" />
 
@@ -17,20 +14,6 @@
 			method="POST" 
 			enctype="multipart/form-data">
 			<table class="tbl-board-enroll">
-				<tr>
-					<th>분류<sup>*</sup></th>
-					<td>
-						<div>
-							<select name="noticeBoardSelect" class="notice-board-select" required>
-								<option value="" selected>선택</option>
-								<option value="general">일반</option>
-								<option value="event">이벤트</option>
-							</select>
-							<input type="hidden" name="noticeBoardSelect" value="general" />
-							<input type="hidden" name="noticeBoardSelect" value="event" />
-						</div>
-					</td>
-				</tr>
 				<tr>
 					<th>작성자</th>
 					<td>
@@ -84,7 +67,7 @@
 			</table>
 			<div class="board-button-wrap">
 				<input type="submit" value="등록" id="board-enroll-btn" />
-				<input type="reset" value="취소" id="board-reset-btn" />
+				<input type="button" value="취소" id="board-reset-btn" onclick="history.go(-1);" />
 			</div>
 		</form>
 	</div>

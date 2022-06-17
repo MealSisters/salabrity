@@ -19,7 +19,7 @@ import board.model.dto.PostingLike;
 
 public class BoardService {
 	
-	public static final int Num_PER_PAGE = 10;
+	public static final int NUM_PER_PAGE = 10;
 	private BoardDao boardDao = new BoardDao();
 	
 	/**
