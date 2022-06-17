@@ -1,4 +1,4 @@
-package admin.model.dao;
+package buy.model.dao;
 
 import static common.JdbcTemplate.close;
 
@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import admin.model.exception.BuyException;
+import admin.model.dao.AdminDao;
 import buy.model.dto.Buy;
 import buy.model.dto.BuyExt;
 import buy.model.dto.PayStatement;
 import buy.model.dto.ProductBuyExt;
+import buy.model.exception.BuyException;
 
 public class BuyDao {
 

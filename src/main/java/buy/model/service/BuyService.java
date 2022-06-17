@@ -1,4 +1,4 @@
-package admin.model.service;
+package buy.model.service;
 
 import static common.JdbcTemplate.close;
 import static common.JdbcTemplate.getConnection;
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-import admin.model.dao.BuyDao;
+import buy.model.dao.BuyDao;
 import buy.model.dto.BuyExt;
 import buy.model.dto.ProductBuyExt;
 
