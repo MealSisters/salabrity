@@ -1,3 +1,4 @@
+<%@page import="board.model.dto.PostingExt"%>
 <%@page import="board.model.dto.Posting"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,9 +8,7 @@
 	href="<%=request.getContextPath()%>/css/member/myPage.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/board.css" />
-<%
-List<Posting> list = (List<Posting>) request.getAttribute("list");
-%>
+
 <div class="my_page_content">
 
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
@@ -23,19 +22,18 @@ List<Posting> list = (List<Posting>) request.getAttribute("list");
 
 			<div class="question_zone_view">
 				<div class="question_view_hd">
-					<h3>f</h3>
+					<h3></h3>
 				</div>
 
 				<div class="question_view_info">
-					<span class="view_info_name">홍**</span> <span class="view_info_day">2022-06-11
-						20:42:46</span>
+					<span class="view_info_name"></span> <span class="view_info_day"></span>
 				</div>
 
 				<div class="question_view_content">
 					<div class="view_question_box">
 					
 						<div class="q_cont">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum earum culpa vel maxime deserunt at assumenda blanditiis ipsum dicta odio dolorum eligendi? Quaerat sapiente possimus ipsa excepturi officiis praesentium ullam?</p>
+							<p></p>
 						</div>
 					</div>
 					
@@ -54,10 +52,6 @@ List<Posting> list = (List<Posting>) request.getAttribute("list");
 			</div>
 		</div>
 	</div>
-
-
-
-
 </div>
 
 

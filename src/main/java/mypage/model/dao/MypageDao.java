@@ -303,6 +303,86 @@ public class MypageDao {
 		return result;
 		
 	}
+
+
+	public PostingExt findByNo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		PostingExt posting = null;
+		String sql = prop.getProperty("findByNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			System.out.println("디에이오" + no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				posting = handleBoardResultSet(rset);
+				System.out.println("디에이오" + posting);
+			}
+		} catch (Exception e) {
+			throw new MypageException("게시글 한 건 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return posting;
+	}
+
+
+	private PostingExt handleBoardResultSet(ResultSet rset) throws SQLException {
+		PostingExt posting = new PostingExt();
+		posting.setPostingNo(rset.getInt("posting_no"));
+		posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+		posting.setMemberId(rset.getString("member_id"));
+		posting.setTitle(rset.getString("title"));
+		posting.setContent(rset.getString("content"));
+		posting.setRegDate(rset.getDate("reg_date"));
+		posting.setReadCount(rset.getInt("read_count"));
+		posting.setPostingLevel(rset.getInt("posting_level"));
+		posting.setPostingRef(rset.getInt("posting_ref"));
+		posting.setAttachCount(rset.getInt("attach_count"));
+		posting.setCommentCount(rset.getInt("comment_count"));
+		posting.setLikeCount(rset.getInt("like_count"));
+		return posting;
+	}
+
+
+	public List<PostingAttach> findAttachmentByNo(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<PostingAttach> attachments = new ArrayList<>();
+		String sql = prop.getProperty("findAttachmentByNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			System.out.println("디에이오 첨부파일" + no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				PostingAttach attach = handleAttachmentResultSet(rset);
+				attachments.add(attach);
+			}
+		} catch (Exception e) {
+			throw new MypageException("게시글 번호 첨부파일 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return attachments;
+	}
+
+
+	private PostingAttach handleAttachmentResultSet(ResultSet rset) throws SQLException {
+		PostingAttach attach = new PostingAttach();
+		attach.setPostingAttachNo(rset.getInt("posting_attach_no"));
+		attach.setPostingNo(rset.getInt("posting_no"));
+		attach.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+		attach.setOriginalFilename(rset.getString("original_filename"));
+		attach.setRenamedFilename(rset.getString("renamed_filename"));
+		attach.setRegDate(rset.getDate("reg_date"));
+		return attach;
+	}
 	
 	
 

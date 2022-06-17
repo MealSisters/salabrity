@@ -35,7 +35,7 @@
 								<td>
 									<div class="upload_file">
 										<input type="file" name="upFile1" id="upFile1">
-										<input type="file" name="upFile1" id="upFile2">
+										<input type="file" name="upFile2" id="upFile2">
 									<!--  	<div class="btn_upload_box">
 											<button type="button" id="search_file">찾아보기</button>
 											<button type="button" id="plus_file">+ 추가</button>

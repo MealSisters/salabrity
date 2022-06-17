@@ -36,9 +36,7 @@ public class MypageService {
 		Connection conn = getConnection();
 		
 		try {
-			
-			// 각 각 등록
-			
+
 			// posting에 등록
 			result = mypageDao.insertQuestion(conn, posting); // nextval
 			
@@ -114,6 +112,20 @@ public class MypageService {
 		int totalContents = mypageDao.searchMyBoardListCount(conn, memberId, param);
 		close(conn);
 		return totalContents;
+	}
+
+
+	public PostingExt findByNo(int no) {
+		Connection conn = getConnection();
+		
+		PostingExt posting = mypageDao.findByNo(conn, no);
+		List<PostingAttach> attachments = mypageDao.findAttachmentByNo(conn, no);
+		
+		posting.setAttachments(attachments);
+		System.out.println("서비스" + posting);
+		close(conn);
+		
+		return posting;
 	}
 
 
