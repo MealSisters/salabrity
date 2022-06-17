@@ -9,9 +9,17 @@
 	href="<%=request.getContextPath()%>/css/member/myPage.css" />
 <%
 	List<Posting> list = (List<Posting>) request.getAttribute("list");
-	String type = request.getParameter("searchType");
-	String word = request.getParameter("searchKeyword");
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
+	int cPage = (int)request.getAttribute("cPage");
 %>
+<style>
+.page-bar a {
+	text-decoration: none;
+    color: #000;
+    margin-left: 8px;
+}
+</style>
 <div class="my_page_content">
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
 
@@ -38,7 +46,7 @@
 								<td><%= p.getPostingNo() %></td>
 								
 								<td>
-								<a href="<%= request.getContextPath() %>/mypage/boardWriteList?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
+								<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
 								</td>
 								
 								<td><%= p.getRegDate() %></td>
@@ -51,18 +59,19 @@
 					</table>
 				</div>
 				<div id="search_container">
-					
+					<input type="hidden" name="memberId" />
 						<select id="searchType">
-							<option value="boardTitle">제목</option>
+							<option value="title" <%= "title".equals(searchType)?"selected":"" %>>제목</option> <!-- boardTitle -->
+							<option value="content">내용</option>
 						</select>
 						<div id="search_boardTitle">
-							<form action="">
-								<input type="hidden" name="searchType" value="boardTitle">
-								<input type="text" name="searchKeyword" id="searchKeyword" placeholder="검색할 제목 입력"/>
+							<form action="<%= request.getContextPath() %>/mypage/finder">
+								<input type="hidden" name="searchType" value="title">
+								<input type="text" name="searchKeyword" id="searchKeyword" placeholder="검색할 제목 입력" value="<%= "title".equals(searchType) ? searchKeyword : "" %>"/>
 								<button type="submit" class="btn_write_search">검색</button>
 							</form>
 						</div>
-<%@ include file="/WEB-INF/views/common/pagebar.jsp" %>
+<%= request.getAttribute("pageBar") != null ? request.getAttribute("pageBar") : ""%>
 					</div>
 
 			</div>

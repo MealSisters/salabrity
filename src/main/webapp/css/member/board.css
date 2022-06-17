@@ -83,6 +83,11 @@
     color: #000;
 }
 
+.write_list a {
+	text-decoration: none;
+    color: #000;
+}
+
 .question_list th {
 	border-top: 1px solid #000;
 	width: 300px;

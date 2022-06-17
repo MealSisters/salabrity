@@ -8,12 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import static common.JdbcTemplate.close;
 
+import board.model.dto.BoardCode;
 import board.model.dto.Posting;
 import board.model.dto.PostingExt;
+import member.model.dto.Member;
+import member.model.exception.MemberException;
 import mypage.model.exception.MypageException;
 
 public class MypageDao {
@@ -79,6 +83,101 @@ public class MypageDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+	public List<Posting> MyWriteList(Connection conn, String memberId, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Posting> list = new ArrayList<>();
+		String sql = prop.getProperty("MyWriteList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rset = pstmt.executeQuery();
+			// 작성일 조회수
+			while(rset.next()) {
+				Posting p = new Posting();
+				p.setPostingNo(rset.getInt("posting_no"));
+				p.setTitle(rset.getString("title"));
+				p.setMemberId(rset.getString("member_id"));
+				p.setRegDate(rset.getDate("reg_date"));
+				p.setReadCount(rset.getInt("read_count"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MypageException("작성글 조회 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+	public int MyWriteTotal(Connection conn, String memberId) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("MyWriteTotal");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContents = rset.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MypageException("작성글 조회 오류",e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+
+
+	public List<Posting> findBy(Connection conn, String memberId, Map<String, String> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Posting> list = new ArrayList<>();
+		String sql = prop.getProperty("findBy");
+		sql = sql.replace("#", param.get("searchType"));
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + param.get("searchKeyword") + "%");
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Posting posting = new Posting();
+				posting.setPostingNo(rset.getInt("posting_no"));
+				posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				posting.setMemberId(rset.getString("member_id"));
+				posting.setTitle(rset.getString("title"));
+				posting.setContent(rset.getString("content"));
+				posting.setRegDate(rset.getDate("reg_date"));
+				posting.setReadCount(rset.getInt("read_count"));
+				posting.setPostingLevel(rset.getInt("posting_level"));
+				posting.setPostingRef(rset.getInt("posting_ref"));
+				list.add(posting);
+			}
+		} catch (Exception e) {
+			throw new MemberException("작성글 검색 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
 	}
 	
 	
