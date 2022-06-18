@@ -1,6 +1,10 @@
+<%@ page import="board.model.dto.PostingExt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	PostingExt posting = (PostingExt) request.getAttribute("posting");
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/question/questionBoard.css" />
 
@@ -9,16 +13,15 @@
 	<span class="main-sub-title">*표시가 된 곳은 필수 입력사항입니다.</span>
 	<div>
 		<form
-			name="faqBoardUpdateFrm" 
+			name="boardUpdateFrm" 
 			action="<%= request.getContextPath() %>/board/faqUpdate" 
-			method="POST" 
-			enctype="multipart/form-data">
+			method="POST">
 			<table class="tbl-board-update">
 				<tr>
 					<th>작성자</th>
 					<td>
 						<div>
-							<input type="text" name="memberId" value="관리자" readonly/>
+							<input type="text" name="memberId" value="<%= posting.getMemberId() %>" readonly/>
 						</div>
 					</td>
 				</tr>
@@ -26,7 +29,7 @@
 					<th>제목<sup>*</sup></th>
 					<td>
 						<div>
-							<input type="text" name="title" value="Q. 정기구독 이용 중 수령일 / 주소지 변경이 가능한가요?" />
+							<input type="text" name="title" value="<%= posting.getTitle() %>" />
 						</div>
 					</td>
 				</tr>
@@ -34,43 +37,19 @@
 					<th>내용<sup>*</sup></th>
 					<td>
 						<div>
-							<textarea rows="5" cols="40" name="content">정기 구독 이용 중에 주소지 변경이 가능한가요?</textarea>
+							<textarea rows="5" cols="40" name="content"><%= posting.getContent() %></textarea>
 						</div>
 					</td>
 				</tr>
 			</table>
 			<div class="board-button-wrap">
 				<input type="submit" value="수정" id="board-update-btn" />
-				<input type="reset" value="취소" id="board-reset-btn" />
+				<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />
+				<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
+				<input type="reset" value="취소" id="board-back-btn" onclick="history.go(-1);" />
 			</div>
 		</form>
 	</div>
 </div>
-<script>
-/**
- * faqBoardUpdateFrm 유효성 검사
- */
-window.addEventListener('load', () => {
-	document.faqBoardUpdateFrm.onsubmit = (e) => {
-		const frm = e.target;
-		
-		const titleVal = frm.title.value.trim();
-		if(!/^.+$/.test(titleVal)) {
-			alert("제목을 입력해주세요.");
-			frm.title.select();
-			return false;
-		}
-		
-		const contentVal = frm.content.value.trim();
-		if(!/^(.|\n)+$/.test(contentVal)) {
-			alert("내용을 입력해주세요.");
-			frm.content.select();
-			return false;
-		}
-		
-		return true;
-	}
-});
-</script>
-
+<script src="<%= request.getContextPath() %>/js/validation.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

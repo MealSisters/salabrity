@@ -35,7 +35,7 @@ public class BoardService {
 	}
 	
 	/**
-	 * 전체 게시글 조회
+	 * 전체 게시글 수 조회
 	 * @return
 	 */
 	public int getTotalPostings() {
@@ -97,7 +97,6 @@ public class BoardService {
 		posting.setAttachments(attachments);
 		posting.setComments(comments);
 		posting.setLikes(likes);
-		System.out.println("service@posting=" + posting);
 		close(conn);
 		return posting;
 	}	
@@ -327,6 +326,56 @@ public class BoardService {
 		} finally {
 			close(conn);
 		}
+	}
+
+	/**
+	 * 답변 게시글 등록
+	 * @param posting
+	 * @return
+	 */
+	public int insertPostingRef(PostingExt posting) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = boardDao.insertPostingRef(conn, posting);
+			int no = boardDao.findCurrentPostingNo(conn);
+			posting.setPostingNo(no);
+			System.out.println("방금 등록된 posting_no = " + no);
+			
+			BoardCode boardCode = boardDao.findCurrentBoardCode(conn, no);
+			posting.setBoardCode(boardCode);
+			System.out.println("방금 등록된 board_code = " + boardCode);
+
+			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
+			if(attachments != null && !attachments.isEmpty()) {
+				for(PostingAttach attach : attachments) {
+					attach.setPostingNo(no);
+					attach.setBoardCode(boardCode);
+					result = boardDao.insertPostingAttach(conn, attach);
+				}
+			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 커뮤니티 메인 게시판 목록 조회
+	 * @param param
+	 * @return
+	 */
+	public List<PostingExt> findCommunityPostingList(Map<Object, String> param) {
+		Connection conn = getConnection();
+		List<PostingExt> postingList = boardDao.findCommunityPostingList(conn, param);
+		close(conn);
+		return postingList;
 	}
 	
 }

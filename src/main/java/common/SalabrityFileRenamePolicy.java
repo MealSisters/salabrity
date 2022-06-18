@@ -8,6 +8,9 @@ import java.util.Date;
 
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
+/**
+ * @author 박수진
+ */
 public class SalabrityFileRenamePolicy implements FileRenamePolicy {
 
 	@Override

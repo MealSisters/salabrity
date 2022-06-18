@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * @author 박수진
  * Servlet implementation class PrivacyPolicyServlet
  */
 @WebServlet("/privacyPolicy")
