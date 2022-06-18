@@ -6,28 +6,25 @@
 	href="<%= request.getContextPath() %>/css/survey/surveyCustom.css">
 
 <link rel="stylesheet" href="surveyCustom.css">
+<script type="text/javascript"></script>
 
       <form method="post" name="surveyForm">
       <div id="surveyContainer">
       	<div class="h1-container">
           <h1>나만을 위한 식단을 찾아보세요.</h1>
-          <h5>아래 상세정보를 입력하시면, 맞춤 식단을 찾아드립니다.</h5>
+          <h5>아래 상세정보를 입력해주시면, 맞춤 식단을 찾아드립니다.</h5>
         </div>
 
     	<div class="gender">
-    		<p>
     		<input type="radio" name="gender" value="female" checked="checked"> 여자
-    		</p>
-    		<p>
-    		<input type="radio" name="gender" value="male"> 남자
-			</p>        
+    		<input type="radio" name="gender" value="male"> 남자       
        	</div>
 
     	<div class="survey_height">
-    		키 <input type="number" id="height" name="heightInput" placeholder="cm">
+    		키 <input type="number" id="height" name="surveyInput" placeholder="cm">
     	</div>
     	<div class="survey_weight">
-    		몸무게 <input type="number" id="weight" name="weightInput" placeholder="kg">
+    		몸무게 <input type="number" id="weight" name="surveyInput2" placeholder="kg">
     	</div>
 
         <div class="Uniqueness">
@@ -50,17 +47,23 @@
 <!-- 유효성 검사 -->
 <script>
 	function check_onclick(){
-	    const frm = document.surveyForm;
-	      if(frm.heightInput.value=="" && frm.weightInput.value=="" ){
-	      alert("상세정보 입력여부를 확인해주세요.")
-	        return frm.heightInput.focus();
-	      }if(frm.heightInput.value==""){
+	    form = document.surveyForm;
+	      if(form.surveyInput.value=="" && form.surveyInput2.value=="" ){
+	      alert("상세정보 입력을 다시 한번 확인해주세요.")
+	        form.surveyInput2.focus();
+	        return;
+	      }if(form.surveyInput.value==""){
 	        alert("키가 입력되지 않았습니다. 확인해주세요.")
-	        return frm.heightInput.focus();
-	      }if(frm.weightInput.value==""){
+	          form.surveyInput.focus();
+	          return;
+	      }if(form.surveyInput2.value==""){
 	        alert("몸무게가 입력되지 않았습니다. 확인해주세요.")
-	        return frm.weightInput.focus();
+	          form.surveyInput2.focus();
+	          return;
 	      }
+	     form.action = "<%= request.getContextPath() %>/surveyResult.jsp";
+ 	     form.method = "post";
+     	 form.submit();
 	    }
 </script>
 
