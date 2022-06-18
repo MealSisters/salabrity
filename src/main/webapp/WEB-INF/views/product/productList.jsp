@@ -12,8 +12,8 @@
 <!-- 이은지 start -->
 <div class="list_header" style="background-image: url(<%= request.getContextPath() %>/images/productList_headimg.jpg);">
 <!-- 이은지 end -->
-    <h1>정기배송(●'◡'●)</h1>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis corporis d </p>
+    <h1>정기배송</h1>
+    <p>샐러브리티에서 판매하고 있는 건강하고 맛있는 식단들을 다양하게 만나보실 수 있습니다.</p>
 </div>
 
 
@@ -40,7 +40,7 @@
 	<div class="item">
 
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>">
-	    <img src="<%= request.getContextPath() %>/images/product/<%= attach.getRenamedFileName()%>" alt="<%= attach.getOriginalFileName() %>" class="item_img">
+	    <img src="<%= request.getContextPath() %>/upload/product/<%= attach.getRenamedFileName()%>" alt="<%= attach.getOriginalFileName() %>" class="item_img">
 	    </a>
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_tit"><%= product.getProductName() %></a>
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_dsc"><%= product.getProductdescription() %></a>
@@ -130,17 +130,17 @@ console.log("<%= memberId %>");
 				data : {productNo: $(event.target).prev().val(), memberId : "<%=memberId%>", quantity : 1},
 
 				url : "<%=request.getContextPath()%>/order/cart/insertCart",
-				success : function(data){
-					alert('요청성공');
+				success : function(resp){
+					alert(resp);
 				},
-				error : function(data){
+				error : function(resp){
 					alert('요청실패');
 				}
 
 			});
 			}
 			else{
-				alert("로그인 후 이용 가능");
+				alert("로그인 후 이용하실 수 있습니다.");
 		
 			}
 		});

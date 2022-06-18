@@ -44,7 +44,7 @@
     <table>
         <thead>
             <tr>
-                <th class="col1">선택</td>
+                <th class="col1">선택</th>
                 <th class="col2">받으실분</th>
                 <th class="col3">주소</th>
                 <th class="col4">연락처</th>

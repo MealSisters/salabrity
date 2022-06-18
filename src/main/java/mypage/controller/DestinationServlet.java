@@ -33,8 +33,8 @@ public class DestinationServlet extends HttpServlet {
 			
 			List<Destination> list = destinationService.findById(memberId);
 			System.out.println("list = " + list);
-			request.setAttribute("list", list);
 			// 3. view단 처리
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/views/member/mypage/destination.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
