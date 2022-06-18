@@ -38,10 +38,7 @@ const printlineChart = (target, days, salesData, rgb = "#0C7475") => {
                   beginAtZero: true,
                   ticks: {
                     userCallback: function(value, index, values) {
-                        value = value.toString();
-                        value = value.split(/(?=(?:...)*$)/);
-                        value = value.join(',');
-                        return value;
+                        return value.toLocaleString('ko-KR');
                     }
                   }
               }]
