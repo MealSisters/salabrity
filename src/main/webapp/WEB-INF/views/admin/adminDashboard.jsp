@@ -105,8 +105,8 @@
             </table>
         </div>
         <div>
-            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/notice">Notice Board</a></div>
-            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/community">Other Board</a></div>
+            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/notice?boardCode=<%= BoardCode.N %>">Notice Board</a></div>
+            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">Recipe Board</a></div>
         </div>
     </div>
     
