@@ -126,9 +126,15 @@ if(productHere != null)
 					<li data-wdCode="W<%= i %>D<%= j %>">
 						<div class="day-code"><span>Week<%= i %> Day<%= j %></span></div>
 						<div class="day-btns">
+<% 
+						if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { 
+%>
                             <div class="enrollDay-wrapper">
                                 <button class="enrollDay">등록</button>
                             </div>
+<% 
+						} 
+%>
                         </div>
 					</li>
 				<% } else { %>
