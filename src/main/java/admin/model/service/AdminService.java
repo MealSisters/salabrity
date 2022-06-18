@@ -12,12 +12,14 @@ import java.util.Map;
 
 import admin.model.dao.AdminDao;
 import admin.model.dto.SalesTrend;
+import board.model.dto.Posting;
 import member.model.dto.Member;
 
 public class AdminService {
 
 	public static final int MEMBER_NUM_PER_PAGE = 15;
 	public static final int ORDER_NUM_PER_PAGE = 15;
+	public static final int CHART_MIN_PERIOD = 7;
 	private AdminDao adminDao = new AdminDao();
 
 	public int getTotalMembers() {
@@ -75,6 +77,41 @@ public class AdminService {
 		List<SalesTrend> list = adminDao.findSalesTrend(conn, param);
 		close(conn);
 		return list;
+	}
+
+	public List<SalesTrend> findTopSalesTrend(Map<String, Date> param) {
+		Connection conn = getConnection();
+		List<SalesTrend> list = adminDao.findTopSalesTrend(conn, param);
+		close(conn);
+		return list;
+	}
+
+	public List<Map<Date, Integer>> getEnrollMemberByPeriod(Map<String, Date> param) {
+		Connection conn = getConnection();
+		List<Map<Date, Integer>> map = adminDao.getEnrollMemberByPeriod(conn, param);
+		close(conn);
+		return map;
+	}
+
+	public int getTodayPosting() {
+		Connection conn = getConnection();
+		int todayPosting = adminDao.getTodayPosting(conn);
+		close(conn);
+		return todayPosting;
+	}
+
+	public List<Posting> findRecentQuestion() {
+		Connection conn = getConnection();
+		List<Posting> list = adminDao.findRecentQuestion(conn);
+		close(conn);
+		return list;
+	}
+
+	public int getTodayOrder() {
+		Connection conn = getConnection();
+		int result = adminDao.getTodayOrder(conn);
+		close(conn);
+		return result;
 	}
 
 	

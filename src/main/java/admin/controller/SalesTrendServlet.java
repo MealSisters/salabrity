@@ -27,8 +27,6 @@ public class SalesTrendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 사용자입력값 처리
-		// 업무로직
 		long miliseconds = System.currentTimeMillis();
         Date endDate = new Date(miliseconds);
 		Date startDate = new Date(miliseconds - (1000 * 60 * 60 * 24 * 6));
@@ -36,12 +34,21 @@ public class SalesTrendServlet extends HttpServlet {
 		param.put("startDate", startDate);
 		param.put("endDate", endDate);
 		
+		// 라인차트
 		List<SalesTrend> totalSalesData = adminService.findSalesTrend(param);
-		System.out.println("totalSalesData@servlet = " + totalSalesData);
+		
+		// 파이차트
+		Map<String, Date> pieParam = new HashMap<>();
+		pieParam.put("startDate", startDate);
+		pieParam.put("endDate", endDate);
+		List<SalesTrend> topSalesData = adminService.findTopSalesTrend(pieParam);
+		// System.out.println("topSalesData@servlet = " + topSalesData);
 		
 		// view단처리
 		request.setAttribute("period", param);
+		request.setAttribute("piePeriod", pieParam);
 		request.setAttribute("salesData", totalSalesData);
+		request.setAttribute("topSalesData", topSalesData);
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminSalesTrend.jsp").forward(request, response);
 	}
 	
@@ -61,12 +68,26 @@ public class SalesTrendServlet extends HttpServlet {
 		param.put("endDate", endDate);
 		List<SalesTrend> totalSalesData = adminService.findSalesTrend(param);
 		System.out.println("totalSalesData@doPost = " + totalSalesData);
+
 		
-		System.out.println("startDate@doPost = " + startDate);
-		System.out.println("endDate@doPost = " + endDate);
+		Date pieStartDate = null;
+		Date pieEndDate = null;
+		if(!request.getParameter("topProductStart").equals("")) {
+			pieStartDate = Date.valueOf(request.getParameter("topProductStart"));
+		}
+		if(!request.getParameter("topProductEnd").equals("")) {
+			pieEndDate = Date.valueOf(request.getParameter("topProductEnd"));
+		}
+		Map<String, Date> pieParam = new HashMap<>();
+		pieParam.put("startDate", pieStartDate);
+		pieParam.put("endDate", pieEndDate);
+		List<SalesTrend> topSalesData = adminService.findTopSalesTrend(pieParam);
+
 		
 		request.setAttribute("period", param);
+		request.setAttribute("piePeriod", pieParam);
 		request.setAttribute("salesData", totalSalesData);
+		request.setAttribute("topSalesData", topSalesData);
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminSalesTrend.jsp").forward(request, response);
 	}
 
