@@ -38,16 +38,16 @@ public class AdminQnAListServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
-			
+
 			int totalQuestions = adminService.getTotalQuestion();
 			List<Question> list = adminService.findAllQuestion(param);
 			// System.out.println("list@servlet = " + list);
 
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalQuestions, url);
-			
+
 			request.setAttribute("list", list);
-			request.setAttribute("pagebar", pagebar);			
+			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/admin/adminQnAList.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

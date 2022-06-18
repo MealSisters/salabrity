@@ -23,14 +23,14 @@ public class AdminFileDownloadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
-			
+
 			PostingAttach attach = boardService.findPostingAttachByPostingAttachNo(no);
 			System.out.println(attach);
-			
+
 			String saveDirectory = getServletContext().getRealPath("/upload/question/mypage");
 			String originalFilename = attach.getOriginalFilename();
 			String renamedFilename = attach.getRenamedFilename();
-			
+
 			FileDownload.getFileDownload(response, saveDirectory, originalFilename, renamedFilename);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -63,7 +63,7 @@
 	<input type="hidden" name="delProductNo" value="" />
 </form>
 
-<% if(true) { %> <!-- member 작업 끝나면 분기처리 예정 -->
+<% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 <script>
     window.addEventListener('load', (e) => {
         addProductManageBtn();

@@ -21,8 +21,10 @@ if(productHere != null)
 %>
 
 <!-- 관리자분기처리 예정 -->
+<% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
 <%@ include file="/WEB-INF/views/admin/backtoDashboard.jsp" %>
+<% } %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminCalendar.css">
 <div class="div-level1">
@@ -77,15 +79,21 @@ if(productHere != null)
 %>
 						<div class="day-menu"><a href="<%=request.getContextPath() %>/menu/menuInfo?menuNo=<%= cal.getMenuNo() %>"><%= cal.getMenuName() %></a></div>
                         <div class="day-btns">
-                            <div class="modifyDay-wrapper">
-                                <button class="modifyDay">수정</button>
-                            </div>
-                            <div class="deleteDay-wrapper">
-                                <button class="deleteDay">삭제</button>
-                            </div>
-                        </div>
 <% 
-					} else { 
+						if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { 
+%>
+	                            <div class="modifyDay-wrapper">
+	                                <button class="modifyDay">수정</button>
+	                            </div>
+	                            <div class="deleteDay-wrapper">
+	                                <button class="deleteDay">삭제</button>
+	                            </div>
+<% 
+						} 
+%>
+	                        </div>
+<% 
+					} else if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { 
 %>
                         <div class="day-btns">
                             <div class="enrollDay-wrapper">
@@ -122,7 +130,7 @@ if(productHere != null)
                                 <button class="enrollDay">등록</button>
                             </div>
                         </div>
-					</li> 
+					</li>
 				<% } else { %>
 					<li></li>
 <%
@@ -138,7 +146,7 @@ if(productHere != null)
         </div>
     </div>
 </div>
-
+<% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 <script>
 window.addEventListener('load', () => {
     const enrollBtns = document.querySelectorAll(".enrollDay");
@@ -179,8 +187,6 @@ const menuDeleteEvent = (e) => {
 		document.calendarDeleteFrm.submit();
 	};
 }
-
-
 </script>
-
+<% } %>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -20,12 +20,17 @@ public class AdminAnswerViewServlet extends HttpServlet {
 	private MypageService mypageService = new MypageService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postingNo = Integer.parseInt(request.getParameter("no"));
-		PostingExt posting = mypageService.findByNo(postingNo);
-		posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
-		
-		request.setAttribute("posting", posting);
-		request.getRequestDispatcher("/WEB-INF/views/admin/answerView.jsp").forward(request, response);
+		try {
+			int postingNo = Integer.parseInt(request.getParameter("no"));
+			PostingExt posting = mypageService.findByNo(postingNo);
+			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
+			
+			request.setAttribute("posting", posting);
+			request.getRequestDispatcher("/WEB-INF/views/admin/answerView.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

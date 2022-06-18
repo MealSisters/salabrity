@@ -23,21 +23,18 @@ public class AdminQuestionViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int questionNo = Integer.parseInt(request.getParameter("no"));
-		
-		Question question = adminService.findQuestion(questionNo);
-		question.setContent(question.getContent().replaceAll("\n", "<br/>"));
-		
-		request.setAttribute("question", question);
-		request.getRequestDispatcher("/WEB-INF/views/admin/questionView.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			int questionNo = Integer.parseInt(request.getParameter("no"));
+			
+			Question question = adminService.findQuestion(questionNo);
+			question.setContent(question.getContent().replaceAll("\n", "<br/>"));
+			
+			request.setAttribute("question", question);
+			request.getRequestDispatcher("/WEB-INF/views/admin/questionView.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

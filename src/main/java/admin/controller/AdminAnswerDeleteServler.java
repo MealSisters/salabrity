@@ -25,28 +25,27 @@ public class AdminAnswerDeleteServler extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int answerNo = Integer.parseInt(request.getParameter("no"));
-			
+
 			String saveDirectory = getServletContext().getRealPath("/upload/board/qna");
-			
+
 			List<PostingAttach> attachments = mypageService.findByNo(answerNo).getAttachments();
-			if(attachments != null && attachments.isEmpty())
-				for(PostingAttach attach : attachments) {
+			if (attachments != null && attachments.isEmpty())
+				for (PostingAttach attach : attachments) {
 					File delFile = new File(saveDirectory, attach.getRenamedFilename());
-					if(delFile.exists())
+					if (delFile.exists())
 						delFile.delete();
 					System.out.println("> " + attach.getRenamedFilename() + "파일 삭제");
 				}
-			
+
 			int result = mypageService.deleteQuestion(answerNo);
 			String msg = "게시글이 삭제되었습니다.";
-			
+
 			request.getSession().setAttribute("msg", msg);
-			response.sendRedirect(request.getContextPath()+"/admin/questionList");
+			response.sendRedirect(request.getContextPath() + "/admin/questionList");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
-
 
 }
