@@ -55,7 +55,7 @@ public class FaqBoardEnrollServlet extends HttpServlet {
 			// 3. 리다이렉트
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", msg);
-			response.sendRedirect(request.getContextPath() + "/board/faq?boardCode=" + BoardCode.C2 + "?no=" + posting.getPostingNo());
+			response.sendRedirect(request.getContextPath() + "/board/faq?boardCode=" + BoardCode.C2 + "&no=" + posting.getPostingNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

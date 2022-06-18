@@ -53,7 +53,7 @@ public class NoticeBoardServlet extends HttpServlet {
 			List<PostingExt> postingList = boardService.findAllPostingList(param, boardCode);
 			
 			// 2.b. pagebar 영역
-			int totalPostingContents = boardService.getTotalPostings();
+			int totalPostingContents = boardService.getTotalPostings(boardCode);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
 			

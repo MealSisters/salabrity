@@ -387,17 +387,22 @@ document.commentEnrollFrm.onsubmit = commentSubmitHandler;
  */
 const loginAlert = () => {
 	alert("로그인 후 이용할 수 있습니다.");
-	document.querySelector("#memberId").focus();
+	window.location.href = "<%= request.getContextPath() %>/member/login";
 };
 
 /**
  * 좋아요 기능
  */
 window.onload = () => {
+	const likeUp = () => {
+		document.generalLikeUpFrm.submit();
+	};
+};
+/* window.onload = () => {
 	document.querySelector("#board-like-btn").addEventListener('click', () => {
 		document.generalLikeUpFrm.submit();
 	});
-};
+}; */
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -1,110 +1,102 @@
-<%@page import="board.model.dto.PostingAttach"%>
+<%@ page import="board.model.dto.BoardCode" %>
+<%@ page import="board.model.dto.PostingAttach" %>
 <%@ page import="board.model.dto.PostingExt" %>
 <%@ page import="java.util.List" %>
-<%@ page import="board.model.dto.BoardCode" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<PostingExt> postingList = (List<PostingExt>) request.getAttribute("postingList");
-	PostingExt posting = (PostingExt) request.getAttribute("posting");
+	List<PostingExt> cPostingList = (List<PostingExt>) request.getAttribute("cPostingList");
+	List<PostingExt> pPostingList = (List<PostingExt>) request.getAttribute("pPostingList");
 	
-	String boardCode = request.getParameter("boardCode");
-	String orderBy = request.getParameter("orderBy");
+	final int READ_COUNT = 3;
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/board/community/communityBoard.css" />
 <!-- 커뮤니티게시판 메인 -->
 <div id="community-board-wrap">
 	<!-- 샐브's 레시피 -->
-	<form action="<%= request.getContextPath() %>/board/community">
-		<div id="community-hacks-wrap">
-			<input type="hidden" name="boardCode" value="C1" />
-			<input type="hidden" name="orderBy" value="reg_date" />
-			<table class="tbl-community-hacks">
-				<thead>
-					<tr>
-						<th class="main-title" colspan="6">Community</th>
-					</tr>
-					<tr>
-						<td class="main-sub-title" colspan="6">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</td>
-					</tr>
-					<tr class="hacks-title">
-						<th colspan="6">
-							<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
-								<i class="fa-solid fa-caret-right"></i>샐브's 레시피
+	<div id="community-hacks-wrap">
+		<table class="tbl-community-hacks">
+			<thead>
+				<tr>
+					<th class="main-title" colspan="6">Community</th>
+				</tr>
+				<tr>
+					<td class="main-sub-title" colspan="6">샐뮤니티에서 자유롭게 꿀팁을 나누세요.</td>
+				</tr>
+				<tr class="hacks-title">
+					<th colspan="6">
+						<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
+							<i class="fa-solid fa-caret-right"></i>샐브's 레시피
+						</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+<%
+	if(cPostingList != null && !cPostingList.isEmpty()) {
+		for(int i = 0; i < READ_COUNT; i++) {
+			List<PostingAttach> attachments = cPostingList.get(i).getAttachments();
+			if(attachments != null && !attachments.isEmpty()) {
+				for(int j = 0; j < 1; j++) {
+%>
+				<tr class="hacks-img">
+					<td colspan="2">
+						<div>
+							<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>">
+								<img src="<%= request.getContextPath() %>/upload/board/community/hacks/<%= attachments.get(j).getRenamedFilename() %>" alt="<%= attachments.get(j).getOriginalFilename() %>" />
 							</a>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
+						</div>
+					</td>
+				</tr>
 		<%
-			if(postingList != null && !postingList.isEmpty()) {
-				for(int i = 0; i < 3; i++) {
-		%>
-					<tr class="hacks-img">
-						<td colspan="2">
-							<div>
-								<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= postingList.get(i).getPostingNo() %>">
-								<input type="hidden" name="no" value="<%= postingList.get(i).getPostingNo() %>" />
-						<% 
-							List<PostingAttach> attachments = postingList.get(i).getAttachments();
-							if(attachments != null && !attachments.isEmpty()) {
-								for(int j = 0; j < 1; j++) {
-						%>
-									<img src="<%= request.getContextPath() %>/upload/board/community/hacks/<%= attachments.get(j).getRenamedFilename() %>" alt="<%= attachments.get(j).getOriginalFilename() %>" />
-						<%
-								}
-							}
-						%>
-								</a>
-							</div>
-						</td>
-					</tr>
-					<tr class="hacks-content-title">
-						<td colspan="2">
-							<div>
-								<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= postingList.get(i).getPostingNo() %>"><%= postingList.get(i).getTitle() %></a>
-							</div>
-						</td>
-					</tr>
-					<tr class="hacks-content">
-						<td colspan="2">
-							<div>
-								<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= postingList.get(i).getPostingNo() %>"><%= postingList.get(i).getContent() %></a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="comment-cnt">
-								<i class="fa-regular fa-comment"></i><%= postingList.get(i).getCommentCount() %>
-							</div>
-						</td>
-						<td>
-							<div class="like-cnt">
-								<%= postingList.get(i).getLikeCount() %><i class="fa-solid fa-heart"></i>
-							</div>
-						</td>
-					</tr>
-		<%		
-			 	}
+				}
 			}
 		%>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="6">
-							<div class="hacks-btn">
-								<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
-									샐브's 레시피 더보기　<i class="fa-solid fa-rectangle-list"></i>
-								</a>
-							</div>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-	</form>
+				<tr class="hacks-content-title">
+					<td colspan="2">
+						<div>
+							<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>"><%= cPostingList.get(i).getTitle() %></a>
+						</div>
+					</td>
+				</tr>
+				<tr class="hacks-content">
+					<td colspan="2">
+						<div>
+							<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>"><%= cPostingList.get(i).getContent() %></a>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="comment-cnt">
+							<i class="fa-regular fa-comment"></i><%= cPostingList.get(i).getCommentCount() %>
+						</div>
+					</td>
+					<td>
+						<div class="like-cnt">
+							<%= cPostingList.get(i).getLikeCount() %><i class="fa-solid fa-heart"></i>
+						</div>
+					</td>
+				</tr>
+	<%		
+		 	}
+		}
+	%>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6">
+						<div class="hacks-btn">
+							<a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">
+								샐브's 레시피 더보기　<i class="fa-solid fa-rectangle-list"></i>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 	<!-- 자유게시판 -->
 	<div id="community-general-wrap">
 		<table class="tbl-community-general">
@@ -118,94 +110,50 @@
 				</tr>
 			</thead>
 			<tbody>
+	<%
+		if(pPostingList != null && !pPostingList.isEmpty()) {
+			for(int i = 0; i < READ_COUNT; i++) {
+	%>
 				<tr class="general-content-writer">
 					<td colspan="2">
-						<div>작성자　writer</div>
-					</td>
-					<td colspan="2">
-						<div>작성자　writer</div>
-					</td>
-					<td colspan="2">
-						<div>작성자　writer</div>
+						<div>작성자&nbsp;<%= pPostingList.get(i).getMemberId() %></div>
 					</td>
 				</tr>
 				<tr class="general-content-reg-date">
 					<td colspan="2">
-						<div>작성일　22-06-04</div>
-					</td>
-					<td colspan="2">
-						<div>작성일　22-06-04</div>
-					</td>
-					<td colspan="2">
-						<div>작성일　22-06-04</div>
+						<div>작성일&nbsp;<%= pPostingList.get(i).getRegDate() %></div>
 					</td>
 				</tr>
 				<tr class="general-content-title">
 					<td colspan="2">
-						<div>						
-							<a href="#">게시글1</a>
-						</div>
-					</td>
-					<td colspan="2">
-						<div>						
-							<a href="#">게시글2</a>
-						</div>
-					</td>
-					<td colspan="2">
-						<div>						
-							<a href="#">게시글3</a>
+						<div>
+							<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= pPostingList.get(i).getPostingNo() %>"><%= pPostingList.get(i).getTitle() %></a>					
 						</div>
 					</td>
 				</tr>
 				<tr class="general-content">
 					<td colspan="2">
 						<div>
-							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi quaerat accusantium excepturi debitis consectetur iure iusto numquam incidunt fugiat rerum accusamus velit aspernatur facere quis praesentium officiis hic voluptates temporibus!</a>
-						</div>
-					</td>
-					<td colspan="2">
-						<div>
-							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis sequi totam sapiente quisquam doloribus ratione amet laudantium impedit vero minima magni pariatur vitae recusandae dolores adipisci ut maiores temporibus et.</a>
-						</div>
-					</td>
-					<td colspan="2">
-						<div>
-							<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur laborum hic quisquam optio necessitatibus autem blanditiis modi explicabo non adipisci. Iure impedit quo sed dicta cumque natus nam officia corporis?</a>
+							<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= pPostingList.get(i).getPostingNo() %>"><%= pPostingList.get(i).getContent() %></a>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<div class="comment-cnt">
-							<i class="fa-regular fa-comment"></i>0
+							<i class="fa-regular fa-comment"></i><%= pPostingList.get(i).getCommentCount() %>
 						</div>
 					</td>
 					<td>
 						<div class="like-cnt">
-							0<i class="fa-solid fa-heart"></i>
-						</div>
-					</td>
-					<td>
-						<div class="comment-cnt">	
-							<i class="fa-regular fa-comment"></i>0
-						</div>
-					</td>
-					<td>
-						<div class="like-cnt">
-							0<i class="fa-solid fa-heart"></i>
-						</div>
-					</td>
-					<td>
-						<div class="comment-cnt">
-							<i class="fa-regular fa-comment"></i>0
-						</div>
-					</td>
-					<td>
-						<div class="like-cnt">
-							0<i class="fa-solid fa-heart"></i>
+							<%= pPostingList.get(i).getLikeCount() %><i class="fa-solid fa-heart"></i>
 						</div>
 					</td>
 				</tr>
+	<%
+			}
+		}
+	%>
 			</tbody>
 			<tfoot>
 				<tr>
