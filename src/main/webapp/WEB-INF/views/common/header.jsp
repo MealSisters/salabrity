@@ -51,7 +51,7 @@
 					<li class="diet-calendar"><a href="<%= request.getContextPath() %>/calendar">샐브의식단</a></li>
 					<li class="diet-products"><a href="<%= request.getContextPath() %>/product/productList">전체상품</a></li>
 					<li class="community-board"><a href="<%= request.getContextPath() %>/board/community">커뮤니티</a></li>
-					<li class="notice"><a href="<%= request.getContextPath() %>/board/notice?boardCode=<%= BoardCode.N %>">공지사항/이벤트</a></li>
+					<li class="notice"><a href="<%= request.getContextPath() %>/board/notice?boardCode=<%= BoardCode.N %>">공지사항</a></li>
 				<%-- 관리자 페이지 조건문 적용 예정! --%>
 				<% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 					<li class="admin"><a href="<%= request.getContextPath() %>/admin/dashboard">관리자페이지</a></li>
