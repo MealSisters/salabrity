@@ -20,6 +20,9 @@
     color: #000;
     margin-left: 8px;
 }
+.mypage_hd {
+	border-bottom: 0px solid !important;
+	}
 </style>
 <div class="my_page_content">
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
