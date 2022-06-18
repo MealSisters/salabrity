@@ -84,7 +84,6 @@ public class CommunityBoardHacksUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
 
 	public void deletePostingAttach(String saveDirectory, MultipartRequest multiReq) {

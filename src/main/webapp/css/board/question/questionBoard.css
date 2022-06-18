@@ -53,11 +53,11 @@ questionBoardReplyEnroll.jsp
 	height: 25px;	
 }
 
-input[name="memberId"], input[name="email"] {
+input[name="memberId"], input[name="qRegDate"] {
 	width: 25%;
 }
 
-input[name="qTitle"], input[name="rTitle"] {
+input[name="qTitle"], input[name="aTitle"] {
 	width: 50%;
 }
 
