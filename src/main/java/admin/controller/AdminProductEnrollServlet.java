@@ -53,7 +53,7 @@ public class AdminProductEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String saveDirectory = getServletContext().getRealPath("/images/product");
+			String saveDirectory = getServletContext().getRealPath("/upload/product");
 			int maxPostSize = 1024 * 1024 * 10; // 첨부파일 크기 최대 10MB
 			String encoding = "utf-8";
 			FileRenamePolicy policy = new SalabrityFileRenamePolicy();

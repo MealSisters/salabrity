@@ -44,7 +44,7 @@
     <table>
         <thead>
             <tr>
-                <th class="col1">선택</td>
+                <th class="col1">선택</th>
                 <th class="col2">받으실분</th>
                 <th class="col3">주소</th>
                 <th class="col4">연락처</th>
@@ -61,14 +61,15 @@
         			}
         			String telephone = destination.getTelephone().substring(0, 3) + "-" +
         				destination.getTelephone().substring(3, 7) + "-" + destination.getTelephone().substring(7);
-        			
+        			String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
+        			address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
 %>        			
             <tr id= "<%= destination.getShippingAddressNo()%>">
                 <td class="col1">
                	 		<input type="radio" name="default" id="<%= destination.getShippingAddressNo()%>" <%= checked %>>
                 </td>
                 <td class="col2"><%= destination.getShippingPerson() %></td>
-                <td class="col3">(<%= destination.getZipcode() %>)<%= destination.getAddress() %> <%= destination.getAddressDetail() %></td>
+                <td class="col3"><%=address %></td>
                 <td class="col4"><%= telephone %></td>
                 <td class="col5">
           	

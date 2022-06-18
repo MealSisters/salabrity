@@ -10,16 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import admin.model.dto.SalesTrend;
 import admin.model.exception.AdminException;
+import board.model.dto.Posting;
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
-import menu.model.dto.Menu;
-import menu.model.dto.MenuAttach;
-import menu.model.dto.MenuExt;
 
 public class AdminDao {
 
@@ -211,6 +211,162 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return enrollMembers;
+	}
+
+	public List<SalesTrend> findSalesTrend(Connection conn, Map<String, Date> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SalesTrend> list = new ArrayList<>();
+		String sql = prop.getProperty("findSalesTrend");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (param.get("startDate") != null) {
+				pstmt.setDate(1, param.get("startDate"));
+			} else {
+				pstmt.setDate(1, Date.valueOf("1000-01-01"));
+			}
+			if (param.get("endDate") != null) {
+				pstmt.setDate(2, param.get("endDate"));
+			} else {
+				pstmt.setDate(2, Date.valueOf("5000-01-01"));
+			}
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				SalesTrend st = new SalesTrend();
+				st.setSalesDate(rset.getDate("payment_date"));
+				st.setAmount(rset.getInt("sales"));
+				list.add(st);
+			}
+		} catch (Exception e) {
+			throw new AdminException("일자별 매출액 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<SalesTrend> findTopSalesTrend(Connection conn, Map<String, Date> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SalesTrend> list = new ArrayList<>();
+		String sql = prop.getProperty("findTopSalesTrend");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (param.get("startDate") != null) {
+				pstmt.setDate(1, param.get("startDate"));
+			} else {
+				pstmt.setDate(1, Date.valueOf("1000-01-01"));
+			}
+			if (param.get("endDate") != null) {
+				pstmt.setDate(2, param.get("endDate"));
+			} else {
+				pstmt.setDate(2, Date.valueOf("5000-01-01"));
+			}
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				SalesTrend st = new SalesTrend();
+				st.setProductName(rset.getString("product_name"));
+				st.setAmount(rset.getInt("sales"));
+				list.add(st);
+			}
+		} catch (SQLException e) {
+			throw new AdminException("최고 매출 상품정보 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<Map<Date, Integer>> getEnrollMemberByPeriod(Connection conn, Map<String, Date> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Map<Date, Integer>> mapList = new ArrayList<>();
+		String sql = prop.getProperty("getEnrollMemberByPeriod");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setDate(1, param.get("startDate"));
+			pstmt.setDate(2, param.get("endDate"));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Map<Date, Integer> map = new HashMap<>();
+				Date date = rset.getDate(1);
+				Integer count = rset.getInt(2);
+				map.put(date, count);
+				mapList.add(map);
+			}
+		} catch (SQLException e) {
+			throw new AdminException("최고 매출 상품정보 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return mapList;
+	}
+
+	public int getTodayPosting(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalPosting = 0;
+		String sql = prop.getProperty("getTodayPosting");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				totalPosting = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new AdminException("오늘 등록 게시글 수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalPosting;
+	}
+
+	public List<Posting> findRecentQuestion(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Posting> list = new ArrayList<>();
+		String sql = prop.getProperty("findRecentQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Posting posting = new Posting();
+				posting.setPostingNo(rset.getInt("posting_no"));
+				posting.setRegDate(rset.getDate("reg_date"));
+				posting.setTitle(rset.getString("title"));
+				list.add(posting);
+			}
+		} catch (Exception e) {
+			throw new AdminException("최근등록 문의글 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getTodayOrder(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = prop.getProperty("getTodayOrder");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new AdminException("오늘 주문수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 
 	

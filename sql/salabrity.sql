@@ -272,7 +272,7 @@ create table buy (
     payment_date date not null, --결제일
     buy_date date not null, --주문일
     imp_uid varchar2(100) not null,
-    pay_statement char(20) not null,
+    pay_statement varchar2(20) not null,
     request_term varchar2(500),
     
     constraint pk_buy_merchant_uid primary key(merchant_uid),

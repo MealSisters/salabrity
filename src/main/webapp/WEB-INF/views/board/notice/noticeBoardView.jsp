@@ -62,7 +62,7 @@
 <!-- 수진 end -->
             <button class="update_notice" onclick="location.href='<%= request.getContextPath() %>/board/noticeUpdate?no=<%= posting.getPostingNo() %>';">수정</button>
             <button class="delete_notice" onclick="deleteNoticeBoard();">삭제</button>
-			<button class="back_notice" onclick="location.href='<%= request.getContextPath() %>/board/notice?boardCode=<%= BoardCode.N %>';">글 목록</button>
+			<button class="back_notice" onclick="location.href='<%= request.getContextPath() %>/board/notice?boardCode=<%= posting.getBoardCode() %>';">글 목록</button>
 		</div>
 	</div>
 </div>

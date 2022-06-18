@@ -12,7 +12,6 @@ import java.util.Map;
 import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
-import member.model.dto.Member;
 import mypage.model.dao.MypageDao;
 
 public class MypageService {
@@ -20,10 +19,10 @@ public class MypageService {
 	public static final int Num_PER_PAGE = 10;
 	private MypageDao mypageDao = new MypageDao();
 
-	public List<Posting> findQuestionList(String memberId) {
+	public List<PostingExt> findQuestionList(String memberId) {
 		Connection conn = getConnection();
 		
-		List<Posting> list = mypageDao.findQuestionList(conn, memberId);
+		List<PostingExt> list = mypageDao.findQuestionList(conn, memberId);
 		System.out.println("service" + list);
 		
 		close(conn);
@@ -31,17 +30,28 @@ public class MypageService {
 	}
 
 
-	public int insertQuestion(PostingExt posting) {
+	public int insertQuestion(Posting posting) {
 		int result = 0;
 		Connection conn = getConnection();
 		
 		try {
+
 			// posting에 등록
-			result = mypageDao.insertQuestion(conn, posting);
+			result = mypageDao.insertQuestion(conn, posting); // nextval
+			
+			// 2. pk 가져오기
+			int no = mypageDao.findCurrentQuestionNo(conn); // currval
+			posting.setPostingNo(no);
+			System.out.println("등록된 posting no" + no);
 			
 			// attachment에 등록
 			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
-			
+			if(attachments != null && !attachments.isEmpty()) {
+				for(PostingAttach attach : attachments) {
+					attach.setPostingNo(no);
+					result = mypageDao.insertAttachment(conn, attach);
+				}
+			}
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -101,6 +111,36 @@ public class MypageService {
 		int totalContents = mypageDao.searchMyBoardListCount(conn, memberId, param);
 		close(conn);
 		return totalContents;
+	}
+
+
+	public PostingExt findByNo(int no) {
+		Connection conn = getConnection();
+		
+		PostingExt posting = mypageDao.findByNo(conn, no);
+		List<PostingAttach> attachments = mypageDao.findAttachmentByNo(conn, no);
+		
+		posting.setAttachments(attachments);
+		System.out.println("서비스" + posting);
+		close(conn);
+		
+		return posting;
+	}
+
+
+	public int deleteQuestion(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = mypageDao.deleteQuestion(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 
 
