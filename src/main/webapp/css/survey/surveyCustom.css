@@ -3,48 +3,73 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {
-  box-sizing: border-box;
+ 	box-sizing: border-box;
 }
 
 h1 {
-  display: flex;
+	margin-top: 0px;
+	padding-top: 0px;
 }
 
-h5  {
-  color: #666;
-  margin-bottom: 40px;
+h5 {
+	color: #666;
+	margin-bottom: 60px;
 }
 
 #surveyContainer {
-  background-color: white;
-  border: 1px solid;
-  border-radius: 50px;
-  width: 800px;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 100px auto;
-  padding: 80px;
-  transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+	text-align: center;
+	background-color: white;
+	border: 1px solid;
+	border-radius: 50px;
+	width: 800px;
+	border-radius: 8px;
+	overflow: hidden;
+	margin: 100px auto;
+	padding: 80px;
+	transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 }
 
 #surveyContainer:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  transform: translateY(-10px);
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	transform: translateY(-10px);
 }
 
 input {
-  accent-color: #116916;
+	accent-color: #116916;
 }
 
-.gender, .survey_height, .survey_weight, .Uniqueness {
-  display: flex;
-  color: #666;
-  margin-bottom: 20px;
-  font-weight: 600;
+input[type=number] {
+	width: 100px;
+	height: 32px;
+	font-size: 15px;
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	margin-left: 10px;
+	background-color: rgb(233, 233, 233);
 }
 
-#next {
-	border: none;
+input[type=number]::placeholder {
+	text-align: right;
+}
+
+#height{
+	margin-left: 22px;
+}
+
+.survey_height{
+	margin-left: 20px;
+}
+
+.gender, .survey_weight, .survey_height, .Uniqueness {
+	color: #666;
+	margin-bottom: 12px;
+	font-weight: 600;
+}
+
+#next{
+	border: solid 1px #116916;
 	height: 50px;
 	width: 45%;
 	border-radius: 20px;
@@ -53,9 +78,10 @@ input {
 	text-decoration: none;
 	color: #f1f1f1;
 	background-color: #116916;
+	margin-top: 20px;
 }
 
-#next:hover {
+#next:hover{
 	color: #116916;
 	background-color: #f1f1f1;
 }
