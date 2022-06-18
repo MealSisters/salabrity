@@ -107,5 +107,12 @@ public class AdminService {
 		return list;
 	}
 
+	public int getTodayOrder() {
+		Connection conn = getConnection();
+		int result = adminDao.getTodayOrder(conn);
+		close(conn);
+		return result;
+	}
+
 	
 }

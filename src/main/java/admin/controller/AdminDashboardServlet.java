@@ -88,7 +88,6 @@ public class AdminDashboardServlet extends HttpServlet {
 					enrollMemberCount[i] = map.get(Date.valueOf(dateArr[i]));
 				}
 			}
-			System.out.println();
 		}
 		
 		for(int i = 0 ; i < MIN_PERIOD ; i++) {
@@ -98,11 +97,13 @@ public class AdminDashboardServlet extends HttpServlet {
 		
 		/* ---------------------------------------------- today 데이터 --------------------------------------------- */
 		Map<String, Object> todayDataMap = new HashMap<>();
+		int todayOrder = adminService.getTodayOrder();
 		int todayPosting = adminService.getTodayPosting(); 
 		int todaySales = salesArr[MIN_PERIOD-1];
 		int todayMember = enrollMemberCount[MIN_PERIOD-1];
 		
 		
+		todayDataMap.put("order", todayOrder);
 		todayDataMap.put("posting", todayPosting);
 		todayDataMap.put("sales", todaySales);
 		todayDataMap.put("member", todayMember);

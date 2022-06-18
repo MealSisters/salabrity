@@ -151,7 +151,16 @@
   padding: 5px 0;
   display: flex;
   justify-content: space-between; 
-} 
+}
+#div-board tbody a {
+  color: #000;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+#div-board tbody a:hover {
+  color: #0EAE57;
+  text-decoration: none;
+}
 .div-174wrap {
   width: 174px;
   height: 40px;

@@ -43,8 +43,8 @@
                     </td>
                     <td>
                         <div>
-                            <h2>Visitor</h2>
-                            <p>300</p>
+                            <h2>Order</h2>
+                            <p><%= fm.format(todayDataMap.get("order")) %></p>
                         </div>
                     </td>
                 </tr>
@@ -89,7 +89,7 @@
                     <tr>
                         <td><%= posting.getPostingNo() %></td>
                         <td><%= posting.getRegDate() %></td>
-                        <td><%= posting.getTitle() %></td>
+                        <td><a href="<%= request.getContextPath() %>/admin/QnAList/answer?no=<%= posting.getPostingNo() %>"><%= posting.getTitle() %></a></td>
                     </tr>
 <%
 	}

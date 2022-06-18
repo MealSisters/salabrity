@@ -349,6 +349,26 @@ public class AdminDao {
 		return list;
 	}
 
+	public int getTodayOrder(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = prop.getProperty("getTodayOrder");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new AdminException("오늘 주문수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
 	
 
 }
