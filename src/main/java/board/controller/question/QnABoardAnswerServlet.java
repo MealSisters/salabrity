@@ -74,7 +74,7 @@ public class QnABoardAnswerServlet extends HttpServlet {
 			// 3. 리다이렉트
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", msg);
-			response.sendRedirect(request.getContextPath() + "/admin/QnAList");
+			response.sendRedirect(request.getContextPath() + "/admin/questionList");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
