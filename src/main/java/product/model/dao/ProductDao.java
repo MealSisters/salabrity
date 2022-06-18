@@ -348,49 +348,7 @@ public class ProductDao {
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 
 
-//	public ProductExt findByNo(Connection conn, int no) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		ProductExt product = null;
-//		String sql = prop.getProperty("findByNo");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1,no);
-//			rset = pstmt.executeQuery();
-//			while (rset.next()) {
-//				product = handelProductResultSet(rset);
-//			}
-//		} catch (Exception e) {
-//			throw new ProductException("상품 1개 조회 오류", e);
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		return product;
-//	}
-//
-//	public List<ProductAttach> findProductAttachachmentsByProductNo (Connection conn, int no) {
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		List<ProductAttach> attachments= new ArrayList<>();
-//		String sql = prop.getProperty("findProductAttachachmentsByProductNo ");
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, no);
-//			rset = pstmt.executeQuery();
-//			while (rset.next()) {
-//				ProductAttach attach = handelAttachResultSet(rset);
-//				attachments.add(attach);
-//			}
-//		} catch (Exception e) {
-//			throw new ProductException("상품번호 일치 첨부파일 조회 오류", e);
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		return attachments;
-//	}
+
 
 	public List<ProductExt>findAllProduct(Connection conn) {
 		String sql = prop.getProperty("findAllProduct");
@@ -418,5 +376,6 @@ public class ProductDao {
 
 		return list;
 	}
+	
 
 }
