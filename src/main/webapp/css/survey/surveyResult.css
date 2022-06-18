@@ -3,43 +3,60 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .survey_result {
-  background-color: white;
-  border: 1px solid;
-  border-radius: 50px;
-  width: 800px;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 100px auto;
-  padding: 80px;
-  transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+	background-color: white;
+	border: 1px solid;
+	border-radius: 50px;
+	width: 800px;
+	border-radius: 8px;
+	overflow: hidden;
+	margin: 100px auto;
+	padding: 80px;
+	transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 }
 
 .survey_result_warp {
 	display: center;
-  text-align: center;
+	text-align: center;
 	border-bottom: 1px solid #000;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .survey_detail {
 	background-color: #fbfbfb;
-  margin-top: 20px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.survey_detail p {
+	font-size: 40px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.survey_result_warp h5 {
+    color: #666;
+    margin-bottom: 0px;
+}
+
+.survey_result_warp p {
+	font-size: 30px;
+	font-weight: bold;
+	margin-top: 5px;
 }
 
 
 #foward {
 	height: 40px;
 	width: 20%;
-  border:none;
-  border-radius: 20px;
+	border: solid 1px #116916;
+	 border-radius: 20px;
 	font-size: 16px;
 	text-align: center;
-	text-decoration: none;
 	color: #f1f1f1;
 	background-color: #116916;
-  float: right;
+	 float: right;
+	 margin-top: 40px;
 }
 
 #foward:hover {
@@ -48,17 +65,17 @@
 }
 
 #detail {
-  height: 40px;
+	height: 40px;
 	width: 20%;
-  border:none;
-  border-radius: 20px;
+	border: solid 1px #116916;
+	border-radius: 20px;
 	font-size: 16px;
 	text-align: center;
-	text-decoration: none;
 	color: #f1f1f1;
 	background-color: #116916;
-  float: right;
-  margin-right: 10px;
+	float: right;
+	margin-right: 10px;
+	margin-top: 40px;
 }
 
 #detail:hover {
