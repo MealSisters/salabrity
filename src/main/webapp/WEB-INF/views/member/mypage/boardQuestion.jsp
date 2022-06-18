@@ -28,14 +28,19 @@
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><input type="text" name="content" id="p_content"></td>
+								<td><textarea name="content" id="p_content" cols="30" rows="10"></textarea></td>
 							</tr>
 							<tr>
 								<th>첨부파일</th>
 								<td>
 									<div class="upload_file">
-										<input type="file" name="upFile1" id="upFile1">
-										<input type="file" name="upFile2" id="upFile2">
+									 <input type="text" readonly="readonly" class="file-name" />
+  									 <label for="upFile1" class="file-label">찾아보기</label>
+										<!--  <input type="text" readonly="readonly" class="file-name" />
+										<label for="upFile2" class="file-label">찾아보기</label>-->
+
+										<input type="file" name="upFile1" id="upFile1" style=display:none; class="file-upload">
+										<!--  <input type="file" name="upFile2" id="upFile2" style=display:none; class="file-upload">-->
 									<!--  	<div class="btn_upload_box">
 											<button type="button" id="search_file">찾아보기</button>
 											<button type="button" id="plus_file">+ 추가</button>
@@ -75,6 +80,41 @@ document.questionEnrollFrm.onsubmit = (e) => {
 	}
 }
 
+(function($){
+	  
+	  var $fileBox = null;
+	  
+	  $(function() {
+	    init();
+	  })
+	  
+	  function init() {
+	    $fileBox = $('.upload_file');
+	    fileLoad();
+	  }
+	  
+	  function fileLoad() {
+	    $.each($fileBox, function(idx){
+	      var $this = $fileBox.eq(idx),
+	          $btnUpload = $this.find('[type="file"]'),
+	          $label = $this.find('.file-label');
+	      
+	      $btnUpload.on('change', function() {
+	        var $target = $(this),
+	            fileName = $target.val(),
+	            $fileText = $target.siblings('.file-name');
+	        $fileText.val(fileName);
+	      })
+	      
+	      $btnUpload.on('focusin focusout', function(e) {
+	        e.type == 'focusin' ?
+	          $label.addClass('file-focus') : $label.removeClass('file-focus');
+	      })
+	      
+	    })
+	  }
+	  
+	})(jQuery);
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

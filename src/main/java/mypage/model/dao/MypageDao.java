@@ -36,10 +36,10 @@ public class MypageDao {
 	}
 
 
-	public List<Posting> findQuestionList(Connection conn, String memberId) {
+	public List<PostingExt> findQuestionList(Connection conn, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<Posting> list = new ArrayList<>();
+		List<PostingExt> list = new ArrayList<>();
 		String sql = prop.getProperty("findQuestionList");
 		
 		try {
@@ -48,11 +48,17 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Posting p = new Posting();
-				p.setTitle(rset.getString("title"));
-				p.setRegDate(rset.getDate("reg_date"));
-				p.setMemberId(rset.getString("member_id"));
-				list.add(p);
+				PostingExt posting = new PostingExt();
+				posting.setPostingNo(rset.getInt("posting_no"));
+				posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				posting.setMemberId(rset.getString("member_id"));
+				posting.setTitle(rset.getString("title"));
+				posting.setContent(rset.getString("content"));
+				posting.setRegDate(rset.getDate("reg_date"));
+				posting.setReadCount(rset.getInt("read_count"));
+				posting.setPostingLevel(rset.getInt("posting_level"));
+				posting.setPostingRef(rset.getInt("posting_ref"));
+				list.add(posting);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -306,9 +312,9 @@ public class MypageDao {
 
 
 	public PostingExt findByNo(Connection conn, int no) {
+		PostingExt posting = new PostingExt();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		PostingExt posting = null;
 		String sql = prop.getProperty("findByNo");
 		
 		try {
@@ -317,7 +323,15 @@ public class MypageDao {
 			System.out.println("디에이오" + no);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				posting = handleBoardResultSet(rset);
+				posting.setPostingNo(rset.getInt("posting_no"));
+				posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				posting.setMemberId(rset.getString("member_id"));
+				posting.setTitle(rset.getString("title"));
+				posting.setContent(rset.getString("content"));
+				posting.setRegDate(rset.getDate("reg_date"));
+				posting.setReadCount(rset.getInt("read_count"));
+				posting.setPostingLevel(rset.getInt("posting_level"));
+				posting.setPostingRef(rset.getInt("posting_ref"));
 				System.out.println("디에이오" + posting);
 			}
 		} catch (Exception e) {
@@ -330,22 +344,22 @@ public class MypageDao {
 	}
 
 
-	private PostingExt handleBoardResultSet(ResultSet rset) throws SQLException {
-		PostingExt posting = new PostingExt();
-		posting.setPostingNo(rset.getInt("posting_no"));
-		posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
-		posting.setMemberId(rset.getString("member_id"));
-		posting.setTitle(rset.getString("title"));
-		posting.setContent(rset.getString("content"));
-		posting.setRegDate(rset.getDate("reg_date"));
-		posting.setReadCount(rset.getInt("read_count"));
-		posting.setPostingLevel(rset.getInt("posting_level"));
-		posting.setPostingRef(rset.getInt("posting_ref"));
-		posting.setAttachCount(rset.getInt("attach_count"));
-		posting.setCommentCount(rset.getInt("comment_count"));
-		posting.setLikeCount(rset.getInt("like_count"));
-		return posting;
-	}
+//	private PostingExt handleBoardResultSet(ResultSet rset) throws SQLException {
+//		PostingExt posting = new PostingExt();
+//		posting.setPostingNo(rset.getInt("posting_no"));
+//		posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+//		posting.setMemberId(rset.getString("member_id"));
+//		posting.setTitle(rset.getString("title"));
+//		posting.setContent(rset.getString("content"));
+//		posting.setRegDate(rset.getDate("reg_date"));
+//		posting.setReadCount(rset.getInt("read_count"));
+//		posting.setPostingLevel(rset.getInt("posting_level"));
+//		posting.setPostingRef(rset.getInt("posting_ref"));
+//		posting.setAttachCount(rset.getInt("attach_count"));
+//		posting.setCommentCount(rset.getInt("comment_count"));
+//		posting.setLikeCount(rset.getInt("like_count"));
+//		return posting;
+//	}
 
 
 	public List<PostingAttach> findAttachmentByNo(Connection conn, int no) {
@@ -382,6 +396,24 @@ public class MypageDao {
 		attach.setRenamedFilename(rset.getString("renamed_filename"));
 		attach.setRegDate(rset.getDate("reg_date"));
 		return attach;
+	}
+
+
+	public int deleteQuestion(Connection conn, int no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new MypageException("게시글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

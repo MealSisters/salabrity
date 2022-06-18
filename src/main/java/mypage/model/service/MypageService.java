@@ -12,7 +12,6 @@ import java.util.Map;
 import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
-import member.model.dto.Member;
 import mypage.model.dao.MypageDao;
 
 public class MypageService {
@@ -20,10 +19,10 @@ public class MypageService {
 	public static final int Num_PER_PAGE = 10;
 	private MypageDao mypageDao = new MypageDao();
 
-	public List<Posting> findQuestionList(String memberId) {
+	public List<PostingExt> findQuestionList(String memberId) {
 		Connection conn = getConnection();
 		
-		List<Posting> list = mypageDao.findQuestionList(conn, memberId);
+		List<PostingExt> list = mypageDao.findQuestionList(conn, memberId);
 		System.out.println("service" + list);
 		
 		close(conn);
@@ -126,6 +125,22 @@ public class MypageService {
 		close(conn);
 		
 		return posting;
+	}
+
+
+	public int deleteQuestion(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = mypageDao.deleteQuestion(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 
 
