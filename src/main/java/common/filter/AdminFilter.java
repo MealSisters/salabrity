@@ -19,7 +19,7 @@ import member.model.dto.MemberRole;
  * @author 박수진
  * Servlet Filter implementation class AdminFilter
  */
-@WebFilter({})
+@WebFilter("/admin/*")
 public class AdminFilter implements Filter {
 
     /**
@@ -46,7 +46,13 @@ public class AdminFilter implements Filter {
 		HttpSession session = httpReq.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 				
-		if(loginMember == null || loginMember.getMemberRole() == MemberRole.A) {
+		if(loginMember == null) {
+			session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
+			httpRes.sendRedirect(httpReq.getContextPath() + "/");
+			return; // 조기리턴
+		}
+		
+		if (loginMember.getMemberRole() != MemberRole.A) {
 			session.setAttribute("msg", "관리자만 사용할 수 있습니다.");
 			httpRes.sendRedirect(httpReq.getContextPath() + "/");
 			return;

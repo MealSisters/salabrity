@@ -126,9 +126,16 @@ tbody .col-title {
     background-color: #fafafa;
     overflow-y: scroll;
 }
+.readyQuestion {
+	color: #AD1C0E;	
+}
+.clearQuestion {
+	color: #0EAE57;
+}
 .postingAttach-wrapper { 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
 }
 .postingAttach-wrapper span {
     font-family: 'LeferiBaseType-BoldA';
@@ -155,17 +162,20 @@ tbody .col-title {
     border-radius: 7px;
     transition-duration: 0.1s;
 }
-.div-answer {
-    background-color: #116135;
-}
-.div-answer:hover {
-    background-color: #0EAE57;
-}
-.div-cancel {
+.div-answer, .div-cancel, .div-done {
     background-color: #888;
 }
-.div-cancel:hover {
+.div-done:hover, .div-answer:hover {
+    background-color: #0EAE57;
+}
+.div-delete {
     background-color: #AD1C0E;
+}
+.div-delete:hover {
+	background-color: #610800;
+}
+.div-cancel:hover {
+    background-color: #333;
 }
 .buttons-wrapper button {
     font-size: 13px;

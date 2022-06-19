@@ -17,13 +17,19 @@ import java.util.Properties;
 
 import admin.model.dto.SalesTrend;
 import admin.model.exception.AdminException;
+import board.model.dao.BoardDao;
+import board.model.dto.BoardCode;
 import board.model.dto.Posting;
+import board.model.dto.PostingAttach;
+import board.model.dto.Question;
 import member.model.dto.Member;
 import member.model.dto.MemberRole;
+import product.model.dto.ProductAttach;
 
 public class AdminDao {
 
 	private Properties prop = new Properties();
+	private BoardDao boardDao = new BoardDao(); 
 
 	public AdminDao() {
 		String filename = AdminDao.class.getResource("/sql/admin-query.properties").getPath();
@@ -369,6 +375,82 @@ public class AdminDao {
 		return result;
 	}
 
+	public int getTotalQuestion(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = prop.getProperty("getTotalQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new AdminException("전체 질문글 수 조회 오류", e);
+		}
+		return result;
+	}
+
+	public List<Question> findAllQuestion(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Question> list = new ArrayList<>();
+		String sql = prop.getProperty("findAllQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Question question = handleQuestionResultSet(rset);
+				List<PostingAttach> attachs = boardDao.findPostingAttachByPostingNo(conn, question.getPostingNo());
+				question.setAttachCount(attachs.size());
+				question.setAttachments(attachs);
+				list.add(question);
+			}
+		} catch (Exception e) {
+			throw new AdminException("질문글 목록 조회 오류", e);
+		}
+		return list;
+	}
+
+	private Question handleQuestionResultSet(ResultSet rset) throws SQLException {
+		Question question = new Question();
+		question.setPostingNo(rset.getInt("posting_no"));
+		question.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+		question.setMemberId(rset.getString("member_id"));
+		question.setTitle(rset.getString("title"));
+		question.setContent(rset.getString("content"));
+		question.setRegDate(rset.getDate("reg_date"));
+		question.setReadCount(rset.getInt("read_count"));
+		question.setPostingLevel(rset.getInt("posting_level"));
+		question.setPostingRef(rset.getInt("posting_ref"));
+		question.setAnswerNo(rset.getInt("answer_no"));
+		return question;
+	}
+
+	public Question findQuestion(Connection conn, int questionNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Question question = null;
+		String sql = prop.getProperty("findQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, questionNo);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				question = handleQuestionResultSet(rset);
+				List<PostingAttach> attachs = boardDao.findPostingAttachByPostingNo(conn, question.getPostingNo());
+				question.setAttachCount(attachs.size());
+				question.setAttachments(attachs);
+			}
+		} catch (Exception e) {
+			throw new AdminException("글번호를 이용한 문의글 조회 오류", e);
+		}
+		return question;
+	}
+	
 	
 
 }

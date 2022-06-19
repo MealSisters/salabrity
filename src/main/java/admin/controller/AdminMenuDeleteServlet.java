@@ -26,16 +26,16 @@ public class AdminMenuDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int menuNo = Integer.parseInt(request.getParameter("delMenuNo"));
-			
+
 			String saveDirectory = getServletContext().getRealPath("/upload/menu");
 			MenuAttach attach = menuService.findAttachByMenuNo(menuNo);
 			File delFile = new File(saveDirectory, attach.getRenamedFileName());
 			if (delFile.exists()) {
 				delFile.delete();
 			}
-			
+
 			int result = menuService.deleteMenu(menuNo);
-			
+
 			response.sendRedirect(request.getContextPath() + "/admin/menuList");
 		} catch (Exception e) {
 			e.printStackTrace();
