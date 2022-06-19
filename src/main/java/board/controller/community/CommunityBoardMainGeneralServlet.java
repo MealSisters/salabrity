@@ -11,15 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.dto.BoardCode;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 
 /**
- * Servlet implementation class CommunityBoardServlet
+ * Servlet implementation class CommunityBoardmainHacksServlet
  */
-@WebServlet("/board/community")
-public class CommunityBoardServlet extends HttpServlet {
+@WebServlet("/board/community/mainGeneral")
+public class CommunityBoardMainGeneralServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -28,24 +27,20 @@ public class CommunityBoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 사용자 입력값 처리	
-			Map<Object, String> c1Board = new HashMap<>();
-			c1Board.put("boardCode", "C1");
-			c1Board.put("orderBy", "reg_date");
-			System.out.println("c1Board = " + c1Board);
+			// 1. 사용자 입력값 처리
+			String boardCode = request.getParameter("boardCode");
+			String orderBy = request.getParameter("orderBy");
 			
-			Map<Object, String> c2Board = new HashMap<>();
-			c2Board.put("boardCode", "C2");
-			c2Board.put("orderBy", "read_count");
-			System.out.println("c2Board = " + c2Board);
+			Map<Object, String> param = new HashMap<>();
+			param.put("boardCode", boardCode);
+			param.put("orderBy", orderBy);
+			System.out.println("param = " + param);
 			
 			// 2. 업무 로직
-			List<PostingExt> cPostingList = boardService.findCommunityPostingList(c1Board);
-			List<PostingExt> pPostingList = boardService.findCommunityPostingList(c2Board);
+			List<PostingExt> postingList = boardService.findCommunityPostingList(param);
 			
 			// 3. view단 처리
-			request.setAttribute("cPostingList", cPostingList);
-			request.setAttribute("pPostingList", pPostingList);
+			request.setAttribute("postingList", postingList);
 			request.getRequestDispatcher("/WEB-INF/views/board/community/communityBoard.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
