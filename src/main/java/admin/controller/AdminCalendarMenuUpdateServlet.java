@@ -40,12 +40,12 @@ public class AdminCalendarMenuUpdateServlet extends HttpServlet {
 			ProductExt product = productService.findProductByNo(productNo);
 			List<ProductMenu> menus = product.getMenus();
 			List<MenuExt> canSelectMenus = new ArrayList<>();
-			for(ProductMenu menu : menus) {
+			for (ProductMenu menu : menus) {
 				MenuExt canSelect = menuService.findByMenuNo(menu.getMenuNo());
 				canSelectMenus.add(canSelect);
 			}
 			Calendar calendar = calendarService.findCalByProductNoAndwdCode(productNo, dataDate);
-			
+
 			request.setAttribute("menuList", canSelectMenus);
 			request.setAttribute("calendar", calendar);
 			request.setAttribute("product", product);

@@ -32,6 +32,16 @@ const printlineChart = (target, days, salesData, rgb = "#0C7475") => {
           maintainAspectRatio: false,
           legend: {
               display: false
+          },
+          scales: {
+              yAxes: [{
+                  beginAtZero: true,
+                  ticks: {
+                    userCallback: function(value, index, values) {
+                        return value.toLocaleString('ko-KR');
+                    }
+                  }
+              }]
           }
       }
   })
@@ -63,12 +73,14 @@ let customLegend = (chart) => {
   let ul = document.createElement('ul');
   let color = chart.data.datasets[0].backgroundColor;
 
-  chart.data.labels.forEach(function (label, index) {
-      ul.innerHTML += `<li>
-              <span style="background-color: ${color[index]}"></span>
-              <span class="span-customlabel-pie">${label}</span>
-          </li>`;
-  });
+  if(chart.data.label[0] != null) {
+      chart.data.labels.forEach(function (label, index) {
+          ul.innerHTML += `<li>
+                  <span style="background-color: ${color[index]}"></span>
+                  <span class="span-customlabel-pie">${label}</span>
+              </li>`;
+      });
+  }
 
   return ul.outerHTML;
 };

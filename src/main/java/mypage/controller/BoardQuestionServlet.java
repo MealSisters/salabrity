@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-import board.model.dto.BoardCode;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
 import common.SalabrityFileRenamePolicy;
@@ -42,20 +42,22 @@ public class BoardQuestionServlet extends HttpServlet {
 //			// d. 인코딩
 			String encoding = "utf-8";
 		
+			FileRenamePolicy policy = new SalabrityFileRenamePolicy();
+			
 			MultipartRequest multiReq = 
-					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, new SalabrityFileRenamePolicy());
+					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 			
 			// 사용자 입력 값
+			
 			String memberId = multiReq.getParameter("memberId");
 			String title = multiReq.getParameter("title");
 			String content = multiReq.getParameter("content");
 			
 			PostingExt posting = new PostingExt();
-			posting.setBoardCode(BoardCode.Q1);
 			posting.setMemberId(memberId);
 			posting.setTitle(title);
 			posting.setContent(content);
-			System.out.println("question" + posting);
+			System.out.println("서블릿 posting = " + posting);
 			
 			File upFile1 = multiReq.getFile("upFile1");
 			File upFile2 = multiReq.getFile("upFile2");
@@ -71,7 +73,6 @@ public class BoardQuestionServlet extends HttpServlet {
 				
 				posting.setAttachments(attachments); // 없으면 null처리			
 			}
-			System.out.println("체크체크questionEnroll = " + posting);
 			
 			int result = mypageService.insertQuestion(posting);
 			

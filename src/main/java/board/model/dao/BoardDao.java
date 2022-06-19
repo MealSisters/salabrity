@@ -21,7 +21,6 @@ import board.model.dto.PostingComment;
 import board.model.dto.PostingExt;
 import board.model.dto.PostingLike;
 import board.model.exception.BoardException;
-import member.model.exception.MemberException;
 
 public class BoardDao {
 	
@@ -52,9 +51,9 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("start"));
-			pstmt.setInt(2, (int) param.get("end"));
-			pstmt.setString(3, boardCode.toString());
+			pstmt.setString(1, boardCode.toString());
+			pstmt.setInt(2, (int) param.get("start"));
+			pstmt.setInt(3, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				PostingExt posting = handlePostingResultSet(rset);
@@ -62,7 +61,6 @@ public class BoardDao {
 				posting.setCommentCount(rset.getInt("comment_count")); // 댓글 개수
 				posting.setLikeCount(rset.getInt("like_count")); // 좋아요 개수
 				postingList.add(posting);
-				System.out.println("boardDao@64=" + posting);
 			}
 		} catch (Exception e) {
 			throw new BoardException("게시판 목록 조회 오류", e);
@@ -94,7 +92,6 @@ public class BoardDao {
 		posting.setAttachCount(rset.getInt("attach_count"));
 		posting.setCommentCount(rset.getInt("comment_count"));
 		posting.setLikeCount(rset.getInt("like_count"));
-		System.out.println("boardDao93@posting=" + posting);
 		return posting;
 	}
 
@@ -103,7 +100,7 @@ public class BoardDao {
 	 * @param conn
 	 * @return
 	 */
-	public int getTotalPostings(Connection conn) {
+	public int getTotalPostings(Connection conn, BoardCode boardCode) {
 		String sql = prop.getProperty("getTotalPostings");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -111,6 +108,7 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardCode.toString());
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				getTotalPostings = rset.getInt(1);
@@ -222,11 +220,9 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
-			System.out.println("boardDao221@no=" + no);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				posting = handlePostingResultSet(rset);
-				System.out.println("boardDao@223=" + posting);
 			}
 		} catch (Exception e) {
 			throw new BoardException("게시글 한 건 조회 오류", e);
@@ -605,7 +601,6 @@ public class BoardDao {
 	public List<PostingExt> searchBy(Connection conn, Map<String, Object> pageParam, Map<String, String> param) {
 		String sql = prop.getProperty("searchBy");
 		sql = sql.replace("#", param.get("searchType"));
-		System.out.println("sql = " + sql);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -625,7 +620,7 @@ public class BoardDao {
 				postingList.add(posting);
 			}
 		} catch (Exception e) {
-			throw new MemberException("게시물 검색 오류", e);
+			throw new BoardException("게시물 검색 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -661,7 +656,7 @@ public class BoardDao {
 				like.setStatus(rset.getString("status"));
 			}
 		} catch (Exception e) {
-			throw new MemberException("좋아요 여부 체크 오류", e);
+			throw new BoardException("좋아요 여부 체크 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -727,6 +722,72 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 답변 게시글 등록
+	 * @param conn
+	 * @param posting
+	 * @return
+	 */
+	public int insertPostingRef(Connection conn, PostingExt posting) {
+		String sql = prop.getProperty("insertPostingRef");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, posting.getBoardCode().toString());
+			pstmt.setString(2, posting.getMemberId());
+			pstmt.setString(3, posting.getTitle());
+			pstmt.setString(4, posting.getContent());
+			pstmt.setInt(5, posting.getPostingLevel());
+			pstmt.setInt(6, posting.getPostingRef());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BoardException("답변 게시글 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 커뮤니티 메인 게시판 목록 조회
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public List<PostingExt> findCommunityPostingList(Connection conn, Map<Object, String> param) {
+		String sql = prop.getProperty("findCommunityPostingList");		
+		sql = sql.replace("#", param.get("orderBy"));
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<PostingExt> postingList = new ArrayList<>();
+		List<PostingAttach> attachments = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, param.get("boardCode"));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				PostingExt posting = handlePostingResultSet(rset);
+				posting.setAttachCount(rset.getInt("attach_count")); // 첨부파일 개수
+				posting.setCommentCount(rset.getInt("comment_count")); // 댓글 개수
+				posting.setLikeCount(rset.getInt("like_count")); // 좋아요 개수
+				attachments = findPostingAttachByPostingNo(conn, posting.getPostingNo());
+				posting.setAttachments(attachments); // 첨부파일
+				postingList.add(posting);
+			}
+		} catch (Exception e) {
+			throw new BoardException("커뮤니티 메인 게시판 목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return postingList;
 	}
 
 }

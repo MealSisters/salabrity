@@ -1,6 +1,26 @@
+<%@page import="board.model.dto.Posting"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	List<Posting> questionList = (List<Posting>) request.getAttribute("questionList");
+	Map<String, Object> todayDataMap = (Map<String, Object>) request.getAttribute("todayDataMap");
+	String salesTrendData = (String) request.getAttribute("salesTrendData");
+	Integer[] memberData = (Integer[]) request.getAttribute("memberData");
+	DecimalFormat fm = new DecimalFormat("###,###");
+	
+	String memberDataStr = "['";
+	for(int i = 0 ; i < memberData.length ; i++) {
+		if( i != memberData.length - 1){
+			memberDataStr += memberData[i] + "', '";
+		} else {
+			memberDataStr += memberData[i] + "']";
+		}
+	}
+%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminDashboard.css">
 <script src="https://kit.fontawesome.com/4ade5a15fa.js" crossorigin="anonymous"></script>
 <script src="<%= request.getContextPath() %>/js/Chart.min.js"></script>
@@ -18,13 +38,13 @@
                     <td>
                         <div>
                             <h2>Sales</h2>
-                            <p>1,000,000</p>
+                            <p><%= fm.format(todayDataMap.get("sales")) %></p>
                         </div>
                     </td>
                     <td>
                         <div>
-                            <h2>Visitor</h2>
-                            <p>300</p>
+                            <h2>Order</h2>
+                            <p><%= fm.format(todayDataMap.get("order")) %></p>
                         </div>
                     </td>
                 </tr>
@@ -32,13 +52,13 @@
                     <td>
                         <div>
                             <h2>New Member</h2>
-                            <p>20</p>
+                            <p><%= fm.format(todayDataMap.get("member")) %></p>
                         </div>
                     </td>
                     <td>
                         <div>
                             <h2>New Posting</h2>
-                            <p>1,234</p>
+                            <p><%= fm.format(todayDataMap.get("posting")) %></p>
                         </div>
                     </td>
                 </tr>
@@ -50,7 +70,7 @@
         <div id="div-QnAboard">
             <div id="div-QnAboard-head">
                 <h1>Question</h1>
-                <div><a href="<%= request.getContextPath() %>/admin/QnAList">Go</a></div>
+                <div><a href="<%= request.getContextPath() %>/admin/questionList">Go</a></div>
             </div>
             <table id="tbl-QnAboard">
                 <thead>
@@ -61,37 +81,32 @@
                     </tr>
                 </thead>
                 <tbody>
+<%
+	final int MAX = 5;
+	int size = questionList.size();
+	for(Posting posting : questionList) {
+%>
                     <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
+                        <td><%= posting.getPostingNo() %></td>
+                        <td><%= posting.getRegDate() %></td>
+                        <td><a href="<%= request.getContextPath() %>/admin/QnAList/answer?no=<%= posting.getPostingNo() %>"><%= posting.getTitle() %></a></td>
                     </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
+<%
+	}
+	for(int i = 0; i < MAX-size ; i++){
+%>
+					<tr>
+                        <td></td><td></td><td></td>
                     </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
-                    </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
-                    </tr>
-                    <tr>
-                        <td>812</td>
-                        <td>2022-04-12</td>
-                        <td>asd</td>
-                    </tr>
+<%
+	} 
+%>
                 </tbody>
             </table>
         </div>
         <div>
-            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/notice">Notice Board</a></div>
-            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/community">Other Board</a></div>
+            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/notice?boardCode=<%= BoardCode.N %>">Notice Board</a></div>
+            <div class="div-174wrap"><a href="<%= request.getContextPath() %>/board/community/hacks?boardCode=<%= BoardCode.C1 %>">Recipe Board</a></div>
         </div>
     </div>
     
@@ -122,10 +137,19 @@
 </div>
 <script>
     window.addEventListener('load', () => {
-        
         const days = recent7Days();
-        const memberData = new Array();
-        $.ajax({
+        
+		const memberCanvas = document.getElementById("barChart-member");
+		printBarChart(memberCanvas, days, <%= memberDataStr %> );
+        
+        const salesCanvas = document.getElementById("lineChart-sales");
+        printlineChart(salesCanvas, days, <%= salesTrendData %>);
+        
+    });
+    
+    const memberData = new Array();
+    const memberChart = () => {
+    	$.ajax({
         	url : "<%= request.getContextPath() %>/admin/memberChart",
         	method : "POST",
         	dataType : "json",
@@ -141,16 +165,7 @@
         	},
         	error : console.log
         });
-
-        
-        const salesCanvas = document.getElementById("lineChart-sales");
-        const salesData = [100000, 123000, 85000, 104000, 146700, 137000, 10000];
-        printlineChart(salesCanvas, days, salesData);
-
-        
-        
-        
-    });
+    }
 
 
 </script>

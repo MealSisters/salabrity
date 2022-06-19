@@ -5,6 +5,9 @@
   display: flex;
   justify-content: space-between;
 }
+.div-level1 form {
+	display: flex;
+}
 .div-level2 {
   width: 582px;
   padding: inherit;

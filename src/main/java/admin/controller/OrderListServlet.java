@@ -33,32 +33,30 @@ public class OrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		try {
 			// 검색어
 			Map<String, Object> searchParam = new HashMap<>();
-			if(request.getParameter("payStatement")!=null) {
+			if (request.getParameter("payStatement") != null) {
 				String merchantUid = request.getParameter("merchantUid");
 				String memberId = request.getParameter("memberId");
 				Date orderDateStart = null;
 				Date orderDateEnd = null;
-				if(!request.getParameter("orderDateStart").equals(""))
+				if (!request.getParameter("orderDateStart").equals(""))
 					orderDateStart = Date.valueOf(request.getParameter("orderDateStart"));
-				if(!request.getParameter("orderDateEnd").equals(""))
+				if (!request.getParameter("orderDateEnd").equals(""))
 					orderDateStart = Date.valueOf(request.getParameter("orderDateEnd"));
 				PayStatement payStatement = null;
-				if(!request.getParameter("payStatement").equals("all")) {
+				if (!request.getParameter("payStatement").equals("all")) {
 					payStatement = PayStatement.valueOf(request.getParameter("payStatement"));
 				}
-	
+
 				searchParam.put("merchantUid", merchantUid);
 				searchParam.put("memberId", memberId);
 				searchParam.put("orderDateStart", orderDateStart);
 				searchParam.put("orderDateEnd", orderDateEnd);
 				searchParam.put("payStatement", payStatement);
 			}
-			
-			
+
 			int numPerPage = AdminService.ORDER_NUM_PER_PAGE;
 			int cPage = 1;
 			try {
@@ -85,13 +83,13 @@ public class OrderListServlet extends HttpServlet {
 				list = buyService.findAllBuyExt(param);
 				totalOrders = buyService.getTotalBuys();
 			}
-			if(list != null) {
-				for(BuyExt buy : list) {
+			if (list != null) {
+				for (BuyExt buy : list) {
 					List<ProductBuyExt> pbeList = buyService.findProductBuyExtByUid(buy.getMerchantUid());
 					buy.setList(pbeList);
 				}
 			}
-			
+
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalOrders, url);
 
@@ -100,17 +98,9 @@ public class OrderListServlet extends HttpServlet {
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/admin/orderList.jsp").forward(request, response);
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			throw e;
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

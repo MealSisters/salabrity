@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.dto.BoardCode;
 import board.model.dto.PostingExt;
 import board.model.service.BoardService;
 import common.utill.PageBar;
@@ -59,7 +60,7 @@ public class CommunityBoardHacksSearchServlet extends HttpServlet {
 			List<PostingExt> postingList = boardService.searchBy(pageParam, param);
 
 			// 2.b. pagebar 영역
-			int totalPostingContents = boardService.getTotalPostings();
+			int totalPostingContents = boardService.getTotalPostings(BoardCode.C1);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
 			System.out.println("pagebar = " + pagebar);

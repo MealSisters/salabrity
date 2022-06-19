@@ -40,11 +40,11 @@ public class AdminCalendarMenuEnrollServlet extends HttpServlet {
 			ProductExt product = productService.findProductByNo(productNo);
 			List<ProductMenu> menus = product.getMenus();
 			List<MenuExt> canSelectMenus = new ArrayList<>();
-			for(ProductMenu menu : menus) {
+			for (ProductMenu menu : menus) {
 				MenuExt canSelect = menuService.findByMenuNo(menu.getMenuNo());
 				canSelectMenus.add(canSelect);
 			}
-			
+
 			request.setAttribute("menuList", canSelectMenus);
 			request.setAttribute("dataDate", dataDate);
 			request.setAttribute("product", product);
@@ -63,14 +63,14 @@ public class AdminCalendarMenuEnrollServlet extends HttpServlet {
 			int productNo = Integer.parseInt(request.getParameter("productNo"));
 			int menuNo = Integer.parseInt(request.getParameter("menuNo"));
 			WeekDayCode weekDayCode = WeekDayCode.valueOf(request.getParameter("data-wdCode"));
-			
+
 			Calendar calendar = new Calendar();
 			calendar.setProductNo(productNo);
 			calendar.setMenuNo(menuNo);
 			calendar.setWeekDayCode(weekDayCode);
-			
+
 			int result = calendarService.insertCalendar(calendar);
-			
+
 			response.sendRedirect(request.getContextPath() + "/calendar?productNo=" + productNo);
 		} catch (Exception e) {
 			e.printStackTrace();

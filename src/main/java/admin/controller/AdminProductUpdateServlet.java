@@ -67,26 +67,26 @@ public class AdminProductUpdateServlet extends HttpServlet {
 			int originalThumbnailNo = Integer.parseInt(multiReq.getParameter("originalThumbnail"));
 			int originalDetail1No = Integer.parseInt(multiReq.getParameter("originalDetail1"));
 			int originalDetail2No = 0;
-			if(multiReq.getParameter("originalDetail2") != null) {
+			if (multiReq.getParameter("originalDetail2") != null) {
 				originalDetail2No = Integer.parseInt(multiReq.getParameter("originalDetail2"));
 			}
-			
+
 			boolean delFileflag = Boolean.parseBoolean(multiReq.getParameter("delFileflag"));
-			
+
 			int productNo = Integer.parseInt(multiReq.getParameter("productNo"));
 			String productName = multiReq.getParameter("productName");
 			String productDescription = multiReq.getParameter("productDescription");
 			ProductTarget productTarget = ProductTarget.valueOf(multiReq.getParameter("productTarget"));
 			int subscriptionPeriod = Integer.parseInt(multiReq.getParameter("subscriptionPeriod"));
 			String[] arrMenuNo = multiReq.getParameterValues("menuNo");
-			
+
 			ProductExt product = new ProductExt();
 			product.setProductNo(productNo);
 			product.setProductName(productName);
 			product.setProductdescription(productDescription);
 			product.setProductTarget(productTarget);
 			product.setSubscriptionPeriod(subscriptionPeriod);
-			
+
 			File thumbnail = multiReq.getFile("thumbnail");
 			File detailimg1 = multiReq.getFile("detailimg1");
 			File detailimg2 = multiReq.getFile("detailimg2");
@@ -112,9 +112,9 @@ public class AdminProductUpdateServlet extends HttpServlet {
 				pmList.add(pm);
 			}
 			product.setMenus(pmList);
-			
+
 			int result = productService.updateProduct(product);
-			
+
 			if (thumbnail != null) {
 				result = deleteAttach(saveDirectory, originalThumbnailNo);
 			}
@@ -122,11 +122,11 @@ public class AdminProductUpdateServlet extends HttpServlet {
 				result = deleteAttach(saveDirectory, originalDetail1No);
 			}
 			if (detailimg2 != null || delFileflag != false) { // 테이블만 지워짐
-				if(originalDetail2No != 0)
+				if (originalDetail2No != 0)
 					result = deleteAttach(saveDirectory, originalDetail2No);
 			}
 
-			response.sendRedirect(request.getContextPath() + "/product/productList");			
+			response.sendRedirect(request.getContextPath() + "/product/productList");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -142,7 +142,7 @@ public class AdminProductUpdateServlet extends HttpServlet {
 		result = productService.deleteProductAttach(productAttachNo);
 		return result;
 	}
-	
+
 	private ProductAttach getAttachment(MultipartRequest multiReq, String name, Thumbnail thumbnail) {
 		ProductAttach attach = new ProductAttach();
 		String originalFilename = multiReq.getOriginalFileName(name);

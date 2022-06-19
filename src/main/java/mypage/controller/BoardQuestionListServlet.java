@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import board.model.dto.Posting;
+import board.model.dto.PostingExt;
 import member.model.dto.Member;
 import member.model.service.MemberService;
 import mypage.model.service.MypageService;
@@ -28,14 +29,13 @@ public class BoardQuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Posting> list = null;
 		
 		HttpSession session = request.getSession();
-		
 		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
 		
 		
-		list = mypageService.findQuestionList(memberId);
+		List<PostingExt> list = mypageService.findQuestionList(memberId);
+	
 		
 		request.setAttribute("list", list);
 		

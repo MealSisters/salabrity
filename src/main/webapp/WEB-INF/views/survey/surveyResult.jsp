@@ -3,15 +3,50 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/survey/surveyResult.css">
-	
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <link rel="stylesheet" href="surveyResult.css">
 
-<script type="text/javascript"></script>
 
 <div class="survey_result">
 
-	<%
-	request.setCharacterEncoding("UTF-8");
+<!-- js분리
+
+const select = [0, 0, 0, 0];
+
+// 식단결과계산
+function calResult(){
+	console.log(select);
+	var result = select.indexOf();
+	return result;
+}
+
+// 식단결과출력
+function setResult(){
+	
+	// 식단명
+	let point = calResult();
+	const resultName = document.querySelector('.resultname');
+	resultName.innerHTML = productList[point].name;
+	
+	
+	// 식단이미지
+	var resultImg = document.createElement('img');
+	const imgDiv = document.querySelector('#resultImg');
+	var imgURL = 'img/image-' + point + '.png';
+	resultImg.src = imgURL;
+	resultImg.alt = point;
+	resultImg.classList.add('img-fluid');
+	imgDiv.appendChild(resultImg);
+
+	// 식단설명
+	const resultDesc = document.querySelector('.resultDesc');
+	resultDesc.innerHTML = productList[point].desc;
+}
+
+ -->
+
+<!-- 
 	
 	// 당뇨케어, 베이비식단
     String[] uniquenessArr = request.getParameterValues("uniq");
@@ -50,19 +85,19 @@
 	  // 체중조절식단
 	 }
 	}
-	%>
-	
+-->
+
 	<div class="survey_result_warp">
-    <p>My Salabrity Meal</p>
-    <p>맞춤식단추천</p></div>
+	    <h5>My Salabrity Meal</h5>
+	    <p>맞춤식단추천</p></div>
 	<div class="survey_detail">
-		<p><img src="#" width="400">식단명</p>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-	</div>
+		<img src="#" width="400">
+			<p>식단명</p>
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
 
 
  	<button id="foward" onclick="location.href='javascript:history.go(-1)'">다시 찾기</button>
-	<button id="detail" onclick="#">식단 정보 확인</button>
+	<button id="detail" onclick="#">자세히 보기</button>
 	
 	
 

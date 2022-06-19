@@ -30,14 +30,13 @@ public class AdminMemberChartServlet extends HttpServlet {
 			String daysVal = request.getParameter("days");
 
 			String[] week = daysVal.split(",");
-			List<Integer> dataList = new ArrayList<>();  
+			List<Integer> dataList = new ArrayList<>();
 			int result = 0;
-			for(int i = 0; i < week.length ; i++) {
+			for (int i = 0; i < week.length; i++) {
 				result = adminService.getEnrollMemberByDate(Date.valueOf(week[i]));
 				System.out.println(week[i] + "의 result = " + result);
 				dataList.add(result);
 			}
-			
 
 			response.setContentType("application/json; charset=utf-8");
 			new Gson().toJson(dataList, response.getWriter());
