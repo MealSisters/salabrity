@@ -144,7 +144,7 @@ public class ProductService {
 			close(conn);
 		}
 		
-		return 0;
+		return result;
 	}
 
 	public List<ProductExt> findProductsAll() {
