@@ -5,6 +5,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
+String loginMemberId = loginMember.getMemberId();
+
 List<Member> list = (List<Member>) request.getAttribute("list");
 String pagebar = (String) request.getAttribute("pagebar");
 
@@ -133,8 +135,15 @@ int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
 		const selectAll = document.querySelectorAll("tbody .member-role");
 		selectAll.forEach((select) => {
 			select.addEventListener('change', (e2) => {
+				
 				const memberId = e2.target.dataset.memberId
 				const memberRole = e2.target.value;
+				
+				if(memberId == "<%= loginMemberId%>"){
+					e2.target.lastElementChild.selected = true;
+					alert("현재 로그인회원의 권한은 변경할 수 없습니다.");
+					return;
+				}
 				
 				const frm = document.updateMemberRoleFrm;
 				frm.memberId.value = memberId;
