@@ -3,15 +3,50 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/survey/surveyResult.css">
-	
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <link rel="stylesheet" href="surveyResult.css">
 
-<script type="text/javascript"></script>
 
 <div class="survey_result">
 
+<!-- js분리
+
+const select = [0, 0, 0, 0];
+
+// 식단결과계산
+function calResult(){
+	console.log(select);
+	var result = select.indexOf();
+	return result;
+}
+
+// 식단결과출력
+function setResult(){
+	
+	// 식단명
+	let point = calResult();
+	const resultName = document.querySelector('.resultname');
+	resultName.innerHTML = productList[point].name;
+	
+	
+	// 식단이미지
+	var resultImg = document.createElement('img');
+	const imgDiv = document.querySelector('#resultImg');
+	var imgURL = 'img/image-' + point + '.png';
+	resultImg.src = imgURL;
+	resultImg.alt = point;
+	resultImg.classList.add('img-fluid');
+	imgDiv.appendChild(resultImg);
+
+	// 식단설명
+	const resultDesc = document.querySelector('.resultDesc');
+	resultDesc.innerHTML = productList[point].desc;
+}
+
+ -->
+
 <!-- 
-	request.setCharacterEncoding("UTF-8");
 	
 	// 당뇨케어, 베이비식단
     String[] uniquenessArr = request.getParameterValues("uniq");
