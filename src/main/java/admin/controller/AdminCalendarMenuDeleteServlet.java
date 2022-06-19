@@ -29,13 +29,13 @@ public class AdminCalendarMenuDeleteServlet extends HttpServlet {
 			WeekDayCode dataDate = WeekDayCode.valueOf(request.getParameter("delWeekDayCode"));
 			System.out.println("productNo@doPost = " + productNo);
 			System.out.println("dataDate@doPost = " + dataDate);
-			
+
 			Calendar cal = new Calendar();
 			cal.setProductNo(productNo);
 			cal.setWeekDayCode(dataDate);
-			
+
 			int result = calendarService.deleteCalendar(cal);
-			
+
 			response.sendRedirect(request.getContextPath() + "/calendar?productNo=" + productNo);
 		} catch (Exception e) {
 			e.printStackTrace();

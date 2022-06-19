@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="product.model.dto.ProductMenu"%>
 <%@page import="product.model.dto.Thumbnail"%>
@@ -34,6 +35,8 @@ if(menus != null) {
 	}	
 }
 
+DecimalFormat df = new DecimalFormat("###,###");
+
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/enroll.css">
 <div class="div-level1">
@@ -59,7 +62,7 @@ if(menus != null) {
         </div>
         <div class="formLine-wrapper">
             <label for="productPrice">가격</label>
-            <p class="p-productPrice"><%= product.getProductPrice() %></p><span>원</span>
+            <p class="p-productPrice"><%= df.format(product.getProductPrice()) %></p><span>원</span>
             <span class="inputErrMsg"></span>
         </div>
         <div class="formLine-wrapper">

@@ -6,6 +6,7 @@ import static common.JdbcTemplate.getConnection;
 import static common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import product.model.dao.ProductDao;
@@ -84,13 +85,24 @@ public class ProductService {
 				}
 			}
 
+			List<Integer> newMenuNums = new ArrayList<>();
+			List<Integer> delMenuNums = productDao.findTargetMenuNoByProductNo(conn, product.getProductNo());
+			
 			result = productDao.deleteProductMenu(conn, product.getProductNo());
 			List<ProductMenu> menuList = product.getMenus();
 			if (menuList != null && !menuList.isEmpty()) {
 				for (ProductMenu pm : menuList) {
+					newMenuNums.add(pm.getMenuNo());
 					result = productDao.insertProductMenu(conn, pm);
 				}
 			}
+
+			for (Integer delMenuNo : delMenuNums) {
+				if (!newMenuNums.contains(delMenuNo)) {
+					result = productDao.deleteCalendarMenu(conn, product.getProductNo(), delMenuNo);
+				}
+			}
+
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -144,7 +156,7 @@ public class ProductService {
 			close(conn);
 		}
 		
-		return 0;
+		return result;
 	}
 
 	public List<ProductExt> findProductsAll() {

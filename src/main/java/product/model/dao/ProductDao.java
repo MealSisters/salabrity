@@ -87,6 +87,7 @@ public class ProductDao {
 			pstmt.setString(4, product.getProductdescription());
 			pstmt.setString(5, product.getProductTarget().toString());
 			pstmt.setInt(6, product.getSubscriptionPeriod());
+			System.out.println("product@dao = " + product);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new ProductException("상품 등록 오류", e);
@@ -344,6 +345,44 @@ public class ProductDao {
 		return list;
 	}
 	
+	public List<Integer> findTargetMenuNoByProductNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Integer> targetMenuNoList = new ArrayList<>();
+		String sql = prop.getProperty("findTargetMenuNoByProductNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Integer menuNo = rset.getInt("menu_no");
+				targetMenuNoList.add(menuNo);
+			}
+		} catch (Exception e) {
+			throw new ProductException("상품번호를 이용한 연결 메뉴번호 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return targetMenuNoList;
+	}
+	
+	public int deleteCalendarMenu(Connection conn, int productNo, Integer delMenuNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteCalendarMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			pstmt.setInt(2, delMenuNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new ProductException("특정 상품의 특정 메뉴연결정보 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
 

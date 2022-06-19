@@ -38,9 +38,9 @@ public class BoardService {
 	 * 전체 게시글 수 조회
 	 * @return
 	 */
-	public int getTotalPostings() {
+	public int getTotalPostings(BoardCode boardCode) {
 		Connection conn = getConnection();
-		int totalBoardContents = boardDao.getTotalPostings(conn);
+		int totalBoardContents = boardDao.getTotalPostings(conn, boardCode);
 		close(conn);
 		return totalBoardContents;
 	}

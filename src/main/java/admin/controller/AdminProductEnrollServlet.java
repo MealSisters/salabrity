@@ -99,7 +99,7 @@ public class AdminProductEnrollServlet extends HttpServlet {
 				pmList.add(pm);
 			}
 			product.setMenus(pmList);
-			
+
 			int result = productService.insertProduct(product);
 
 			response.sendRedirect(request.getContextPath() + "/product/productList");

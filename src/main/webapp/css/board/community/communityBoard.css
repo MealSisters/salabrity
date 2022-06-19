@@ -4,6 +4,7 @@
 communityBoard.jsp
 ======================================*/
 
+/* 커뮤니티 메인 wrap */
 #community-board-wrap a {
 	text-decoration: none;
 	color: black;
@@ -13,51 +14,55 @@ communityBoard.jsp
 #community-board-wrap .hacks-title a,
 #community-board-wrap .general-title a {
 	color: #116916;
+	font-weight: bold;
 }
 
 #community-board-wrap .hacks-content-title,
 #community-board-wrap .general-content-title {
 	font-size: 14px;
 	font-weight: bold;
+	width: 300px;
 }
 
-#community-board-wrap .hacks-content-title a:hover,
-#community-board-wrap .general-content-title a:hover {
-	color: #f8674f;
-}
-
-/* table */
-.tbl-community-hacks, .tbl-community-general {
+/* hacks/general 레이아웃 */
+.community-hacks-layout, .community-general-layout {
 	margin: 0 auto;
-	width: 90%;
-	border-spacing: 10px 0;
-	table-layout: fixed;
+	width: 95%;
 }
 
-/* th, td */
-.hacks-title th, .general-title th {
-	padding: 20px 10px;
-	text-align: left;
-	color: #116916;
+.community-hacks-contents-wrap, .community-general-contents-wrap {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
 }
 
-.hacks-title th i, .general-title i {
-	padding-right: 10px;
+.hacks-content-wrap, .general-content-wrap {
+	margin-bottom: 50px;
+	padding: 5px;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
 }
 
-.hacks-content-title div, .general-content-title div {
+
+.hacks-content-title a, .general-content-title a {
 	/* 제목이 한 줄 이상인 경우 ...처리 */
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-.hacks-content div, .general-content div {
+hacks-content-title a:hover, .general-content-title a:hover {
+	color: #f8674f;
+}
+
+.hacks-content, .general-content {
+	width: 300px;
 	border-top: 1px solid rgb(225, 225, 225);	
 	border-bottom: 1px dashed rgb(225, 225, 225);	
 }
 
-.hacks-content div a {
+.hacks-content a {
 	/* hacks content 영역이 3줄 이상일 경우 ...처리 */
 	white-space: normal;
 	display: -webkit-box;
@@ -66,7 +71,7 @@ communityBoard.jsp
 	overflow: hidden;
 }
 
-.general-content div a {
+.general-content a {
 	/* general content 영역이 5줄 이상일 경우 ...처리 */
 	white-space: normal;
 	display: -webkit-box;
@@ -75,34 +80,43 @@ communityBoard.jsp
 	overflow: hidden;
 }
 
-.hacks-content, .general-content {
+.hacks-content {
 	font-size: 13px;
+	width: 300px;
+	height: 50px;
+}
+
+.general-content {
+	font-size: 13px;
+	width: 300px;
+	height: 100px;
+	
 }
 
 /* hacks image */
-.hacks-img div {
+.hacks-img {
+	margin: 0;
+	width: 300px;
 	height: 300px;
-	border: 1px solid gray;
 }
 
-.hack-img img {
-	width: 100%;
-	height: 100%;
-}
-
-.general-content-writer div {
+.general-content-writer {
+	width: 300px;
 	font-size: 13px;
 	font-weight: bold;
 	padding-bottom: 2px;
 }
 
-.general-content-reg-date div {
+.general-content-reg-date {
+	width: 300px;
 	font-size: 13px;
 	padding-top: 2px;
 }
 
 .comment-cnt, .like-cnt {
 	font-size: 14px;
+	display: inline-block;
+	width: 150px;
 }
 
 .like-cnt {
