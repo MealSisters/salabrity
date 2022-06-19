@@ -86,6 +86,8 @@ div#container {
 /* header */
 header {
 	height: 80px;
+	display: flex;
+    justify-content: space-between;
 }
 
 .main-logo, .main-nav, .member-nav {
@@ -148,14 +150,6 @@ header nav ul li:hover {
 	float: left;
 	width: 10em;
 	text-align: center;
-}
-
-.main-nav li:nth-of-type(5) {
-	margin-left: 20px;
-}
-
-.main-nav li:last-of-type {
-	margin-left: 30px;
 }
 
 .member-nav li {

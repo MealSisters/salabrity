@@ -598,7 +598,7 @@ public class BoardDao {
 	 * @param param
 	 * @return
 	 */
-	public List<PostingExt> searchBy(Connection conn, Map<String, Object> pageParam, Map<String, String> param) {
+	public List<PostingExt> searchBy(Connection conn, Map<String, Object> pageParam, Map<String, String> param, BoardCode boardCode) {
 		String sql = prop.getProperty("searchBy");
 		sql = sql.replace("#", param.get("searchType"));
 		
@@ -608,9 +608,10 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) pageParam.get("start"));
-			pstmt.setInt(2, (int) pageParam.get("end"));
-			pstmt.setString(3, "%" + param.get("searchKeyword") + "%");
+			pstmt.setString(1, boardCode.toString());
+			pstmt.setString(2, "%" + param.get("searchKeyword") + "%");
+			pstmt.setInt(3, (int) pageParam.get("start"));
+			pstmt.setInt(4, (int) pageParam.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				PostingExt posting = handlePostingResultSet(rset);

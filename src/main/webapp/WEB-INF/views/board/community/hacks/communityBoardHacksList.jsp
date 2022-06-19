@@ -31,7 +31,7 @@
 	<input type="button" value="글쓰기" id="board-post-btn" onclick="location.href='<%= request.getContextPath() %>/board/community/hacksEnroll';" />	
 <% } %>
 	<div class="board-search-wrap">
-		<form action="<%=request.getContextPath()%>/board/community/hacksSearch">
+		<form action="<%=request.getContextPath()%>/board/community/hacksSearch?boardCode=<%= BoardCode.C1 %>">
 			<select name="searchType">
 		<% if(searchType != null && searchType.equals("title")) { %>
 				<option value="title" selected>제목</option>

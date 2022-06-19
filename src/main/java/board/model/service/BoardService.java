@@ -263,9 +263,9 @@ public class BoardService {
 	 * @param param
 	 * @return
 	 */
-	public List<PostingExt> searchBy(Map<String, Object> pageParam, Map<String, String> param) {
+	public List<PostingExt> searchBy(Map<String, Object> pageParam, Map<String, String> param, BoardCode boardCode) {
 		Connection conn = getConnection();
-		List<PostingExt> postingList = boardDao.searchBy(conn, pageParam, param);
+		List<PostingExt> postingList = boardDao.searchBy(conn, pageParam, param, boardCode);
 		close(conn);
 		return postingList;
 	}
