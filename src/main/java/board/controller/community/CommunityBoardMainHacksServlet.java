@@ -18,7 +18,7 @@ import board.model.service.BoardService;
  * Servlet implementation class CommunityBoardmainHacksServlet
  */
 @WebServlet("/board/community/mainHacks")
-public class CommunityBoardmainHacksServlet extends HttpServlet {
+public class CommunityBoardMainHacksServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 
@@ -33,8 +33,8 @@ public class CommunityBoardmainHacksServlet extends HttpServlet {
 			String orderBy = request.getParameter("orderBy");
 			
 			Map<Object, String> param = new HashMap<>();
-			param.put("boardCode", "C1");
-			param.put("orderBy", "reg_date");
+			param.put("boardCode", boardCode);
+			param.put("orderBy", orderBy);
 			System.out.println("param = " + param);
 			
 			// 2. 업무 로직

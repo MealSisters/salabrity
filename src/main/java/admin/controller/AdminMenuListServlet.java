@@ -41,24 +41,24 @@ public class AdminMenuListServlet extends HttpServlet {
 			int end = cPage * numPerPage;
 			param.put("start", start);
 			param.put("end", end);
-		
+
 			String menuId = request.getParameter("menuId");
 			String menuName = request.getParameter("menuName");
-			
+
 			String sortBy = request.getParameter("sortBy");
-			
+
 			Map<String, Object> searchParam = new HashMap<>();
 			if (menuId != null)
 				searchParam.put("menuId", menuId);
 			if (menuName != null)
 				searchParam.put("menuName", menuName);
-			
+
 			int totalMenu = 0;
 			if (!searchParam.isEmpty()) {
 				param.put("searchParam", searchParam);
 				totalMenu = menuService.getTotalFilteredMenu(searchParam);
 			} else {
-				totalMenu = menuService.getTotalMenu();				
+				totalMenu = menuService.getTotalMenu();
 			}
 
 			// 업무로직
@@ -88,14 +88,6 @@ public class AdminMenuListServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

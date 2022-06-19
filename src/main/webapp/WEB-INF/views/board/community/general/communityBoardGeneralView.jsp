@@ -114,19 +114,19 @@
 			<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
 			<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
-			<button type="submit" id="board-like-btn">
+			<button type="submit" id="board-like-btn" onclick="LikeUp();">
 	<% 
 		List<PostingLike> likes = posting.getLikes();
 		for(int i = 0; i < likes.size(); i++) {
 			PostingLike pl = likes.get(i);
-			if(pl.getStatus().equals("Y")) {
+			if(pl.getStatus().equals("N")) {
 	%>
-				love it&nbsp;<i class="fa-solid fa-heart"></i>
+				love it&nbsp;<i class="fa-regular fa-heart"></i>
 		<% 
 		    }
 		    else {
 		%>
-				love it&nbsp;<i class="fa-regular fa-heart"></i>
+				love it&nbsp;<i class="fa-solid fa-heart"></i>
 	<%
 			}
 		}
@@ -364,10 +364,7 @@ document.querySelector("textarea[name=commentContent]").onfocus = (e) => {
  * 댓글 제출 폼
  */
 const commentSubmitHandler = (e) => {
-	if(<%= loginMember == null %>) {
-		loginAlert();
-		return false;		
-	}
+	if(<%= loginMember == null %>) loginAlert();
 	
 	/**
 	 * 댓글 내용이 공백일 경우 대비
@@ -387,16 +384,16 @@ document.commentEnrollFrm.onsubmit = commentSubmitHandler;
  */
 const loginAlert = () => {
 	alert("로그인 후 이용할 수 있습니다.");
-	document.querySelector("#memberId").focus();
+	window.location.href = "<%= request.getContextPath() %>/member/login";
 };
 
 /**
  * 좋아요 기능
  */
-window.onload = () => {
-	document.querySelector("#board-like-btn").addEventListener('click', () => {
+ window.onload = () => {
+	const likeUp = () => {
 		document.generalLikeUpFrm.submit();
-	});
+	};
 };
 </script>
 

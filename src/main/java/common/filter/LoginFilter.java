@@ -20,7 +20,6 @@ import member.model.dto.Member;
 @WebFilter({
 	"/mypage/memberUpdate",
 	"/mypage/memberDelete"
-	
 })
 public class LoginFilter implements Filter {
 

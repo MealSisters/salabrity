@@ -13,6 +13,7 @@ import java.util.Map;
 import admin.model.dao.AdminDao;
 import admin.model.dto.SalesTrend;
 import board.model.dto.Posting;
+import board.model.dto.Question;
 import member.model.dto.Member;
 
 public class AdminService {
@@ -20,6 +21,7 @@ public class AdminService {
 	public static final int MEMBER_NUM_PER_PAGE = 15;
 	public static final int ORDER_NUM_PER_PAGE = 15;
 	public static final int CHART_MIN_PERIOD = 7;
+	public static final int QUESTION_NUM_PER_PAGE = 10;
 	private AdminDao adminDao = new AdminDao();
 
 	public int getTotalMembers() {
@@ -112,6 +114,27 @@ public class AdminService {
 		int result = adminDao.getTodayOrder(conn);
 		close(conn);
 		return result;
+	}
+
+	public int getTotalQuestion() {
+		Connection conn = getConnection();
+		int result = adminDao.getTotalQuestion(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<Question> findAllQuestion(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Question> list = adminDao.findAllQuestion(conn, param);
+		close(conn);
+		return list;
+	}
+
+	public Question findQuestion(int questionNo) {
+		Connection conn = getConnection();
+		Question question = adminDao.findQuestion(conn, questionNo);
+		close(conn);
+		return question;
 	}
 
 	
