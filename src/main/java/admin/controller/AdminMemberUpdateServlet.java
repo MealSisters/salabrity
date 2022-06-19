@@ -28,13 +28,13 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 			String memberId = request.getParameter("memberId");
 			MemberRole memberRole = MemberRole.valueOf(request.getParameter("memberRole"));
 			String memberRoleText = (memberRole == MemberRole.A) ? "관리자" : "회원";
-			
+
 			Member member = new Member();
 			member.setMemberId(memberId);
 			member.setMemberRole(memberRole);
 			int result = adminService.updateMemberRole(member);
 			System.out.println("result = " + result);
-			
+
 			request.getSession().setAttribute("msg", "[" + memberId + "]의 권한이 [" + memberRoleText + "]으로 변경되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/admin/memberList");
 		} catch (Exception e) {

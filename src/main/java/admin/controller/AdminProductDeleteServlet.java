@@ -21,12 +21,11 @@ public class AdminProductDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int productNo = Integer.parseInt(request.getParameter("delProductNo"));
-			//System.out.println("productNo@servlet = " + productNo);
-			
+
 			// ProductAttach남기기
 			// Product del_flag 변경 -> 트리거로 ProductMenu 레코드 삭제
 			int result = productService.deleteProduct(productNo);
-			
+
 			response.sendRedirect(request.getContextPath() + "/product/productList");
 		} catch (Exception e) {
 			e.printStackTrace();

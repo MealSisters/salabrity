@@ -51,9 +51,9 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("start"));
-			pstmt.setInt(2, (int) param.get("end"));
-			pstmt.setString(3, boardCode.toString());
+			pstmt.setString(1, boardCode.toString());
+			pstmt.setInt(2, (int) param.get("start"));
+			pstmt.setInt(3, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				PostingExt posting = handlePostingResultSet(rset);
@@ -100,7 +100,7 @@ public class BoardDao {
 	 * @param conn
 	 * @return
 	 */
-	public int getTotalPostings(Connection conn) {
+	public int getTotalPostings(Connection conn, BoardCode boardCode) {
 		String sql = prop.getProperty("getTotalPostings");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -108,6 +108,7 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardCode.toString());
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				getTotalPostings = rset.getInt(1);
@@ -764,6 +765,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<PostingExt> postingList = new ArrayList<>();
+		List<PostingAttach> attachments = new ArrayList<>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -774,6 +776,8 @@ public class BoardDao {
 				posting.setAttachCount(rset.getInt("attach_count")); // 첨부파일 개수
 				posting.setCommentCount(rset.getInt("comment_count")); // 댓글 개수
 				posting.setLikeCount(rset.getInt("like_count")); // 좋아요 개수
+				attachments = findPostingAttachByPostingNo(conn, posting.getPostingNo());
+				posting.setAttachments(attachments); // 첨부파일
 				postingList.add(posting);
 			}
 		} catch (Exception e) {

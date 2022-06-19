@@ -70,7 +70,7 @@
         <div id="div-QnAboard">
             <div id="div-QnAboard-head">
                 <h1>Question</h1>
-                <div><a href="<%= request.getContextPath() %>/admin/QnAList">Go</a></div>
+                <div><a href="<%= request.getContextPath() %>/admin/questionList">Go</a></div>
             </div>
             <table id="tbl-QnAboard">
                 <thead>
