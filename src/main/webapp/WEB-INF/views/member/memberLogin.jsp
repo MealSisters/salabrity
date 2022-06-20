@@ -34,6 +34,7 @@ window.onload = () => {
 	<% } %>
 };
 </script>
+<div class="wrap_main">
 <h3 class="head_log">로그인</h3>
 <div class="form_cont">
 <!-- 로그인 폼 시작 -->
@@ -63,6 +64,7 @@ window.onload = () => {
 			</ul>
 		</div>
 	</form>
+</div>
 </div>
 <!-- 
 <div class="member_sns_login">

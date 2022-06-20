@@ -4,6 +4,10 @@
 	font-family: 'LeferiBaseType-RegularA';
 }
 
+.wrap_main {
+	    margin-top: 25px
+}
+
 /* login 페이지 */
 .head_log {
 	text-align: center;

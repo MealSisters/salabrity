@@ -50,7 +50,7 @@
 								<td><%= p.getPostingNo() %></td>
 								
 								<td>
-								<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
+								<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
 								</td>
 								
 								<td><%= p.getRegDate() %></td>

@@ -119,8 +119,10 @@
 }
 
 .board_question_zone {
-	margin-top: 6px;
-	margin-left: 20px;
+
+	margin-left: 15px;
+	    padding-top: 0px;
+    margin-top: -1px;
 }
 
 /* 1:1 문의 상세글 */
@@ -144,16 +146,38 @@
 	float: right;
 }
 
-.q_cont {
+.q_cont p {
 	font-size: 14px;
-	padding: 0px;
+	padding: 0px !important;
 	height: 250px;
-	display: inline;
-	overflow-y: scroll;
+	overflow-y: hidden;
 }
 
+.a_cont p {
+	font-size: 14px;
+    padding: 0px !important;
+    height: 250px;
+    overflow-y: hidden;
+	
+}
+.a_cont, .q_cont {
+	padding-left : 0px;
+}
+
+.view_answer_box {
+    background-color: #fbfbfb;
+    padding : 0px;
+}
+
+.answer_view_hd h3 {
+	font-size : 14px;
+	margin:0px;
+	
+}
+
+
 .question_view_content {
-	border-bottom: 1px solid #dbdbdb;
+	border-bottom: 1px solid #000;
 	padding-top: 0px;
 }
 
@@ -334,6 +358,7 @@
 	border: #116916;
 	color: #fff;
 	font-size: 12px;
+	    padding-top: 2px;
 }
 
 .btn_write_search:hover {
@@ -346,7 +371,9 @@
 }
 
 #searchType {
-	height: 24px;
+	height: 25px;
+    padding-bottom: 3px;
+        padding-right: 4px;
 }
 
 #searchKeyword {
