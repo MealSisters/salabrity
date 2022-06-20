@@ -87,7 +87,7 @@ public class ProductDao {
 			pstmt.setString(4, product.getProductdescription());
 			pstmt.setString(5, product.getProductTarget().toString());
 			pstmt.setInt(6, product.getSubscriptionPeriod());
-			System.out.println("product@dao = " + product);
+			// System.out.println("product@dao = " + product);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new ProductException("상품 등록 오류", e);
