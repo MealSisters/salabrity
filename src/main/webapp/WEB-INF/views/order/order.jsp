@@ -1,3 +1,5 @@
+<%@page import="java.sql.Date"%>
+<%@page import="buy.model.dto.ProductBuy"%>
 <%@ page import= "java.util.List" %>
 <%@ page import= "cart.model.dto.Cart" %>
 <%@ page import= "mypage.model.dto.Destination" %>
@@ -32,7 +34,13 @@
 		productList = (List<ProductExt>)map.get("productList");
 	}
 
-	System.out.println(map);
+	System.out.println("cartList = " + cartList);
+	System.out.println();
+	System.out.println("productList = " + productList);
+	System.out.println();
+	
+	//String mergeProductNo = "";
+	List<ProductBuy> pbList = new ArrayList<>();
 
 %>
 
@@ -55,6 +63,13 @@
            <%
            if (cartList != null && !cartList.isEmpty()) {	
            		for(int i = 0; i < cartList.size(); i++){
+           			ProductBuy pb = new ProductBuy();
+           			pb.setProductNo(productList.get(i).getProductNo());
+           			pb.setQuantity(cartList.get(i).getQuantity());
+           			pb.setFirstShippingDate(Date.valueOf(cartList.get(i).getFirstShipppingDate()));
+           			System.out.println("단품상품주문정보 : " + pb);
+           			pbList.add(pb);
+           			
            			ProductAttach attach  = productList.get(i).getAttachs().get(0);
            			totalPrice += productList.get(i).getProductPrice()*cartList.get(i).getQuantity();
            %>
@@ -67,8 +82,8 @@
                         </ul>
                     </td>
                     <td class="term"><%= cartList.get(i).getFirstShipppingDate() %></td>
-                    <td class="date"><%= cartList.get(i).getQuantity() %>개</td>
-                    <td class="qty"><%= productList.get(i).getSubscriptionPeriod() %>주</td>
+                    <td class="qty"><%= cartList.get(i).getQuantity() %>개</td>
+                    <td class="date"><%= productList.get(i).getSubscriptionPeriod() %>주</td>
                     <td class="prd_price"><%= productList.get(i).getProductPrice() %>원</td>
                     <td class="prd_price"><%= productList.get(i).getProductPrice()*cartList.get(i).getQuantity() %></td>
                 </tr>
@@ -130,12 +145,12 @@
         <table class="shipping_tbl">
             <tbody>
                 <tr>
-                    <th>배송지 선택</th>
+                    <th><label for="radio">배송지 선택</label></th>
                     <td class="addr_chk">
-                        <input type="radio" name="radio" id="user_addr" checked>&nbsp;&nbsp;<label for="user_addr">주문고객 정보와 동일</label>
-                        <input type="radio" name="radio" id="address_default" >&nbsp;&nbsp;<label for="destination_default">기본 배송지</label>
-                        <input type="radio" name="radio" id="address_choice">&nbsp;&nbsp;<label for="destination_choice">배송지 정보에서 선택</label>
-                        <input type="radio" name="radio" id="new_addr">&nbsp;&nbsp;<label for="new_addr">직접 입력</label>
+                        <input type="radio" name="radio" id="user_addr" value="user_addr" checked>&nbsp;&nbsp;<span for="user_addr" style="font-size:13px; margin-right:20px;" >주문고객 정보와 동일</span>
+                        <input type="radio" name="radio" id="address_default" value="address_default" >&nbsp;&nbsp;<span for="address_default" style="font-size:13px; margin-right:20px;" >기본 배송지</span>
+                        <input type="radio" name="radio" id="address_choice" value="address_choice">&nbsp;&nbsp;<span for="address_choice" style="font-size:13px; margin-right:20px;" >배송지 정보에서 선택</span>
+                        <input type="radio" name="radio" id="new_addr" value="new_addr">&nbsp;&nbsp;<span for="new_addr" style="font-size:13px; margin-right:20px;" >직접 입력</span>
                     </td>
                 </tr>
                 <tr>
@@ -202,7 +217,7 @@
             </tr>
             
          <% 
-        	}
+        		}
         	}
         %>
             
@@ -214,33 +229,26 @@
 
 <script>
 
-
-
-
-
-
-$(()=>{
+	$(()=>{
 		console.log("로드테스트");
 		<%
-		if( defaultDestination != null){
+			if( defaultDestination != null){
 		%>
-		
-			$('#address_default').prop('checked', true);
-			addressDefault();
+				$('#address_default').prop('checked', true);
+				addressDefault();
 		<%
-		} else {
+			} else {
 		%>
-		$('#user_addr').prop('checked', true);
-		buyerAddr();
+				$('#user_addr').prop('checked', true);
+				buyerAddr();
 		<%
-		}
-		if(destinationList != null && destinationList.size()!= 0){
+			}
+				if(destinationList != null && destinationList.size()!= 0){
 		%>
 			
 		<%
 		}
 		%>
-
 	});
 	
 
@@ -286,18 +294,13 @@ $(()=>{
     console.log(apply);
     apply.addEventListener('click',function(){
         const destinationList = document.querySelector('#destination_list');
-        //체크된 객체 가져오기
-        
-        	
 
+        //체크된 객체 가져오기
         <% 
         for(Destination destination : destinationList){        	
         	%>
-        	if(document.querySelector("#destination_list input[type='radio']:checked").id === "<%= destination.getShippingAddressNo()%>"){
-        		
-       	
-        //일치
-				
+        	//일치
+        	if(document.querySelector("#destination_list input[type='radio']:checked").id === "<%= destination.getShippingAddressNo()%>"){	
 		    	$('#shipping_person').val("<%=destination.getShippingPerson()%>");
 				$('#tel1').val("<%=destination.getTelephone().substring(0, 3)%>");
 				$('#tel2').val("<%=destination.getTelephone().substring(3, 7)%>");
@@ -315,37 +318,33 @@ $(()=>{
         //창 숨김
         destinationList.style.zIndex="-1";
         destinationList.style.opacity="0";
-    })
+    });
     
     //주문자정보와 동일 선택시
-        $('#user_addr').click((e) => {
-        	buyerAddr();
-    	
+    $('#user_addr').click((e) => {
+       	buyerAddr();
     });
     
     //라디오 - 기본배송지 선택시 이벤트
-
     $('#address_default').click((e) => {
-
 	    	addressDefault();
-
     });
     
     const addressDefault = () => {
     	
-		<% if(defaultDestination != null){
-		addressDetail = defaultDestination.getAddressDetail() != null ? defaultDestination.getAddressDetail() : "";%>
-		
-    	$('#shipping_person').val("<%=defaultDestination.getShippingPerson()%>");
-		$('#tel1').val("<%=defaultDestination.getTelephone().substring(0, 3)%>");
-		$('#tel2').val("<%=defaultDestination.getTelephone().substring(3, 7)%>");
-		$('#tel3').val("<%=defaultDestination.getTelephone().substring(7)%>");
-		$('#zipcode').val(<%=defaultDestination.getZipcode()%>);
-		$('#address').val("<%=defaultDestination.getAddress()%>");
-		
-		$('#address_detail').val("<%=addressDetail%>");
-		<% 
-		}else{
+		<% if(defaultDestination != null) {
+			addressDetail = defaultDestination.getAddressDetail() != null ? defaultDestination.getAddressDetail() : "";%>
+			
+	    	$('#shipping_person').val("<%=defaultDestination.getShippingPerson()%>");
+			$('#tel1').val("<%=defaultDestination.getTelephone().substring(0, 3)%>");
+			$('#tel2').val("<%=defaultDestination.getTelephone().substring(3, 7)%>");
+			$('#tel3').val("<%=defaultDestination.getTelephone().substring(7)%>");
+			$('#zipcode').val(<%=defaultDestination.getZipcode()%>);
+			$('#address').val("<%=defaultDestination.getAddress()%>");
+			
+			$('#address_detail').val("<%=addressDetail%>");
+			<% 
+		} else {
 		%>
 			alert('기본배송지가 등록되어있지 않습니다.');
 			addrClear();
@@ -379,84 +378,118 @@ $(()=>{
     };
     
     //새로입력 클릭 이벤트
+	$('#new_addr').click((e) => {
+		addrClear();
+    });
     
-		$('#new_addr').click((e) => {
-			addrClear();
-	    });
-    
-		 //주문명 생성
-		console.log($(".productName").html());
-		let orderName = $(".productName").html();
-		if(<%= cartList != null && cartList.size() > 1%>){
-			orderName += " 외 " + <%= cartList.size() - 1 %> + "건";
-		}
+	//주문명 생성
+	console.log($(".productName").html());
+	let orderName = $(".productName").html();
+	if(<%= cartList != null && cartList.size() > 1%>){
+		orderName += " 외 " + <%= cartList.size() - 1 %> + "건";
+	}
 		
-		//주문자 주소 처리
+	//주문자 주소 처리
 	<%	String buyerAddress = "(" + loginMember.getZipcode() + ") " + loginMember.getAddress();
 				buyerAddress += loginMember.getAddressDetail() != null ? loginMember.getAddressDetail() : ""; %>
     let buyerAddress = "<%= buyerAddress %>";
-				
     //아임포트 결제-결제준비
    IMP.init('imp68598851'); 
     
 
    
-	 $('#paymentBtn').click((e) => {
+	<%-------------------------------------- 이은지 start --------------------------------------%>
+	
+	$('#paymentBtn').click((e) => {
+		// 사용자 form 입력값 가져오기
+		const buyerTelMerge = $('#tel1').val()+$('#tel2').val()+$('#tel3').val();
+		const buyerAddrMerge = $('#address').val()+" "+$('#address_detail').val();
+		const requestTermVal = document.querySelector("#requestTerm").value;
+
+		// 배송지정보 옵션 처리 1.주문고객정보 2.기본배송지 3.배송지정보에서선택 4.직접입력
+		let shippingOpt = "";
+		switch($("[type=radio]:checked").val()){
+		case "user_addr": shippingOpt = "userAddr"; break;
+		case "address_default": shippingOpt = "addressDefault"; break;
+		case "address_choice": shippingOpt = "addressChoice"; break;
+		case "new_addr": shippingOpt = "newAddr"; break;
+		}
+		
+		let productBuyArr = [];
+		<% for(int i = 0 ; i < pbList.size(); i++) { %>
+			productBuyArr.push({ 
+				productNo: "<%= pbList.get(i).getProductNo() %>",
+				quantity: "<%= pbList.get(i).getQuantity() %>",
+				firstShippingDate: "<%= pbList.get(i).getFirstShippingDate() %>"
+			});
+		<% } %>
+		const jsonProductBuyArr = JSON.stringify(productBuyArr);
+		console.log("productBuyArr = " , productBuyArr);
+		
+		
 	 	IMP.request_pay({
 	 	    pg : 'inicis', // version 1.1.0부터 지원.
 	 	    pay_method : 'card',
 	 	    merchant_uid : new Date().getTime(),
 	 	    name : orderName,
-	 	  //  amount : <%= totalPrice %>, //판매 가격
-	 	    amount : 100, //판매 가격
+	 	  	// amount : <%= totalPrice %>, //판매 가격
+	 	    amount : 10, // 테스트용 판매 가격
 	 	    buyer_email : '<%= loginMember.getEmail() %>',
-	 	    buyer_name : '<%= loginMember.getMemberName() %>',
-	 	    buyer_tel : '<%= loginMember.getPhone()%>',
-	 	    buyer_addr : buyerAddress,
-	 	    buyer_postcode : '<%= loginMember.getZipcode()%>'
+	 	    buyer_name : $('#shipping_person').val(),
+	 	    buyer_tel : buyerTelMerge,
+	 	    buyer_addr : buyerAddrMerge,
+	 	    buyer_postcode : $('#zipcode').val()
 	 	}, function (rsp) { // callback
 	 	    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	 	        // console.log(rsp); // 결제정보 확인용 출력문
+	 	
 	 	        // jQuery로 HTTP 요청
-	 	        jQuery.ajax({
-	 	         // url: , // 가맹점 서버
-	 	          method: "POST",
-	 	          headers: { "Content-Type": "application/json" },
-	 	          data: {
-	 	              impUid: rsp.imp_uid,
-	 	              merchantUid: rsp.merchant_uid,
-	 	              payMethod = 'card',
-	 	              requestTerm = $('requestTerm').html();
-	 	              amount = <%= totalPrice %>,
-	 	              paymentStatemant = "paid",
-	 	              
-	 	              
-	 	              
-	 	              //배송지
-	 	              //주문자 정보와 동일에서 선택한 경우, 새 배송지 선택한 경우
-	 	              
-	 	              //배송지 목록에서 선택한 경우
-	 	              
-	 	              
-	 	              
-	 	          }
+	 	        $.ajax({
+					url: "<%= request.getContextPath() %>/buy/payment",
+					method: "POST",
+					dataType : "json",
+					data: {
+		 	            merchantUid: rsp.merchant_uid, // 주문번호(buy테이블 고유값)
+		 	            memberId: "<%= loginMember.getMemberId() %>",
+		 	            payMethod: rsp.pay_method,
+		 	            amount: rsp.paid_amount,
+		 	            buyerEmail: rsp.buyer_email,
+		 	            buyerName: rsp.buyer_name,
+		 	            buyerTel: rsp.buyer_tel,
+		 	            buyerAddr: rsp.buyer_addr,
+		 	            buyerPostcode: rsp.buyer_postCode,
+		 	            paySec: rsp.paid_at,
+		 	            // 주문일은 컨트롤러에서
+						impUid: rsp.imp_uid, // 결제번호
+						payStatement: rsp.status,
+		 	            requestTerm: requestTermVal,
+		 	            
+						jsonPbArr: jsonProductBuyArr,
+		 	            
+						shippingOpt: shippingOpt,
+						shippingAddrInput: $('#address').val(),
+						shippingAddrDetailInput: $('#address_detail').val()
+						
+					}
 	 	      }).done(function(data) { // 응답 처리
 
 	 	            	if(data.status.equals("success")){
 	 	            		//결제 성공시 로직
 	 	            		
 	 	            		//페이지 이동
-	 	            		location.href="<%= request.getContextPath() %>";
+	 	            		// location.href="<%= request.getContextPath() %>";
 	 	            	}
 	 	           
 	 	          
 	 	        });
+	 			
 	 	    } else {
 	 	      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
 	 	    }
 	 	  });
-	 	
+	 		 // --%>
 	 	    });
-	 
+	 <%--------------------------------------- 이은지 end ---------------------------------------%>
 	
 
 
