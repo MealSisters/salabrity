@@ -144,6 +144,12 @@ public class MypageService {
 	}
 
 
+	public PostingExt findByAnswer(int no) {
+		Connection conn = getConnection();
+		PostingExt answer = mypageDao.findByAnswer(conn, no);
+		close(conn);
+		return answer;
+	}
 
 
 }

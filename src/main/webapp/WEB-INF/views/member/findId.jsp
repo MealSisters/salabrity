@@ -3,23 +3,29 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
-
+<%
+	String memberName = request.getParameter("memberName");
+	String phone = request.getParameter("phone");
+	Member member = (Member) request.getAttribute("member");
+%>
 	
        <h3 class="head_log">아이디 찾기</h3>
 			<div class="find_box">
 				<div class="find_main_box">
 			<div class="find_id_box">
+				<form name="findIdFrm" method="POST" action="<%= request.getContextPath() %>/member/findId">
 				
 				<div class="find_input">
-					<input class="find_input_box" type="text" name="" id="" placeholder="이름"><br>
-					<input class="find_input_box" type="text" name="" id=""  placeholder="휴대폰 번호">
+					<input class="find_input_box" type="text" name="memberName" id="" placeholder="이름"><br>
+					<input class="find_input_box" type="text" name="phone" id=""  placeholder="핸드폰 번호">
 				</div>
 				
-				<button class="btn_find_id">아이디 찾기</button>
+				<button type="submit" class="btn_find_id">아이디 찾기</button>
+				</form>
+			
+				<button type="button" class="btn_find" onclick="location.href='<%= request.getContextPath() %>/member/findPwd';">비밀번호 찾기</button>
 				
-				<button class="btn_find" onclick="location.href='<%= request.getContextPath() %>/member/findPwd';">비밀번호 찾기</button>
-				
-				<button class="btn_find_log" onclick="location.href='<%= request.getContextPath() %>/member/login';">로그인</button>
+				<button type="button" class="btn_find_log" onclick="location.href='<%= request.getContextPath() %>/member/login';">로그인</button>
 			</div>
 			<div class="plus">
 				<span>- 회원 가입 시 입력한 이름과 휴대폰 번호를 입력해주세요.</span>

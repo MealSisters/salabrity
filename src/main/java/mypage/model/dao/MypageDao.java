@@ -17,7 +17,6 @@ import board.model.dto.BoardCode;
 import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
-import member.model.dto.Member;
 import member.model.exception.MemberException;
 import mypage.model.exception.MypageException;
 
@@ -414,6 +413,38 @@ public class MypageDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+	public PostingExt findByAnswer(Connection conn, int no) {
+		PostingExt answer = new PostingExt();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findByAnswer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				answer.setPostingNo(rset.getInt("posting_no"));
+				answer.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				answer.setMemberId(rset.getString("member_id"));
+				answer.setTitle(rset.getString("title"));
+				answer.setContent(rset.getString("content"));
+				answer.setRegDate(rset.getDate("reg_date"));
+				answer.setReadCount(rset.getInt("read_count"));
+				answer.setPostingLevel(rset.getInt("posting_level"));
+				answer.setPostingRef(rset.getInt("posting_ref"));
+			}
+		} catch (Exception e) {
+			throw new MypageException("답변 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return answer;
 	}
 	
 	

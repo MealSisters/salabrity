@@ -24,16 +24,24 @@ public class BoardQuestionViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			
 			int no = Integer.parseInt(request.getParameter("no"));
 			
-			PostingExt posting = mypageService.findByNo(no);
-			System.out.println("서블릿"+posting);
 			
-//			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
-//			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
-//			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
+			PostingExt posting = mypageService.findByNo(no); // 작성글
+			
+			PostingExt answer = mypageService.findByAnswer(no); // 답변
+			
+		
+			System.out.println("서블릿!!!!!!!!!!!!!"+posting);
+			System.out.println("서블릿!!!!!!!!!!!!!"+answer);
+			
+			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
 			
 			request.setAttribute("posting", posting);
+			request.setAttribute("answer", answer);
 			request.getRequestDispatcher("/WEB-INF/views/member/mypage/boardQuestionView.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

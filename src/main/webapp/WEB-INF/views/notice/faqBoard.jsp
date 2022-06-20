@@ -5,7 +5,7 @@
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/notice/notice.css" />
-	
+<script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <div class="notice_page_content">
     <h3 class="notice_hd">자주 묻는 질문</h3>
     <div class="notice_wrap">        

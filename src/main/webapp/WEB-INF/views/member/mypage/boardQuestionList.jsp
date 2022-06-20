@@ -51,7 +51,7 @@
 							<tr>
 								<th>문의날짜</th>
 								<th>제목</th>
-								<th>작성자</th>
+								<th>문의상태</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -68,7 +68,7 @@
 								<td>
 								<a href="<%= request.getContextPath() %>/mypage/boardQuestionView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
 								</td>
-								<td><%= loginMember.getMemberName() %></td>
+								<td><%= p.getPostingRef() == 0 ? "대기중" : "완료" %></td>
 							</tr>
 							<% }
 							
