@@ -32,12 +32,11 @@ public class CartToOrderAll extends HttpServlet {
 			String memberId = loginMember.getMemberId();
 			
 			//아이디로 장바구니 조회
-			Map<String, Object> map = cartService.findByIdCart(memberId);
-			System.out.println("서블렛@"+map);
+			Map<String, Object> orderMap = cartService.findByIdCart(memberId);
+			System.out.println("서블렛@"+orderMap);
 			// view단 처리
-			request.setAttribute("map", map);
+			session.setAttribute("orderMap", orderMap);
 			request.getRequestDispatcher("/order/order").forward(request, response);
-			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

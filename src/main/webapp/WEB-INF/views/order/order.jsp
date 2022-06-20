@@ -21,7 +21,7 @@
 	Destination defaultDestination = (Destination)request.getAttribute("defaultDestination");
 	List<Destination> destinationList = (List<Destination>) request.getAttribute("destinationList");
 	String memberId = loginMember.getMemberId();
-	Map<String, Object> map = (Map<String, Object>) request.getAttribute("map");
+	Map<String, Object> map = (Map<String, Object>) session.getAttribute("orderMap");
 	List<Cart> cartList = null;
 	List<ProductExt> productList = null;
 	int quantity = 0;
@@ -63,7 +63,7 @@
                         <ul>
                             <li><img src="<%= request.getContextPath() %>/upload/product/<%= attach.getRenamedFileName()%>"
                              alt="<%= attach.getOriginalFileName() %>" ></li>
-                            <li><%= productList.get(i).getProductName() %></li>
+                            <li class = "productName"><%= productList.get(i).getProductName() %></li>
                         </ul>
                     </td>
                     <td class="term"><%= cartList.get(i).getFirstShipppingDate() %></td>
@@ -135,7 +135,7 @@
                         <input type="radio" name="radio" id="user_addr" checked>&nbsp;&nbsp;<label for="user_addr">주문고객 정보와 동일</label>
                         <input type="radio" name="radio" id="address_default" >&nbsp;&nbsp;<label for="destination_default">기본 배송지</label>
                         <input type="radio" name="radio" id="address_choice">&nbsp;&nbsp;<label for="destination_choice">배송지 정보에서 선택</label>
-                        <input type="radio" name="radio" id="new_addr">&nbsp;&nbsp;<label for="new_addr">새로 입력</label>
+                        <input type="radio" name="radio" id="new_addr">&nbsp;&nbsp;<label for="new_addr">직접 입력</label>
                     </td>
                 </tr>
                 <tr>
@@ -160,7 +160,7 @@
                 <tr>
                     <th>배송 요청사항</th>
                     <td>
-                        <textarea name="" id="" cols="30" rows="10"></textarea><br>
+                        <textarea name="" id="requestTerm" cols="30" rows="10"></textarea><br>
                         - 입력글자는 최대 한글 60자, 영문/숫자 120자까지 가능합니다.
                     </td>
                 </tr>
@@ -213,14 +213,20 @@
 </div>
 
 <script>
-	$(()=>{
+
+
+
+
+
+
+$(()=>{
 		console.log("로드테스트");
 		<%
 		if( defaultDestination != null){
 		%>
 		
-		$('#address_default').prop('checked', true);
-		addressDefault();
+			$('#address_default').prop('checked', true);
+			addressDefault();
 		<%
 		} else {
 		%>
@@ -236,6 +242,8 @@
 		%>
 
 	});
+	
+
 	
     //우편번호 선택 클릭 이벤트
     const zipcode = document.querySelector('.search_zipcode');
@@ -287,8 +295,7 @@
         	%>
         	if(document.querySelector("#destination_list input[type='radio']:checked").id === "<%= destination.getShippingAddressNo()%>"){
         		
-
-        	
+       	
         //일치
 				
 		    	$('#shipping_person').val("<%=destination.getShippingPerson()%>");
@@ -377,15 +384,82 @@
 			addrClear();
 	    });
     
-
+		 //주문명 생성
+		console.log($(".productName").html());
+		let orderName = $(".productName").html();
+		if(<%= cartList != null && cartList.size() > 1%>){
+			orderName += " 외 " + <%= cartList.size() - 1 %> + "건";
+		}
+		
+		//주문자 주소 처리
+	<%	String buyerAddress = "(" + loginMember.getZipcode() + ") " + loginMember.getAddress();
+				buyerAddress += loginMember.getAddressDetail() != null ? loginMember.getAddressDetail() : ""; %>
+    let buyerAddress = "<%= buyerAddress %>";
+				
     //아임포트 결제-결제준비
    IMP.init('imp68598851'); 
     
-$('#paymentBtn').click((e) => {
+
+   
+	 $('#paymentBtn').click((e) => {
+	 	IMP.request_pay({
+	 	    pg : 'inicis', // version 1.1.0부터 지원.
+	 	    pay_method : 'card',
+	 	    merchant_uid : new Date().getTime(),
+	 	    name : orderName,
+	 	  //  amount : <%= totalPrice %>, //판매 가격
+	 	    amount : 100, //판매 가격
+	 	    buyer_email : '<%= loginMember.getEmail() %>',
+	 	    buyer_name : '<%= loginMember.getMemberName() %>',
+	 	    buyer_tel : '<%= loginMember.getPhone()%>',
+	 	    buyer_addr : buyerAddress,
+	 	    buyer_postcode : '<%= loginMember.getZipcode()%>'
+	 	}, function (rsp) { // callback
+	 	    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	 	        // jQuery로 HTTP 요청
+	 	        jQuery.ajax({
+	 	         // url: , // 가맹점 서버
+	 	          method: "POST",
+	 	          headers: { "Content-Type": "application/json" },
+	 	          data: {
+	 	              impUid: rsp.imp_uid,
+	 	              merchantUid: rsp.merchant_uid,
+	 	              payMethod = 'card',
+	 	              requestTerm = $('requestTerm').html();
+	 	              amount = <%= totalPrice %>,
+	 	              paymentStatemant = "paid",
+	 	              
+	 	              
+	 	              
+	 	              //배송지
+	 	              //주문자 정보와 동일에서 선택한 경우, 새 배송지 선택한 경우
+	 	              
+	 	              //배송지 목록에서 선택한 경우
+	 	              
+	 	              
+	 	              
+	 	          }
+	 	      }).done(function(data) { // 응답 처리
+
+	 	            	if(data.status.equals("success")){
+	 	            		//결제 성공시 로직
+	 	            		
+	 	            		//페이지 이동
+	 	            		location.href="<%= request.getContextPath() %>";
+	 	            	}
+	 	           
+	 	          
+	 	        });
+	 	    } else {
+	 	      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	 	    }
+	 	  });
+	 	
+	 	    });
+	 
 	
-	    });
-	
-    
+
+
 	
 
    
