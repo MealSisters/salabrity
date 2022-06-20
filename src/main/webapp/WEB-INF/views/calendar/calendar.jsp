@@ -29,7 +29,7 @@ if(productHere != null)
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/adminCalendar.css">
 <div class="div-level1">
     <div class="div-level2 calendarimg-wrapper">
-        <img class="calendarimg" src="<%= request.getContextPath() %>/images/food_sample.jpg" alt="">
+        <img class="calendarimg" src="<%= request.getContextPath() %>/images/calendar_banner.png" alt="">
     </div>
     <div class="div-level2 productName-wrapper">
         <p class="now-productName"><%=  productHere!=null ? productHere.getProductName() : ( recentProduct!=null ? recentProduct.getProductName() : "캘린더 준비중") %></p>

@@ -1,4 +1,9 @@
-<%@ page import= "java.util.List, cart.model.dto.Cart, java.util.ArrayList, java.util.Map, product.model.dto.ProductExt, product.model.dto.ProductAttach" %>
+<%@ page import= "java.util.List" %>
+<%@ page import= "cart.model.dto.Cart" %>
+<%@ page import= "java.util.ArrayList" %>
+<%@ page import= "java.util.Map" %>
+<%@ page import= "product.model.dto.ProductExt" %>
+<%@ page import= "product.model.dto.ProductAttach" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -6,8 +11,8 @@
 
 <%
 	Map<String, Object> map = (Map<String, Object>) request.getAttribute("map");
-	List cartList = (List)map.get("cartList");
-	List productList = (List)map.get("productList");
+	List<Cart> cartList = (List<Cart>)map.get("cartList");
+	List<ProductExt> productList = (List<ProductExt>)map.get("productList");
 	int totalPrice = 0;
 	
 %>
@@ -35,7 +40,7 @@
 %>
     </div>
 </div>
-<form action="" name="cart-form" method="post">
+
 
     <div id="cart_container">
         <table class="cart_list">
@@ -111,10 +116,13 @@
                         <span id="total_price" class="total_price="><%=totalPrice%></span><span>원</span>
                     </div>
                     <div class="order_container">
-                        <a href="/salabrity/order/order">
+                        <a id="checkedOrder">
                             선택상품 주문
                         </a>
-                        <a href="/salabrity/order/order">
+                       	<form id="checkedOrderFrm" action="<%=request.getContextPath()%>/order/cart/checkedCartOrder" method="post" name="checkedOrderFrm">
+                       	<input type="hidden" name="checkedCartNoList" id="checkedCartNoList"/>
+                       	</form>
+                        <a href="<%=request.getContextPath()%>/order/cartOrder">
                             전체주문
                         </a>
                     </div>
@@ -122,7 +130,7 @@
       <%
 			}
 			%>   
-</form>
+
 <script>
 
     //datepicker
@@ -290,7 +298,7 @@
         
 
         //전체삭제
-        $("#allDel").click((e) =>{
+          $("#allDel").click((e) =>{
         		
         		$.ajax({
 					type : "POST",
@@ -309,8 +317,21 @@
         
         //선택주문으로 넘기기
         
-        //전체주문으로 넘기기
-       
+        $("#checkedOrder").click((e) =>{
+        		
+        	// 배열 가져오기
+    		let checkedCartNoList = [];
+    		checkedCartNoList = checkedCartNoListSearch();
+			console.log(checkedCartNoList);
+		if (!checkedCartNoList.length) {
+			alert("선택된 상품이 없습니다.");
+			return
+			};
+    		$('#checkedCartNoList').val(checkedCartNoList);
+    		console.log($('#checkedCartNoList').val());
+    		$('form').submit();
+        });
+
         
 </script>
 

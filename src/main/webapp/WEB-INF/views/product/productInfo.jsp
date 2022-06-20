@@ -6,7 +6,6 @@
 <%@ page import="product.model.dto.ProductAttach"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-	
 	ProductExt product = (ProductExt) request.getAttribute("product");
 	List<ProductAttach> attachments= product.getAttachs();
 	ProductAttach thumbnailImg = null;
@@ -23,7 +22,6 @@
 	System.out.println("thumbnail = " + thumbnailImg);
 	System.out.println("detailImg1" + detailImg1);
 
-	
 
 %>
 <link rel="stylesheet"
@@ -41,10 +39,17 @@
     %>"
 		alt="<%= thumbnailImg.getOriginalFileName() %>" class="prd_img" />
 	<div class="prd_info">
-		<a href="<%= request.getContextPath() %>/calendar" class="go_cal">식단캘린더로
+	<form action="<%=request.getContextPath()%>/order/order" method="post" name ="singleProductOrderFrm">
+		<input type="hidden" name="productNo" value="<%=product.getProductNo() %>" />
+		<input type="hidden" name="productPrice" value="<%=product.getProductPrice() %>" />
+		<input type="hidden" name="originalFileName" value="<%=thumbnailImg.getOriginalFileName() %>" />
+		<input type="hidden" name="renamedFileName" value="<%=thumbnailImg.getRenamedFileName() %>" />
+		<input type="hidden" name="subscriptionPeriod" value="<%= product.getSubscriptionPeriod() %>" />
+		<a href="<%= request.getContextPath() %>/calendar?productNo=<%=product.getProductNo() %>" class="go_cal">식단캘린더로
 			이동</a>
 		<div class="prd_tit_wrap">
-			<h2 class="prd_tit"><%=product.getProductName() %></h2>
+			<h2 class="prd_tit"><%=product.getProductName() %>
+			<input type="hidden" name="productName" value="<%= product.getProductName()%>"/> </h2>
 			<h3 class="prd_sub_tit"><%=product.getProductdescription() %></h3>
 		</div>
 		<div class="prd_opt_wrp">
@@ -54,7 +59,7 @@
 					<ul class="qty_wrp">
 						<li class="qty_minus"><span class="quantity_minus"><i
 								class="fa-solid fa-minus"></i></span>
-						<li class="qty"><input type="number" value="1" id="quantity"></li>
+						<li class="qty"><input type="number" value="1" id="quantity" name="quantity"></li>
 						<li class="qty_plus"><span class="quantity_plus"><i
 								class="fa-solid fa-plus"></i></span></li>
 					</ul>
@@ -64,19 +69,20 @@
 				<div class="opt_title">첫 배송일</div>
 				<div class="opt">
 					<div class="input_wrp">
-						<input class="datepicker" id="firstShippingDate" />
+						<input class="datepicker" id="firstShippingDate" name="firstShippingDate"/>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="total_wrap">
-			<div class="total_tit">총 주문금액</div>
-			<div class="total_price"><%=product.getProductPrice() %></div>
+			<div class="total_tit">판매 가격</div>
+			<div class="total_price"><%=product.getProductPrice() %>원</div>
 		</div>
 		<div class="order_btn_wrp">
-			<a href='javascript:void(0);' class="btn_order">주문하기</a> <a
-				href='javascript:void(0);' class="btn_add_cart">장바구니 담기</a>
+			<a href='#' class="btn_order">주문하기</a> 
+			<a href='javascript:void(0);' class="btn_add_cart">장바구니 담기</a>
 		</div>
+		</form>
 	</div>
 </div>
 <div class="tab_wrap">
@@ -94,8 +100,7 @@
 		<%
     	if(detailImg2 != null ){
     %>
-		<img
-			src="<%= request.getContextPath() %>/upload/product/<%= detailImg2.getRenamedFileName()
+		<img src="<%= request.getContextPath() %>/upload/product/<%= detailImg2.getRenamedFileName()
     %>"
 			alt="<%= detailImg2.getOriginalFileName() %>" class="detail_img" />
 		<%
@@ -103,7 +108,7 @@
     %>
 
 		<h3>상품정보 제공고시</h3>
-		<p>상품상세 참조</p>
+		<p>상세이미지, 식단캘린더-메뉴정보 참조</p>
 	</div>
 	<div class="detail_tab2_active">
 		<table>
@@ -201,38 +206,17 @@
 		});
 		}
 		else{
-			alert("로그인 후 이용 가능");
+			alert("로그인 후 이용하실 수 있습니다.");
 	
 		}
 	});
   //주문하기 버튼 클릭
+  
 	$(".btn_order").click((e) => {
-		if("<%=memberId%>" !== ""){
-
-		$.ajax({
-			type : "POST",
-			async : true,
-			data : {productNo: <%=product.getProductNo() %>, memberId : "<%=memberId%>",
-					quantity : $('#quantity').val(), firstShippingDate : $('#firstShippingDate').val()},
-			url : "<%=request.getContextPath()%>/order/cart/insertCart",
-			success : function(data){
-				alert('요청성공');
-			},
-			error : function(data){
-				alert('요청실패');
-			}
-
-		});
-		}
-		else{
-			alert("로그인 후 이용 가능");
-	
-		}
+		$("form").submit();
 	});
   
 </script>
-
-
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

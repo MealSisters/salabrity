@@ -1,3 +1,10 @@
+<%@ page import= "java.util.List" %>
+<%@ page import= "cart.model.dto.Cart" %>
+<%@ page import= "mypage.model.dto.Destination" %>
+<%@ page import= "product.model.dto.ProductExt" %>
+<%@ page import= "java.util.Map" %>
+<%@ page import= "product.model.dto.ProductAttach" %>
+<%@ page import= "java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -9,10 +16,28 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<%
+	String addressDetail = "";
+	Destination defaultDestination = (Destination)request.getAttribute("defaultDestination");
+	List<Destination> destinationList = (List<Destination>) request.getAttribute("destinationList");
+	String memberId = loginMember.getMemberId();
+	Map<String, Object> map = (Map<String, Object>) request.getAttribute("map");
+	List<Cart> cartList = null;
+	List<ProductExt> productList = null;
+	int quantity = 0;
+	int price = 0;
+	int totalPrice = 0;
+	if(map != null && !map.isEmpty()){
+		cartList = (List<Cart>)map.get("cartList");
+		productList = (List<ProductExt>)map.get("productList");
+	}
 
+	System.out.println(map);
+
+%>
 
 <h1>주문/결제</h1>
-<form action="" id="frmOrder">
+<form action="" id="frmOrder" method="post">
     <div class="order_list">
         <h2>주문/결제 상품</h2>
         <table class="order_tbl">
@@ -21,45 +46,75 @@
                     <th class="prd_title order_tbl_tit">상품명</th>
                     <th class="date order_tbl_tit">첫배송일</th>
                     <th class="qt order_tbl_tit">수량</th>
-                    <th class="term order_tbl_tit">배송기간</th>
+                    <th class="term order_tbl_tit">구독기간</th>
                     <th class="prd_price order_tbl_tit">판매가격</th>
                     <th class="prd_price order_tbl_tit">합계가격</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+           <%
+           if (cartList != null && !cartList.isEmpty()) {	
+           		for(int i = 0; i < cartList.size(); i++){
+           			ProductAttach attach  = productList.get(i).getAttachs().get(0);
+           			totalPrice += productList.get(i).getProductPrice()*cartList.get(i).getQuantity();
+           %>
+          		 <tr>
                     <td class="prd_title">
                         <ul>
-                            <li><img src="" alt="이미지"></li>
-                            <li>베이비 식단</li>
+                            <li><img src="<%= request.getContextPath() %>/upload/product/<%= attach.getRenamedFileName()%>"
+                             alt="<%= attach.getOriginalFileName() %>" ></li>
+                            <li><%= productList.get(i).getProductName() %></li>
                         </ul>
                     </td>
-                    <td class="term">1주(1일 2식 총 10회)</td>
-                    <td class="date">2022-06-07</td>
-                    <td class="qty">1개</td>
-                    <td class="prd_price">104,000원</td>
-                    <td class="prd_price">104,000원</td>
+                    <td class="term"><%= cartList.get(i).getFirstShipppingDate() %></td>
+                    <td class="date"><%= cartList.get(i).getQuantity() %>개</td>
+                    <td class="qty"><%= productList.get(i).getSubscriptionPeriod() %>주</td>
+                    <td class="prd_price"><%= productList.get(i).getProductPrice() %>원</td>
+                    <td class="prd_price"><%= productList.get(i).getProductPrice()*cartList.get(i).getQuantity() %></td>
                 </tr>
-                <tr>
+           <%
+           		}
+           	} else {    
+           		 quantity = Integer.parseInt(request.getParameter("quantity"));
+           		price = Integer.parseInt(request.getParameter("productPrice"));
+           		totalPrice = quantity * price;
+           %>
+            <tr>
                     <td class="prd_title">
                         <ul>
-                        
-                            <li><img src="" alt="이미지"></li>
-                            <li>체중조절 식단</li>
+                            <li><img src="<%= request.getContextPath() %>/upload/product/<%= request.getParameter("renamedFileName") %>"
+                            alt="<%= request.getParameter("originalFileName") %>"></li>
+                            <li><%= request.getParameter("productName") %></li>
                         </ul>
                     </td>
-                    <td class="term">1주(1일 2식 총 10회)</td>
-                    <td class="date">2022-06-07</td>
-                    <td class="qty">1개</td>
-                    <td class="prd_price">140,000원</td>
-                    <td class="prd_price">140,000원</td>
+                    <td class="term"><%= request.getParameter("firstShippingDate") %></td>
+                    <td class="qty"><%= quantity %>개</td>
+                    <td class="date"><%= request.getParameter("subscriptionPeriod") %>주</td>
+                    <td class="prd_price"><%= price %>원</td>
+                    <td class="prd_price"><%= totalPrice%>원</td>
                 </tr>
+           <%
+           	}
+           %>
+               
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="6" class="total_tit">
                         총 결제금액&nbsp;&nbsp;
-                        <span class="total_price">244,000원</span>
+                        <span class="total_price">
+                        <% if(map != null && !map.isEmpty()){
+                        %>
+                        	<%= totalPrice%>
+                        <%
+                        } else {
+                        %>
+                        <%= quantity * price %>
+                        <%
+                        } 
+                        %>
+                        
+						</span>
                     </td>
 
                 </tr>
@@ -67,9 +122,7 @@
         </table>
     </div>
     <!-- 주문자정보 -->
-    <divclass class="buyer_info">
 
-    </divclass>
     <div class="ship-info">
         <div class="ship-header">
             <h2>상품 배송지 정보</h2><div><span>*</span>는 필수 입력 항목</div>
@@ -79,26 +132,29 @@
                 <tr>
                     <th>배송지 선택</th>
                     <td class="addr_chk">
-                        <input type="radio" name="radio" id="user_addr">&nbsp;&nbsp;<label for="user_addr">주문고객 정보와 동일</label>
-                        <input type="radio" name="radio" id="address_default" checked>&nbsp;&nbsp;<label for="destination_default">기본 배송지</label>
+                        <input type="radio" name="radio" id="user_addr" checked>&nbsp;&nbsp;<label for="user_addr">주문고객 정보와 동일</label>
+                        <input type="radio" name="radio" id="address_default" >&nbsp;&nbsp;<label for="destination_default">기본 배송지</label>
                         <input type="radio" name="radio" id="address_choice">&nbsp;&nbsp;<label for="destination_choice">배송지 정보에서 선택</label>
                         <input type="radio" name="radio" id="new_addr">&nbsp;&nbsp;<label for="new_addr">새로 입력</label>
                     </td>
                 </tr>
                 <tr>
                     <th>받으시는분 <span class="required_col">*</span></th>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="shipping_person"></td>
                 </tr>
                 <tr>
                     <th>휴대폰번호 <span class="required_col">*</span></th>
-                    <td><input type="text">&nbsp;&nbsp;-&nbsp;&nbsp;<input type="text">&nbsp;&nbsp;-&nbsp;&nbsp;<input type="text"></td>
+                    <td><input type="text" id="tel1">&nbsp;&nbsp;-&nbsp;&nbsp;
+                    	<input type="text" id="tel2">&nbsp;&nbsp;-&nbsp;&nbsp;
+                    	<input type="text" id="tel3"></td>
                 </tr>
                 <tr class="address_row">
                     <th>주소 <span class="required_col">*</span></th>
                         <td>
-                            <input type="text" class="zipcode add_input" disabled>&nbsp;&nbsp;<button type="button" class="search_zipcode">우편번호 검색</button><br>
-                            <input type="text" class="address add_input" disabled>&nbsp;&nbsp;
-                            <input type="text" class="address_detail add_input">
+                            <input type="text" class="zipcode add_input" id="zipcode" value="<%= loginMember.getZipcode() %>" readonly>&nbsp;&nbsp;
+                            <button type="button" class="search_zipcode">우편번호 검색</button><br>
+                            <input type="text" class="address add_input" id="address" value="<%= loginMember.getAddress() %>" readonly>&nbsp;&nbsp;
+                            <input type="text" class="address_detail add_input" id="address_detail" value="<%= loginMember.getAddressDetail() %>">
                         </td>	
                 </tr>
                 <tr>
@@ -112,7 +168,7 @@
             </tbody>
         </table>
     </div>
-    <div class="payment"><button class="payment" type="button">결제하기</button></div>
+    <div class="payment"><button class="payment" type="button" id="paymentBtn">결제하기</button></div>
 </form>
 <div id="destination_list">
     <h3>배송지 목록</h3>
@@ -126,36 +182,30 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
+<%
+        	if(destinationList != null && !destinationList.isEmpty()){
+        		for(Destination destination : destinationList){
+        			String checked = "";
+        			if(destination.getIsDefault().equals("Y")){
+        				checked = "checked";
+        			}
+        			String telephone = destination.getTelephone().substring(0, 3) + "-" +
+        				destination.getTelephone().substring(3, 7) + "-" + destination.getTelephone().substring(7);
+        			String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
+        			address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
+%> 
+            <tr >
+                <td class="col1"><input type="radio" name="default" id="<%= destination.getShippingAddressNo() %>" <%=destination.getIsDefault().equals("Y")? "checked":""%>></td>
+                <td class="col2"><%= destination.getShippingPerson() %></td>
+                <td class="col3"><%= address %></td>
+                <td class="col4"><%= telephone %></td>
             </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-            </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-            </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-            </tr>
-            <tr>
-                <td class="col1"><input type="radio" name="default" id="default"></td>
-                <td class="col2">홍길동</td>
-                <td class="col3">(11111)서울특별시 종로구 필운대로5가길 47(누상동, 창원예가) 111-101</td>
-                <td class="col4">010-1111-1111</td>
-            </tr>
+            
+         <% 
+        	}
+        	}
+        %>
+            
             
         </tbody>
     </table>
@@ -163,6 +213,30 @@
 </div>
 
 <script>
+	$(()=>{
+		console.log("로드테스트");
+		<%
+		if( defaultDestination != null){
+		%>
+		
+		$('#address_default').prop('checked', true);
+		addressDefault();
+		<%
+		} else {
+		%>
+		$('#user_addr').prop('checked', true);
+		buyerAddr();
+		<%
+		}
+		if(destinationList != null && destinationList.size()!= 0){
+		%>
+			
+		<%
+		}
+		%>
+
+	});
+	
     //우편번호 선택 클릭 이벤트
     const zipcode = document.querySelector('.search_zipcode');
     console.log(zipcode);
@@ -178,26 +252,143 @@
     });
     // 배송지 정보에서 선택 클릭
     const addressChoice = document.querySelector("#address_choice");
-    console.log(addressChoice);
-    
+  
     addressChoice.addEventListener('click', function(){
+     <%
+    	if( destinationList != null && destinationList.size() != 0 ){
+    %>
+
         const destinationList = document.querySelector('#destination_list')
         console.log(destinationList);
         destinationList.style.zIndex="1";
         destinationList.style.opacity="1";
+    <%
+    }else {
+    %>
+    	alert('등록된 배송지가 없습니다.');
+    	$('#address_choice').prop('checked', false);
+    	addrClear();
+    	return;
+    <%
+    	}
+    %>
     });
     //선택창에서 확인버튼 클릭
     const apply = document.querySelector(".apply");
     console.log(apply);
     apply.addEventListener('click',function(){
-        const destinationList = document.querySelector('#destination_list')
-        //input 태그들에 값 입력
+        const destinationList = document.querySelector('#destination_list');
+        //체크된 객체 가져오기
+        
+        	
 
+        <% 
+        for(Destination destination : destinationList){        	
+        	%>
+        	if(document.querySelector("#destination_list input[type='radio']:checked").id === "<%= destination.getShippingAddressNo()%>"){
+        		
+
+        	
+        //일치
+				
+		    	$('#shipping_person').val("<%=destination.getShippingPerson()%>");
+				$('#tel1').val("<%=destination.getTelephone().substring(0, 3)%>");
+				$('#tel2').val("<%=destination.getTelephone().substring(3, 7)%>");
+				$('#tel3').val("<%=destination.getTelephone().substring(7)%>");
+				$('#zipcode').val(<%=destination.getZipcode()%>);
+				$('#address').val("<%=destination.getAddress()%>");
+				<%addressDetail = destination.getAddressDetail() != null ? destination.getAddressDetail() : "";%>
+				$('#address_detail').val("<%=addressDetail%>");
+        	}
+		<%
+        
+        }
+        %>
+       
         //창 숨김
         destinationList.style.zIndex="-1";
         destinationList.style.opacity="0";
     })
+    
+    //주문자정보와 동일 선택시
+        $('#user_addr').click((e) => {
+        	buyerAddr();
+    	
+    });
+    
+    //라디오 - 기본배송지 선택시 이벤트
 
+    $('#address_default').click((e) => {
+
+	    	addressDefault();
+
+    });
+    
+    const addressDefault = () => {
+    	
+		<% if(defaultDestination != null){
+		addressDetail = defaultDestination.getAddressDetail() != null ? defaultDestination.getAddressDetail() : "";%>
+		
+    	$('#shipping_person').val("<%=defaultDestination.getShippingPerson()%>");
+		$('#tel1').val("<%=defaultDestination.getTelephone().substring(0, 3)%>");
+		$('#tel2').val("<%=defaultDestination.getTelephone().substring(3, 7)%>");
+		$('#tel3').val("<%=defaultDestination.getTelephone().substring(7)%>");
+		$('#zipcode').val(<%=defaultDestination.getZipcode()%>);
+		$('#address').val("<%=defaultDestination.getAddress()%>");
+		
+		$('#address_detail').val("<%=addressDetail%>");
+		<% 
+		}else{
+		%>
+			alert('기본배송지가 등록되어있지 않습니다.');
+			addrClear();
+		<%
+		}
+		%>
+    };
+    
+    //주문자 주소
+        const buyerAddr = () => {
+    	$('#shipping_person').val("<%=loginMember.getMemberName()%>");
+		$('#tel1').val("<%=loginMember.getPhone().substring(0,3)%>");
+		$('#tel2').val("<%=loginMember.getPhone().substring(3,7)%>");
+		$('#tel3').val("<%=loginMember.getPhone().substring(7)%>");
+		$('#zipcode').val(<%= loginMember.getZipcode() %>);
+		$('#address').val("<%= loginMember.getAddress() %>");
+		
+		<% addressDetail = loginMember.getAddressDetail() != null ? loginMember.getAddressDetail() : "";%>
+		$('#address_detail').val("<%= addressDetail %>");
+    };
+    
+    // 배송지 값 ""로
+    const addrClear = () => {
+    	$('#shipping_person').val("");
+		$('#tel1').val("");
+		$('#tel2').val("");
+		$('#tel3').val("");
+		$('#zipcode').val("");
+		$('#address').val("");
+		$('#address_detail').val("");
+    };
+    
+    //새로입력 클릭 이벤트
+    
+		$('#new_addr').click((e) => {
+			addrClear();
+	    });
+    
+
+    //아임포트 결제-결제준비
+   IMP.init('imp68598851'); 
+    
+$('#paymentBtn').click((e) => {
+	
+	    });
+	
+    
+	
+
+   
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
