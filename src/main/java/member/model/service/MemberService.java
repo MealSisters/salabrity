@@ -80,4 +80,21 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public String findId(String memberName, String phone) {
+		Connection conn = getConnection();
+		
+			String findId = memberDao.findId(conn, memberName, phone);
+		
+			close(conn);
+		return findId;
+	}
+
+	public Member findByMemberEmail(String email) {
+		Connection conn = getConnection();
+		Member member = memberDao.findByMemberEmail(conn, email);
+		close(conn);
+		return member;
+	}
+	
 }

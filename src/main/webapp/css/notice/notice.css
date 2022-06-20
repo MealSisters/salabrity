@@ -235,6 +235,82 @@ strong {
 	margin-left: 4px;
 }
 
+/*faq*/
+.q_img {
+	float: right;
+}
+
+.icon_a {
+	text-align: center;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	background: #116916;
+	color: #FFF;
+	line-height: 36px;
+	font-size: 16px;
+	border-radius: 50%;
+}
+
+.icon_q {
+	text-align: center;
+	display: inline-block;
+	font-weight: bold;
+	width: 32px;
+	height: 32px;
+	background: #fff;
+	border: 1px solid #116916;
+	color: #116916;
+	line-height: 36px;
+	font-size: 16px;
+	border-radius: 50%;
+}
+
+.page-bar a {
+	text-decoration: none;
+    color: #000;
+    margin-left: 8px;
+}
+
+#faq_cont {
+	width: 881px !important;
+}
+
+.article {
+	border-top: 1px solid #dbdbdb;
+}
+
+.faq {
+	margin-left: -47px;
+	margin-top: -25px;
+}
+
+.q {
+	margin: 0px;
+	padding: 10px;
+}
+
+.a {
+	border-top: 1px solid #dbdbdb;
+	background-color: #fbfbfb;
+	padding: 10px;
+	margin: 0px;
+}
+
+.article {
+	list-style: none;
+}
+
+.article a {
+	text-decoration: none;
+	color: #000;
+}
+.faqBody {
+	font-size : 15px;
+	    margin-bottom: -12px;
+
+}
+
 /* [관리자버튼] 이은지 start */
 
 .admin_buttons {

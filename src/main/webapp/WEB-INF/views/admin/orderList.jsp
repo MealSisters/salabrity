@@ -77,7 +77,7 @@
                     <th class="col-shippingAddr">배송지</th>
                     <th class="col-products">주문상품</th>
                     <th class="col-orderReq">요청사항</th>
-                    <th class="col-buttons">주문취소</th>
+                    <%-- <th class="col-buttons">주문취소</th> --%>
                 </tr>
             </thead>
             <tbody>
@@ -109,26 +109,29 @@
                     <td class="col-shippingAddr td-xscroll"><%= buy.getBuyerAddr() %></td>
                     <td class="col-products td-xscroll"><%= sumName %></td>
                     <td class="col-orderReq td-xscroll"><%= buy.getRequestTerm()!=null ? buy.getRequestTerm() : "" %></td>
-<%
-			if(!status.equals("결제실패") && !status.equals("환불처리")){
-%>
-                    <td class="col-buttons">
-                        <div class="div-cancel"><a class="a-cancel">주문취소</a></div>
-                    </td>
-<%
-			} else {
-%>
-					<td><div><a>취소불가</a></div></td>
-<%
-			}
-%>
+                    
+<%--            
+	<%
+				if(!status.equals("결제실패") && !status.equals("환불처리")){
+	%>
+	                    <td class="col-buttons">
+	                        <div class="div-cancel"><a class="a-cancel">주문취소</a></div>
+	                    </td>
+	<%
+				} else {
+	%>
+						<td><div><a>취소불가</a></div></td>
+	<%
+				}
+	%>
+--%>
                 </tr>
 <%
 		}
 	} else {
 %>
 				<tr>
-					<td colspan="10">조회된 주문기록이 없습니다.</td>
+					<td colspan="9">조회된 주문기록이 없습니다.</td>
 				</tr>
 <%
 	}

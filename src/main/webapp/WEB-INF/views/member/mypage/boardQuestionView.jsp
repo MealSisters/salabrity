@@ -11,6 +11,7 @@
 	href="<%=request.getContextPath()%>/css/member/board.css" />
 <%
 	PostingExt posting = (PostingExt) request.getAttribute("posting");
+	PostingExt answer = (PostingExt) request.getAttribute("answer");
 %>
 <style>
 	
@@ -36,6 +37,7 @@
 	.mypage_hd {
 	border-bottom: 0px solid !important;
 	}
+
 </style>
 <div class="my_page_content">
 
@@ -44,7 +46,7 @@
 
 	<div class="my_sub_content">
 		<!-- 컨텐츠 -->
-		<button type="" class="btn_del_q" onclick="deleteQuestion()">삭제</button>
+		<button type="button" class="btn_del_q" onclick="deleteQuestion()">삭제</button>
 		<h4 class="mypage_hd">1:1 문의</h4>
 		<div class="board_question_zone_sec">
 
@@ -63,7 +65,8 @@
 				<!--  <div class="view_question_box"> -->
 					
 						<div class="q_cont">
-							<p><%= posting.getContent() %></p>
+							<p>
+							<%= posting.getContent() %></p>
 						</div>
 				<!--   	</div>-->	
 					
@@ -73,28 +76,59 @@
 					for(PostingAttach attach : attachments) {
 		%>
 		<div class="file_con" style="padding:5px 0px;">
-				<%-- 첨부파일이 있을경우만, 이미지와 함께 original파일명 표시 --%>
 				<span style="font-size:13px; margin-right:5px;">첨부파일 </span><a href="<%= request.getContextPath() %>/upload/question/mypage/<%= attach.getRenamedFilename() %>"><%= attach.getOriginalFilename() %></a>
 		</div>
 		<%
 				}
 			}
 		%>
-				<!--  	<div class="view_answer_box">
-						<strong>A.</strong>
-						<div class="view_answer_info">
-							<strong>안녕하세요. 샐러브리티입니다.</strong> <span class="view_info_name">관리자</span>
-							<span class="view_info_day">2022-06-12 12:00:45</span>
+		
+		
 						</div>
-						<div class="q_cont">
-							<p>...</p>
-							<p>~!~!@!##$</p>
-						</div>
-					</div> -->
+						<% 
+						if(answer.getPostingNo() != 0){
+						%>
+				  	<div class="view_answer_box">
+						
+						<div class="answer_view_hd">
+					<h3><%= answer.getTitle() %></h3>
 				</div>
+
+				<div class="question_view_info">
+					<span class="view_info_name">관리자</span> 
+					<span class="view_info_day"><%= answer.getRegDate() %></span>
+				</div>
+				
+
+				<div class="answer_view_content">
+				<!--  <div class="view_question_box"> -->
+					
+						<div class="a_cont">
+							<p>
+							<%= answer.getContent() %></p>
+						</div>
+						
+						<% 
+				List<PostingAttach> attachments2 = answer.getAttachments();
+				if(attachments2 != null && !attachments2.isEmpty()) {
+					for(PostingAttach attach2 : attachments2) {
+		%>
+		<div class="file_con" style="padding:5px 0px;">
+				<span style="font-size:13px; margin-right:5px;">첨부파일 </span><a href="<%= request.getContextPath() %>/upload/question/mypage/<%= attach2.getRenamedFilename() %>"><%= attach2.getOriginalFilename() %></a>
+		</div>
+		<%
+				}
+			}
+		%>
+						
 			</div>
 		</div>
+			<%
+			}
+		%>
 	</div>
+</div>
+</div>
 </div>
 	<form action="<%= request.getContextPath() %>/mypage/questionDelete" name="questionDeleteFrm" method="POST">
 		<input type="hidden" name="no" value="<%= posting.getPostingNo() %>" />

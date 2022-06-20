@@ -174,6 +174,15 @@ public class ProductService {
 		close(conn);
 		return list;
 	}
+
+	/*-------------------------------------- 박수진 start --------------------------------------*/
+	public List<ProductExt> findPopularProducts() {
+		Connection conn = getConnection();
+		List<ProductExt> productList = productDao.findPopularProducts(conn);
+		close(conn);
+		return productList;
+	}
+	/*--------------------------------------- 박수진 end ---------------------------------------*/
 	
 	
 	
