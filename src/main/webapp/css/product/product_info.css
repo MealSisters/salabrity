@@ -60,6 +60,7 @@ div .prd_detail {
 	font-size: 1.2em;
 	position: relative;
 	top: 30%;
+	cursor: pointer;
 }
 
 .detail_tab1 {
@@ -79,7 +80,7 @@ a.go_cal {
 
 #content .prd_tit {
 	font-size: 24px;
-	margin: 15px 0 15px 0;
+	margin: 32px 0 15px 0;
 	text-align: left;
 }
 

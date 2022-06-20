@@ -3,6 +3,9 @@
 <%@ page import = "product.model.dto.ProductExt" %>
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
+<%@ page import= "java.util.Date" %>
+<%@ page import= "java.util.Calendar" %>
+<%@ page import= "java.text.SimpleDateFormat" %>
 <%@ page import = "product.model.dto.ProductAttach" %>
 <%@ page import= "java.text.DecimalFormat" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -10,6 +13,18 @@
 <% 
 	List<ProductExt> list = (List<ProductExt>) request.getAttribute("list");
 	DecimalFormat df = new DecimalFormat("#,###");
+	
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	cal.setTime(new Date());
+	cal.add(Calendar.DATE, 3);
+	if(cal.get(Calendar.DAY_OF_WEEK) == 1){
+		cal.add(Calendar.DATE, 1);
+	} else if(cal.get(Calendar.DAY_OF_WEEK) == 7){
+		cal.add(Calendar.DATE, 2);
+	}
+	Date date = cal.getTime();
+	String defaultDate = sdf.format(date);
 
 %>
 <!-- 이은지 start -->
@@ -130,7 +145,8 @@ console.log("<%= memberId %>");
 				type : "POST",
 				async : true,
 
-				data : {productNo: $(event.target).prev().val(), memberId : "<%=memberId%>", quantity : 1},
+				data : {productNo: $(event.target).prev().val(), memberId : "<%=memberId%>", quantity : 1
+					,firstShippingDate : "<%= defaultDate %>"},
 
 				url : "<%=request.getContextPath()%>/order/cart/insertCart",
 				success : function(resp){
