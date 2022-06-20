@@ -35,7 +35,7 @@ public class MypageDao {
 	}
 
 
-	public List<PostingExt> findQuestionList(Connection conn, String memberId) {
+	public List<PostingExt> findQuestionList(Connection conn, String memberId, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<PostingExt> list = new ArrayList<>();
@@ -44,6 +44,8 @@ public class MypageDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -508,6 +510,34 @@ public class MypageDao {
 		}
 		return result;
 	}
+
+
+	public int myQuestionTotal(Connection conn, String memberId) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myQuestionTotal");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContents = rset.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MypageException("1:1 목록 조회 오류",e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+
+
+
 	
 	
 

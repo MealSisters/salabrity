@@ -9,11 +9,18 @@
 	href="<%=request.getContextPath()%>/css/member/board.css" />
 <%
 	List<Posting> list = (List<Posting>) request.getAttribute("list");
+	int cPage = (int)request.getAttribute("cPage");
 %>
 <style>
 .mypage_hd {
 	border-bottom: 0px solid !important;
 	}
+.page-bar {
+	text-align: center;
+	text-decoration: none;
+    color: #000;
+    margin-left: 8px;
+}
 </style>
 <div class="my_page_content">
 
@@ -81,7 +88,7 @@
 						</tbody>
 					</table>
 				</div>
-
+<%= request.getAttribute("pageBar") != null ? request.getAttribute("pageBar") : ""%>
 		</div>
 	</div>
 
