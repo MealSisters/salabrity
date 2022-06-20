@@ -124,7 +124,13 @@
     }
   })();
   ChannelIO('boot', {
-    "pluginKey": "875acb53-7bf0-445a-8d7e-d6ef21bab6e9"
+    "pluginKey": "875acb53-7bf0-445a-8d7e-d6ef21bab6e9",
+    "memberId": "member_id",
+    "profile": {
+      "name": "member_name",
+      "mobileNumber": "phone",
+      "email": "email"
+    }
   });
 </script>
 <!-- End Channel Plugin -->
