@@ -72,6 +72,10 @@
 						<a href="<%= request.getContextPath() %>/member/login" title="로그인"><i class="fa-solid fa-user"></i></a>
 					<% } else { %>
 						<%-- 로그인 후 --%>
+						<input type="hidden" id="memberId" value="<%= loginMember.getMemberId() %>" />
+					    <input type="hidden" id="memberName" value="<%= loginMember.getMemberName() %>" />
+					    <input type="hidden" id="phone" value="<%= loginMember.getPhone() %>" />
+					    <input type="hidden" id="email" value="<%= loginMember.getEmail() %>" />
 						<a href="<%= request.getContextPath() %>/mypage/orderList" title="마이페이지"><i class="fa-solid fa-user"></i></a>
 						<div class="member-nav-depth">
 							<div class="inner-member-nav">
