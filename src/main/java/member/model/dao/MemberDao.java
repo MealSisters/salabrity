@@ -151,4 +151,66 @@ public class MemberDao {
 		return result;
 	}
 
+	public String findId(Connection conn, String memberName, String phone) {
+		String findId = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, phone);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				findId = rset.getString("member_id");
+			}
+		} catch (Exception e) {
+			throw new MemberException("아이디 찾기 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return findId;
+	}
+
+	public Member findByMemberEmail(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String sql = prop.getProperty("findByMemberEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				member = new Member();
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setGender(rset.getString("gender"));
+				member.setBirthday(rset.getDate("birthday"));
+				member.setEmail(rset.getString("email"));
+				member.setPhone(rset.getString("phone"));
+				member.setZipcode(rset.getString("zipcode"));
+				member.setAddress(rset.getString("address"));
+				member.setAddressDetail(rset.getString("address_detail"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+				member.setMemberRole(MemberRole.valueOf(rset.getString("member_role")));
+			}
+			
+			
+		} catch (Exception e) {
+			throw new MemberException("이메일 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return member;
+	}
+
 }

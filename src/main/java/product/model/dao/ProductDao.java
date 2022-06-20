@@ -1,6 +1,7 @@
 package product.model.dao;
 
 import static common.JdbcTemplate.close;
+import static common.JdbcTemplate.getConnection;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -87,7 +88,7 @@ public class ProductDao {
 			pstmt.setString(4, product.getProductdescription());
 			pstmt.setString(5, product.getProductTarget().toString());
 			pstmt.setInt(6, product.getSubscriptionPeriod());
-			System.out.println("product@dao = " + product);
+			// System.out.println("product@dao = " + product);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new ProductException("상품 등록 오류", e);
@@ -415,6 +416,34 @@ public class ProductDao {
 
 		return list;
 	}
-	
 
+	/*-------------------------------------- 박수진 start --------------------------------------*/
+	public List<ProductExt> findPopularProducts(Connection conn) {
+		String sql = prop.getProperty("findPopularProducts");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ProductExt> productList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				List<ProductAttach> attachments = new ArrayList<>();
+				ProductExt product = handleProductResultSet(rset);
+				ProductAttach attach = handleAttachResultSet(rset);
+				attachments.add(attach);
+				product.setAttachs(attachments);
+				productList.add(product);
+			}
+		} catch (Exception e) {
+			throw new DestinationException("메인 화면 인기상품 조회 오류", e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return productList;
+	}
+	/*--------------------------------------- 박수진 end ---------------------------------------*/
+	
 }

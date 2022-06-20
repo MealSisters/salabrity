@@ -1,6 +1,8 @@
 package mypage.controller;
 
 import java.io.File;
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +95,8 @@ public class BoardQuestionServlet extends HttpServlet {
 		attach.setRenamedFilename(renamedFilename);
 		return attach;
 	}
+	
+	
+	
 	
 }

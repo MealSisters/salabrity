@@ -10,6 +10,11 @@
 <%
 	List<Posting> list = (List<Posting>) request.getAttribute("list");
 %>
+<style>
+.mypage_hd {
+	border-bottom: 0px solid !important;
+	}
+</style>
 <div class="my_page_content">
 
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
@@ -22,7 +27,7 @@
 
 
 	<%-- data() 함수 사용 예정..... --%>
-				<div class="date_view_box">
+			<!--  	<div class="date_view_box">
 					<form>
 						<span class="date_span">조회기간</span>
 						<div class="date_check_box">
@@ -42,16 +47,16 @@
 							</button>
 						</div>
 					</form>
-				</div>
+				</div>-->
 
-				<div class="board_question_list">
+				
 				
 					<table class="question_list">
 						<thead>
 							<tr>
 								<th>문의날짜</th>
 								<th>제목</th>
-								<th>작성자</th>
+								<th>문의상태</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -68,7 +73,7 @@
 								<td>
 								<a href="<%= request.getContextPath() %>/mypage/boardQuestionView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
 								</td>
-								<td><%= loginMember.getMemberName() %></td>
+								<td><%= p.getPostingRef() == 0 ? "대기중" : "완료" %></td>
 							</tr>
 							<% }
 							
@@ -82,6 +87,6 @@
 
 
 
-</div>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
