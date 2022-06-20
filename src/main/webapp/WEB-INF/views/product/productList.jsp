@@ -4,10 +4,13 @@
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
 <%@ page import = "product.model.dto.ProductAttach" %>
+<%@ page import= "java.text.DecimalFormat" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/product/productList.css">
 <% 
 	List<ProductExt> list = (List<ProductExt>) request.getAttribute("list");
+	DecimalFormat df = new DecimalFormat("#,###");
+
 %>
 <!-- 이은지 start -->
 <div class="list_header" style="background-image: url(<%= request.getContextPath() %>/images/productList_headimg.jpg);">
@@ -44,7 +47,7 @@
 	    </a>
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_tit"><%= product.getProductName() %></a>
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_dsc"><%= product.getProductdescription() %></a>
-	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_price"><%= product.getProductPrice() %></a>
+	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_price"><%= df.format(product.getProductPrice()) %>원</a>
 	    <span class="add_cart"><input type="hidden" value="<%= product.getProductNo() %>" /><i class="fa-solid fa-cart-plus"></i></span>
 	</div>
 <%		
