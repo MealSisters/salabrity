@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import board.model.dto.Posting;
 import board.model.dto.PostingExt;
+import board.model.dto.Question;
 import common.utill.PageBar;
 import member.model.dto.Member;
 import member.model.service.MemberService;
@@ -40,13 +41,13 @@ public class BoardQuestionListServlet extends HttpServlet {
 		int start = (cPage - 1) * numPerPage + 1;
 		int end = cPage * numPerPage;
 		
-		List<PostingExt> list = null;
+		List<Question> list = null;
 		HttpSession session = request.getSession();
 		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
 		
 		
 		list = mypageService.findQuestionList(memberId, start, end);
-	
+	System.out.println("----------" + list);
 		int totalContents = mypageService.myQuestionTotal(memberId);
 //		System.out.println("토탈컨텐츠 : " + totalContents);
 		String url = request.getRequestURI();

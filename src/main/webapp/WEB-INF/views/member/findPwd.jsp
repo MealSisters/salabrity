@@ -5,8 +5,8 @@
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 
 	<div class="wrap_main">
-       <h3 class="head_log">비밀번호 찾기</h3>
 			<div class="find_box">
+       <h3 class="head_log">비밀번호 찾기</h3>
 				<div class="find_main_box">
 			<div class="find_id_box">
 				<form name="findPwdFrm" method="POST" action="<%= request.getContextPath() %>/member/findPwd">

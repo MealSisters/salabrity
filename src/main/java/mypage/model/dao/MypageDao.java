@@ -17,6 +17,7 @@ import board.model.dto.BoardCode;
 import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
+import board.model.dto.Question;
 import member.model.exception.MemberException;
 import mypage.model.exception.MypageException;
 
@@ -35,10 +36,10 @@ public class MypageDao {
 	}
 
 
-	public List<PostingExt> findQuestionList(Connection conn, String memberId, int start, int end) {
+	public List<Question> findQuestionList(Connection conn, String memberId, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<PostingExt> list = new ArrayList<>();
+		List<Question> list = new ArrayList<>();
 		String sql = prop.getProperty("findQuestionList");
 		
 		try {
@@ -49,7 +50,7 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				PostingExt posting = new PostingExt();
+				Question posting = new Question();
 				posting.setPostingNo(rset.getInt("posting_no"));
 				posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
 				posting.setMemberId(rset.getString("member_id"));
@@ -59,6 +60,7 @@ public class MypageDao {
 				posting.setReadCount(rset.getInt("read_count"));
 				posting.setPostingLevel(rset.getInt("posting_level"));
 				posting.setPostingRef(rset.getInt("posting_ref"));
+				posting.setAnswerNo(rset.getInt("answer_no"));
 				list.add(posting);
 			}
 		} catch (SQLException e) {
