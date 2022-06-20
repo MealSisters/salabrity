@@ -75,21 +75,21 @@
 			%>	
 						<div class="board-attach-wrap" id="board-attach1-wrap">
 				            <p class="attach-name"></p>
-				            <input type="file" name="attach1" id="attach1" />
+				            <input type="file" name="attach1" id="attach1" accept="image/*" />
 				            <div class="attach-btn-wrap">
 				                <button type="button">파일찾기</button>
 				            </div>
 				        </div>
 						<div class="board-attach-wrap" id="board-attach2-wrap">
 				            <p class="attach-name"></p>
-				            <input type="file" name="attach2" id="attach2" />
+				            <input type="file" name="attach2" id="attach2" accept="image/*" />
 				            <div class="attach-btn-wrap">
 				                <button type="button">파일찾기</button>
 				            </div>
 				        </div>
 						<div class="board-attach-wrap" id="board-attach3-wrap">
 				            <p class="attach-name"></p>
-				            <input type="file" name="attach3" id="attach3" />
+				            <input type="file" name="attach3" id="attach3" accept="image/*" />
 				            <div class="attach-btn-wrap">
 				                <button type="button">파일찾기</button>
 				            </div>

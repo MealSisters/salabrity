@@ -72,7 +72,7 @@ public class CartDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DestinationException("장바구니에 추가 오류", e);
+			throw new CartException("장바구니에 추가 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -107,7 +107,7 @@ public class CartDao {
 			map.put("productList",productList);
 			System.out.println("Dao@"+ map);
 		} catch (Exception e) {
-			throw new DestinationException("상품목록 조회 오류", e);
+			throw new CartException("상품목록 조회 오류", e);
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -129,7 +129,7 @@ public class CartDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DestinationException("수량 업데이트 오류", e);
+			throw new CartException("수량 업데이트 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -148,7 +148,7 @@ public class CartDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DestinationException("배송 시작일 업데이트 오류", e);
+			throw new CartException("배송 시작일 업데이트 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -166,7 +166,7 @@ public class CartDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DestinationException("장바구니 - 선택 삭제 오류", e);
+			throw new CartException("장바구니 - 선택 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -188,13 +188,35 @@ public class CartDao {
 			//System.out.println("sql요청후 result" +  result);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DestinationException("장바구니 - 선택 삭제 오류", e);
+			throw new CartException("장바구니 - 선택 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}
 		return result;	
 	}
-	
+	//장바구니 번호로 장바구니 목록 조회
+	public Cart findByCartNo(Connection conn, int cartNo) {
+		Cart cart = new Cart();
+		String sql = prop.getProperty("findByCartNo");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cartNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				cart = handleCartResultSet(rset);
+			}
+		} catch (Exception e) {
+			throw new CartException("장바구니 조회 오류", e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cart;
+	}
+
+
 	// 핸들러
 	
 	private ProductExt handleProductResultSet(ResultSet rset) throws SQLException {
@@ -203,6 +225,7 @@ public class CartDao {
 		product.setProductId(rset.getString("product_id"));
 		product.setProductName(rset.getString("product_name"));
 		product.setProductPrice(rset.getInt("product_price"));
+		product.setSubscriptionPeriod(rset.getInt("subscription_period"));
 		return product;
 	}
 	
@@ -218,6 +241,7 @@ public class CartDao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Cart cart = new Cart();
 		cart.setCartNo(rset.getInt("cart_no"));
+		cart.setProductNo(rset.getInt("product_no"));
 		cart.setMemberId(rset.getString("member_id"));
 		cart.setQuantity(rset.getInt("quantity"));	
 		if(rset.getDate("first_shipping_date") != null) {
@@ -226,6 +250,8 @@ public class CartDao {
 		}
 		return cart;
 	}
+
+
 
 
 

@@ -1,4 +1,6 @@
-<%@ page import= "java.util.List, mypage.model.dto.Destination, java.util.ArrayList" %>
+<%@ page import= "java.util.List" %>
+<%@ page import= "mypage.model.dto.Destination" %>
+<%@ page import= "java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -69,7 +71,7 @@
                	 		<input type="radio" name="default" id="<%= destination.getShippingAddressNo()%>" <%= checked %>>
                 </td>
                 <td class="col2"><%= destination.getShippingPerson() %></td>
-                <td class="col3"><%=address %></td>
+                <td class="col3"><%= address %></td>
                 <td class="col4"><%= telephone %></td>
                 <td class="col5">
           	
@@ -144,7 +146,7 @@
 				data : {shippingAddressNo : radio.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
 				url : "<%=request.getContextPath()%>/mypage/destination/defaultUpdate",
 				success : function(data){
-					alert('요청성공');
+					
 					location.reload();
 				},
 				error : function(data){
@@ -169,7 +171,7 @@
 				data : {shippingAddressNo : isDefaultValueN.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
 				url : "<%=request.getContextPath()%>/mypage/destination/delFlagUpdate",
 				success : function(data){
-					alert('요청성공');
+				
 					location.reload();
 				},
 				error : function(data){
