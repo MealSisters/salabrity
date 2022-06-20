@@ -23,16 +23,16 @@
             <h1>새 배송지 추가</h1>
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <form action="<%= request.getContextPath() %>/mypage/destination/enroll" method="post">
+        <form action="<%= request.getContextPath() %>/mypage/destination/enroll" method="post" id="shippingAddressInsertFrm">
         <input type="hidden" name="member_id" value="<%= loginMember.getMemberId() %>" />
             <label for="shipping_person">받으실분</label><br>
             <input type="text" name="shipping_person" id="shipping_person"><br>
-            <label for="telephone">연락처</label><br>
-            <input type="text" name="telephone" id="telephone"><br>
+            <label for="telephone">휴대전화 번호</label><br>
+            <input type="text" name="telephone" id="telephone" placeholder="01012341234"><br>
             <label for="zipcode">우편번호</label>
             <div class="zipcode_wrp">
-            <input type="text" name="zipcode" id="zipcode" readonly>
-            <button class="search_zipcode" type="button">우편번호 찾기</button><br>
+           	 <input type="text" name="zipcode" id="zipcode" readonly>
+           	 <button class="search_zipcode" type="button">우편번호 찾기</button><br>
             </div>
             <label for="address">주소</label><br>
             <input type="text" name="address" id="address"  readonly><br>
@@ -175,7 +175,7 @@
 					location.reload();
 				},
 				error : function(data){
-					console.log('요청실패');
+					console.log('요청에 실패했습니다.');
 				}
 
 			});
@@ -183,17 +183,41 @@
 		});
 
 	});
-
-
+//기본배송지인 아이콘 클릭시 이벤트
 	const isDefaultValueY= document.querySelector('.isDefaultValueY');
 	isDefaultValueY.addEventListener('click', function () {
-
 			alert('기본 배송지는 삭제할 수 없습니다.')	
 		});
+	//폼 제출 유효성 검사
+	$("form").submit(function(event){
+		console.log(zipcode.value);
+		console.log(typeof(zipcode.value));
+		
+		
+		console.log("폼이 제출되고 있을까요??");
 
+		
+		if(!/^[가-힣]{2,}$/.test(shipping_person.value)){
+			alert("이름은 한글 2글자이상 입력해주세요.");
+			return false;
+		}
+		
+		if(!(/^01([0|1|6|7|8|9])([0-9]{8})$/.test(telephone.value))){
+			alert("휴대전화 번호가 올바르지 않습니다.");
+			return false;
+		}
+		
+		//우편번호
+		if(!/^[0-9]{5}$/.test($('#zipcode').val())){
+			alert("주소를 입력해주세요.1");
+			return false;
+		}
+				
+		
+	});
 	
-	 	
-	
+
+
 
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

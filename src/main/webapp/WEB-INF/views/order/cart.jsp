@@ -4,6 +4,11 @@
 <%@ page import= "java.util.Map" %>
 <%@ page import= "product.model.dto.ProductExt" %>
 <%@ page import= "product.model.dto.ProductAttach" %>
+<%@ page import= "java.util.Date" %>
+<%@ page import= "java.util.Calendar" %>
+<%@ page import= "java.text.SimpleDateFormat" %>
+<%@ page import= "java.text.DecimalFormat" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -14,6 +19,22 @@
 	List<Cart> cartList = (List<Cart>)map.get("cartList");
 	List<ProductExt> productList = (List<ProductExt>)map.get("productList");
 	int totalPrice = 0;
+	
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	cal.setTime(new Date());
+	cal.add(Calendar.DATE, 3);
+	if(cal.get(Calendar.DAY_OF_WEEK) == 1){
+		cal.add(Calendar.DATE, 1);
+	} else if(cal.get(Calendar.DAY_OF_WEEK) == 7){
+		cal.add(Calendar.DATE, 2);
+	}
+	Date date = cal.getTime();
+	String defaultDate = sdf.format(date);
+	
+	DecimalFormat df = new DecimalFormat("#,###");
+	
+	
 	
 %>
 <link rel="stylesheet"
@@ -62,7 +83,7 @@
 					Cart cart = (Cart)cartList.get(i);
 					ProductAttach attach  = product.getAttachs().get(0);
 					totalPrice += product.getProductPrice() * cart.getQuantity();
-					String firstShippingDate = cart.getFirstShipppingDate() != null ? "\"" + cart.getFirstShipppingDate() + "\"" : "";
+					String firstShippingDate = cart.getFirstShipppingDate() != null ?  cart.getFirstShipppingDate() : defaultDate;
 			%>
             <tr id="<%= cart.getCartNo()%>"  class="itemRow">
                 <td class="col1">
@@ -88,8 +109,8 @@
                     </table>
                 </td>
 
-                <td><input class="datepicker" value=<%= firstShippingDate %>></td>
-        <td><span class="price"><%= product.getProductPrice()*cart.getQuantity()%></span>원</td>
+                <td><input class="datepicker" value="<%= firstShippingDate %>"></td>
+        <td><span class="price"><%= df.format(product.getProductPrice()*cart.getQuantity())%></span>원</td>
     </tr>
         <%
         	}
@@ -113,7 +134,7 @@
 <div class=" cal">
                     <div class=total>
                         <span>총 결제금액&nbsp;</span>
-                        <span id="total_price" class="total_price="><%=totalPrice%></span><span>원</span>
+                        <span id="total_price" class="total_price="><%=df.format(totalPrice)%></span><span>원</span>
                     </div>
                     <div class="order_container">
                         <a id="checkedOrder">
@@ -133,11 +154,13 @@
 
 <script>
 
+
     //datepicker
     flatpickr(" .datepicker", {
         // local:'ko',
         minDate: new Date().fp_incr(3),
-   //     defaultDate: new Date().fp_incr(3),
+
+  //      defaultDate: new Date().fp_incr(3),
         maxDate: new Date().fp_incr(30),
         "disable": [
             function (date) {
@@ -299,7 +322,8 @@
 
         //전체삭제
           $("#allDel").click((e) =>{
-        		
+        	
+        	  
         		$.ajax({
 					type : "POST",
 					async : false,
@@ -318,7 +342,8 @@
         //선택주문으로 넘기기
         
         $("#checkedOrder").click((e) =>{
-        		
+        	
+        	
         	// 배열 가져오기
     		let checkedCartNoList = [];
     		checkedCartNoList = checkedCartNoListSearch();
