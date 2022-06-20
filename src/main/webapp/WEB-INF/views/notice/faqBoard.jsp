@@ -25,7 +25,7 @@
 			if(list != null && !list.isEmpty()) {
 				for(Posting posting : list) {
 		%>
-                <ul class="faqBody">
+                <ul class="faqBody" data-no="<%= posting.getPostingNo() %>">
                     <li class="article" id="a1">
                         <p class="q"><a href="#a1">
                         <span class="icon_q">Q</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= posting.getTitle() %><span class="q_img"><img src="<%= request.getContextPath() %>/images/arrow.png" style="width:20px" alt=""></span>
@@ -79,36 +79,46 @@
 </script>
 
 <!-- 이은지 start -->
-<!-- 로그인정보에 따라 추후 분기처리 예정 -->
-
-<% if(true) { %>
+<% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 <script>
     window.addEventListener('load', (e) => {
         addAdminBtns();
-        addAdminEvent();
+        addAdminEvent(e);
     });
     const addAdminBtns = () => {
-        const answerAll = document.querySelectorAll(".faq");
+        const faqAll = document.querySelectorAll(".faqBody");
         const adminDiv = `<div class="admin_buttons">
                             	<div class="updateBtn-wrapper">
 					                <button class="updateBtn">수정</button>
 					            </div>
 					            <div class="cancelBtn-wrapper">
-					                <button type="button" class="cancelBtn">취소</button>
+					                <button type="button" class="cancelBtn">삭제</button>
 					            </div>
                             </div>`
 
-        answerAll.forEach((answer) => {
-            const tr = answer.firstElementChild;
+        faqAll.forEach((faq) => {
+            const tr = faq.firstElementChild.lastElementChild;
             tr.insertAdjacentHTML('beforeEnd', adminDiv);
         });
     };
-    const addAdminEvent = () => {
+    const addAdminEvent = (e) => {
         const updateBtns = document.querySelectorAll(".updateBtn");
+        const postingNo = $(e.target).parents("ul").attr("data-no");
         updateBtns.forEach((btn) => {
-            btn.onclick = () => {
-                location.href = "<%= request.getContextPath() %>/board/faqUpdate";
+            btn.onclick = (e) => {
+                location.href = `<%= request.getContextPath() %>/board/faqUpdate?no=\${postingNo}`;
             };
+        });
+        
+        const cancelBtns = document.querySelectorAll(".cancelBtn");
+        cancelBtns.forEach((btn) => {
+        	btn.onclick = (e) => {
+        		// doGet
+        		// location.href = `<%= request.getContextPath() %>/board/faqDelete?no=\${postingNo}`;
+        		
+        		//doPost
+        		// document.deleteFaqFrm.submit();
+        	};
         });
     };
 </script>
