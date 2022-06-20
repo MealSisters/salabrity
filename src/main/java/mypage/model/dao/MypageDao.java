@@ -1,5 +1,7 @@
 package mypage.model.dao;
 
+import static common.JdbcTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import static common.JdbcTemplate.close;
 
 import board.model.dto.BoardCode;
 import board.model.dto.Posting;
@@ -445,6 +445,68 @@ public class MypageDao {
 		}
 		
 		return answer;
+	}
+
+
+	public List<Posting> findFaqList(Connection conn, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Posting> list = new ArrayList<>();
+		String sql = prop.getProperty("findFaqList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Posting p = new Posting();
+				p.setPostingNo(rset.getInt("posting_no"));
+				p.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
+				p.setMemberId(rset.getString("member_id"));
+				p.setTitle(rset.getString("title"));
+				p.setContent(rset.getString("content"));
+				p.setRegDate(rset.getDate("reg_date"));
+				p.setReadCount(rset.getInt("read_count"));
+				p.setPostingLevel(rset.getInt("posting_level"));
+				p.setPostingRef(rset.getInt("posting_ref"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MypageException("faq 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
+
+
+	public int faqTotal(Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("faqTotal");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MypageException("faq 총 게시글 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

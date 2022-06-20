@@ -142,17 +142,6 @@ function sample4_execDaumPostcode() {
 
 // 수정 유효성 검사
 document.memberUpdateFrm.onsubmit = () => {
-	// ID는 6자리 이상의 영문 혹은 숫자
-	if(!/^[A-Za-z0-9]{6,}/.test(memberId.value)){
-		alert("아이디는 대소문자/숫자로 6글자 이상이어야 합니다.");
-		return false;
-	}
-		
-	// 이름
-	if(!/^[가-힣]{2,}$/.test(memberName.value)){
-		alert("이름은 한글로 2글자 이상 입력해주세요.");
-		return false;
-	}
 	
 	// 이메일
 	if(/^[0-9A-Z]([-_\.]?[0-9A-Z])*@[0-9A-Z]([-_\.]?[0-9A-Z])*\.[A-Z]{2,6}$/.test(email.value)){

@@ -10,6 +10,11 @@
 <%
 	List<Posting> list = (List<Posting>) request.getAttribute("list");
 %>
+<style>
+.mypage_hd {
+	border-bottom: 0px solid !important;
+	}
+</style>
 <div class="my_page_content">
 
 	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
@@ -22,7 +27,7 @@
 
 
 	<%-- data() 함수 사용 예정..... --%>
-				<div class="date_view_box">
+			<!--  	<div class="date_view_box">
 					<form>
 						<span class="date_span">조회기간</span>
 						<div class="date_check_box">
@@ -42,9 +47,9 @@
 							</button>
 						</div>
 					</form>
-				</div>
+				</div>-->
 
-				<div class="board_question_list">
+				
 				
 					<table class="question_list">
 						<thead>
@@ -82,6 +87,6 @@
 
 
 
-</div>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

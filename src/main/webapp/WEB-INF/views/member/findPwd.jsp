@@ -4,7 +4,7 @@
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 
-	
+	<div class="wrap_main">
        <h3 class="head_log">비밀번호 찾기</h3>
 			<div class="find_box">
 				<div class="find_main_box">
@@ -28,6 +28,6 @@
 			</div>
 		</div>
 		</div>
-
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

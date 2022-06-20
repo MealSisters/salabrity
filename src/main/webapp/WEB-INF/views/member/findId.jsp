@@ -8,7 +8,9 @@
 	String phone = request.getParameter("phone");
 	Member member = (Member) request.getAttribute("member");
 %>
-	
+
+<div class="wrap_main">
+
        <h3 class="head_log">아이디 찾기</h3>
 			<div class="find_box">
 				<div class="find_main_box">
@@ -34,6 +36,8 @@
 			</div>
 		</div>
 		</div>
+		</div>
+	
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

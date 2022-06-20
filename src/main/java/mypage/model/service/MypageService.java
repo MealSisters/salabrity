@@ -152,4 +152,33 @@ public class MypageService {
 	}
 
 
+	public List<Posting> findFaqList(int start, int end) {
+		Connection conn = getConnection();
+		List<Posting> list = null;
+		try {
+			list = mypageDao.findFaqList(conn, start, end);
+		} catch (Exception e) {
+			throw e; 
+		} finally {
+			close(conn);
+		}
+		return list;
+	}
+
+
+	public int faqTotal() {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = mypageDao.faqTotal(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
 }
