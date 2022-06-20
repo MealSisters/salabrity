@@ -46,7 +46,7 @@ public class NoticeBoardServlet extends HttpServlet {
 			param.put("start", start);
 			param.put("end", end);
 			
-			BoardCode boardCode = BoardCode.valueOf(request.getParameter("boardCode"));
+			BoardCode boardCode = BoardCode.N;
 			
 			// 2. 업무 로직
 			// 2.a. content 영역
@@ -55,7 +55,14 @@ public class NoticeBoardServlet extends HttpServlet {
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings(boardCode);
 			String url = request.getRequestURI();
-			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
+			String pagebar = "";
+			if (boardCode != null) {
+				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalPostingContents, url + "?BoardCode=" + boardCode);
+			}
+			else {
+				pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
+			}
+			System.out.println("pagebar = " + pagebar);
 			
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);

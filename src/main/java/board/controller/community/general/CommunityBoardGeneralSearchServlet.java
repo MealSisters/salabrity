@@ -55,14 +55,22 @@ public class CommunityBoardGeneralSearchServlet extends HttpServlet {
 			param.put("searchKeyword", searchKeyword);
 			System.out.println("param = " + param);
 			
+			BoardCode boardCode = BoardCode.C2;
+			
 			// 2. 업무 로직
 			// 2.a. content 영역
-			List<PostingExt> postingList = boardService.searchBy(pageParam, param, BoardCode.C2);
+			List<PostingExt> postingList = boardService.searchBy(pageParam, param, boardCode);
 
 			// 2.b. pagebar 영역
-			int totalPostingContents = boardService.getTotalPostings(BoardCode.C2);
+			int totalPostingContents = boardService.getTotalPostings(boardCode);
 			String url = request.getRequestURI();
-			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
+			String pagebar = "";
+			if (boardCode != null) {
+				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalPostingContents, url + "?BoardCode=" + boardCode);
+			}
+			else {
+				pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
+			}
 			System.out.println("pagebar = " + pagebar);
 			
 			// 3. view단 처리
