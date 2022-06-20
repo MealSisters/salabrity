@@ -57,7 +57,7 @@ public class CommunityBoardHacksSearchServlet extends HttpServlet {
 			
 			// 2. 업무 로직
 			// 2.a. content 영역
-			List<PostingExt> postingList = boardService.searchBy(pageParam, param);
+			List<PostingExt> postingList = boardService.searchBy(pageParam, param, BoardCode.C1);
 
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings(BoardCode.C1);

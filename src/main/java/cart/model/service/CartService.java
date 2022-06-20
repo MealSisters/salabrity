@@ -113,6 +113,14 @@ public class CartService {
 		return result;
 	}
 
+	public Cart findByCartNo(int cartNo) {
+		Connection conn = getConnection();
+		Cart cart = cartDao.findByCartNo(conn, cartNo);
+		System.out.println("Service@" + cart);
+		close(conn);
+		return cart;
+	}
+
 
 }
 
