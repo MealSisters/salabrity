@@ -5,7 +5,7 @@
 }
 
 .wrap_main {
-	    margin-top: 25px
+	margin-top: 25px
 }
 
 /* login 페이지 */
@@ -26,10 +26,9 @@
 }
 
 .login_input_cont input {
-    width: 316px;
-    height: 44px;
+	width: 316px;
+	height: 44px;
 	border: 1px solid #dbdbdb;
-	
 	text-indent: 15px;
 
 	/* border-radius:5px; */
@@ -41,7 +40,7 @@
 
 .btn_member_login {
 	width: 321px;
-    height: 53px;
+	height: 53px;
 	line-height: 55px;
 	background: #116916;
 	color: #fff;
@@ -53,9 +52,13 @@
 	bottom: 74px;
 }
 
+.btn_member_login:hover {
+	background: #1f5822;
+}
+
 .btn_member_join {
 	width: 321px;
-    height: 53px;
+	height: 53px;
 	line-height: 55px;
 	border: 1px solid #116916;
 	background: #116916;
@@ -72,14 +75,40 @@
 	left: 0;
 }
 
+.avatar {
+	width: 64px;
+	height: 65px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin: 0 auto;
+	border: 6px solid #e6e6e6;
+	position: relative;
+}
+
+.avatar img {
+	width: 100%;
+	height: auto;
+}
+
 .form_cont {
 	padding: 40px;
-	width: 340px;
-	border-top: 1px solid #dbdbdb;
-	border-bottom: 1px solid #dbdbdb;
+	width: 450px;
+	border: 1px solid #dbdbdb;
 	margin: 0 auto;
 	margin-top: 30px;
 	padding-bottom: 19px;
+	background: #ffffff;
+	width: 450px;
+	box-sizing: border-box;
+	padding: 40px 30px;
+	border-radius: 20px;
+	box-shadow: 0px 10px 29px 0px #e0e0e0;
+	margin-top: -40px;
+}
+
+.member_login_box {
+	margin-left: 22px;
+	margin-top: 10px;
 }
 
 .id_chk {
@@ -89,6 +118,10 @@
 	left: -10px;
 }
 
+.find_main_box {
+	    margin-left: 14px;
+       margin-top: 18px;
+}
 .idpw_list li {
 	float: left;
 	margin-left: 10px;
@@ -99,7 +132,7 @@
 .member_sns_login {
 	width: 300px;
 	margin: 0 auto;
-	margin-top : 10px;
+	margin-top: 10px;
 }
 
 .member_sns_login_in li {
@@ -144,13 +177,9 @@
 	margin-left: 17px;
 }
 
-.idpw_list li:not(:first-child) {
-	/*border-left: 1px solid #BEBEBE;*/
-	
-}
-
 .on {
 	font-size: 12px;
+	color: #000;
 }
 
 #saveId {
@@ -269,7 +298,7 @@ label {
 }
 
 .input_text {
-    padding: 0 10px;
+	padding: 0 10px;
 	width: 300px;
 	height: 35px;
 	border: 1px solid #BDBDBD;
@@ -389,19 +418,30 @@ label {
 
 /* find 페이지 */
 .find_box {
-	padding: 30px;
-	width: 360px;
-	border-top: 1px solid #dbdbdb;
+
+	  
+	padding: 40px;
+	width: 450px;
+	border: 1px solid #dbdbdb;
 	margin: 0 auto;
 	margin-top: 30px;
-	height: 510px;
+	padding-bottom: 19px;
+	background: #ffffff;
+	width: 450px;
+	box-sizing: border-box;
+	padding: 40px 30px;
+	border-radius: 20px;
+	box-shadow: 0px 10px 29px 0px #e0e0e0;
+	    margin-top: -54px;
+	        height: 560px;
+    margin-top: 7px;
+    padding-top: 24px;
 }
 
 .find_input_box {
-	    width: 302px;
-    height: 44px;
+	width: 302px;
+	height: 44px;
 	border: 1px solid #dbdbdb;
-	
 	margin-bottom: 14px;
 	padding-left: 16px;
 }
@@ -415,9 +455,13 @@ label {
 	margin-bottom: 10px;
 }
 
+.btn_find_id:hover {
+	background: #1f5822;
+}
+
 .btn_find_id {
 	width: 321px;
-    height: 53px;
+	height: 53px;
 	line-height: 55px;
 	background: #116916;
 	color: #fff;
@@ -429,7 +473,7 @@ label {
 
 .btn_find, .btn_find_log {
 	width: 321px;
-    height: 53px;
+	height: 53px;
 	line-height: 55px;
 	border: 1px solid #116916;
 	background: #116916;
@@ -459,6 +503,7 @@ label {
 
 .find_id_box {
 	border-bottom: solid 1px #bdbdbd;
+	
 }
 
 /* 회원 정보 수정 페이지 member update */
@@ -584,7 +629,6 @@ label {
 	margin-left: 40px;
 }
 
-
 /* member update 페이지 */
 #btn_update {
 	width: 190px;
@@ -629,7 +673,7 @@ label {
 }
 
 .input__text {
-    padding: 0 10px;
+	padding: 0 10px;
 	width: 400px;
 	height: 35px;
 	border: 1px solid #BDBDBD;
@@ -646,8 +690,7 @@ label {
 }
 
 #phone1, #phone2, #phone3 {
-	width : 91px;
-	
+	width: 91px;
 }
 
 #email2, #email1 {
@@ -655,7 +698,7 @@ label {
 }
 
 #inputDomain {
-    width: 139px;
+	width: 139px;
 }
 
 .email_select {
@@ -691,7 +734,7 @@ label {
 }
 
 .point {
-	color : red;
+	color: red;
 }
 
 .btn_password {
