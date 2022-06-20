@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ProductBuy {
 	private int productBuyNo;
 	private int productNo;
-	private int merchantUid;
+	private Long merchantUid;
 	private int quantity;
 	private Date firstShippingDate;
 	private String cancelFlag;
@@ -15,7 +15,7 @@ public class ProductBuy {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductBuy(int productBuyNo, int productNo, int merchantUid, int quantity, Date firstShippingDate,
+	public ProductBuy(int productBuyNo, int productNo, Long merchantUid, int quantity, Date firstShippingDate,
 			String cancelFlag) {
 		super();
 		this.productBuyNo = productBuyNo;
@@ -42,11 +42,11 @@ public class ProductBuy {
 		this.productNo = productNo;
 	}
 
-	public int getMerchantUid() {
+	public Long getMerchantUid() {
 		return merchantUid;
 	}
 
-	public void setMerchantUid(int merchantUid) {
+	public void setMerchantUid(Long merchantUid) {
 		this.merchantUid = merchantUid;
 	}
 

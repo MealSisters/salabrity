@@ -96,7 +96,7 @@
 .col-gender {
   width: 40px;
 }
-.col-orderNo, .col-menuNo {
+.col-menuNo {
   width: 60px;
 }
 .col-price {
@@ -111,7 +111,7 @@
 .col-phone, #tbl-menuList .col-buttons {
   width: 110px;
 }
-.col-memberId {
+.col-memberId, .col-orderNo {
   width: 130px;
 }
 .col-products, .col-orderReq {

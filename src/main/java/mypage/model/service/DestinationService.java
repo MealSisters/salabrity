@@ -87,7 +87,31 @@ public class DestinationService {
 	
 
 
+	/*-------------------------------------- 이은지 start --------------------------------------*/
 	
+	public int insertDestinationReturnDestNo(Destination destination) {
+		Connection conn = getConnection();
+		int result = 0;
+		int destNo = 0;
+		try {
+			String isDefault = "N";
+			if( 0 == destinationDao.getByIdDefaultCount(conn, destination)) {
+				isDefault = "Y";
+			}
+			destination.setIsDefault(isDefault);
+			result = destinationDao.insertDestination(conn, destination);
+			destNo = destinationDao.findCurrentDestNo(conn);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return destNo;
+	}
+	
+	/*--------------------------------------- 이은지 end ---------------------------------------*/
 	
 
 }
