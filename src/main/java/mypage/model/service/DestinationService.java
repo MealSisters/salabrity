@@ -78,6 +78,14 @@ public class DestinationService {
 		return result;
 	}
 
+	public Destination findDefaultDestinationById(String memberId) {
+		Connection conn = getConnection();
+		Destination destination = destinationDao.findDefaultDestinationById(conn, memberId);
+		close(conn);
+		return destination;
+	}
+	
+
 
 	
 	

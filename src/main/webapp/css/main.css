@@ -31,21 +31,6 @@ index.jsp - main
     list-style-type: none;
 }
 
-#main-slider-wrap ul#main-slider li > div {
-    position: absolute;
-    top: 20px;
-    left: 35px;
-}
-
-#main-slider-wrap ul#main-slider li > div h3 {
-    font-size: 36px;
-    text-transform: uppercase;
-}
-
-#main-slider-wrap ul#main-slider li > div span {
-    font-size: 21px;
-}
-
 #main-slider-wrap ul#main-slider li img {
     display: block;
     width: 100%;
@@ -55,10 +40,9 @@ index.jsp - main
 .main-slider-btns {
     position: absolute;
     width: 50px;
-    height: 60px;
     top: 50%;
-    margin-top: -25px;
-    line-height: 57px;
+    margin-top: -40px;
+    line-height: 60px;
     text-align: center;
     cursor: pointer;
     background: rgba(0, 0, 0, 0.1);
@@ -86,6 +70,11 @@ index.jsp - main
     left: -50px;
     border-radius: 0px 7px 7px 7px;
     color: #eee;
+}
+
+#next span, #previous span {
+	display: inline-block;
+	padding-top: 5px;
 }
 
 #main-slider-wrap.active #next {
