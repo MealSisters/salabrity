@@ -35,7 +35,10 @@ window.onload = () => {
 };
 </script>
 <div class="wrap_main">
-<h3 class="head_log">로그인</h3>
+<div class="avatar">
+            <img src="https://www.markuptag.com/images/user-icon.jpg" alt="Avatar">
+        </div>
+        
 <div class="form_cont">
 <!-- 로그인 폼 시작 -->
 	<form id="loginFrm" name="loginFrm" method="POST" action="<%= request.getContextPath() %>/member/login">

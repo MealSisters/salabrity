@@ -1,4 +1,4 @@
-<%@page import="board.model.dto.Posting"%>
+<%@page import="board.model.dto.Question"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,12 +8,19 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/board.css" />
 <%
-	List<Posting> list = (List<Posting>) request.getAttribute("list");
+	List<Question> list = (List<Question>) request.getAttribute("list");
+	int cPage = (int)request.getAttribute("cPage");
 %>
 <style>
 .mypage_hd {
 	border-bottom: 0px solid !important;
 	}
+.page-bar {
+	text-align: center;
+	text-decoration: none;
+    color: #000;
+    margin-left: 8px;
+}
 </style>
 <div class="my_page_content">
 
@@ -65,15 +72,15 @@
 							<td colspan="4">작성한 게시글이 없습니다.</td>
 						</tr>
 						<% } else { 
-							for(Posting p : list) {
+							for(Question q : list) {
 						%>
 						<tr>
-								<td><%= p.getRegDate() %></td>
+								<td><%= q.getRegDate() %></td>
 
 								<td>
-								<a href="<%= request.getContextPath() %>/mypage/boardQuestionView?no=<%= p.getPostingNo() %>"><%= p.getTitle() %></a>
+								<a href="<%= request.getContextPath() %>/mypage/boardQuestionView?no=<%= q.getPostingNo() %>"><%= q.getTitle() %></a>
 								</td>
-								<td><%= p.getPostingRef() == 0 ? "대기중" : "완료" %></td>
+								<td><%= q.getAnswerNo() == 0 ? "대기중" : "완료" %></td>
 							</tr>
 							<% }
 							
@@ -81,7 +88,7 @@
 						</tbody>
 					</table>
 				</div>
-
+<%= request.getAttribute("pageBar") != null ? request.getAttribute("pageBar") : ""%>
 		</div>
 	</div>
 
