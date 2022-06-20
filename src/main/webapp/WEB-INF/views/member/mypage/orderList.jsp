@@ -82,9 +82,7 @@
 						<td class="col4"> <button>1 : 1문의</button></td>
 					</tr>
 				</table>
-
-				
-				
+			
 				
 				<script>
 				const question_btns = document.querySelectorAll('#order_list tr.row2 td.col4');

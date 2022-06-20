@@ -41,16 +41,7 @@ public class DestinationDao {
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
-				Destination destination = new Destination();
-				destination.setShippingAddressNo(rset.getInt("shipping_address_no"));
-				destination.setMemberId(rset.getString("member_id"));
-				destination.setTelephone(rset.getString("telephone"));
-				destination.setZipcode(rset.getString("zipcode"));
-				destination.setAddress(rset.getString("address"));
-				destination.setAddressDetail(rset.getString("address_detail"));
-				destination.setIsDefault(rset.getString("is_default"));
-				destination.setShippingPerson(rset.getString("shipping_person"));
-				destination.setDelFlag(rset.getString("del_flag"));
+				Destination destination = handleDestinationResultSet(rset);
 				list.add(destination);
 			}
 		} catch (Exception e) {
@@ -63,6 +54,20 @@ public class DestinationDao {
 		}
 
 		return list;
+	}
+
+	public Destination handleDestinationResultSet(ResultSet rset) throws SQLException {
+		Destination destination = new Destination();
+		destination.setShippingAddressNo(rset.getInt("shipping_address_no"));
+		destination.setMemberId(rset.getString("member_id"));
+		destination.setTelephone(rset.getString("telephone"));
+		destination.setZipcode(rset.getString("zipcode"));
+		destination.setAddress(rset.getString("address"));
+		destination.setAddressDetail(rset.getString("address_detail"));
+		destination.setIsDefault(rset.getString("is_default"));
+		destination.setShippingPerson(rset.getString("shipping_person"));
+		destination.setDelFlag(rset.getString("del_flag"));
+		return destination;
 	}
 
 	//기본배송지 수 
@@ -179,11 +184,33 @@ public class DestinationDao {
 		}
 		return result;
 	}
+//아이디로 기본배송지 조회
+	public Destination findDefaultDestinationById(Connection conn, String memberId) {
+		String sql = prop.getProperty("findDefaultDestinationById");
+		PreparedStatement pstmt = null;
+		Destination destination = null;
+		ResultSet rset = null;
 
+		try {
+			System.out.println(memberId);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
 
+			while(rset.next()) {
+				destination = handleDestinationResultSet(rset);
+			}
+		} catch (Exception e) {
 
+			throw new DestinationException("기본배송지 조회 오류", e);
 
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
 
+		return destination;
+	}
 
 
 

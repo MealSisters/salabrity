@@ -160,6 +160,9 @@
     color: #fff;
     cursor: pointer;
 }
+.fa-cart-plus{
+	cursor: pointer;
+}
 .button-wrapper:hover {
     background-color: #0EAE57;
 }
