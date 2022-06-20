@@ -3,6 +3,7 @@
 <%@ page import="product.model.dto.ProductExt"%>
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
+<%@ page import= "java.text.DecimalFormat" %>
 <%@ page import="product.model.dto.ProductAttach"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
@@ -21,6 +22,8 @@
 	}
 	System.out.println("thumbnail = " + thumbnailImg);
 	System.out.println("detailImg1" + detailImg1);
+	
+	DecimalFormat df = new DecimalFormat("#,###");
 
 
 %>
@@ -76,7 +79,7 @@
 		</div>
 		<div class="total_wrap">
 			<div class="total_tit">판매 가격</div>
-			<div class="total_price"><%=product.getProductPrice() %>원</div>
+			<div class="total_price"><%=df.format(product.getProductPrice()) %>원</div>
 		</div>
 		<div class="order_btn_wrp">
 			<a href='#' class="btn_order">주문하기</a> 
