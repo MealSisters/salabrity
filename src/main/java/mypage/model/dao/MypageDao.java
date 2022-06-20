@@ -17,6 +17,7 @@ import board.model.dto.BoardCode;
 import board.model.dto.Posting;
 import board.model.dto.PostingAttach;
 import board.model.dto.PostingExt;
+import board.model.dto.Question;
 import member.model.exception.MemberException;
 import mypage.model.exception.MypageException;
 
@@ -35,19 +36,21 @@ public class MypageDao {
 	}
 
 
-	public List<PostingExt> findQuestionList(Connection conn, String memberId) {
+	public List<Question> findQuestionList(Connection conn, String memberId, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<PostingExt> list = new ArrayList<>();
+		List<Question> list = new ArrayList<>();
 		String sql = prop.getProperty("findQuestionList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				PostingExt posting = new PostingExt();
+				Question posting = new Question();
 				posting.setPostingNo(rset.getInt("posting_no"));
 				posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
 				posting.setMemberId(rset.getString("member_id"));
@@ -57,6 +60,7 @@ public class MypageDao {
 				posting.setReadCount(rset.getInt("read_count"));
 				posting.setPostingLevel(rset.getInt("posting_level"));
 				posting.setPostingRef(rset.getInt("posting_ref"));
+				posting.setAnswerNo(rset.getInt("answer_no"));
 				list.add(posting);
 			}
 		} catch (SQLException e) {
@@ -508,6 +512,34 @@ public class MypageDao {
 		}
 		return result;
 	}
+
+
+	public int myQuestionTotal(Connection conn, String memberId) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myQuestionTotal");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContents = rset.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MypageException("1:1 목록 조회 오류",e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+
+
+
 	
 	
 

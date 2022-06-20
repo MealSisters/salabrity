@@ -11,8 +11,8 @@
 
 <div class="wrap_main">
 
-       <h3 class="head_log">아이디 찾기</h3>
 			<div class="find_box">
+       <h3 class="head_log">아이디 찾기</h3>
 				<div class="find_main_box">
 			<div class="find_id_box">
 				<form name="findIdFrm" method="POST" action="<%= request.getContextPath() %>/member/findId">
