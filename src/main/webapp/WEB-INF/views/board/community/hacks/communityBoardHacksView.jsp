@@ -279,7 +279,7 @@ document.querySelectorAll("#comment-delete-btn").forEach((button) => {
  * 답글폼 동적 생성
  */
 document.querySelectorAll("#comment-reply-btn").forEach((button) => {
-		button.onclick = (e) => {
+	button.onclick = (e) => {
 		if(<%= loginMember == null %>) {
 			loginAlert();
 			return;
@@ -356,8 +356,12 @@ document.querySelectorAll("#comment-reply-btn").forEach((button) => {
 /**
  * 댓글창 포커스시 비로그인일 경우 사용 제한 경고창 발생
  */
-document.querySelector("textarea[name=commentContent]").onfocus = (e) => {
-	if(<%= loginMember == null %>) loginAlert();
+const commentContent = document.querySelector("textarea[name=commentContent]");
+commentContent.onfocus = (e) => {
+	if(<%= loginMember == null %>) {
+		commentContent.blur();
+		loginAlert();
+	}
 };
 
 /**
@@ -385,9 +389,8 @@ document.commentEnrollFrm.onsubmit = commentSubmitHandler;
 /**
  * 비로그인일 경우 사용 제한 경고창 발생
  */
-const loginAlert = () => {
+const loginAlert = (e) => {
 	alert("로그인 후 이용할 수 있습니다.");
-	window.location.href = "<%= request.getContextPath() %>/member/login";
 };
 
 /**

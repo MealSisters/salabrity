@@ -5,27 +5,15 @@
 		<div id="main-slider-wrap">
 	        <ul id="main-slider">
 	            <li>
-	                <div>
-	                    <h3>Slide 1</h3>
-	                    <span>슬라이드 1</span>
-	                </div>
-	                <img src="https://beyondtype2.org/wp-content/uploads/2019/03/BT2-HEADER-DASH-DIET.png">
+	                <img src="<%= request.getContextPath() %>/images/main-banner1.png">
 	            </li>
 	    
 	            <li>
-	                <div>
-	                    <h3>Slide 2</h3>
-	                    <span>슬라이드 2</span>
-	                </div>
-	                <img src="https://www.unic.ac.cy/medicalcentre/wp-content/uploads/sites/31/2021/01/P3217-image-e1610535947352.jpg">
+	                <img src="<%= request.getContextPath() %>/images/main-banner2.png">
 	            </li>
 	    
 	            <li>
-	                <div>
-	                    <h3>Slide 3</h3>
-	                    <span>슬라이드 3</span>
-	                </div>
-	                <img src="https://images.everydayhealth.com/images/what-is-the-dash-diet-1440x810.jpg?w=1110">
+	                <img src="<%= request.getContextPath() %>/images/main-banner3.png">
 	            </li>
 	        </ul>
 	        <div class="main-slider-btns" id="next"><span>▶</span></div>
