@@ -227,19 +227,20 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (param.get("startDate") != null) {
-				pstmt.setDate(1, param.get("startDate"));
+				pstmt.setString(1, param.get("startDate").toString());
 			} else {
-				pstmt.setDate(1, Date.valueOf("1000-01-01"));
+				pstmt.setString(1, Date.valueOf("1000-01-01").toString());
 			}
 			if (param.get("endDate") != null) {
-				pstmt.setDate(2, param.get("endDate"));
+				pstmt.setString(2, param.get("endDate").toString());
 			} else {
-				pstmt.setDate(2, Date.valueOf("5000-01-01"));
+				pstmt.setString(2, Date.valueOf("5000-01-01").toString());
 			}
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				SalesTrend st = new SalesTrend();
-				st.setSalesDate(rset.getDate("payment_date"));
+				System.out.println(rset.getString("payment_date"));
+				st.setSalesDate(Date.valueOf(rset.getString("payment_date")));
 				st.setAmount(rset.getInt("sales"));
 				list.add(st);
 			}
