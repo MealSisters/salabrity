@@ -191,6 +191,9 @@
 			alert('기본 배송지는 삭제할 수 없습니다.')	
 		});
 
+	
+	 	
+	
 
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

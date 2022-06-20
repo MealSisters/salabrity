@@ -35,10 +35,11 @@ public class OrderServlet extends HttpServlet {
 		//배송지 목록 가져오기
 		List<Destination> destinationList = destinationService.findById(memberId);
 		System.out.println(defaultDestination);
-		//서버시간 가져오기
+		
 		request.setAttribute("defaultDestination", defaultDestination);
 		request.setAttribute("destinationList", destinationList);
 		request.getRequestDispatcher("/WEB-INF/views/order/order.jsp").forward(request, response);
+		
 		
 	}
 
@@ -46,7 +47,12 @@ public class OrderServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		if(request.getParameter("productNo")!= null) {
+			session.setAttribute("productNo", request.getParameter("productNo"));
+			session.setAttribute("firstShippingDate", request.getParameter("firstShippingDate"));
+			session.setAttribute("quantity", request.getParameter("quantity"));
+		}
 		doGet(request, response);
 	}
 
