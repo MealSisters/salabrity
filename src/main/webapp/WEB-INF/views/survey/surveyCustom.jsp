@@ -8,7 +8,7 @@
 
 <script type="text/javascript"></script>
 
-      <form method = "post" name="surveyForm">
+      <form method="post" name="surveyForm">
       <div id="surveyContainer">
       	<div class="h1-container">
           <h1>나만을 위한 식단을 찾아보세요.</h1>
@@ -47,7 +47,7 @@
 	    form = document.surveyForm;
 	      if(form.heightInput.value=="" && form.weightInput.value=="" ){
 	      alert("상세정보 입력을 다시 한번 확인해주세요.")
-	        form.weightInput.focus();
+	        form.heightInput.focus();
 	        return;
 	      }if(form.heightInput.value==""){
 	        alert("키가 입력되지 않았습니다. 확인해주세요.")
@@ -58,11 +58,25 @@
 	          form.weightInput.focus();
 	          return;
 	      }
-	     form.action = "/survey/surveyResult";
- 	     form.method = "post";
+	     form.action = "<%= request.getContextPath() %>/survey/surveyResult";
      	 form.submit();
 	    }
 </script>
+
+
+<!-- 유효성검사 jquery
+	$("#surveyForm").onclick(function(){
+		    if($("#height").val() == ""){
+		        alert("키가 입력되지 않았습니다. 확인해주세요.");
+		        $("#height").focus();
+		        return false;
+		    }if($("#weight").val() == ""){
+		        alert("몸무게가 입력되지 않았습니다. 확인해주세요.");
+		        $("#weight").focus();
+		        return false;
+		    }
+		  });
+-->
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
