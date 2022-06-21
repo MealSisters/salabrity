@@ -114,7 +114,7 @@
 			<input type="hidden" name="postingNo" value="<%= posting.getPostingNo() %>" />
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
 			<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
-			<button type="submit" id="board-like-btn">
+			<button type="submit" id="board-like-btn" onclick="LikeUp();">
 	<% 
 		List<PostingLike> likes = posting.getLikes();
 		for(int i = 0; i < likes.size(); i++) {
@@ -128,6 +128,7 @@
 		%>
 				love it&nbsp;<i class="fa-solid fa-heart"></i>
 	<%
+				break;
 			}
 		}
 	%>
