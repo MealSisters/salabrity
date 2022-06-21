@@ -34,12 +34,10 @@ public class DestinationDao {
 		PreparedStatement pstmt = null;
 		List<Destination> list = new ArrayList<>();
 		ResultSet rset = null;
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-
 			while(rset.next()) {
 				Destination destination = handleDestinationResultSet(rset);
 				list.add(destination);
