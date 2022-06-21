@@ -58,14 +58,16 @@ public class FindPwdServlet extends HttpServlet {
     	  String user = "salabrity@naver.com";
     	  String password = "salabrity~!";
     	  
-    	  String toEmail = member.getEmail(); // 전송 받을 이메일 주소
+//    	  String toEmail = member.getEmail(); // 전송 받을 이메일 주소
+    	  String to_email = "mzyow7@naver.com";
     	  
     	  Properties props = new Properties();
     	  props.put("mail.smtp.host", host);
           props.put("mail.smtp.port", 465);
           props.put("mail.smtp.auth", "true");
-          props.put("mail.smtp.ssl.enable", true);
-          props.put("mail.smtp.ssl.turst", "smtp.naver.com");
+	  		props.put("mail.smtp.ssl.enable", "true");
+	  		props.put("mail.smtp.starttls.enable", "true");
+	  		props.put("mail.debug", "true");
           
           
           
@@ -81,8 +83,8 @@ public class FindPwdServlet extends HttpServlet {
 			
 			try {
 				MimeMessage send = new MimeMessage(session);
-				send.setFrom(new InternetAddress(user));
-				send.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+				send.setFrom(new InternetAddress(user, "KH"));
+				send.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
 				send.setSubject("임시 비밀번호 발급 안내입니다.");
 				send.setText("인증번호는 " + randomStr + " 입니다.");
 

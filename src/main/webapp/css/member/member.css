@@ -91,9 +91,12 @@
 }
 
 .form_cont {
+	
 	padding: 40px;
 	width: 450px;
-	border: 1px solid #dbdbdb;
+	border-bottom: 1px solid #dbdbdb;
+	border-left: 1px solid #dbdbdb;
+	border-right: 1px solid #dbdbdb;
 	margin: 0 auto;
 	margin-top: 30px;
 	padding-bottom: 19px;
