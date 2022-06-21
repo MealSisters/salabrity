@@ -43,7 +43,7 @@ public class orderViewServlet extends HttpServlet {
 			List<ProductExt> productList = new ArrayList<ProductExt>();
 			//상품정보
 			for(int i = 0; i < buyList.size();i++) {
-				int no = buyList.get(i).getList().get(0).getProductNo();
+				int no = buyList.get(0).getList().get(i).getProductNo();
 				ProductExt product = productService.findProductByNo(no);
 				//리스트로
 				productList.add(product);
