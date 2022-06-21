@@ -28,6 +28,7 @@
 	<div class="my_sub_content">
 		
 		<button type="button" class="btn_question" onclick="location.href='<%= request.getContextPath() %>/mypage/boardQuestion';">1:1 문의하기</button>
+		<button type="button" class="btn_faq" onclick="location.href='<%= request.getContextPath() %>/board/faq';">FAQ</button>
 		<h4 class="mypage_hd">1:1 문의</h4>
 		
 			<div class="board_question_zone">
