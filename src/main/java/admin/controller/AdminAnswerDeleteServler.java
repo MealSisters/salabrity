@@ -34,7 +34,7 @@ public class AdminAnswerDeleteServler extends HttpServlet {
 					File delFile = new File(saveDirectory, attach.getRenamedFilename());
 					if (delFile.exists())
 						delFile.delete();
-					System.out.println("> " + attach.getRenamedFilename() + "파일 삭제");
+					// System.out.println("> " + attach.getRenamedFilename() + "파일 삭제");
 				}
 
 			int result = mypageService.deleteQuestion(answerNo);

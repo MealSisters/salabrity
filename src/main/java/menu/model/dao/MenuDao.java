@@ -304,10 +304,8 @@ public class MenuDao {
 		ResultSet rset = null;
 		List<Menu> list = new ArrayList<>();
 		String sql = prop.getProperty("findSortedAllMenu");
-		if (!"menu_no".equals((String) param.get("sortBy")))
+		if (param.get("sortBy") != null)
 			sql = sql.replace("#", (String) param.get("sortBy"));
-		else
-			sql = prop.getProperty("findAllMenu");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (param.get("searchParam") != null) {
