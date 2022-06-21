@@ -22,6 +22,9 @@ communityBoard.jsp
 	font-size: 14px;
 	font-weight: bold;
 	width: 300px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* hacks/general 레이아웃 */
@@ -42,14 +45,6 @@ communityBoard.jsp
 	display: inline-block;
 	width: fit-content;
 	height: fit-content;
-}
-
-
-.hacks-content-title a, .general-content-title a {
-	/* 제목이 한 줄 이상인 경우 ...처리 */
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 hacks-content-title a:hover, .general-content-title a:hover {
@@ -89,7 +84,7 @@ hacks-content-title a:hover, .general-content-title a:hover {
 .general-content {
 	font-size: 13px;
 	width: 300px;
-	height: 100px;
+	height: 85px;
 	
 }
 
@@ -449,6 +444,15 @@ communityBoardView.jsp
 	font-size: 14px;
 }
 
+.posting-view-writer a {
+	text-decoration: none;
+	color: black;
+}
+
+.posting-view-writer a:hover {
+	color: #f8674f;
+}
+
 .posting-view-writer i {
 	color: #f8674f;
 }
@@ -507,10 +511,6 @@ communityBoardView.jsp
 	padding: 10px 25px;
 	background-color: white;
 	font-size: 15px;
-}
-
-#board-like-btn i {
-	color: red;	
 }
 
 #board-update-btn, #board-delete-btn {
