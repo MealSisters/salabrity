@@ -35,7 +35,7 @@ function setResult(){
 }
 
 
-/** 식단list
+// 식단list
 const productList = [
   {
     name: '일반식단',
@@ -54,4 +54,3 @@ const productList = [
 	desc: '식단설명'
   },
 ]
-*/
