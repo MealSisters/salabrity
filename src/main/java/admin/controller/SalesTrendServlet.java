@@ -59,14 +59,14 @@ public class SalesTrendServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			Date startDate = null;
 			Date endDate = null;
-			if(!request.getParameter("startDate").equals("")) {
+			if (!request.getParameter("startDate").equals("")) {
 				startDate = Date.valueOf(request.getParameter("startDate"));
 			}
-			if(!request.getParameter("endDate").equals("")) {
+			if (!request.getParameter("endDate").equals("")) {
 				endDate = Date.valueOf(request.getParameter("endDate"));
 			}
 			Map<String, Date> param = new HashMap<>();
@@ -74,7 +74,6 @@ public class SalesTrendServlet extends HttpServlet {
 			param.put("endDate", endDate);
 			List<SalesTrend> totalSalesData = adminService.findSalesTrend(param);
 
-			
 			Date pieStartDate = null;
 			Date pieEndDate = null;
 			if(!request.getParameter("topProductStart").equals("")) {
@@ -86,11 +85,8 @@ public class SalesTrendServlet extends HttpServlet {
 			Map<String, Date> pieParam = new HashMap<>();
 			pieParam.put("startDate", pieStartDate);
 			pieParam.put("endDate", pieEndDate);
-			System.out.println("pieParam@doPost = " + pieParam);
 			List<SalesTrend> topSalesData = adminService.findTopSalesTrend(pieParam);
-			// System.out.println("topSalesData@doPost = " + topSalesData);
 
-			
 			request.setAttribute("period", param);
 			request.setAttribute("piePeriod", pieParam);
 			request.setAttribute("salesData", totalSalesData);

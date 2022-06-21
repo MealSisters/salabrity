@@ -76,7 +76,6 @@ public class MemberListServlet extends HttpServlet {
 				totalMembers = adminService.getTotalMembers();
 			}
 
-			System.out.println("totalMembers@servlet = " + totalMembers);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMembers, url);
 
