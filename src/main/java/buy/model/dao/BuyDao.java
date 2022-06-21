@@ -297,4 +297,35 @@ public class BuyDao {
 	}
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
+	
+	public List<BuyExt> findBuyExtById(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<BuyExt> list = new ArrayList<>();
+		String sql = prop.getProperty("findBuyExtById");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				BuyExt buy = handleBuyExtResultSet(rset);
+				
+				list.add(buy);
+			}
+		} catch (Exception e) {
+			throw new BuyException("주문내역 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }

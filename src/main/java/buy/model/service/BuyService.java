@@ -73,4 +73,12 @@ public class BuyService {
 	}
 
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
+	
+	
+	public List<BuyExt> findBuyExtById(String memberId) {
+		Connection conn = getConnection();
+		List<BuyExt> list = buyDao.findBuyExtById(conn, memberId);
+		close(conn);
+		return list;
+	}
 }

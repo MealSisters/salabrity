@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ page import="product.model.dto.ProductExt"%>
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
@@ -23,6 +24,7 @@
 	System.out.println("thumbnail = " + thumbnailImg);
 	System.out.println("detailImg1" + detailImg1);
 	
+
 	DecimalFormat df = new DecimalFormat("#,###");
 
 

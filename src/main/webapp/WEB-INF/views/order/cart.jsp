@@ -304,7 +304,7 @@
 				};
         		$.ajax({
 					type : "POST",
-					async : false,
+					async : true,
 					traditional : true,
 					data : {cartNoList: checkedCartNoList},
 					url : "<%=request.getContextPath()%>/order/cart/checkedDelete",
