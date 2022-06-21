@@ -96,5 +96,17 @@ public class MemberService {
 		close(conn);
 		return member;
 	}
+
+	public int findPwdUpdate(Member member) {
+		Connection conn = getConnection();
+		int result = memberDao.findPwdUpdate(conn, member);
+		
+			commit(conn);
+		
+			rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 	
 }

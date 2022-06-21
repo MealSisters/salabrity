@@ -14,26 +14,7 @@
 	PostingExt answer = (PostingExt) request.getAttribute("answer");
 %>
 <style>
-	
-	.file_con a {
-	text-decoration:underline;
-	color:#000;
-	font-size:13px;
-	}
-	.btn_del_q {
-		float: right;
-    display: inline-block;
-       margin-top: 27px;
-    margin-right: 20px;
-    background-color: #fff;
-    border: 1px solid #116916;
-    height: 30px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #116916;
-        width: 50px;
-        cursor:pointer;
-	}
+
 	.mypage_hd {
 	border-bottom: 0px solid !important;
 	}

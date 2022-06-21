@@ -38,6 +38,8 @@ public class FindPwdServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	
 		String memberName = request.getParameter("memberName");
 		String email = request.getParameter("email");
 		
@@ -58,16 +60,17 @@ public class FindPwdServlet extends HttpServlet {
     	  String user = "salabrity@naver.com";
     	  String password = "salabrity~!";
     	  
-//    	  String toEmail = member.getEmail(); // 전송 받을 이메일 주소
-    	  String to_email = "mzyow7@naver.com";
+    	  String toEmail = member.getEmail(); // 전송 받을 이메일 주소
+
     	  
     	  Properties props = new Properties();
     	  props.put("mail.smtp.host", host);
           props.put("mail.smtp.port", 465);
           props.put("mail.smtp.auth", "true");
-	  		props.put("mail.smtp.ssl.enable", "true");
-	  		props.put("mail.smtp.starttls.enable", "true");
-	  		props.put("mail.debug", "true");
+  		  props.put("mail.smtp.ssl.enable", "true");
+  		  props.put("mail.smtp.starttls.enable", "true");
+  		  props.put("mail.debug", "true");
+  		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
           
           
           
@@ -83,9 +86,9 @@ public class FindPwdServlet extends HttpServlet {
 			
 			try {
 				MimeMessage send = new MimeMessage(session);
-				send.setFrom(new InternetAddress(user, "KH"));
-				send.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
-				send.setSubject("임시 비밀번호 발급 안내입니다.");
+				send.setFrom(new InternetAddress(user));
+				send.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+				send.setSubject("샐러브리티 인증번호 발급 안내입니다.");
 				send.setText("인증번호는 " + randomStr + " 입니다.");
 
 				Transport.send(send);
@@ -101,9 +104,8 @@ public class FindPwdServlet extends HttpServlet {
 				savePwd.setAttribute("randomStr", randomStr);
 				request.setAttribute("email", email);
 				writer.println("<script>alert('이메일로 임시 비밀번호가 전송되었습니다.');</script>");
-				request.getRequestDispatcher("/WEB-INF/views/member/memberLogin.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/views/member/findPwdUpdate.jsp").forward(request, response);
           
-		
 	}
 
 }

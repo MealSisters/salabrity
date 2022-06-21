@@ -213,4 +213,24 @@ public class MemberDao {
 		return member;
 	}
 
+	public int findPwdUpdate(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("findPwdUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getPassword());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MemberException("비밀번호 변경 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
