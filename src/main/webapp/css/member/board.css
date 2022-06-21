@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+body{
+ -ms-overflow-style: none;
+ }
+ 
+::-webkit-scrollbar {
+  display: none;
+}
 /* 1:1문의 */
 .date_view_box {
 	border: solid 1px #bdbdbd;
@@ -190,14 +197,14 @@
 	font-size: 14px;
 	padding: 0px !important;
 	height: 250px;
-	overflow-y: hidden;
+	overflow-y: scroll;
 }
 
 .a_cont p {
 	font-size: 14px;
 	padding: 0px !important;
 	height: 250px;
-	overflow-y: hidden;
+	overflow-y: scroll;
 }
 
 .a_cont, .q_cont {

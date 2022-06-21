@@ -43,7 +43,7 @@ public class MypageService {
 			// 2. pk 가져오기
 			int no = mypageDao.findCurrentQuestionNo(conn); // currval
 			posting.setPostingNo(no);
-			System.out.println("등록된 posting no" + no);
+//			System.out.println("등록된 posting no" + no);
 			
 			// attachment에 등록
 			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
@@ -68,7 +68,7 @@ public class MypageService {
 		Connection conn = getConnection();
 		
 		List<Posting> list = mypageDao.MyWriteList(conn, memberId, start, end);
-		System.out.println("service" + list);
+//		System.out.println("service" + list);
 		
 		close(conn);
 		return list;
@@ -122,7 +122,7 @@ public class MypageService {
 		List<PostingAttach> attachments = mypageDao.findAttachmentByNo(conn, no);
 		
 		posting.setAttachments(attachments);
-		System.out.println("서비스" + posting);
+//		System.out.println("서비스" + posting);
 		close(conn);
 		
 		return posting;

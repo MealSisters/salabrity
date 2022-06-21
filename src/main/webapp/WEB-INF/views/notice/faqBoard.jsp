@@ -34,7 +34,7 @@
                         </a></p>
 
                         <p class="a">
-                        <span class="icon_a">A</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= posting.getContent() %>
+                        <span class="icon_a" >A</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= posting.getContent() %>
                       
                         </p>
                     </li>

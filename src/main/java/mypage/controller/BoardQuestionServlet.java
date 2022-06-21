@@ -37,7 +37,7 @@ public class BoardQuestionServlet extends HttpServlet {
 		
 		try {
 			String saveDirectory = getServletContext().getRealPath("/upload/question/mypage");
-			System.out.println("saveDirectory = " + saveDirectory);
+//			System.out.println("saveDirectory = " + saveDirectory);
 			
 			int maxPostSize = 1024 * 1024 * 10;
 			

@@ -29,7 +29,7 @@ window.onload = () => {
 				<button type="button" class="btn_find_log" onclick="location.href='<%= request.getContextPath() %>/member/login';">로그인</button>
 			</div>
 			<div class="plus">
-				<span>- 회원 가입 시 입력한 이름과 휴대폰 번호를 입력해주세요.</span>
+				<span>- 회원 가입 시 입력한 아이디와 이메일을 입력해주세요.</span>
 				<!-- <span>- SNS 계정으로 가입하신 경우 해당 웹사이트에서 ID 찾기를 진행해주세요..</span> -->
 				<span>- 위 방법으로 찾지 못할 경우 Salabrity 고객센터(02-0000-0000)으로 문의해주세요.</span>
 			</div>

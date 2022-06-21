@@ -48,7 +48,7 @@ public class FindPwdServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
-		if( member == null || !member.getMemberId().equals(memberId)){
+		if(member == null || !member.getMemberId().equals(memberId) || !member.getEmail().equals(email)){
         	writer.println("<script>alert('해당하는 회원 정보가 없습니다.');</script>");
 			writer.println("<script>history.back();</script>");
 			writer.close();

@@ -275,7 +275,7 @@ label {
 	line-height: 55px;
 	background: #116916;
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -339,6 +339,7 @@ label {
 	height: 35px;
 	font-size: 12px;
 	width: 95px;
+	    border-radius: 20px;
 }
 
 #phone {
@@ -352,7 +353,7 @@ label {
 	border: 1px solid #116916;
 	background: #116916;
 	color: #f1f1f1;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -367,7 +368,7 @@ label {
 	line-height: 52px;
 	background: #116916;
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -399,7 +400,7 @@ label {
 	border: 1px solid #116916;
 	background: #116916;
 	color: #f1f1f1;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -414,7 +415,7 @@ label {
 	line-height: 52px;
 	background: #116916;
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -467,7 +468,7 @@ label {
 	line-height: 55px;
 	background: #116916;
 	color: #fff;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 500;
 	cursor: pointer;
 	border: 1px solid #116916;
@@ -480,7 +481,7 @@ label {
 	border: 1px solid #116916;
 	background: #116916;
 	color: #f1f1f1;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	cursor: pointer;
 	border: 1px solid #116916;
