@@ -58,7 +58,7 @@
 	          form.weightInput.focus();
 	          return;
 	      }
-	     form.action = "<%= request.getContextPath() %>/survey/surveyResult";
+	     form.action = "<%= request.getContextPath() %>/surveyResult";
      	 form.submit();
 	    }
 </script>
