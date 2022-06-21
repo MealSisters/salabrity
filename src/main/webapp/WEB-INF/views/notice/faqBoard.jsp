@@ -16,7 +16,7 @@
 
 <div class="notice_page_content">
     <h3 class="notice_hd">자주 묻는 질문</h3>
-    <div class="notice_wrap">        
+    <div class="notice_wrap">
     <button type="button" class="btn_notice_enroll" onclick="location.href='<%= request.getContextPath() %>/board/faqEnroll';">등록</button>
 <%@ include file="/WEB-INF/views/common/noticePagebar.jsp" %>
    <div class="notice_cont" id="faq_cont"> <!-- faq랑 같이 사용 -->
@@ -53,7 +53,9 @@
 
     </div> <!-- notice_wrap -->
 </div> <!--notice_page_content-->
-
+<!--  --><form method="POST" name="deleteFaqFrm" action="<%= request.getContextPath() %>/board/faqDelete">
+<input type="hidden" name="no" id="deleteNo" />
+</form>
 <script>
     jQuery(function($){
         var article = $('.faq>.faqBody>.article');
@@ -103,21 +105,27 @@
     };
     const addAdminEvent = (e) => {
         const updateBtns = document.querySelectorAll(".updateBtn");
-        const postingNo = $(e.target).parents("ul").attr("data-no");
+        
         updateBtns.forEach((btn) => {
             btn.onclick = (e) => {
-                location.href = `<%= request.getContextPath() %>/board/faqUpdate?no=\${postingNo}`;
+        const postingNo = $(e.target).parents("ul").attr("data-no");
+              location.href = `<%= request.getContextPath() %>/board/faqUpdate?no=\${postingNo}`;
+        
+              //document.querySelector("#updateNo").value = postingNo;
+              //document.updateFaq.submit();
             };
         });
         
         const cancelBtns = document.querySelectorAll(".cancelBtn");
         cancelBtns.forEach((btn) => {
         	btn.onclick = (e) => {
+        		const postingNo = $(e.target).parents("ul").attr("data-no");
         		// doGet
-        		// location.href = `<%= request.getContextPath() %>/board/faqDelete?no=\${postingNo}`;
+        		//location.href = `<%= request.getContextPath() %>/board/faqDelete?no=\${postingNo}`;
         		
         		//doPost
-        		// document.deleteFaqFrm.submit();
+        		document.querySelector("#deleteNo").value = postingNo;
+        		document.deleteFaqFrm.submit();
         	};
         });
     };

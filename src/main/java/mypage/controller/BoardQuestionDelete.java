@@ -27,7 +27,7 @@ public class BoardQuestionDelete extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
-			System.out.println(no);
+//			System.out.println(no);
 			
 			List<PostingAttach> attachments = mypageService.findByNo(no).getAttachments();
 			if(attachments != null && attachments.isEmpty())

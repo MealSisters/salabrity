@@ -32,9 +32,7 @@ public class BoardQuestionViewServlet extends HttpServlet {
 			
 			PostingExt answer = mypageService.findByAnswer(no); // 답변
 			
-		
-			System.out.println("서블릿!!!!!!!!!!!!!"+posting);
-			System.out.println("서블릿!!!!!!!!!!!!!"+answer);
+	
 			
 			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
