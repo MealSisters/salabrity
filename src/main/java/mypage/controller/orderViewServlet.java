@@ -32,7 +32,7 @@ public class orderViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			//사용자 입력값
-			Long merchantUid = Long.parseLong(request.getParameter("merchanUid"));
+			Long merchantUid = Long.parseLong(request.getParameter("merchantUid"));
 			
 			//업무로직
 			

@@ -80,7 +80,7 @@
 			</div>
 		</div>
 		<div class="total_wrap">
-			<div class="total_tit">판매 가격</div>
+			<div class="total_tit">상품 단가</div>
 			<div class="total_price"><%=df.format(product.getProductPrice()) %>원</div>
 		</div>
 		<div class="order_btn_wrp">
@@ -142,7 +142,7 @@
         "disable": [
             function (date) {
                 // return true to disable
-                return (date.getDay() === 0 || date.getDay() === 6);
+            //    return (date.getDay() === 0 || date.getDay() === 6);
 
             }
         ]
@@ -200,10 +200,10 @@
 			dataType: "text",
 			data : {productNo: <%=product.getProductNo() %>, memberId : "<%=memberId%>",
 				quantity : $('#quantity').val(), firstShippingDate : $('#firstShippingDate').val()},
-			url : "`	",
-			success : function(resp){
-				alert(resp);
-			},
+				url : "<%=request.getContextPath()%>/order/cart/insertCart",
+				success : function(resp){
+					alert(resp);
+				},
 			error : function(data){
 				alert('요청실패');
 			}

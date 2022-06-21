@@ -45,11 +45,11 @@ public class CasrtsInsertServlet extends HttpServlet {
 				result = cartService.cartInsert(cart);
 			}
 			//값 처리
-			System.out.println("InsertServlet" + result);
-			String msg = result == 0 ? "이미 장바구니에 있는 상품입니다." : "장바구니에 "+ result + "개의 상품이 추가되었습니다.";
+			String msg = result == 0 ? "이미 장바구니에 있는 상품입니다." : "장바구니에 추가되었습니다.";
 			HttpSession session = request.getSession();
 			session.setAttribute("addCartSuccessMsg",msg);
 			response.sendRedirect("/salabrity/mypage/orderList");
+			
 			}
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block

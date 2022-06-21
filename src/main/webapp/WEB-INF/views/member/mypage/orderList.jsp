@@ -102,7 +102,7 @@
 				console.log(question_btns);
 				question_btns.forEach(function (elem) {
 					elem.addEventListener('click', function () {
-						location.href = '<%= request.getContextPath() %>/mypage/boardQuestion';
+						location.href = '<%= request.getContextPath() %>/mypage/boardQuestionList';
 					});
 					
 				});
@@ -112,7 +112,7 @@
 
 				order_infoes.forEach(function (elem) {
 					elem.addEventListener('click', function () {
-					location.href = '<%= request.getContextPath() %>/mypage/orderView?merchanUid='+ $(event.target).parent().attr('id');
+					location.href = '<%= request.getContextPath() %>/mypage/orderView?merchantUid='+ $(event.target).parent().attr('id');
 					});
 				});
 				const cart_btns = document.querySelectorAll('#order_list tr.row1 td.col4');

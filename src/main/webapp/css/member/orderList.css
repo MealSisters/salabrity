@@ -85,6 +85,7 @@ section#order_list h1>p{
 	font-size: 11px;
 	color: #116916;
 	margin: 2px 0;
+	cursor: pointer;
 
 }
 #order_list table td button:hover{
