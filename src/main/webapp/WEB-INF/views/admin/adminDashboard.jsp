@@ -131,7 +131,7 @@
         <div class="div-icon"><a href="<%= request.getContextPath() %>/product/productList"><i class="fa-solid fa-plate-wheat fa-3x"></i>상품관리</a></div>
         <div class="div-icon"><a href="<%= request.getContextPath() %>/calendar"><i class="fa-solid fa-calendar-days fa-3x"></i>캘린더관리</a></div>
         <div class="div-icon"><a href="<%= request.getContextPath() %>/admin/orderList"><i class="fa-solid fa-receipt fa-3x"></i>주문내역관리</a></div>
-        <div class="div-icon"><a href="https://desk.channel.io/#/channels/94547/user_chats/62b099397f9398d5f372"><i class="fa-regular fa-comments fa-3x"></i>1:1채팅상담</a></div>
+        <div class="div-icon"><a target="_blank" href="https://desk.channel.io/#/channels/94547/user_chats/62b099397f9398d5f372"><i class="fa-regular fa-comments fa-3x"></i>1:1채팅상담</a></div>
         <div class="div-icon"><a href="<%= request.getContextPath() %>/admin/memberList"><i class="fa-solid fa-unlock fa-3x"></i>역할관리</a></div>
     </div>
 </div>
