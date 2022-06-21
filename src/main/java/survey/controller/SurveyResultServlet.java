@@ -27,16 +27,13 @@ public class SurveyResultServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/surveyCustom.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/survey/surveyCustom.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		doGet(request, response);
 		
 		try {
 			
@@ -86,7 +83,7 @@ public class SurveyResultServlet extends HttpServlet {
 				 }
 				}
 			
-			request.getRequestDispatcher("surveyResult.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/survey/surveyResult.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
