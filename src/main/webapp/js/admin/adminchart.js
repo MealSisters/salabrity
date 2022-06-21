@@ -73,7 +73,7 @@ let customLegend = (chart) => {
   let ul = document.createElement('ul');
   let color = chart.data.datasets[0].backgroundColor;
 
-  if(chart.data.label[0] != null) {
+  if(chart.data.labels[0] != null) {
       chart.data.labels.forEach(function (label, index) {
           ul.innerHTML += `<li>
                   <span style="background-color: ${color[index]}"></span>
@@ -124,7 +124,10 @@ const printBarChart = (target, days, memberData, rgb = "#0C7475") => {
           	},
           	scales: {
             	  yAxes: [{
-                	  ticks: { suggestedMax: max+1 }
+                	  ticks: { 
+                	  	  beginAtZero: true,
+                	  	  suggestedMax: max+1 
+                	  }
              	 }]
           	}
       	}

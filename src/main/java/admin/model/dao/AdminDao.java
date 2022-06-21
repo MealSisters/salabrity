@@ -105,6 +105,11 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("findMemberBy");
+		if (param.get("gender").equals("all")) {
+			sql = sql.replace("#", "or gender is null");
+		} else {
+			sql = sql.replace("#", "");
+		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (!param.get("memberRole").equals("all")) {
@@ -148,6 +153,11 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("getFilteringMembers");
+		if (param.get("gender").equals("all")) {
+			sql = sql.replace("#", "or gender is null");
+		} else {
+			sql = sql.replace("#", "");
+		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (!param.get("memberRole").equals("all")) {
@@ -239,9 +249,9 @@ public class AdminDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				SalesTrend st = new SalesTrend();
-				System.out.println(rset.getString("payment_date"));
 				st.setSalesDate(Date.valueOf(rset.getString("payment_date")));
 				st.setAmount(rset.getInt("sales"));
+				st.setProductName(sql);
 				list.add(st);
 			}
 		} catch (Exception e) {

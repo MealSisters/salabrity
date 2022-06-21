@@ -93,7 +93,7 @@
 			<tr>
 				<td id="main-service-msg1" class="main-service-msg">간단한 설문에 응해주시면</td>
 				<td class="main-service-img" rowspan="3">
-					<a href="<%= request.getContextPath() %>/survey/surveyCustom">
+					<a href="<%= request.getContextPath() %>/surveyResult">
 						<img src="http://physicalsolutionsli.com/wp-content/uploads/2019/10/DASH-diet-1024x689.jpg" alt="맞춤식단찾기" />
 					</a>
 				</td>
@@ -104,7 +104,7 @@
 			<tr>
 				<td>
 					<div class="main-service-btn">
-						<a href="<%= request.getContextPath() %>/survey/surveyCustom">맞춤식단찾기</a>
+						<a href="<%= request.getContextPath() %>/surveyResult">맞춤식단찾기</a>
 					</div>
 				</td>
 			</tr>

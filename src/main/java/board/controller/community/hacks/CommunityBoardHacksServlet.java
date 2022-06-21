@@ -31,7 +31,7 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 1. 사용자 입력값 처리
-			int numPerPage = boardService.NUM_PER_PAGE;
+			int numPerPage = BoardService.NUM_PER_PAGE;
 			int cPage = 1;
 			
 			try {
@@ -55,13 +55,8 @@ public class CommunityBoardHacksServlet extends HttpServlet {
 			// 2.b. pagebar 영역
 			int totalPostingContents = boardService.getTotalPostings(boardCode);
 			String url = request.getRequestURI();
-			String pagebar = "";
-			if (boardCode != null) {
-				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalPostingContents, url + "?BoardCode=" + boardCode);
-			}
-			else {
-				pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
-			}
+			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url + "?boardCode=" + boardCode);
+			System.out.println("pagebar = " + pagebar);
 			
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);

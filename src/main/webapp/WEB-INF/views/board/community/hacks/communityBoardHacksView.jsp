@@ -119,14 +119,14 @@
 		List<PostingLike> likes = posting.getLikes();
 		for(int i = 0; i < likes.size(); i++) {
 			PostingLike pl = likes.get(i);
-			if(pl.getStatus().equals("Y")) {
+			if(pl.getStatus().equals("N")) {
 	%>
-				love it&nbsp;<i class="fa-solid fa-heart"></i>
+				love it&nbsp;<i class="fa-regular fa-heart"></i>
 		<% 
 		    }
 		    else {
 		%>
-				love it&nbsp;<i class="fa-regular fa-heart"></i>
+				love it&nbsp;<i class="fa-solid fa-heart"></i>
 	<%
 			}
 		}

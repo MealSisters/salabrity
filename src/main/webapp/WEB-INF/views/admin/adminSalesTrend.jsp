@@ -81,8 +81,6 @@
 		}
 	}
 	
-	System.out.println("salesData = " + salesData);
-	System.out.println("dateData = " + dateData);
 	/*------------------------------- 라인 차트 영역 -------------------------------*/	
 %>
 <%
@@ -97,11 +95,16 @@
 			pieProductNames += topSalesData.get(i).getProductName() + "', '";	
 			pieSalesData += topSalesData.get(i).getAmount() + "', '";				
 		} else {
-			pieProductNames += topSalesData.get(i).getProductName() + "']";
-			pieSalesData += topSalesData.get(i).getAmount() + "']";
+			pieProductNames += topSalesData.get(i).getProductName();
+			pieSalesData += topSalesData.get(i).getAmount();
 		}
 	}
+	pieProductNames += "']";
+	pieSalesData += "']";
 	
+	System.out.println("piePeriod = " + piePeriod);
+	System.out.println("pieProductNames = " + pieProductNames);
+	System.out.println("pieSalesData = " + pieSalesData);
 	/*------------------------------- 파이 차트 영역 -------------------------------*/	
 %>
 

@@ -179,7 +179,7 @@ List<Menu> menuList = (List<Menu>) request.getAttribute("menuList");
     const goToProductList = () => {
         const btn = document.querySelector(".cancelBtn");
         btn.onclick = () => {
-            location.href = history.go(-1);
+            location.href = "<%= request.getContextPath() %>/product/productList";
         };
     };
     
