@@ -105,6 +105,11 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("findMemberBy");
+		if (param.get("gender").equals("all")) {
+			sql = sql.replace("#", "or gender is null");
+		} else {
+			sql = sql.replace("#", "");
+		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (!param.get("memberRole").equals("all")) {
@@ -148,6 +153,11 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("getFilteringMembers");
+		if (param.get("gender").equals("all")) {
+			sql = sql.replace("#", "or gender is null");
+		} else {
+			sql = sql.replace("#", "");
+		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if (!param.get("memberRole").equals("all")) {

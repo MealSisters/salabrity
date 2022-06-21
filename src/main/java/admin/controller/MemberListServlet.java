@@ -70,11 +70,13 @@ public class MemberListServlet extends HttpServlet {
 				searchParam.put("end", end);
 				list = adminService.findMemberBy(searchParam);
 				totalMembers = adminService.getFilteringMembers(searchParam);
+				System.out.println("listSize@servlet = " + list.size());
 			} else {
 				list = adminService.findAllMember(param);
 				totalMembers = adminService.getTotalMembers();
 			}
 
+			System.out.println("totalMembers@servlet = " + totalMembers);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getPagebar(cPage, numPerPage, totalMembers, url);
 
