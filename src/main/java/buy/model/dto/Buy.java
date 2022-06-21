@@ -3,7 +3,7 @@ package buy.model.dto;
 import java.sql.Date;
 
 public class Buy {
-	private int merchantUid;
+	private Long merchantUid;
 	private String memberId;
 	private int shippingAddressNo;
 	private String payMethod;
@@ -24,7 +24,7 @@ public class Buy {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Buy(int merchantUid, String memberId, int shippingAddressNo, String payMethod, int amount, String buyerEmail,
+	public Buy(Long merchantUid, String memberId, int shippingAddressNo, String payMethod, int amount, String buyerEmail,
 			String buyerName, String buyerTel, String buyerAddr, String buyerPostcode, Date paymentDate, Date buyDate,
 			String impUid, PayStatement payStatement, String requestTerm) {
 		super();
@@ -45,11 +45,11 @@ public class Buy {
 		this.requestTerm = requestTerm;
 	}
 
-	public int getMerchantUid() {
+	public Long getMerchantUid() {
 		return merchantUid;
 	}
 
-	public void setMerchantUid(int merchantUid) {
+	public void setMerchantUid(Long merchantUid) {
 		this.merchantUid = merchantUid;
 	}
 
