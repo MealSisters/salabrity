@@ -124,7 +124,10 @@ const printBarChart = (target, days, memberData, rgb = "#0C7475") => {
           	},
           	scales: {
             	  yAxes: [{
-                	  ticks: { suggestedMax: max+1 }
+                	  ticks: { 
+                	  	  beginAtZero: true,
+                	  	  suggestedMax: max+1 
+                	  }
              	 }]
           	}
       	}
