@@ -114,11 +114,11 @@
                 </tr>
                 <tr>
                     <th>결제방법</th>
-                    <td><%= productList %></td>
+                    <td>카드</td>
                     <td><td>
                 </tr>
                 <tr>
-                    <th>결제일시</th>
+                    <th>결제일자</th>
                     <td><%= buyList.get(0).getPaymentDate() %></td>
                 </tr>
             </table>
