@@ -17,7 +17,9 @@
 <div class="notice_page_content">
     <h3 class="notice_hd">자주 묻는 질문</h3>
     <div class="notice_wrap">
+    <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
     <button type="button" class="btn_notice_enroll" onclick="location.href='<%= request.getContextPath() %>/board/faqEnroll';">등록</button>
+     <% } %>
 <%@ include file="/WEB-INF/views/common/noticePagebar.jsp" %>
    <div class="notice_cont" id="faq_cont"> <!-- faq랑 같이 사용 -->
             <div class="faq">

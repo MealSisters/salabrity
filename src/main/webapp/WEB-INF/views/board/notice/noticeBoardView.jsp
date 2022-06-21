@@ -18,7 +18,11 @@
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/notice/notice.css" />
-
+<style>
+.noticeDetail_view p {
+	height : 267px;
+}
+</style>
 <div class="notice_page_content">
 	<h3 class="notice_hd">공지사항</h3>
 	<div class="notice_wrap">
@@ -47,7 +51,7 @@
 		}
 		
 %>
-                <p><%= posting.getContent() %></p>
+                <p class=""><%= posting.getContent() %></p>
             </div>
 <% 			
 	}
