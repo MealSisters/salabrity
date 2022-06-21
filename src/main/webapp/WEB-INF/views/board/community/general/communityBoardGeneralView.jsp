@@ -128,6 +128,7 @@
 		%>
 				love it&nbsp;<i class="fa-solid fa-heart"></i>
 	<%
+				break;
 			}
 		}
 	%>
@@ -396,7 +397,7 @@ const loginAlert = (e) => {
 /**
  * 좋아요 기능
  */
- window.onload = () => {
+window.onload = () => {
 	const likeUp = () => {
 		document.generalLikeUpFrm.submit();
 	};
