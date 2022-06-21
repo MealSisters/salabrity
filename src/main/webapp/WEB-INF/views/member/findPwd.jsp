@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<% String memberId = (String)request.getAttribute("memberId");  %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
-
+<script>
+window.onload = () => {
+	<% if(msg != null) { %>
+	alert("<%= msg %>");
+	<% } %>
+}
+</script>
 	<div class="wrap_main">
 			<div class="find_box">
        <h3 class="head_log">비밀번호 찾기</h3>
@@ -12,8 +19,8 @@
 				<form name="findPwdFrm" method="POST" action="<%= request.getContextPath() %>/member/findPwd">
 				
 				<div class="find_input">
-					<input class="find_input_box" type="text" name="memberName" id="" placeholder="이름"><br>
-					<input class="find_input_box" type="text" name=email id="" placeholder="이메일">
+					<input class="find_input_box" type="text" name="memberId" id="" placeholder="아이디"><br>
+					<input class="find_input_box" type="text" name="email" id="" placeholder="이메일">
 				</div>
 				<button type="submit" class="btn_find_id">비밀번호 찾기</button>
 				</form>

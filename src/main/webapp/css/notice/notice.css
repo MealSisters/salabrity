@@ -140,7 +140,7 @@ strong {
 /* 공지사항 관리자 글 등록 */
 .btn_notice_enroll {
 	position: absolute;
-	margin-left: 1021px;
+	margin-left: 1016px;
 	margin-top: 10px;
 	float: right;
 	background-color: #116916;
@@ -149,7 +149,14 @@ strong {
 	width: 50px;
 	color: #fff;
 	font-size: 13px;
+	border-radius: 13px;
+    height: 30px;
+    width: 56px;
 }
+.update_notice, .delete_notice, .back_notice {
+	    border-radius: 20px;
+}
+
 
 .btn_notice_enroll:hover {
 	cursor: pointer;
@@ -213,7 +220,7 @@ strong {
 	border: 1px solid #fff;
 	color: #fff;
 	height: 29px;
-	width: 65px;
+	width: 68px;
 	font-size: 12px;
 }
 
