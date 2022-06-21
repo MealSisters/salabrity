@@ -43,7 +43,7 @@ public class MemberLoginServlet extends HttpServlet {
 			
 			// 업무로직
 			Member member = memberService.findByMemberId(memberId);
-			System.out.println("member@MemberLoginServlet = " + member);
+//			System.out.println("member@MemberLoginServlet = " + member);
 			
 			HttpSession session = request.getSession();
 			// saveId
@@ -51,7 +51,7 @@ public class MemberLoginServlet extends HttpServlet {
 			cookie.setPath(request.getContextPath());
 			if(saveId != null) {
 				cookie.setMaxAge(7 * 24 * 60 * 60);
-				System.out.println(cookie.getValue());
+//				System.out.println(cookie.getValue());
 			} else {
 				// 로그인 실패
 				cookie.setMaxAge(0); 

@@ -42,11 +42,19 @@ span#duplicated{color:red;}
 	<% } else { %>
 		<p><span id="duplicated"><%= memberId %></span>는 이미 사용중입니다.</p>
 		<form name="checkIdDuplicateFrm" action="<%= request.getContextPath() %>/member/checkIdDuplicate">
-			<input type="text" name="memberId" />
-			<input type="submit" value="중복검사" />
+			<input type="text" name="memberId" id="memberId"/>
+			<button type="button" onclick="checkId();">중복검사</button>
 		</form>
 	<% } %>
 	</div>
-
+<script>
+	const checkId = () => {
+		if(!/^[A-Za-z0-9]{6,}$/.test(memberId.value)){
+			alert("아이디는 대소문자/숫자를 조합하여 6글자 이상이어야 합니다.");
+			return false;
+		}
+		document.checkIdDuplicateFrm.submit();
+	}
+</script>
 </body>
 </html>
