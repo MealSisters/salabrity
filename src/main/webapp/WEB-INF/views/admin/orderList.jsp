@@ -24,7 +24,7 @@
 	int startNo = (cPage-1)*AdminService.ORDER_NUM_PER_PAGE + 1;
 
 	
-	System.out.println("orderList@jsp = " + list);
+	System.out.println("searchParam@jsp = " + searchParam);
 %>
 <link rel='stylesheet' href='<%= request.getContextPath() %>/css/pagebar.css'>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin/backtoDashboard.css">
@@ -144,6 +144,16 @@
 
     <%= pagebar %>
 </div>
-
+<script>
+	document.orderFilterFrm.onsubmit = () => {
+		let result = true;
+		if (document.querySelector("#filter-orderDate-start").value > document.querySelector("#filter-orderDate-end").value) {
+    		result = false;
+    		alert("마지막 탐색기간은 시작기간보다 빠를 수 없습니다.");
+    		document.querySelector("#filter-orderDate-end").focus();
+    	}
+		return result;
+	};
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

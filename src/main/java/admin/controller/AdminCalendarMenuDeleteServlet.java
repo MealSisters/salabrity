@@ -27,8 +27,6 @@ public class AdminCalendarMenuDeleteServlet extends HttpServlet {
 		try {
 			int productNo = Integer.parseInt(request.getParameter("delProductNo"));
 			WeekDayCode dataDate = WeekDayCode.valueOf(request.getParameter("delWeekDayCode"));
-			System.out.println("productNo@doPost = " + productNo);
-			System.out.println("dataDate@doPost = " + dataDate);
 
 			Calendar cal = new Calendar();
 			cal.setProductNo(productNo);
