@@ -35,10 +35,11 @@ public class CalendarServlet extends HttpServlet {
 			List<ProductExt> productAll = productService.findProductsAll();
 			List<CalendarExt> calList = null;
 			if (request.getParameter("productNo") != null) {
-
 				int productNo = Integer.parseInt(request.getParameter("productNo"));
 				productHere = productService.findProductByNo(productNo);
 				calList = calendarService.findCalendarByProductNo(productNo);
+				if (productAll != null && !productAll.isEmpty())
+					recentProduct = productAll.get(0);
 			} else {
 				// 기본위치를 최근등록상품으로 설정하는 경우
 				calList = calendarService.findRecentProductCal();
@@ -55,6 +56,7 @@ public class CalendarServlet extends HttpServlet {
 				}
 			}
 
+			// System.out.println();
 			request.setAttribute("productHere", productHere);
 			request.setAttribute("recentProduct", recentProduct);
 			request.setAttribute("productList", productAll);			
