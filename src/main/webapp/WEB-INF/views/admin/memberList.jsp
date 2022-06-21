@@ -129,9 +129,6 @@ int startNo = (cPage-1)*AdminService.MEMBER_NUM_PER_PAGE + 1;
 
 <script>
 	window.addEventListener('load', (e1) => {
-		const msg = "<%= msg %>";
-		if(msg != "null")
-			alert("<%= msg %>");
 		const selectAll = document.querySelectorAll("tbody .member-role");
 		selectAll.forEach((select) => {
 			select.addEventListener('change', (e2) => {
