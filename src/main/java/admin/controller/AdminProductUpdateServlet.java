@@ -43,6 +43,8 @@ public class AdminProductUpdateServlet extends HttpServlet {
 
 			List<Menu> menuList = menuService.findAllMenu();
 			ProductExt product = productService.findProductByNo(productNo);
+			
+			System.out.println();
 
 			request.setAttribute("menuList", menuList);
 			request.setAttribute("product", product);

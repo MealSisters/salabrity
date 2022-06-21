@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Map"%>
 <%@page import="buy.model.dto.ProductBuyExt"%>
 <%@page import="buy.model.dto.ProductBuy"%>
@@ -14,6 +15,7 @@
 	Map<String, Object> searchParam = (Map<String, Object>) request.getAttribute("searchParam"); 
 	List<BuyExt> list = (List<BuyExt>) request.getAttribute("list");
 	String pagebar = (String) request.getAttribute("pagebar");
+	DecimalFormat fm = new DecimalFormat("###,###");
 	
 	int cPage = 1;
 	if(request.getParameter("cPage")!=null) {
@@ -105,7 +107,7 @@
                     <td class="col-memberId"><%= buy.getMemberId() %></td>
                     <td class="col-orderDate"><%= buy.getBuyDate() %></td>
                     <td class="col-payStatus"><%= status %></td>
-                    <td class="col-price"><%= buy.getAmount() %></td>
+                    <td class="col-price"><%= fm.format(buy.getAmount()) %></td>
                     <td class="col-shippingAddr td-xscroll"><%= buy.getBuyerAddr() %></td>
                     <td class="col-products td-xscroll"><%= sumName %></td>
                     <td class="col-orderReq td-xscroll"><%= buy.getRequestTerm()!=null ? buy.getRequestTerm() : "" %></td>
