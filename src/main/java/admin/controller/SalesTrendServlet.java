@@ -73,7 +73,6 @@ public class SalesTrendServlet extends HttpServlet {
 			param.put("startDate", startDate);
 			param.put("endDate", endDate);
 			List<SalesTrend> totalSalesData = adminService.findSalesTrend(param);
-			System.out.println("totalSalesData@doPost = " + totalSalesData);
 
 			
 			Date pieStartDate = null;
@@ -87,7 +86,9 @@ public class SalesTrendServlet extends HttpServlet {
 			Map<String, Date> pieParam = new HashMap<>();
 			pieParam.put("startDate", pieStartDate);
 			pieParam.put("endDate", pieEndDate);
+			System.out.println("pieParam@doPost = " + pieParam);
 			List<SalesTrend> topSalesData = adminService.findTopSalesTrend(pieParam);
+			// System.out.println("topSalesData@doPost = " + topSalesData);
 
 			
 			request.setAttribute("period", param);

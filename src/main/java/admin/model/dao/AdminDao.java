@@ -239,9 +239,9 @@ public class AdminDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				SalesTrend st = new SalesTrend();
-				System.out.println(rset.getString("payment_date"));
 				st.setSalesDate(Date.valueOf(rset.getString("payment_date")));
 				st.setAmount(rset.getInt("sales"));
+				st.setProductName(sql);
 				list.add(st);
 			}
 		} catch (Exception e) {
