@@ -55,9 +55,7 @@
 							<td>평일 09:00 ~ 18:00 (토/일/공휴일 휴무)</td>
 						</tr>
 						<tr>
-							<th rowspan="2">
-								<a href="<%= request.getContextPath() %>/mypage/boardQuestion">1:1 문의</a>
-							</th>
+							<th rowspan="2">1:1 문의</th>
 							<td>24시간 접수 가능</td>
 						</tr>
 						<tr>

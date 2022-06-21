@@ -33,7 +33,6 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 			member.setMemberId(memberId);
 			member.setMemberRole(memberRole);
 			int result = adminService.updateMemberRole(member);
-			System.out.println("result = " + result);
 
 			request.getSession().setAttribute("msg", "[" + memberId + "]의 권한이 [" + memberRoleText + "]으로 변경되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/admin/memberList");
