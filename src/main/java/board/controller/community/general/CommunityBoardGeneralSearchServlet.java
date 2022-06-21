@@ -31,7 +31,7 @@ public class CommunityBoardGeneralSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 0. 페이징 처리
-			int numPerPage = boardService.NUM_PER_PAGE;
+			int numPerPage = BoardService.NUM_PER_PAGE;
 			int cPage = 1;
 			
 			try {
@@ -50,26 +50,26 @@ public class CommunityBoardGeneralSearchServlet extends HttpServlet {
 			String searchType = request.getParameter("searchType");
 			String searchKeyword = request.getParameter("searchKeyword");
 			
-			Map<String, String> param = new HashMap<>();
-			param.put("searchType", searchType);
-			param.put("searchKeyword", searchKeyword);
-			System.out.println("param = " + param);
+			Map<String, String> searchParam = new HashMap<>();
+			searchParam.put("searchType", searchType);
+			searchParam.put("searchKeyword", searchKeyword);
+			System.out.println("param = " + searchParam);
 			
 			BoardCode boardCode = BoardCode.C2;
 			
 			// 2. 업무 로직
 			// 2.a. content 영역
-			List<PostingExt> postingList = boardService.searchBy(pageParam, param, boardCode);
+			List<PostingExt> postingList = boardService.searchBy(pageParam, searchParam, boardCode);
 
 			// 2.b. pagebar 영역
-			int totalPostingContents = boardService.getTotalPostings(boardCode);
+			int totalPostingContents = boardService.getSearchTotalPostings(searchParam, boardCode);
 			String url = request.getRequestURI();
 			String pagebar = "";
-			if (boardCode != null) {
-				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalPostingContents, url + "?BoardCode=" + boardCode);
+			if (searchType != null && searchKeyword != null) {
+				pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalPostingContents, url + "?boardCode=" + boardCode + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword);
 			}
 			else {
-				pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url);
+				pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url + "?boardCode=" + boardCode);
 			}
 			System.out.println("pagebar = " + pagebar);
 			
