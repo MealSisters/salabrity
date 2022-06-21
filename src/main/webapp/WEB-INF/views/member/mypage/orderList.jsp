@@ -28,9 +28,7 @@
 	String defaultDate = sdf.format(date);
 	List<BuyExt> list = (List<BuyExt>)request.getAttribute("list");
 	DecimalFormat df = new DecimalFormat("#,###");
-	
-	
-	
+		
 	
 %>
 
@@ -45,7 +43,7 @@
 							List<ProductBuyExt> productBuyList = buy.getList();
 							
 				%>
-					<tr class="row1">
+					<tr class="row1" id="<%= buy.getMerchantUid() %>">
 						<td class="col1" width="193">주문번호: <%= buy.getMerchantUid() %></td>
 						<td class="col2" rowspan="2" width ="400">주문 상품 : <%= productBuyList.get(0).getProductName() %> 
 							<%= productBuyList.size() == 1 ? "" : "외 "+ (productBuyList.size()-1) + "건" %> </td>
@@ -114,7 +112,7 @@
 
 				order_infoes.forEach(function (elem) {
 					elem.addEventListener('click', function () {
-						location.href = '<%= request.getContextPath() %>/mypage/orderView';
+					location.href = '<%= request.getContextPath() %>/mypage/orderView?merchanUid='+ $(event.target).parent().attr('id');
 					});
 				});
 				const cart_btns = document.querySelectorAll('#order_list tr.row1 td.col4');

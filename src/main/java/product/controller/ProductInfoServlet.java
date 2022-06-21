@@ -36,6 +36,7 @@ public class ProductInfoServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/product/productInfo.jsp").forward(request, response);}
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 
