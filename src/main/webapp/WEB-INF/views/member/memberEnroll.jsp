@@ -172,14 +172,26 @@ function sample4_execDaumPostcode() {
 
 // 회원가입폼 유효성 검사
 const checkIdDuplicate = () => {
+	
+	const id = document.getElementById("memberId");
+	if(id.value.length == 0) {
+		alert("아이디를 입력해주세요.");
+		return false;
+	} 
+	if(!/[A-Za-z0-9]{6,}$/.test(memberId.value)){
+		alert("아이디는 대소문자/숫자를 조합하여 6글자 이상이어야 합니다.");
+		return false;
+	}
 	const title = "checkIdDuplicatePopup";
-	const spec = "width=300px, height=200px";
+	const spec = "width=460px, height=300px";
 	const popup = open("", title, spec);
 	
 	const frm = document.checkIdDuplicateFrm;
 	frm.target = title;
 	frm.memberId.value = memberId.value;
 	frm.submit();
+	return true;
+	
 };
 
 checkPassword.onblur = () => {
@@ -193,7 +205,7 @@ checkPassword.onblur = () => {
 	
 document.memberEnrollFrm.onsubmit = () => {
 	// ID는 6자리 이상의 영문 혹은 숫자
-	if(!/[A-Za-z0-9]{6,}/.test(memberId.value)){
+	if(!/^[A-Za-z0-9]{6,}/.test(memberId.value)){
 		alert("아이디는 대소문자/숫자를 조합하여 6글자 이상이어야 합니다.");
 		return false;
 	}

@@ -416,6 +416,7 @@
 	padding-right: 4px;
 	border-radius: 20px;
 	border: solid 2px #dbdbdb;
+	    padding-left: 8px;
 }
 
 #searchKeyword {
@@ -423,6 +424,7 @@
 	width: 164px;
 	border-radius: 20px;
 	border: solid 2px #dbdbdb;
+	    padding-left: 10px;
 }
 
 #search_container {

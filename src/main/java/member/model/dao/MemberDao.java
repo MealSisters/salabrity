@@ -18,7 +18,7 @@ public class MemberDao {
 	
 	public MemberDao() {
 		String fileName = MemberDao.class.getResource("/sql/member-query.properties").getPath();
-		System.out.println("fileName@MemberDao = " + fileName);
+//		System.out.println("fileName@MemberDao = " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
@@ -220,12 +220,10 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, member.getPassword());
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new MemberException("비밀번호 변경 오류", e);
 		} finally {
 			close(pstmt);

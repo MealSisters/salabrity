@@ -1,8 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,45 +20,56 @@ import member.model.service.MemberService;
 public class FindPwdUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/member/findPwdUpdate.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String randomStr = (String) request.getSession().getAttribute("randomStr");
 		String randomPwd = request.getParameter("randomPwd");
-		String email = request.getParameter("email");
-		String newPwd = PwdEncrypt.encrypt(request.getParameter("newPwd"), email);
+		String memberId = request.getParameter("memberId");
+//		System.out.println(memberId);
+		String newPassword = PwdEncrypt.encrypt(request.getParameter("newPassword"), memberId);
 		
-		if(!randomStr.equals(randomPwd)){
-			request.setAttribute("msg", "인증번호가 일치하지 않습니다");
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		
+		if (!randomStr.equals(randomPwd)) {
+			writer.println("<script>alert('인증번호가 일치하지 않습니다. 다시 시도해주세요.');</script>");
+			writer.println("<script>history.go(-2);</script>");
+			writer.close();
 			return;
 		}
-		
-		Member member = memberService.findByMemberEmail(email);
+
 		String msg = "";
+		Member member = memberService.findByMemberId(memberId);
 		String location = request.getContextPath();
-		if(member != null) {
+		if (member != null) {
 			Member findPwdUpdate = new Member();
-			findPwdUpdate.setEmail(email);
-			findPwdUpdate.setPassword(newPwd);
+			findPwdUpdate.setMemberId(memberId);
+			findPwdUpdate.setPassword(newPassword);
 			int result = memberService.findPwdUpdate(findPwdUpdate);
-			System.out.println(result);
+//			System.out.println(result);
 			msg = "비밀번호가 변경되었습니다.";
 			location += "/member/login";
-		} else {
-			msg = "기존 비밀번호가 일치하지 않습니다.";
-			location += "/member/findPwdUpdate";
+
+			request.getSession().setAttribute("msg", msg);
+			response.sendRedirect(location);
+			
 		}
-		request.getSession().setAttribute("msg", msg);
-		response.sendRedirect(location);
-		} 
-	
+
+	}
 
 }

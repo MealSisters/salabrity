@@ -40,16 +40,15 @@ public class FindPwdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	
-		String memberName = request.getParameter("memberName");
+		String memberId = request.getParameter("memberId");
 		String email = request.getParameter("email");
 		
-		Member member = memberService.findByMemberEmail(email);
-		System.out.println("이건 비밀번호찾기 서블릿" + member);
-		
+		Member member = memberService.findByMemberId(memberId);
+//		System.out.println("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ"+member);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
-		if( member == null || !member.getMemberName().equals(memberName)){
+		if( member == null || !member.getMemberId().equals(memberId)){
         	writer.println("<script>alert('해당하는 회원 정보가 없습니다.');</script>");
 			writer.println("<script>history.back();</script>");
 			writer.close();
@@ -75,7 +74,7 @@ public class FindPwdServlet extends HttpServlet {
           
           
           int random = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
-			System.out.println("인증번호 : " + random);
+//			System.out.println("인증번호 : " + random);
 			String randomStr = Integer.toString(random);
 			
 			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
@@ -92,7 +91,7 @@ public class FindPwdServlet extends HttpServlet {
 				send.setText("인증번호는 " + randomStr + " 입니다.");
 
 				Transport.send(send);
-				System.out.println("이메일 전송 완료");
+//				System.out.println("이메일 전송 완료");
 				
 			} catch (AddressException e) {
 				e.printStackTrace();
@@ -103,7 +102,8 @@ public class FindPwdServlet extends HttpServlet {
 				HttpSession savePwd = request.getSession();
 				savePwd.setAttribute("randomStr", randomStr);
 				request.setAttribute("email", email);
-				writer.println("<script>alert('이메일로 임시 비밀번호가 전송되었습니다.');</script>");
+				request.setAttribute("memberId", memberId);
+				savePwd.setAttribute("msg", "이메일로 인증 번호가 전송되었습니다.");
 				request.getRequestDispatcher("/WEB-INF/views/member/findPwdUpdate.jsp").forward(request, response);
           
 	}
