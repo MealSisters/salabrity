@@ -52,7 +52,7 @@
 			<%-- 메인 메뉴 --%>
 			<nav class="main-nav">
 				<ul>					
-					<li class="diet-survey"><a href="<%= request.getContextPath() %>/survey/surveyCustom">맞춤식단찾기</a></li>
+					<li class="diet-survey"><a href="<%= request.getContextPath() %>/surveyResult">맞춤식단찾기</a></li>
 					<li class="diet-calendar"><a href="<%= request.getContextPath() %>/calendar">샐브의식단</a></li>
 					<li class="diet-products"><a href="<%= request.getContextPath() %>/product/productList">전체상품</a></li>
 					<li class="community-board"><a href="<%= request.getContextPath() %>/board/community">커뮤니티</a></li>
