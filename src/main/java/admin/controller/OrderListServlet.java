@@ -44,7 +44,7 @@ public class OrderListServlet extends HttpServlet {
 				if (!request.getParameter("orderDateStart").equals(""))
 					orderDateStart = Date.valueOf(request.getParameter("orderDateStart"));
 				if (!request.getParameter("orderDateEnd").equals(""))
-					orderDateStart = Date.valueOf(request.getParameter("orderDateEnd"));
+					orderDateEnd = Date.valueOf(request.getParameter("orderDateEnd"));
 				PayStatement payStatement = null;
 				if (!request.getParameter("payStatement").equals("all")) {
 					payStatement = PayStatement.valueOf(request.getParameter("payStatement"));

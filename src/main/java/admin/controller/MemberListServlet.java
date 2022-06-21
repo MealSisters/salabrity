@@ -70,6 +70,7 @@ public class MemberListServlet extends HttpServlet {
 				searchParam.put("end", end);
 				list = adminService.findMemberBy(searchParam);
 				totalMembers = adminService.getFilteringMembers(searchParam);
+				System.out.println("listSize@servlet = " + list.size());
 			} else {
 				list = adminService.findAllMember(param);
 				totalMembers = adminService.getTotalMembers();
