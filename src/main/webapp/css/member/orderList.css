@@ -38,6 +38,9 @@ section#order_list h1>p{
     padding-left: 10px;
     font-weight: 500;
 }
+#order_list .orderListNull{
+	text-align: center;
+}
 #order_list{
     width: 75%;
 	margin: 0 auto;
