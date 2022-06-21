@@ -14,7 +14,7 @@
     <article class="order_prduct">
         <div class="heading_wrp">
             <h2>주문번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;000015212564</h2>
-            <div>배송 또는 상품에 문제가 있나요? <a href="배송조회">1:1문의하기</a></div>
+            <div>배송 또는 상품에 문제가 있나요?&nbsp;<a href="배송조회">1 : 1 문의하기</a></div>
         </div>
         <table class="order_product_tbl">
             <tr class="row_odd">

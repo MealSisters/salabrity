@@ -1,3 +1,4 @@
+<%@page import="buy.model.dto.ProductBuyExt"%>
 <%@ page import= "java.util.List" %>
 <%@ page import= "java.util.ArrayList" %>
 <%@ page import= "java.util.Date" %>
@@ -41,16 +42,34 @@
 				<%
 					if(list != null && !list.isEmpty()){
 						for(BuyExt buy : list){
+							List<ProductBuyExt> productBuyList = buy.getList();
+							
 				%>
 					<tr class="row1">
-						<td class="col1">주문번호 : <%= ""%></td>
-						<td class="col2" rowspan="2" >주문 상품: <%= "주문상품이름"%> <%=  ""%> </td>
-						<td class="col3" rowspan="2"> 결제금액 : <%= df.format("결제금액") %></td>
-						<td class="col4"><button class="addCart">다시담기</button></td>
+						<td class="col1" width="193">주문번호: <%= buy.getMerchantUid() %></td>
+						<td class="col2" rowspan="2" width ="400">주문 상품 : <%= productBuyList.get(0).getProductName() %> 
+							<%= productBuyList.size() == 1 ? "" : "외 "+ (productBuyList.size()-1) + "건" %> </td>
+						<td class="col3" rowspan="2" > 결제금액 : <%= df.format(buy.getAmount()) %>원</td>
+						<td class="col4" width="110">
+							<form action="<%= request.getContextPath() %>/order/cart/insertCarts" method="post">
+								<button class="addCart">다시담기</button>
+								<%
+									for(ProductBuyExt productBuy : productBuyList){
+								%>
+									<input type="hidden" name="productNo" value="<%= productBuy.getProductNo() %>"/>
+									<input type="hidden" name="quantity" value="<%= productBuy.getQuantity() %>"/>
+								<%
+									}
+								%>
+									<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>"/>
+									<input type="hidden" name="firstShippingDate" value="<%= defaultDate %>"/>
+								
+							</form>
+						</td>
 					</tr>
 					<tr class="row2">
-						<td class="col1">주문일자 : 2022-06-08</td>
-						<td class="col4"> <button class="boardQuestion">1 : 1문의</button></td>
+						<td class="col1">주문일자 : <%= sdf.format(buy.getBuyDate()) %></td>
+						<td class="col4" > <button class="boardQuestion">1 : 1문의</button></td>
 					</tr>
 				<%
 						}
@@ -67,12 +86,27 @@
 			
 				
 				<script>
+				
+				window.onload = () => {
+					<%
+						String addCartSuccessMsg = (String)session.getAttribute("addCartSuccessMsg");
+						if (addCartSuccessMsg  != null){
+					%>
+						alert("<%= addCartSuccessMsg %>");
+					<%
+							session.removeAttribute("addCartSuccessMsg");
+						}
+					%>
+				}
+				
+				
 				const question_btns = document.querySelectorAll('#order_list tr.row2 td.col4');
 				console.log(question_btns);
 				question_btns.forEach(function (elem) {
 					elem.addEventListener('click', function () {
 						location.href = '<%= request.getContextPath() %>/mypage/boardQuestion';
 					});
+					
 				});
 
 				const order_infoes = document.querySelectorAll('#order_list tr .col1, #order_list tr .col2,#order_list tr .col3');

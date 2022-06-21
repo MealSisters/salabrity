@@ -200,7 +200,7 @@
 			dataType: "text",
 			data : {productNo: <%=product.getProductNo() %>, memberId : "<%=memberId%>",
 				quantity : $('#quantity').val(), firstShippingDate : $('#firstShippingDate').val()},
-			url : "<%=request.getContextPath()%>/order/cart/insertCart",
+			url : "`	",
 			success : function(resp){
 				alert(resp);
 			},

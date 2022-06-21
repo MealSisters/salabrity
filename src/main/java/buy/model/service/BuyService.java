@@ -78,6 +78,11 @@ public class BuyService {
 	public List<BuyExt> findBuyExtById(String memberId) {
 		Connection conn = getConnection();
 		List<BuyExt> list = buyDao.findBuyExtById(conn, memberId);
+		for(BuyExt buy : list) {
+			Long merchantUid = buy.getMerchantUid();
+			List<ProductBuyExt> productBuyList = buyDao.findProductBuyExtByUid(conn, merchantUid);
+			buy.setList(productBuyList);
+		}
 		close(conn);
 		return list;
 	}

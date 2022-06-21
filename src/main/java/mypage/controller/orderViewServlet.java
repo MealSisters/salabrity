@@ -21,4 +21,6 @@ public class orderViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderView.jsp").forward(request, response);
 	}
+	
+	
 }

@@ -309,7 +309,6 @@ public class BuyDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				BuyExt buy = handleBuyExtResultSet(rset);
-				
 				list.add(buy);
 			}
 		} catch (Exception e) {
