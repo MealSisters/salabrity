@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.dto.Posting;
+import board.model.dto.PostingExt;
 import common.utill.PageBar;
 import mypage.model.service.MypageService;
 
@@ -20,6 +21,7 @@ import mypage.model.service.MypageService;
 public class BoardFaqServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MypageService mypageService = new MypageService();
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -33,6 +35,11 @@ public class BoardFaqServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 			}
 			
+			String postingNo = request.getParameter("no");
+//			int postingNo = Integer.parseInt(request.getParameter("no"));
+//			PostingExt posting = mypageService.findByNo(no); 
+//			System.out.println(postingNo);
+			
 			int start = (cPage - 1) * numPerPage + 1;
 			int end = cPage * numPerPage;
 			
@@ -43,10 +50,11 @@ public class BoardFaqServlet extends HttpServlet {
 
 			int totalContents = mypageService.faqTotal();
 			String url = request.getRequestURI();
-			System.out.println(url);
+//			System.out.println(url);
 			
 			String pageBar = PageBar.getPagebar(cPage, numPerPage, totalContents, url);
 			
+//			request.setAttribute("posting", posting);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("pageBar", pageBar);
 			request.setAttribute("list", list);

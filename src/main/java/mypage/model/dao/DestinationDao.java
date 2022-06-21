@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import mypage.model.dto.Destination;
 import mypage.model.exception.DestinationException;
+import product.model.exception.ProductException;
 
 public class DestinationDao {
 	private Properties prop = new Properties();
@@ -34,12 +35,10 @@ public class DestinationDao {
 		PreparedStatement pstmt = null;
 		List<Destination> list = new ArrayList<>();
 		ResultSet rset = null;
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-
 			while(rset.next()) {
 				Destination destination = handleDestinationResultSet(rset);
 				list.add(destination);
@@ -212,6 +211,25 @@ public class DestinationDao {
 		return destination;
 	}
 
-
+	/*-------------------------------------- 이은지 start --------------------------------------*/
+	public int findCurrentDestNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int destNo = 0;
+		String sql = prop.getProperty("findCurrentDestNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				destNo = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new ProductException("최근 등록 배송지 고유번호 조회 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return destNo;
+	}
+	/*--------------------------------------- 이은지 end ---------------------------------------*/
 
 }

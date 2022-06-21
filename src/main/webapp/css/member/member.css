@@ -76,8 +76,8 @@
 }
 
 .avatar {
-	width: 64px;
-	height: 65px;
+	width: 56px;
+    height: 57px;
 	border-radius: 50%;
 	overflow: hidden;
 	margin: 0 auto;
@@ -91,9 +91,12 @@
 }
 
 .form_cont {
+	
 	padding: 40px;
 	width: 450px;
-	border: 1px solid #dbdbdb;
+	border-bottom: 1px solid #dbdbdb;
+	border-left: 1px solid #dbdbdb;
+	border-right: 1px solid #dbdbdb;
 	margin: 0 auto;
 	margin-top: 30px;
 	padding-bottom: 19px;
@@ -119,9 +122,10 @@
 }
 
 .find_main_box {
-	    margin-left: 14px;
-       margin-top: 18px;
+	margin-left: 14px;
+	margin-top: 27px;
 }
+
 .idpw_list li {
 	float: left;
 	margin-left: 10px;
@@ -418,8 +422,6 @@ label {
 
 /* find 페이지 */
 .find_box {
-
-	  
 	padding: 40px;
 	width: 450px;
 	border: 1px solid #dbdbdb;
@@ -432,10 +434,10 @@ label {
 	padding: 40px 30px;
 	border-radius: 20px;
 	box-shadow: 0px 10px 29px 0px #e0e0e0;
-	    margin-top: -54px;
-	        height: 560px;
-    margin-top: 7px;
-    padding-top: 24px;
+	margin-top: -54px;
+	height: 566px;
+	margin-top: 7px;
+	padding-top: 24px;
 }
 
 .find_input_box {
@@ -503,7 +505,6 @@ label {
 
 .find_id_box {
 	border-bottom: solid 1px #bdbdbd;
-	
 }
 
 /* 회원 정보 수정 페이지 member update */

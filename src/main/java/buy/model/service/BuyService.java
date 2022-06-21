@@ -1,6 +1,6 @@
 package buy.model.service;
 
-import static common.JdbcTemplate.close;
+import static common.JdbcTemplate.*;
 import static common.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
@@ -31,7 +31,7 @@ public class BuyService {
 		return totalBuys;
 	}
 
-	public List<ProductBuyExt> findProductBuyExtByUid(int merchantUid) {
+	public List<ProductBuyExt> findProductBuyExtByUid(Long merchantUid) {
 		Connection conn = getConnection();
 		List<ProductBuyExt> list = buyDao.findProductBuyExtByUid(conn, merchantUid);
 		close(conn);
@@ -52,5 +52,33 @@ public class BuyService {
 		return totalBuys;
 	}
 
+	public int insertBuy(BuyExt buy) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = buyDao.insertBuy(conn, buy);
+			List<ProductBuyExt> list = buy.getList();
+			for(ProductBuyExt pbe : list) {
+				result = buyDao.insertProductBuy(conn, pbe);
+				result = buyDao.deleteCart(conn, buy.getMemberId(), pbe);
+			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
+	
+	
+	public List<BuyExt> findBuyExtById(String memberId) {
+		Connection conn = getConnection();
+		List<BuyExt> list = buyDao.findBuyExtById(conn, memberId);
+		close(conn);
+		return list;
+	}
 }

@@ -85,53 +85,71 @@
 			</div>
 		</footer>
 	</div>
+	<script>
+	<!-- Channel Plugin Scripts -->
+	var memberIdVal = $("#memberId").val();
+	var memberNameVal = $("#memberName").val();
+	var phoneVal = $("#phone").val();
+	var emailVal = $("#email").val();
+
+	if(memberIdVal=='') {
+		memberIdVal = null;
+	}
+	if(memberNameVal=='') {
+		memberNameVal = null;
+	}
+	if(phoneVal=='') {
+		phoneVal = null;
+	}
+	if(emailVal=='') {
+		emailVal = null;
+	}
+
+	(function() {
+	  var w = window;
+	  if (w.ChannelIO) {
+	    return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+	  }
+	  var ch = function() {
+	    ch.c(arguments);
+	  };
+	  ch.q = [];
+	  ch.c = function(args) {
+	    ch.q.push(args);
+	  };
+	  w.ChannelIO = ch;
+	  function l() {
+	    if (w.ChannelIOInitialized) {
+	      return;
+	    }
+	    w.ChannelIOInitialized = true;
+	    var s = document.createElement('script');
+	    s.type = 'text/javascript';
+	    s.async = true;
+	    s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+	    s.charset = 'UTF-8';
+	    var x = document.getElementsByTagName('script')[0];
+	    x.parentNode.insertBefore(s, x);
+	  }
+	  if (document.readyState === 'complete') {
+	    l();
+	  } else if (window.attachEvent) {
+	    window.attachEvent('onload', l);
+	  } else {
+	    window.addEventListener('DOMContentLoaded', l, false);
+	    window.addEventListener('load', l, false);
+	  }
+	})();
+	ChannelIO('boot', {
+	  "pluginKey": "875acb53-7bf0-445a-8d7e-d6ef21bab6e9",
+	  "memberId": memberIdVal,
+	  "profile": {
+	    "name": memberNameVal,
+	    "mobileNumber": phoneVal,
+	    "email": emailVal
+	  }
+	});
+	<!-- End Channel Plugin -->
+	</script>
 </body>
-<!-- Channel Plugin Scripts -->
-<script>
-  (function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-  ChannelIO('boot', {
-    "pluginKey": "875acb53-7bf0-445a-8d7e-d6ef21bab6e9",
-    "memberId": "member_id",
-    "profile": {
-      "name": "member_name",
-      "mobileNumber": "phone",
-      "email": "email"
-    }
-  });
-</script>
-<!-- End Channel Plugin -->
 </html>

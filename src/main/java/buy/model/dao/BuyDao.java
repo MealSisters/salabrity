@@ -62,7 +62,7 @@ public class BuyDao {
 
 	private BuyExt handleBuyExtResultSet(ResultSet rset) throws SQLException {
 		BuyExt buy = new BuyExt();
-		buy.setMerchantUid(rset.getInt("merchant_uid"));
+		buy.setMerchantUid(rset.getLong("merchant_uid"));
 		buy.setMemberId(rset.getString("member_id"));
 		buy.setShippingAddressNo(rset.getInt("shipping_address_no"));
 		buy.setPayMethod(rset.getString("pay_method"));
@@ -100,14 +100,14 @@ public class BuyDao {
 		return totalBuys;
 	}
 
-	public List<ProductBuyExt> findProductBuyExtByUid(Connection conn, int merchantUid) {
+	public List<ProductBuyExt> findProductBuyExtByUid(Connection conn, Long merchantUid) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<ProductBuyExt> list = new ArrayList<>();
 		String sql = prop.getProperty("findProductBuyExtByUid");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, merchantUid);
+			pstmt.setLong(1, merchantUid);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				ProductBuyExt pb = handleProductBuyExtResultSet(rset);
@@ -127,7 +127,7 @@ public class BuyDao {
 
 		pbe.setProductBuyNo(rset.getInt("product_buy_no"));
 		pbe.setProductNo(rset.getInt("product_no"));
-		pbe.setMerchantUid(rset.getInt("merchant_uid"));
+		pbe.setMerchantUid(rset.getLong("merchant_uid"));
 		pbe.setQuantity(rset.getInt("quantity"));
 		pbe.setFirstShippingDate(rset.getDate("first_shipping_date"));
 		pbe.setCancelFlag(rset.getString("cancel_flag"));
@@ -230,5 +230,102 @@ public class BuyDao {
 		return totalBuys;
 	}
 
+	public int insertBuy(Connection conn, BuyExt buy) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertBuy");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, buy.getMerchantUid());
+			pstmt.setString(2, buy.getMemberId());
+			pstmt.setInt(3, buy.getShippingAddressNo());
+			pstmt.setString(4, buy.getPayMethod());
+			pstmt.setInt(5, buy.getAmount());
+			pstmt.setString(6, buy.getBuyerEmail());
+			pstmt.setString(7, buy.getBuyerName());
+			pstmt.setString(8, buy.getBuyerTel());
+			pstmt.setString(9, buy.getBuyerAddr());
+			pstmt.setString(10, buy.getBuyerPostcode());
+			pstmt.setDate(11, buy.getPaymentDate());
+			pstmt.setDate(12, buy.getBuyDate());
+			pstmt.setString(13, buy.getImpUid());
+			pstmt.setString(14, buy.getPayStatement().toString());
+			pstmt.setString(15, buy.getRequestTerm());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BuyException("구매정보 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertProductBuy(Connection conn, ProductBuyExt pbe) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertProductBuy");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pbe.getProductNo());
+			pstmt.setLong(2, pbe.getMerchantUid());
+			pstmt.setInt(3, pbe.getQuantity());
+			pstmt.setDate(4, pbe.getFirstShippingDate());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BuyException("구매상품정보 등록 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteCart(Connection conn, String memberId, ProductBuyExt pbe) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteCart");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, pbe.getProductNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new BuyException("장바구니 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
+	
+	public List<BuyExt> findBuyExtById(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<BuyExt> list = new ArrayList<>();
+		String sql = prop.getProperty("findBuyExtById");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				BuyExt buy = handleBuyExtResultSet(rset);
+				
+				list.add(buy);
+			}
+		} catch (Exception e) {
+			throw new BuyException("주문내역 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }
