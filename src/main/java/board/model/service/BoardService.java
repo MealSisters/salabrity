@@ -260,12 +260,12 @@ public class BoardService {
 	/**
 	 * 게시글 검색
 	 * @param pageParam 
-	 * @param param
+	 * @param searchParam
 	 * @return
 	 */
-	public List<PostingExt> searchBy(Map<String, Object> pageParam, Map<String, String> param, BoardCode boardCode) {
+	public List<PostingExt> searchBy(Map<String, Object> pageParam, Map<String, String> searchParam, BoardCode boardCode) {
 		Connection conn = getConnection();
-		List<PostingExt> postingList = boardDao.searchBy(conn, pageParam, param, boardCode);
+		List<PostingExt> postingList = boardDao.searchBy(conn, pageParam, searchParam, boardCode);
 		close(conn);
 		return postingList;
 	}
@@ -376,6 +376,19 @@ public class BoardService {
 		List<PostingExt> postingList = boardDao.findCommunityPostingList(conn, param);
 		close(conn);
 		return postingList;
+	}
+
+	/**
+	 * 검색 게시글 수 조회
+	 * @param searchParam
+	 * @param boardCode
+	 * @return
+	 */
+	public int getSearchTotalPostings(Map<String, String> searchParam, BoardCode boardCode) {
+		Connection conn = getConnection();
+		int totalBoardContents = boardDao.getSearchTotalPostings(conn, searchParam, boardCode);
+		close(conn);
+		return totalBoardContents;
 	}
 	
 }

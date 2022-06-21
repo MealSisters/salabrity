@@ -598,9 +598,9 @@ public class BoardDao {
 	 * @param param
 	 * @return
 	 */
-	public List<PostingExt> searchBy(Connection conn, Map<String, Object> pageParam, Map<String, String> param, BoardCode boardCode) {
+	public List<PostingExt> searchBy(Connection conn, Map<String, Object> pageParam, Map<String, String> searchParam, BoardCode boardCode) {
 		String sql = prop.getProperty("searchBy");
-		sql = sql.replace("#", param.get("searchType"));
+		sql = sql.replace("#", searchParam.get("searchType"));
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -609,7 +609,7 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardCode.toString());
-			pstmt.setString(2, "%" + param.get("searchKeyword") + "%");
+			pstmt.setString(2, "%" + searchParam.get("searchKeyword") + "%");
 			pstmt.setInt(3, (int) pageParam.get("start"));
 			pstmt.setInt(4, (int) pageParam.get("end"));
 			rset = pstmt.executeQuery();
@@ -789,6 +789,38 @@ public class BoardDao {
 		}
 		
 		return postingList;
+	}
+
+	/**
+	 * 검색 게시글 수 조회
+	 * @param conn
+	 * @param searchParam 
+	 * @param boardCode
+	 * @return
+	 */
+	public int getSearchTotalPostings(Connection conn, Map<String, String> searchParam, BoardCode boardCode) {
+		String sql = prop.getProperty("getSearchTotalPostings");
+		sql = sql.replace("#", searchParam.get("searchType"));
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int getSearchTotalPostings = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardCode.toString());
+			pstmt.setString(2, "%" + searchParam.get("searchKeyword") + "%");
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				getSearchTotalPostings = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new BoardException("검색 게시글 수 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return getSearchTotalPostings;
 	}
 
 }

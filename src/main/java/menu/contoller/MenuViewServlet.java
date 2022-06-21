@@ -26,7 +26,6 @@ public class MenuViewServlet extends HttpServlet {
 		try {
 			int menuNo = Integer.parseInt(request.getParameter("menuNo"));
 			MenuExt menu = menuService.findByMenuNo(menuNo);
-			
 
 			request.setAttribute("menu", menu);
 			request.getRequestDispatcher("/WEB-INF/views/menu/menuInfo.jsp").forward(request, response);
