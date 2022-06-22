@@ -149,7 +149,7 @@ const printBarChart = (target, days, memberData, rgb = "#0C7475") => {
 	              	 label: (tooltipItem, data) => {
 	              	  	 let label = data.datasets[tooltipItem.datasetIndex].label;
 	                  	 let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-	                  	 return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "명";
+	                  	 return "신규가입 : " + value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "명";
 	                 }
 	         	 }
           	}

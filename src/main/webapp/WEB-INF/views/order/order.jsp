@@ -158,10 +158,10 @@
                 <tr class="address_row">
                     <th>주소 <span class="required_col">*</span></th>
                         <td>
-                            <input type="text" class="zipcode add_input" id="zipcode" value="<%= loginMember.getZipcode() %>" readonly>&nbsp;&nbsp;
+                            <input type="text" class="zipcode add_input" id="zipcode" value="" readonly>&nbsp;&nbsp;
                             <button type="button" class="search_zipcode">우편번호 검색</button><br>
-                            <input type="text" class="address add_input" id="address" value="<%= loginMember.getAddress() %>" readonly>&nbsp;&nbsp;
-                            <input type="text" class="address_detail add_input" id="address_detail" value="<%= loginMember.getAddressDetail() %>">
+                            <input type="text" class="address add_input" id="address" value="" readonly>&nbsp;&nbsp;
+                            <input type="text" class="address_detail add_input" id="address_detail" value="">
                         </td>	
                 </tr>
                 <tr>
@@ -345,6 +345,7 @@
 		} else {
 		%>
 			alert('기본배송지가 등록되어있지 않습니다.');
+			$('#new_addr').prop('checked', true);
 			addrClear();
 		<%
 		}
