@@ -191,7 +191,6 @@ public class DestinationDao {
 		ResultSet rset = null;
 
 		try {
-			System.out.println(memberId);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
@@ -210,6 +209,31 @@ public class DestinationDao {
 
 		return destination;
 	}
+	
+	public Destination findDestinationByShippingAddressNo(Connection conn, int shippingAddressNo) {
+		String sql = prop.getProperty("findDestinationByShippingAddressNo");
+		PreparedStatement pstmt = null;
+		Destination destination = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shippingAddressNo);
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				destination = handleDestinationResultSet(rset);
+			}
+		} catch (Exception e) {
+			throw new DestinationException("배송지 번호로 배송지 조회 오류", e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return destination;
+	}
+
 
 	/*-------------------------------------- 이은지 start --------------------------------------*/
 	public int findCurrentDestNo(Connection conn) {
@@ -231,5 +255,9 @@ public class DestinationDao {
 		return destNo;
 	}
 	/*--------------------------------------- 이은지 end ---------------------------------------*/
+
+	
+
+
 
 }

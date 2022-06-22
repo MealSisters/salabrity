@@ -19,6 +19,9 @@ div.heading_wrp{
 	align-items: center;
 	margin-bottom: 5px;
 }
+.addCart{
+	display: none;
+}
 div.heading_wrp>div{
 	font-size: 12px;
 }
@@ -100,7 +103,8 @@ div.heading_wrp>div{
 }
 .all_cart_btn{
 	color: #116916;
-	border: #116916 solid 2px;	
+	border: #116916 solid 2px;
+	display: none;	
 }
 #order_view button:hover{
 	font-weight: 900;

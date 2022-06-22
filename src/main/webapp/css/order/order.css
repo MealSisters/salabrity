@@ -156,6 +156,7 @@ button.search_zipcode{
 	margin-left: 5px;
 }
 .shipping_tbl input[type=radio]{
+	cursor:pointer;
 	background-color: #FFFF;
 	border: solid #116916 2px;
 	margin: 0;
@@ -176,6 +177,7 @@ button.search_zipcode{
 	transition-duration: 0.4s;
 }
 button.payment{
+	cursor : pointer;
 	font-size: 18px;
 	display: inline-block;
 	border: none;
@@ -285,6 +287,7 @@ td.col1 input[type=radio] {
 	height: 15px;
 	appearance: none;
 	border-radius: 100%;
+	cursor: pointer;
 	cursor: pointer;
 }
 

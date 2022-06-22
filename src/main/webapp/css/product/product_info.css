@@ -133,7 +133,7 @@ a.go_cal {
 }
 
 .order_btn_wrp {
-	display: flex;
+	/*display: flex;*/
 	padding: 0;
 	justify-content: space-between;
 }
@@ -141,8 +141,8 @@ a.go_cal {
 .order_btn_wrp a {
 	border: solid 1px #ccc;
 	display: block;
-	height: 32px;
-	width: 43%;
+	height: 35px;
+	/*width: 43%;*/
 	font-size: 18px;
 	padding: 13px 10px 5px 10px;
 	text-align: center;
@@ -151,11 +151,13 @@ a.go_cal {
 
 .btn_order {
 	color: #222;
+	display: none !important;
 }
 
 .btn_add_cart {
 	color: #f1f1f1;
 	background-color: #116916;
+
 }
 
 .datepicker {
