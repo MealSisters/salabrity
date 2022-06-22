@@ -99,6 +99,29 @@ window.onload = () => {
 		
 		
 <script>
+// 수정 유효성 검사
+document.memberUpdateFrm.onsubmit = () => {
+	
+	// 이메일
+	if(/^[0-9A-Z]([-_\.]?[0-9A-Z])*@[0-9A-Z]([-_\.]?[0-9A-Z])*\.[A-Z]{2,6}$/.test(email.value)){
+		alert("이메일을 확인해주세요.");
+		return false;
+	}
+	
+	// phone
+	if(!/^[0-9]{9,}$/.test(phone.value)){
+		alert("유효하지 않은 전화번호입니다.");
+		console.log("[" + phone.value + "]");
+		return false;
+	}
+	
+	// 주소
+	if(!/^[0-9]{5}$/.test(zipcode.value)){
+		alert("주소를 입력해주세요.");
+		return false;
+	}
+	
+}
 
 $(function(){		
 	$(document).ready(function(){		
@@ -140,30 +163,6 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 
-// 수정 유효성 검사
-document.memberUpdateFrm.onsubmit = () => {
-	
-	// 이메일
-	if(/^[0-9A-Z]([-_\.]?[0-9A-Z])*@[0-9A-Z]([-_\.]?[0-9A-Z])*\.[A-Z]{2,6}$/.test(email.value)){
-		alert("이메일을 확인해주세요.");
-		return false;
-	}
-	
-	// 주소
-	if(!/^[0-9]{5}$/.test(zipcode.value)){
-		alert("주소를 입력해주세요.");
-		return false;
-	}
-	
-	// phone
-     if(!/^[0-9]{7,}/.test(phone.value)) {
-		alert("유효하지 않은 전화번호입니다.");
-		return false;
-	}
-	
-	
-	
-}
 
 </script>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>

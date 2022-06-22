@@ -19,7 +19,7 @@
 				
 				<div class="find_input">
 					<input class="find_input_box" type="text" name="memberName" id="" placeholder="이름"><br>
-					<input class="find_input_box" type="text" name="phone" id=""  placeholder="핸드폰 번호">
+					<input class="find_input_box" type="text" name="phone" id="" maxlength="11" placeholder="핸드폰 번호">
 				</div>
 				
 				<button type="submit" class="btn_find_id">아이디 찾기</button>
