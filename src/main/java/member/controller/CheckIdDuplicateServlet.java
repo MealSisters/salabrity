@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,20 +20,21 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String memberId = request.getParameter("memberId");
-		System.out.println("checkId = " + memberId);
+		String memberIdChk = request.getParameter("memberIdChk");
+//		System.out.println("checkId = " + memberId);
 		
-		Member member = memberService.findByMemberId(memberId);
-		boolean available = (member == null);
+		Member member = memberService.findByMemberId(memberIdChk);
+
+		response.setContentType("text/plain; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		
-		request.setAttribute("available", available);
-		request.getRequestDispatcher("/WEB-INF/views/member/checkIdDuplicate.jsp")
-		.forward(request, response);
+		if(member != null) {
+			writer.print(memberIdChk + " 는 이미 사용중인 아이디입니다.");
+		} else {
+			writer.print(memberIdChk + " 는 사용가능한 아이디입니다.");
+		}
 	}
 
 }

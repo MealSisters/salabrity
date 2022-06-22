@@ -43,7 +43,7 @@ public class FindIdServlet extends HttpServlet {
 			writer.println("<script>history.back();</script>");
 			writer.close();
 		} else {
-			writer.println("<script>alert('해당하는 회원 정보가 없습니다.');</script>");
+			writer.println("<script>alert('해당하는 회원 정보가 없습니다. 다시 시도해주세요.');</script>");
 			writer.println("<script>history.back();</script>");
 			writer.close();
 		}

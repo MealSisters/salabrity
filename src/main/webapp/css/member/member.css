@@ -5,7 +5,8 @@
 }
 
 .wrap_main {
-	margin-top: 25px
+	/*margin-top: 25px;*/
+	margin-top: 47px;
 }
 
 /* login 페이지 */
@@ -77,7 +78,7 @@
 
 .avatar {
 	width: 56px;
-    height: 57px;
+	height: 57px;
 	border-radius: 50%;
 	overflow: hidden;
 	margin: 0 auto;
@@ -91,7 +92,6 @@
 }
 
 .form_cont {
-	
 	padding: 40px;
 	width: 450px;
 	border-bottom: 1px solid #dbdbdb;
@@ -326,6 +326,16 @@ label {
 	font-size: 11px;
 }
 
+.chkId {
+	display: block;
+	padding: 3px 0 0 137px;
+	color: red;
+	font-size: 13px;
+	margin-top: 3px;
+	margin-bottom: -23px;
+	margin-left: 29px;
+}
+
 .gender_cb {
 	display: inline-block;
 }
@@ -339,7 +349,7 @@ label {
 	height: 35px;
 	font-size: 12px;
 	width: 95px;
-	    border-radius: 20px;
+	border-radius: 20px;
 }
 
 #phone {

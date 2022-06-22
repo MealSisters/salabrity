@@ -45,22 +45,24 @@ window.onload = () => {
 		</div>
 </div>
 <script>
-		function checkPwd() {
-			const newPassword = document.getElementById('newPassword');
-			const chkPwd = document.getElementById('chkPwd');
-			
-			if(newPassword.value == "" || chkPwd.value == "") {
-				alert("비밀번호를 입력해주세요.");
-				return false;
-			}
-			
-			if(newPassword.value != chkPwd.value){
-				alert("비밀번호와 비밀번호 확인이 다릅니다.");
-				return false;
-			}
-			
-			return true;
-		}
+chkPwd.onblur = () => {
+	if(newPassword.value !== chkPwd.value){
+		alert("비밀번호가 일치하지 않습니다.");
+		newPassword.select();
+		return false;
+	}	
+	return true;
+};
+document.updatePwdFrm.onsubmit = () => {
+	if(!/^(?=.*?[A-za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(newPassword.value)){
+		alert("비밀번호는 숫자/대문자/소문자/특수문자를 조합하여 8글자 이상이어야 합니다.");
+		return false;
+	}
+	if(!chkPwd.onblur()){
+		return false;
+	}
+}
+
 	</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

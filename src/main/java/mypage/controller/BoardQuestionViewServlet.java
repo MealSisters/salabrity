@@ -33,10 +33,13 @@ public class BoardQuestionViewServlet extends HttpServlet {
 			PostingExt answer = mypageService.findByAnswer(no); // 답변
 			
 	
-			
+			if(answer != null) {
 			answer.setTitle(answer.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			answer.setContent(answer.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			answer.setContent(answer.getContent().replaceAll("\n", "<br/>"));
+			}
+			
+			
 			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
