@@ -40,7 +40,14 @@
 	<table class="tbl-posting-view">
 		<thead>
 			<tr>
+			<% if(loginMember.getMemberId().equals(posting.getMemberId())) { %>
+				<th class="posting-view-writer">
+					<i class="fa-solid fa-circle-user"></i>&nbsp;<a href="<%= request.getContextPath() %>/mypage/boardWriteList"><%= posting.getMemberId() %></a>
+				</th>
+			<% } 
+			else { %>
 				<th class="posting-view-writer"><i class="fa-solid fa-circle-user"></i>&nbsp;<%= posting.getMemberId() %></th>
+			<% } %>
 				<th class="posting-view-reg-date"><%= posting.getRegDate() %></th>
 			</tr>
 		</thead>
@@ -115,21 +122,16 @@
 			<input type="hidden" name="boardCode" value="<%= posting.getBoardCode() %>" />
 			<%-- 좋아요 버튼은 본인/관리자 열람불가 --%>
 			<button type="submit" id="board-like-btn" onclick="LikeUp();">
+				<span>love it!&nbsp;</span>
 	<% 
 		List<PostingLike> likes = posting.getLikes();
 		for(int i = 0; i < likes.size(); i++) {
 			PostingLike pl = likes.get(i);
-			if(pl.getStatus().equals("N")) {
-	%>
-				love it&nbsp;<i class="fa-regular fa-heart"></i>
+			if(pl.getStatus().equals("Y")) {
+	%>	        
+				<i style="color: red;" class="fa-solid fa-heart"></i>
 		<% 
 		    }
-		    else {
-		%>
-				love it&nbsp;<i class="fa-solid fa-heart"></i>
-	<%
-				break;
-			}
 		}
 	%>
 			</button>
@@ -182,7 +184,7 @@
         		<sub class="comment-writer"><%= pc.getMemberId() != null ? pc.getMemberId() : "(탈퇴회원)" %></sub>
         		<sub class="comment-date"><%= pc.getRegDate() %></sub>
         		<br />
-	        	<span><%= pc.getCommentContent() %></span>
+	        	<span><%= pc.getCommentContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></span>
         	</td>
         	<td>
         		<button id="comment-reply-btn" value="<%= pc.getCommentNo() %>">답글</button>
@@ -200,7 +202,7 @@
         		<sub class="comment-writer"><%= pc.getMemberId() != null ? pc.getMemberId() : "(탈퇴회원)" %></sub>
         		<sub class="comment-date"><%= pc.getRegDate() %></sub>
         		<br />
-        		<span>&nbsp;&nbsp;<%= pc.getCommentContent() %></span>
+        		<span style="margin-left: 20px;"><%= pc.getCommentContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></span>
         	</td>
         	<td>
         	<% if(canDelete) { %>

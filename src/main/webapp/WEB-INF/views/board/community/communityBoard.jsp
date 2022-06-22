@@ -45,10 +45,10 @@
 			}
 		%>
 					<div class="hacks-content-title">
-						<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>"><%= cPostingList.get(i).getTitle() %></a>
+						<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>"><%= cPostingList.get(i).getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></a>
 					</div>
 					<div class="hacks-content">
-						<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>"><%= cPostingList.get(i).getContent() %></a>
+						<a href="<%= request.getContextPath() %>/board/community/hacksView?no=<%= cPostingList.get(i).getPostingNo() %>"><%= cPostingList.get(i).getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></a>
 					</div>
 					<div>
 						<span class="comment-cnt">
@@ -88,10 +88,10 @@
 					<div class="general-content-writer">작성자&nbsp;<%= pPostingList.get(i).getMemberId() %></div>
 					<div class="general-content-reg-date">작성일&nbsp;<%= pPostingList.get(i).getRegDate() %></div>
 					<div class="general-content-title">
-						<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= pPostingList.get(i).getPostingNo() %>"><%= pPostingList.get(i).getTitle() %></a>					
+						<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= pPostingList.get(i).getPostingNo() %>"><%= pPostingList.get(i).getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></a>					
 					</div>
 					<div class="general-content">
-						<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= pPostingList.get(i).getPostingNo() %>"><%= pPostingList.get(i).getContent() %></a>
+						<a href="<%= request.getContextPath() %>/board/community/generalView?no=<%= pPostingList.get(i).getPostingNo() %>"><%= pPostingList.get(i).getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></a>
 					</div>
 					<div>
 						<span class="comment-cnt">
