@@ -42,6 +42,15 @@ const printlineChart = (target, days, salesData, rgb = "#0C7475") => {
                     }
                   }
               }]
+          },
+          tooltips: {
+	          callbacks: {
+	              label: (tooltipItem, data) => {
+	                  let label = data.datasets[tooltipItem.datasetIndex].label;
+	                  let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+	                  return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
+	              }
+	          }
           }
       }
   })
@@ -63,7 +72,12 @@ const printPieChart = (target, labels, salesData, rgb = ["#089C4B", "#9C4917", "
           legend: {
               display: false
           },
-          legendCallback: customLegend
+          legendCallback: customLegend,
+          tooltips: {
+              callbacks: {
+                  label: (item, data) => data.labels[item.index] + " : " + data.datasets[item.datasetIndex].data[item.index].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원"
+              }
+          }
       }
   });
   
@@ -129,6 +143,15 @@ const printBarChart = (target, days, memberData, rgb = "#0C7475") => {
                 	  	  suggestedMax: max+1 
                 	  }
              	 }]
+          	},
+          	tooltips: {
+	         	 callbacks: {
+	              	 label: (tooltipItem, data) => {
+	              	  	 let label = data.datasets[tooltipItem.datasetIndex].label;
+	                  	 let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+	                  	 return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "명";
+	                 }
+	         	 }
           	}
       	}
   	})

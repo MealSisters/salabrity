@@ -27,6 +27,7 @@ public class AdminQuestionViewServlet extends HttpServlet {
 			int questionNo = Integer.parseInt(request.getParameter("no"));
 			
 			Question question = adminService.findQuestion(questionNo);
+			question.setContent(question.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			question.setContent(question.getContent().replaceAll("\n", "<br/>"));
 			
 			request.setAttribute("question", question);
