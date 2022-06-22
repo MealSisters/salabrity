@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ page import="product.model.dto.ProductExt"%>
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
@@ -23,11 +22,7 @@
 	}
 	System.out.println("thumbnail = " + thumbnailImg);
 	System.out.println("detailImg1" + detailImg1);
-	
-
 	DecimalFormat df = new DecimalFormat("#,###");
-
-
 %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/product/product_info.css">
@@ -133,17 +128,13 @@
 
     const datepicker = document.querySelector('.datepicker');
   
-
     flatpickr(" .datepicker", {
-        // local:'ko',
         minDate: new Date().fp_incr(3),
-        defaultDate: new Date().fp_incr(3),
         maxDate: new Date().fp_incr(30),
         "disable": [
             function (date) {
                 // return true to disable
-            //    return (date.getDay() === 0 || date.getDay() === 6);
-
+                return (date.getDay() === 0 || date.getDay() === 6);
             }
         ]
     });

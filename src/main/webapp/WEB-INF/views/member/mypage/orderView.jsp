@@ -57,10 +57,23 @@
         		BuyExt buy = buyList.get(i);
         %>
 			<tr class="row_odd">
-				<td rowspan="2" class="r1"><img
-					src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
-					alt="<%= product.getAttachs().get(i).getOriginalFileName() %>"
-					class="prd_img"></td>
+				<td rowspan="2" class="r1">
+				<% if(product.getDelFlag().equals("Y")){
+						
+				%>
+				<img src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
+					alt="<%= product.getAttachs().get(i).getOriginalFileName() %>" class="prd_img">
+				<%
+				} else {
+				%>
+				<a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>">
+				<img src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
+					alt="<%= product.getAttachs().get(i).getOriginalFileName() %>" class="prd_img">
+				</a>
+				<%
+				}
+				%>	
+				</td>
 				<td class="r2_1"><%= productList.get(i).getProductName() %>
 				<span>
 						&nbsp;&nbsp;주문개수 : <%= buy.getList().get(i).getQuantity()%> 개
