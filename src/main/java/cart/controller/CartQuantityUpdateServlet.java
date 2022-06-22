@@ -25,23 +25,17 @@ public class CartQuantityUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//입력값 처리
 			int cartNo = Integer.parseInt(request.getParameter("cartNo"));
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
-			
-			//업무로직
+
 			Cart cart = new Cart();
 			cart.setCartNo(cartNo);
 			cart.setQuantity(quantity);
-			
 			int result = cartService.cartQuantityUpdate(cart);
 
-			//값 처리
-
-				PrintWriter out = response.getWriter();
-				out.append(result + "");
+			PrintWriter out = response.getWriter();
+			out.append(result + "");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}

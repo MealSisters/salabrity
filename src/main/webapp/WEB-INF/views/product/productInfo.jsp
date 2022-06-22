@@ -3,10 +3,12 @@
 <%@ page import="product.model.dto.ProductExt"%>
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
+<%@ page import="common.utill.Methods"%>
 <%@ page import= "java.text.DecimalFormat" %>
 <%@ page import="product.model.dto.ProductAttach"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
+	String defaultDate = new Methods().getDefaultFilstShippingDate();
 	ProductExt product = (ProductExt) request.getAttribute("product");
 	List<ProductAttach> attachments= product.getAttachs();
 	ProductAttach thumbnailImg = null;
@@ -69,7 +71,7 @@
 				<div class="opt_title">첫 배송일</div>
 				<div class="opt">
 					<div class="input_wrp">
-						<input class="datepicker" id="firstShippingDate" name="firstShippingDate"/>
+						<input class="datepicker" id="firstShippingDate" name="firstShippingDate" value="<%= defaultDate %>"/>
 					</div>
 				</div>
 			</div>

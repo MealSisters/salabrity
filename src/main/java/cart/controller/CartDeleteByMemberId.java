@@ -24,11 +24,8 @@ public class CartDeleteByMemberId extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 값
 			String memberId =  request.getParameter("memberId");
-			// 업무로직
 			int result = cartService.deleteByMemberId(memberId);
-	
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -47,21 +47,18 @@ public class CartDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				cnt = rset.getInt(1);
-				System.out.println(cnt);
 			}
-			
 		} catch (SQLException e) {
-			throw new CartException("장바구니 동일상품 개수 조회 오류");
+			throw new CartException("장바구니에서 동일상품 개수 조회 오류");
 		}
 		return cnt;
 	}
 	
-//추가
+	//추가
 	public int cartInsert(Connection conn, Cart cart) {
 		PreparedStatement pstmt = null;
 		int result = 0;		
 		String sql = prop.getProperty("cartInsert");
-		System.out.println("CartDao@CartInsert cart:" + cart);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cart.getMemberId());
@@ -69,7 +66,6 @@ public class CartDao {
 			pstmt.setInt(3, cart.getQuantity());
 			pstmt.setString(4, cart.getFirstShipppingDate());
 			result = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new CartException("장바구니에 추가 오류", e);
@@ -101,11 +97,8 @@ public class CartDao {
 				productList.add(product);
 				cartList.add(cart);
 			}
-			System.out.println("Dao@" + productList);
-			System.out.println("Dao@" + cartList);
 			map.put("cartList", cartList);
 			map.put("productList",productList);
-			System.out.println("Dao@"+ map);
 		} catch (Exception e) {
 			throw new CartException("상품목록 조회 오류", e);
 		}finally {
@@ -120,9 +113,7 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		int result = 0;		
 		String sql = prop.getProperty("cartQuantityUpdate");
-		System.out.println("CartDao@ cart:" + cart);
 		try {
-			System.out.println("sql요청전" +  cart);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cart.getQuantity());
 			pstmt.setInt(2, cart.getCartNo());
@@ -178,14 +169,10 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		int result = 0;		
 		String sql = prop.getProperty("deleteByMemberId");
-		//System.out.println("CartDao@ cartNoList:" + cartNo);
 		try {
-			//System.out.println("sql요청전" +  cartNo);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			result = pstmt.executeUpdate();
-
-			//System.out.println("sql요청후 result" +  result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new CartException("장바구니 - 선택 삭제 오류", e);
@@ -215,9 +202,6 @@ public class CartDao {
 		}
 		return cart;
 	}
-
-
-	// 핸들러
 	
 	private ProductExt handleProductResultSet(ResultSet rset) throws SQLException {
 		ProductExt product = new ProductExt();
@@ -236,7 +220,6 @@ public class CartDao {
 		return attach;
 	}
 	
-
 	private Cart handleCartResultSet(ResultSet rset) throws SQLException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Cart cart = new Cart();
@@ -249,16 +232,5 @@ public class CartDao {
 			cart.setFirstShipppingDate(tmp);		
 		}
 		return cart;
-	}
-
-
-
-
-
-
-
-
-
-	
-	
+	}	
 }

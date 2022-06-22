@@ -21,7 +21,7 @@ import product.model.service.ProductService;
  * Servlet implementation class orderViewServlet
  */
 @WebServlet("/mypage/orderView")
-public class orderViewServlet extends HttpServlet {
+public class OrderViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BuyService buyService = new BuyService();
 	private ProductService productService = new ProductService();
@@ -31,34 +31,23 @@ public class orderViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//사용자 입력값
-			Long merchantUid = Long.parseLong(request.getParameter("merchantUid"));
-			
-			//업무로직
-			
-			//Map<String, Object> orderViewmap = new HashMap<>();
-			//주문정보
+			Long merchantUid = Long.parseLong(request.getParameter("merchantUid"));	
 			
 			List<BuyExt> buyList = buyService.findBuyByMerchantUid(merchantUid);
 			List<ProductExt> productList = new ArrayList<ProductExt>();
-			//상품정보
 			for(int i = 0; i < buyList.size();i++) {
 				int no = buyList.get(0).getList().get(i).getProductNo();
 				ProductExt product = productService.findProductByNo(no);
-				//리스트로
 				productList.add(product);
 			}
-			//배송지 정보
 			Destination destination = destinationService.findDestinationByShippingAddressNo(buyList.get(0).getShippingAddressNo());
 			
 			request.setAttribute("buyList", buyList);
 			request.setAttribute("productList", productList);
 			request.setAttribute("destination", destination);
-			System.out.println(destination);
-			//view단 위임
+
 			request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderView.jsp").forward(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}

@@ -67,7 +67,7 @@
 				} else {
 				%>
 				<a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>">
-				<img src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
+					<img src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
 					alt="<%= product.getAttachs().get(i).getOriginalFileName() %>" class="prd_img">
 				</a>
 				<%
@@ -167,6 +167,4 @@
         </article>
     </article>
 </section>
-
-
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

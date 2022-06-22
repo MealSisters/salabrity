@@ -31,9 +31,7 @@ public class CartShippingDateUpdateServlet extends HttpServlet {
 			Cart cart = new Cart();
 			cart.setCartNo(cartNo);
 			cart.setFirstShipppingDate(firstShippingDate);
-			System.out.println("Servlet"+cart);
 			int result = cartService.firstShippingDateUpdate(cart);
-
 			//값 처리
 
 			PrintWriter out = response.getWriter();

@@ -405,7 +405,6 @@ public class ProductDao {
 				product.setAttachs(attachs);
 				list.add(product);
 			}
-			System.out.println("Dao@"+ list);
 		} catch (Exception e) {
 			throw new DestinationException("상품목록 조회 오류", e);
 		}finally {

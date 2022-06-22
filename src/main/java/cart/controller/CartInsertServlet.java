@@ -26,26 +26,18 @@ public class CartInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			//사용자 입력값 처리
 			response.setContentType("text/plain; charset=utf-8");
-					String memberId = (String) request.getParameter("memberId");
-					int productNo = Integer.parseInt(request.getParameter("productNo"));
-					int quantity = Integer.parseInt(request.getParameter("quantity"));
+			String memberId = (String) request.getParameter("memberId");
+			int productNo = Integer.parseInt(request.getParameter("productNo"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			String firstShippingDate = (String) request.getParameter("firstShippingDate");
-
-			//업무로직
-
+			System.out.println(firstShippingDate + " 카트 인서트 서블릿");
 			Cart cart = new Cart(memberId, productNo, quantity, firstShippingDate);
-			System.out.println(cart);
 			int result = cartService.cartInsert(cart);
-			System.out.println("InsertServlet" + result);
 			String msg = result == 0 ? "이미 장바구니에 있는 상품입니다." : "장바구니에 추가되었습니다.";
-			//값 처리
 			PrintWriter out = response.getWriter();
 			out.append(msg);
-			
 		}  catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
