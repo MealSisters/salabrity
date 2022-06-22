@@ -25,11 +25,8 @@ public class CartCheckedDelete extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//값 받아오기
 			String[] cartNoArr =  request.getParameterValues("cartNoList");
 			
-			//업무로직
-
 			List<Integer> cartNoList = new ArrayList<Integer>();
 			for(int i = 0; i < cartNoArr.length;i++) {
 				int cartNo = Integer.parseInt(cartNoArr[i]);

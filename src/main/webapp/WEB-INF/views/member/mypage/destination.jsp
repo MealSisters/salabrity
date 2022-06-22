@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/destination.css">
 <% List<Destination> list = (List<Destination>) request.getAttribute("list"); %>
 
-
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 <section id="destination">
@@ -55,18 +54,18 @@
         </thead>
         <tbody>
 <%
-        	if(list != null && !list.isEmpty()){
-        		for(Destination destination : list){
-        			String checked = "";
-        			if(destination.getIsDefault().equals("Y")){
-        				checked = "checked";
-        			}
-        			String telephone = destination.getTelephone().substring(0, 3) + "-" +
-        				destination.getTelephone().substring(3, 7) + "-" + destination.getTelephone().substring(7);
-        			String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
-        			address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
-%>        			
-            <tr id= "<%= destination.getShippingAddressNo()%>">
+			if (list != null && !list.isEmpty()) {
+				for (Destination destination : list) {
+					String checked = "";
+					if (destination.getIsDefault().equals("Y")) {
+				checked = "checked";
+					}
+					String telephone = destination.getTelephone().substring(0, 3) + "-" + destination.getTelephone().substring(3, 7)
+					+ "-" + destination.getTelephone().substring(7);
+					String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
+					address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
+%>
+			<tr id= "<%= destination.getShippingAddressNo()%>">
                 <td class="col1">
                	 		<input type="radio" name="default" id="<%= destination.getShippingAddressNo()%>" <%= checked %>>
                 </td>
@@ -74,21 +73,21 @@
                 <td class="col3"><%= address %></td>
                 <td class="col4"><%= telephone %></td>
                 <td class="col5">
-          	
-                	<i class="fa-regular fa-trash-can isDefaultValue<%=destination.getIsDefault()%>"></i></td>
+                	<i class="fa-regular fa-trash-can isDefaultValue<%=destination.getIsDefault()%>"></i>
+                </td>
 
             </tr>
 <% 
         		}
         	} else {
 %>
-	<tr>
-		<td colspan="5">등록된 배송지가 없습니다.</td>
-	</tr>
+			<tr>
+				<td colspan="5">등록된 배송지가 없습니다.</td>
+			</tr>
 <%       
         	}    
  %>
-    </tbody>
+    	</tbody>
 
     </table>
 </section>
@@ -114,16 +113,13 @@
 					document.getElementById("address").value = data.address + ' (' + data.buildingName + ')';
 				}else{
 					document.getElementById("address").value = data.address;
-
 				}
                 document.getElementById("zipcode").value = data.zonecode;
 				document.getElementById("address_detail").focus;
             }
         }).open();
-
     });
 
-    //X버튼
     const cancel = document.querySelector('i.fa-xmark');
     cancel.addEventListener('click', function () {
         document.getElementById("shipping_person").value = "";
@@ -146,13 +142,11 @@
 				data : {shippingAddressNo : radio.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
 				url : "<%=request.getContextPath()%>/mypage/destination/defaultUpdate",
 				success : function(data){
-					
 					location.reload();
 				},
 				error : function(data){
 					console.log('요청실패');
 				}
-
 			});
 			
 		});
@@ -181,9 +175,8 @@
 			});
 			
 		});
-
 	});
-//기본배송지인 아이콘 클릭시 이벤트
+	//기본배송지인 아이콘 클릭시 이벤트
 	const isDefaultValueY= document.querySelector('.isDefaultValueY');
 	isDefaultValueY.addEventListener('click', function () {
 			alert('기본 배송지는 삭제할 수 없습니다.')	
@@ -211,13 +204,9 @@
 		if(!/^[0-9]{5}$/.test($('#zipcode').val())){
 			alert("주소를 입력해주세요.1");
 			return false;
-		}
-				
+		}			
 		
 	});
 	
-
-
-
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

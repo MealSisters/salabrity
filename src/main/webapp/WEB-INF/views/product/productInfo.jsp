@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ page import="product.model.dto.ProductExt"%>
 <%@ page import="product.model.dto.Thumbnail"%>
 <%@ page import="java.util.List"%>
+<%@ page import="common.utill.Methods"%>
 <%@ page import= "java.text.DecimalFormat" %>
 <%@ page import="product.model.dto.ProductAttach"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
+	String defaultDate = new Methods().getDefaultFilstShippingDate();
 	ProductExt product = (ProductExt) request.getAttribute("product");
 	List<ProductAttach> attachments= product.getAttachs();
 	ProductAttach thumbnailImg = null;
@@ -23,11 +24,7 @@
 	}
 	System.out.println("thumbnail = " + thumbnailImg);
 	System.out.println("detailImg1" + detailImg1);
-	
-
 	DecimalFormat df = new DecimalFormat("#,###");
-
-
 %>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/product/product_info.css">
@@ -74,7 +71,7 @@
 				<div class="opt_title">첫 배송일</div>
 				<div class="opt">
 					<div class="input_wrp">
-						<input class="datepicker" id="firstShippingDate" name="firstShippingDate"/>
+						<input class="datepicker" id="firstShippingDate" name="firstShippingDate" value="<%= defaultDate %>"/>
 					</div>
 				</div>
 			</div>
@@ -133,17 +130,13 @@
 
     const datepicker = document.querySelector('.datepicker');
   
-
     flatpickr(" .datepicker", {
-        // local:'ko',
         minDate: new Date().fp_incr(3),
-        defaultDate: new Date().fp_incr(3),
         maxDate: new Date().fp_incr(30),
         "disable": [
             function (date) {
                 // return true to disable
-            //    return (date.getDay() === 0 || date.getDay() === 6);
-
+                return (date.getDay() === 0 || date.getDay() === 6);
             }
         ]
     });

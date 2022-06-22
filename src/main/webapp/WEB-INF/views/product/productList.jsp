@@ -35,20 +35,6 @@
 </div>
 
 
-<!-- 정렬쪽은 일단 뺄게요
-<div class="sort_box">
-    <div>총 12개의 상품</div>
-    <div>
-        <select name="sort" id="sort">
-            <option value="registration">등록순</option>
-            <option value="sales">판매량순</option>
-            <option value="views">조회순</option>
-            <option value="low_price">낮은 가격순</option>
-        </select>
-	</div>
-    </div>
- -->
-
 
 <div class="product_list">
 <%
@@ -139,8 +125,6 @@ console.log("<%= memberId %>");
 		//장바구니
 		$(".fa-cart-plus").click((e) => {
 			if("<%=memberId%>" !== ""){
-			//console.log($(event.target).parents("span"));
-		//	alert($(event.target).prev().val());
 			$.ajax({
 				type : "POST",
 				async : true,

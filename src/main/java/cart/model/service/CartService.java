@@ -22,15 +22,10 @@ public class CartService {
 		int result = 0;
 		int findByIdIdenticalProductCount = 0;
 		try {
-			String isDefault = "N";
-			//장바구니에 동일 상품 개수 요청
 			findByIdIdenticalProductCount = cartDao.findByIdIdenticalProductCount(conn, cart);
-			//없으면 장바구니에 추가요청 있으면 리턴
-
 			if(findByIdIdenticalProductCount == 0) {
 				result = cartDao.cartInsert(conn, cart);
 			}
-
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -40,14 +35,12 @@ public class CartService {
 		}
 		return result;
 	}
-
+	//아이디로 배송지리스트 조회
 	public Map<String, Object> findByIdCart(String memberId) {
 		Connection conn = getConnection();
 		Map<String, Object> map = cartDao.findByIdCart(conn, memberId);
-		System.out.println("Service@" + map);
 		close(conn);
 		return map;
-
 	}
 	//수량업데이트 
 	public int cartQuantityUpdate(Cart cart) {
@@ -97,7 +90,6 @@ public class CartService {
 		return result;
 	}
 	// 전체삭제
-
 	public int deleteByMemberId(String memberId) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -116,11 +108,8 @@ public class CartService {
 	public Cart findByCartNo(int cartNo) {
 		Connection conn = getConnection();
 		Cart cart = cartDao.findByCartNo(conn, cartNo);
-		System.out.println("Service@" + cart);
 		close(conn);
 		return cart;
 	}
-
-
 }
 

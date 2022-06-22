@@ -32,7 +32,7 @@ public class OrderListServlet extends HttpServlet {
 		String memberId = loginMember.getMemberId();
 		
 		List<BuyExt> list = buyService.findBuyExtById(memberId);
-		System.out.println(list.get(0));
+
 		//뷰단 위임
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderList.jsp").forward(request, response);

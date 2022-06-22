@@ -21,7 +21,6 @@ public class CasrtsInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartService = new CartService();
 
-	
 	@Override
 
 	/**
@@ -30,7 +29,6 @@ public class CasrtsInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			//사용자 입력값 처리
 			response.setContentType("text/plain; charset=utf-8");
 			String[] quantityStrArr = request.getParameterValues("quantity");
 			String[] productNoStrArr = request.getParameterValues("productNo");
@@ -44,12 +42,11 @@ public class CasrtsInsertServlet extends HttpServlet {
 				Cart cart = new Cart(memberId, productNo, quantity, firstShippingDate);
 				result = cartService.cartInsert(cart);
 			}
-			//값 처리
+
 			String msg = result == 0 ? "이미 장바구니에 있는 상품입니다." : "장바구니에 추가되었습니다.";
 			HttpSession session = request.getSession();
 			session.setAttribute("addCartSuccessMsg",msg);
 			response.sendRedirect("/salabrity/mypage/orderList");
-			
 			}
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block

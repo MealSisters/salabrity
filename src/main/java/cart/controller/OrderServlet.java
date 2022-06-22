@@ -29,18 +29,12 @@ public class OrderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
-		
-		//기본배송지 가져오기
 		Destination defaultDestination = destinationService.findDefaultDestinationById(memberId);
-		//배송지 목록 가져오기
 		List<Destination> destinationList = destinationService.findById(memberId);
-		System.out.println(defaultDestination);
-		
+
 		request.setAttribute("defaultDestination", defaultDestination);
 		request.setAttribute("destinationList", destinationList);
 		request.getRequestDispatcher("/WEB-INF/views/order/order.jsp").forward(request, response);
-		
-		
 	}
 
 	/**
@@ -55,5 +49,4 @@ public class OrderServlet extends HttpServlet {
 		}
 		doGet(request, response);
 	}
-
 }

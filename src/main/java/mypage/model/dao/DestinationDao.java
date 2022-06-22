@@ -18,17 +18,14 @@ import product.model.exception.ProductException;
 
 public class DestinationDao {
 	private Properties prop = new Properties();
-
 	public DestinationDao() {
 		String fileName = DestinationDao.class.getResource("/sql/destination-query.properties").getPath();
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 	}
-
 	//아이디로 배송지 리스트 조회
 	public List<Destination> findById(Connection conn, String memberId) {
 		String sql = prop.getProperty("findById");
@@ -44,9 +41,7 @@ public class DestinationDao {
 				list.add(destination);
 			}
 		} catch (Exception e) {
-
 			throw new DestinationException("배송지목록 조회 오류", e);
-
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -75,19 +70,14 @@ public class DestinationDao {
 		PreparedStatement pstmt = null;
 		int  defaultCount = 0;
 		ResultSet rset = null;
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, destination.getMemberId());
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				defaultCount = rset.getInt(1);
-
-
-				System.out.println("defaultCount = "+ defaultCount);
+				defaultCount = rset.getInt(1);			
 			}
 		} catch (SQLException e) {
-
 			throw new DestinationException("기본배송지 개수 조회 오류", e);
 		} finally {
 			close(rset);
@@ -95,18 +85,13 @@ public class DestinationDao {
 		}
 		return defaultCount;
 	}
-
 	//배송지 등록
 	public int insertDestination(Connection conn, Destination destination) {
 		PreparedStatement pstmt = null;
 		int result = 0;		
 		String sql = prop.getProperty("insertDestination");
 		try {
-			System.out.println("DestinationDao@destination : "+destination);
-			System.out.println("sql " + sql);
-
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, destination.getMemberId());
 			pstmt.setString(2, destination.getTelephone());
 			pstmt.setString(3, destination.getZipcode());
@@ -115,7 +100,6 @@ public class DestinationDao {
 			pstmt.setString(6, destination.getIsDefault());
 			pstmt.setString(7, destination.getShippingPerson());
 			result = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			throw new DestinationException("배송지 등록 오류", e);
 		} finally {
@@ -128,14 +112,10 @@ public class DestinationDao {
 		String sql = prop.getProperty("updateNotDefaultDestination");
 		int result = 0;
 		PreparedStatement pstmt = null;
-
 		try {
-			System.out.println("DestinationDao@memberId : "+ memberId);
-
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, memberId);
 			result = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			throw new DestinationException("기본배송지 제거 오류", e);
 		} finally {
@@ -149,14 +129,10 @@ public class DestinationDao {
 		String sql = prop.getProperty("updateDefaultDestination");
 		int result = 0;
 		PreparedStatement pstmt = null;
-
 		try {
-			System.out.println("DestinationDao@shippingAddressNo : "+ shippingAddressNo);
-
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setInt(1, shippingAddressNo);
 			result = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			throw new DestinationException("기본배송지 수정 오류", e);
 		} finally {
@@ -164,20 +140,17 @@ public class DestinationDao {
 		}
 		return result;		
 }
-
+	//배송지 삭제처리
 	public int delFlagUpdateY(Connection conn, int shippingAddressNo) {
 		String sql = prop.getProperty("delFlagUpdateY");
 		int result = 0;
 		PreparedStatement pstmt = null;
-
 		try {
-			System.out.println("DestinationDao@:shippingAddressNo "+ shippingAddressNo);
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setInt(1, shippingAddressNo);
 			result = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
-			throw new DestinationException("배송지 삭제..? 오류", e);
+			throw new DestinationException("배송지 삭제? 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -199,28 +172,22 @@ public class DestinationDao {
 				destination = handleDestinationResultSet(rset);
 			}
 		} catch (Exception e) {
-
 			throw new DestinationException("기본배송지 조회 오류", e);
-
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
-
 		return destination;
 	}
-	
 	public Destination findDestinationByShippingAddressNo(Connection conn, int shippingAddressNo) {
 		String sql = prop.getProperty("findDestinationByShippingAddressNo");
 		PreparedStatement pstmt = null;
 		Destination destination = null;
 		ResultSet rset = null;
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, shippingAddressNo);
 			rset = pstmt.executeQuery();
-
 			while(rset.next()) {
 				destination = handleDestinationResultSet(rset);
 			}
@@ -230,10 +197,8 @@ public class DestinationDao {
 			close(rset);
 			close(pstmt);
 		}
-
 		return destination;
 	}
-
 
 	/*-------------------------------------- 이은지 start --------------------------------------*/
 	public int findCurrentDestNo(Connection conn) {

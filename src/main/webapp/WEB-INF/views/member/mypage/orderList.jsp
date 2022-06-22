@@ -48,26 +48,12 @@
 						<td class="col2" rowspan="2" width ="400">주문 상품 : <%= productBuyList.get(0).getProductName() %> 
 							<%= productBuyList.size() == 1 ? "" : "외 "+ (productBuyList.size()-1) + "건" %> </td>
 						<td class="col3" rowspan="2" > 결제금액 : <%= df.format(buy.getAmount()) %>원</td>
-						<td class="col4" width="110">
-							<form action="<%= request.getContextPath() %>/order/cart/insertCarts" method="post">
-								<button class="addCart">다시담기</button>
-								<%
-									for(ProductBuyExt productBuy : productBuyList){
-								%>
-									<input type="hidden" name="productNo" value="<%= productBuy.getProductNo() %>"/>
-									<input type="hidden" name="quantity" value="<%= productBuy.getQuantity() %>"/>
-								<%
-									}
-								%>
-									<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>"/>
-									<input type="hidden" name="firstShippingDate" value="<%= defaultDate %>"/>
-								
-							</form>
+						<td class="col4" width="110" rowspan="2" >
+						<button class="boardQuestion" >1 : 1문의</button>
 						</td>
 					</tr>
 					<tr class="row2">
 						<td class="col1">주문일자 : <%= sdf.format(buy.getBuyDate()) %></td>
-						<td class="col4" > <button class="boardQuestion">1 : 1문의</button></td>
 					</tr>
 				<%
 						}
@@ -124,10 +110,7 @@
 				});
 				
 				//클릭시
-		       $(".addCart").click((e) =>{
-					//폼생성 후 장바구니 추가 서블릿? 으로 보내기		          	
 
-		           });
 				</script>
 
 			</section>
