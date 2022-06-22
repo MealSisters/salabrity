@@ -158,10 +158,10 @@
                 <tr class="address_row">
                     <th>주소 <span class="required_col">*</span></th>
                         <td>
-                            <input type="text" class="zipcode add_input" id="zipcode" value="<%= loginMember.getZipcode() %>" readonly>&nbsp;&nbsp;
+                            <input type="text" class="zipcode add_input" id="zipcode" value="" readonly>&nbsp;&nbsp;
                             <button type="button" class="search_zipcode">우편번호 검색</button><br>
-                            <input type="text" class="address add_input" id="address" value="<%= loginMember.getAddress() %>" readonly>&nbsp;&nbsp;
-                            <input type="text" class="address_detail add_input" id="address_detail" value="<%= loginMember.getAddressDetail() %>">
+                            <input type="text" class="address add_input" id="address" value="" readonly>&nbsp;&nbsp;
+                            <input type="text" class="address_detail add_input" id="address_detail" value="">
                         </td>	
                 </tr>
                 <tr>
@@ -345,6 +345,7 @@
 		} else {
 		%>
 			alert('기본배송지가 등록되어있지 않습니다.');
+			$('#new_addr').prop('checked', true);
 			addrClear();
 		<%
 		}
@@ -387,14 +388,15 @@
 		orderName += " 외 " + <%= cartList.size() - 1 %> + "건";
 	}
 		
+	<%--
 	//주문자 주소 처리
 	<%	String buyerAddress = "(" + loginMember.getZipcode() + ") " + loginMember.getAddress();
 				buyerAddress += loginMember.getAddressDetail() != null ? loginMember.getAddressDetail() : ""; %>
     let buyerAddress = "<%= buyerAddress %>";
-    //아임포트 결제-결제준비
-   IMP.init('imp68598851'); 
-    
+    --%>
 
+   //아임포트 결제-결제준비
+   IMP.init('imp68598851'); 
    
 	<%-------------------------------------- 이은지 start --------------------------------------%>
 	
@@ -420,7 +422,7 @@
 			shippingAddrNo = 0;
 			break;
 		}
-		
+
 		let payPbArr = [];
 		<% for(int i = 0 ; i < pbList.size(); i++) { %>
 			payPbArr.push({ 
@@ -430,17 +432,15 @@
 			});
 		<% } %>
 		const jsonPayPbArr = JSON.stringify(payPbArr);
-		console.log("loginMember = " , "<%= loginMember.getMemberId() %>");
-		
-		
+
 	 	IMP.request_pay({
 	 	    pg : 'inicis', // version 1.1.0부터 지원.
 	 	    pay_method : 'card',
 	 	    merchant_uid : new Date().getTime(),
 	 	    name : orderName,
-	 	  	amount : <%= totalPrice %>, //판매 가격
+	 	  	amount : <%=totalPrice%>, //판매 가격
 	 	    // amount : 10, // 테스트용 판매 가격
-	 	    buyer_email : '<%= loginMember.getEmail() %>',
+	 	    buyer_email : '<%=loginMember.getEmail()%>',
 	 	    buyer_name : $('#shipping_person').val(),
 	 	    buyer_tel : buyerTelMerge,
 	 	    buyer_addr : buyerAddrMerge,
@@ -449,15 +449,15 @@
 	 	}, function (rsp) { // callback
 	 	    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
 	 	        console.log(rsp); // 결제정보 확인용 출력문
-	 	
+
 	 	        // jQuery로 HTTP 요청
 	 	        $.ajax({
-					url: "<%= request.getContextPath() %>/buy/payment",
+					url: "<%=request.getContextPath()%>/buy/payment",
 					method: "POST",
 					dataType : "json",
 					data: {
 		 	            merchantUid: rsp.merchant_uid, // 주문번호(buy테이블 고유값)
-		 	            memberId: "<%= loginMember.getMemberId() %>",
+		 	            memberId: "<%=loginMember.getMemberId()%>",
 		 	            payMethod: rsp.pay_method,
 		 	            amount: rsp.paid_amount,
 		 	            buyerEmail: rsp.buyer_email,
@@ -469,24 +469,23 @@
 						impUid: rsp.imp_uid, // 결제번호
 						payStatement: rsp.status,
 		 	            requestTerm: requestTermVal,
-		 	            
+
 						jsonPbArr: jsonPayPbArr,
-		 	            
+
 		 	         	shippingAddrNo: shippingAddrNo,
-		 	         		
+
 						shippingAddrInput: $('#address').val(),
 						shippingAddrDetailInput: $('#address_detail').val()
 					}
 	 	      	}).done(function(data) { // 응답 처리
 	 	      		alert("결제에 성공하였습니다.");
-	 	      		location.href = "<%= request.getContextPath() %>/";
+	 	      		location.href = "<%=request.getContextPath()%>/";
 	 	       });
-	 			
 	 	    } else {
 	 	      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
 	 	    }
 		});
-	 		 // --%>
+
 	});
 	 <%--------------------------------------- 이은지 end ---------------------------------------%>
 
