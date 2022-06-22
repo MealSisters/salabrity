@@ -11,7 +11,6 @@
 
 const printlineChart = (target, days, salesData, rgb = "#0C7475") => {
   const context = target.getContext("2d");
-
   const lineChart = new Chart(context, {
       type: 'line',
       data: { // 차트에 들어갈 데이터
@@ -25,14 +24,11 @@ const printlineChart = (target, days, salesData, rgb = "#0C7475") => {
                   borderWidth: 2,
                   data: salesData
               }
-
           ]
       },
       options: {
           maintainAspectRatio: false,
-          legend: {
-              display: false
-          },
+          legend: { display: false },
           scales: {
               yAxes: [{
                   beginAtZero: true,
@@ -46,7 +42,6 @@ const printlineChart = (target, days, salesData, rgb = "#0C7475") => {
           tooltips: {
 	          callbacks: {
 	              label: (tooltipItem, data) => {
-	                  let label = data.datasets[tooltipItem.datasetIndex].label;
 	                  let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 	                  return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
 	              }

@@ -88,7 +88,7 @@ public class PaymentServlet extends HttpServlet {
 			}
 			buy.setList(pbList);
 
-			// 주문테이블 insert + 상품-주문 테이블 insert 트랜잭션 처리
+			// 주문테이블 insert + 상품-주문 테이블 insert + 카트 테이블 delete 트랜잭션 처리
 			int result = buyService.insertBuy(buy);
 
 			// String msg = "결제성공";
