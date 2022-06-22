@@ -4,7 +4,7 @@
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/css/member/member.css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+<script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <style>
 #step2 {
 	color: #116916;
@@ -32,10 +32,13 @@
 			<div class="input_box">
 				<label class="member_title">아이디&nbsp;<span class="point">*</span></label>
 				<input type="text" name="memberId" id="memberId" class="input_text">
-				<button type="button" class="checkId" onclick="checkIdDuplicate();">중복확인</button>
-				<input type="hidden" id="idValid" value="0" />
+				<input type="hidden" name="hiddenId" id="hiddenId" value="0" />
+				
+				<button type="button" name="checkId" class="checkId" id="checkId">중복확인</button>
 				<span class="guide">* 6자리 이상의 영문자, 숫자를 조합하여 입력해 주세요</span>
+				<span class="chkId"></span>
 			</div>
+	
 			<div class="input_box">
 				<label class="member_title">비밀번호&nbsp;<span class="point">*</span></label> 
 				<input type="password" name="password" id="password" class="input_text"> <span
@@ -170,29 +173,47 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 
-// 회원가입폼 유효성 검사
-const checkIdDuplicate = () => {
+
+// 아이디 중복검사 & 유효성검사
+
+	$(checkId).click(function(){
+		const id = $('#memberId').val();
+		const $memberId = $("#memberId");
+		
+		if (/^[A-Za-z0-9]{6,}/.test($memberId.val()) == false) {
+			alert("아이디는 대소문자/숫자를 조합하여 6글자 이상이어야 합니다.");
+			return;
+		}
+
+		
+		$.ajax({
+			url: "<%= request.getContextPath() %>/member/checkIdDuplicate",
+			data : {
+				memberIdChk : id
+				},
+			method: "POST",
+			dataType: "text",
+			success: function(data){
+				$(".chkId").html(data);
+				if(data){
+					$("[name=hiddenId]").val("1");
+				}else{
+					$('#memberId').val("").focus();
+				}
+			},
+			error: console.log
+		});
+	});
 	
-	const id = document.getElementById("memberId");
-	if(id.value.length == 0) {
-		alert("아이디를 입력해주세요.");
-		return false;
-	} 
-	if(!/[A-Za-z0-9]{6,}$/.test(memberId.value)){
-		alert("아이디는 대소문자/숫자를 조합하여 6글자 이상이어야 합니다.");
-		return false;
-	}
-	const title = "checkIdDuplicatePopup";
-	const spec = "width=460px, height=300px";
-	const popup = open("", title, spec);
+	$("#memberId").change(function(){
+		$("[name=hiddenId]").val("0");
+		$(".chkId").html("");
+	});
 	
-	const frm = document.checkIdDuplicateFrm;
-	frm.target = title;
-	frm.memberId.value = memberId.value;
-	frm.submit();
-	return true;
 	
-};
+	
+	
+
 
 checkPassword.onblur = () => {
 	if(password.value !== checkPassword.value){
@@ -210,7 +231,7 @@ document.memberEnrollFrm.onsubmit = () => {
 		return false;
 	}
 	// 중복검사여부 체크
-	if(idValid.value !== "1") {
+	if(hiddenId.value !== "1") {
 		alert("아이디 중복검사는 필수 항목입니다.");
 		return false;
 	}

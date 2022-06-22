@@ -49,7 +49,7 @@ public class FindPwdServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		
 		if(member == null || !member.getMemberId().equals(memberId) || !member.getEmail().equals(email)){
-        	writer.println("<script>alert('해당하는 회원 정보가 없습니다.');</script>");
+        	writer.println("<script>alert('해당하는 회원 정보가 없습니다. 다시 시도해주세요.');</script>");
 			writer.println("<script>history.back();</script>");
 			writer.close();
             return;
@@ -59,7 +59,7 @@ public class FindPwdServlet extends HttpServlet {
     	  String user = "salabrity@naver.com";
     	  String password = "salabrity~!";
     	  
-    	  String toEmail = member.getEmail(); // 전송 받을 이메일 주소
+    	  String toEmail = member.getEmail();
 
     	  
     	  Properties props = new Properties();
@@ -69,13 +69,12 @@ public class FindPwdServlet extends HttpServlet {
   		  props.put("mail.smtp.ssl.enable", "true");
   		  props.put("mail.smtp.starttls.enable", "true");
   		  props.put("mail.debug", "true");
-  		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+  		  props.put("mail.smtp.ssl.protocols", "TLSv1.2");
           
           
           
-          int random = (int)(Math.random() * (99999 - 10000 + 1)) + 10000;
-//			System.out.println("인증번호 : " + random);
-			String randomStr = Integer.toString(random);
+          int random = (int)(Math.random() * (999999 - 100000 + 1)) + 100000;
+			String randomMsg = Integer.toString(random);
 			
 			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
@@ -88,10 +87,9 @@ public class FindPwdServlet extends HttpServlet {
 				send.setFrom(new InternetAddress(user));
 				send.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 				send.setSubject("샐러브리티 인증번호 발급 안내입니다.");
-				send.setText("인증번호는 " + randomStr + " 입니다.");
+				send.setText("인증번호는 " + randomMsg + " 입니다.");
 
 				Transport.send(send);
-//				System.out.println("이메일 전송 완료");
 				
 			} catch (AddressException e) {
 				e.printStackTrace();
@@ -100,10 +98,10 @@ public class FindPwdServlet extends HttpServlet {
 			}
 			
 				HttpSession savePwd = request.getSession();
-				savePwd.setAttribute("randomStr", randomStr);
+				savePwd.setAttribute("randomMsg", randomMsg);
 				request.setAttribute("email", email);
 				request.setAttribute("memberId", memberId);
-				savePwd.setAttribute("msg", "이메일로 인증 번호가 전송되었습니다.");
+				savePwd.setAttribute("msg", "이메일로 인증번호가 전송되었습니다.");
 				request.getRequestDispatcher("/WEB-INF/views/member/findPwdUpdate.jsp").forward(request, response);
           
 	}

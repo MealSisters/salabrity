@@ -36,7 +36,7 @@ public class FindPwdUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String randomStr = (String) request.getSession().getAttribute("randomStr");
+		String randomMsg = (String) request.getSession().getAttribute("randomMsg");
 		String randomPwd = request.getParameter("randomPwd");
 		String memberId = request.getParameter("memberId");
 //		System.out.println(memberId);
@@ -46,27 +46,25 @@ public class FindPwdUpdateServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
-		if (!randomStr.equals(randomPwd)) {
+		if (!randomMsg.equals(randomPwd)) {
 			writer.println("<script>alert('인증번호가 일치하지 않습니다. 다시 시도해주세요.');</script>");
 			writer.println("<script>history.go(-2);</script>");
 			writer.close();
 			return;
 		}
 
-		String msg = "";
 		Member member = memberService.findByMemberId(memberId);
-		String location = request.getContextPath();
 		if (member != null) {
 			Member findPwdUpdate = new Member();
 			findPwdUpdate.setMemberId(memberId);
 			findPwdUpdate.setPassword(newPassword);
 			int result = memberService.findPwdUpdate(findPwdUpdate);
 //			System.out.println(result);
+			String msg = "";
 			msg = "비밀번호가 변경되었습니다.";
-			location += "/member/login";
 
 			request.getSession().setAttribute("msg", msg);
-			response.sendRedirect(location);
+			request.getRequestDispatcher("/WEB-INF/views/member/memberLogin.jsp").forward(request, response);
 			
 		}
 

@@ -36,6 +36,7 @@ public class memberDeleteServlet extends HttpServlet {
 			// 업무로직
 			int result = memberService.deleteMember(memberId);
 //			System.out.println("탈퇴 회원 정보 : " + memberId);
+			String msg = "";
 			
 			if(result>0) {
 
@@ -50,13 +51,15 @@ public class memberDeleteServlet extends HttpServlet {
 					String name = names.nextElement();
 					session.removeAttribute(name);
 				}
-			
+			msg = "회원 탈퇴가 완료되었습니다.";
 			response.sendRedirect(request.getContextPath() + "/");
 			
 			} else {
+			msg = "다시 시도해주세요.";
 				doGet(request, response);
 			}
 			
+			request.getSession().setAttribute("msg", msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

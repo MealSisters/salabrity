@@ -30,15 +30,18 @@
                 <ul class="faqBody" data-no="<%= posting.getPostingNo() %>">
                     <li class="article" id="a1">
                         <p class="q"><a href="#a1">
-                        <span class="icon_q">Q</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= posting.getTitle() %><span class="q_img"><img src="<%= request.getContextPath() %>/images/arrow.png" style="width:20px" alt=""></span>
+                        <span class="icon_q">Q</span>
+                        <span style="margin-left : 9px;"><%= posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></span>
+                        <span class="q_img"><img src="<%= request.getContextPath() %>/images/arrow.png" style="width:20px" alt=""></span>
                         </a></p>
 
-                        <p class="a">
-                        <span class="icon_a" >A</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= posting.getContent() %>
-                      
-                        </p>
-                    </li>
-                  
+                        <div class="a">
+                        <span class="icon_a" >A</span>
+                        <div style="margin-left: -1px; display: inline-flex;"><%= posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></div>
+                        </div>
+                        
+                        
+                    </li>                  
                 </ul>
                 <%		
 			 	}
