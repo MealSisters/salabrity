@@ -53,7 +53,6 @@ public class CommunityBoardHacksSearchServlet extends HttpServlet {
 			Map<String, String> searchParam = new HashMap<>();
 			searchParam.put("searchType", searchType);
 			searchParam.put("searchKeyword", searchKeyword);
-			System.out.println("param = " + searchParam);
 			
 			BoardCode boardCode = BoardCode.C1;
 			
@@ -71,7 +70,6 @@ public class CommunityBoardHacksSearchServlet extends HttpServlet {
 			else {
 				pagebar = PageBar.getPagebar(cPage, numPerPage, totalPostingContents, url + "?boardCode=" + boardCode);
 			}
-			System.out.println("pagebar = " + pagebar);
 			
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);
