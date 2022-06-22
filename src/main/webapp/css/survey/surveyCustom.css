@@ -20,7 +20,7 @@ h5 {
 	width: 800px;
 	border-radius: 8px;
 	overflow: hidden;
-	margin: 100px auto;
+	margin: 80px auto;
 	padding: 80px;
 	transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 }
