@@ -7,6 +7,7 @@
 <%@ page import= "java.util.Map" %>
 <%@ page import= "product.model.dto.ProductAttach" %>
 <%@ page import= "java.util.ArrayList" %>
+<%@ page import= "java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -33,7 +34,7 @@
 		cartList = (List<Cart>)map.get("cartList");
 		productList = (List<ProductExt>)map.get("productList");
 	}
-	
+	DecimalFormat df = new DecimalFormat("#,###");
 	List<ProductBuy> pbList = new ArrayList<>();
 %>
 
@@ -76,34 +77,13 @@
                     <td class="term"><%= cartList.get(i).getFirstShipppingDate() %></td>
                     <td class="qty"><%= cartList.get(i).getQuantity() %>개</td>
                     <td class="date"><%= productList.get(i).getSubscriptionPeriod() %>주</td>
-                    <td class="prd_price"><%= productList.get(i).getProductPrice() %>원</td>
-                    <td class="prd_price"><%= productList.get(i).getProductPrice()*cartList.get(i).getQuantity() %></td>
+                    <td class="prd_price"><%= df.format(productList.get(i).getProductPrice()) %>원</td>
+                    <td class="prd_price"><%= df.format(productList.get(i).getProductPrice()*cartList.get(i).getQuantity()) %>원</td>
                 </tr>
            <%
            		}
-           	} else {    
-           		quantity = Integer.parseInt(request.getParameter("quantity"));
-           		price = Integer.parseInt(request.getParameter("productPrice"));
-           		totalPrice = quantity * price;
-           %>
-            <tr>
-                    <td class="prd_title">
-                        <ul>
-                            <li><img src="<%= request.getContextPath() %>/upload/product/<%= request.getParameter("renamedFileName") %>"
-                            alt="<%= request.getParameter("originalFileName") %>"></li>
-                            <li><%= request.getParameter("productName") %></li>
-                        </ul>
-                    </td>
-                    <td class="term"><%= request.getParameter("firstShippingDate") %></td>
-                    <td class="qty"><%= quantity %>개</td>
-                    <td class="date"><%= request.getParameter("subscriptionPeriod") %>주</td>
-                    <td class="prd_price"><%= price %>원</td>
-                    <td class="prd_price"><%= totalPrice%>원</td>
-                </tr>
-           <%
            	}
            %>
-               
             </tbody>
             <tfoot>
                 <tr>
@@ -112,15 +92,10 @@
                         <span class="total_price">
                         <% if(map != null && !map.isEmpty()){
                         %>
-                        	<%= totalPrice%>
-                        <%
-                        } else {
-                        %>
-                        <%= quantity * price %>
+                        	<%= df.format(totalPrice)%>원
                         <%
                         } 
                         %>
-                        
 						</span>
                     </td>
 
@@ -139,7 +114,6 @@
                 <tr>
                     <th><label for="radio">배송지 선택</label></th>
                     <td class="addr_chk">
-                        <%-- <input type="radio" name="radio" id="user_addr" value="user_addr" checked>&nbsp;&nbsp;<span for="user_addr" style="font-size:13px; margin-right:20px;" >주문고객 정보와 동일</span> --%>
                         <input type="radio" name="radio" id="address_default" value="address_default" >&nbsp;&nbsp;<span for="address_default" style="font-size:13px; margin-right:20px;" >기본 배송지</span>
                         <input type="radio" name="radio" id="address_choice" value="address_choice" >&nbsp;&nbsp;<span for="address_choice" style="font-size:13px; margin-right:20px;" >배송지 정보에서 선택</span>
                         <input type="radio" name="radio" id="new_addr" value="new_addr" checked>&nbsp;&nbsp;<span for="new_addr" style="font-size:13px; margin-right:20px;" >직접 입력</span>
@@ -208,44 +182,33 @@
                 <td class="col4"><%= telephone %></td>
             </tr>
             
-         <% 
-        		}
-        	}
-        %>
+<% 
+       		}
+    	}
+ %>
 
         </tbody>
     </table>
     <button type="button" class="apply"> 확인</button>
 </div>
 
-
 <script>
 
 	$(()=>{
-		console.log("로드테스트");
 		<%
 			if( defaultDestination != null){
 		%>
 				$('#address_default').prop('checked', true);
 				addressDefault();
-		<%--
-		<%
-			} else {
-		%>
-				$('#user_addr').prop('checked', true);
-				buyerAddr();
-		--%>
 		<%
 			}
 			if(destinationList != null && destinationList.size()!= 0){
 		%>
-			
 		<%
 			}
 		%>
 	});
 
-	
     //우편번호 선택 클릭 이벤트
     const zipcode = document.querySelector('.search_zipcode');
     console.log(zipcode);
@@ -259,7 +222,6 @@
         }).open();
 
     });
-
 
     // 배송지 정보에서 선택 클릭
     const addressChoice = document.querySelector("#address_choice");
@@ -284,10 +246,8 @@
     %>
     });
 
-
     //선택창에서 확인버튼 클릭
     const apply = document.querySelector(".apply");
-    console.log(apply);
     apply.addEventListener('click',function(){
         const destinationList = document.querySelector('#destination_list');
 
@@ -307,7 +267,6 @@
 				$('#address_detail').val("<%=addressDetail%>");
         	}
 		<%
-        
         }
         %>
        
@@ -315,13 +274,6 @@
         destinationList.style.zIndex="-1";
         destinationList.style.opacity="0";
     });
-    
-    <%--
-    //주문자정보와 동일 선택시
-    $('#user_addr').click((e) => {
-       	buyerAddr();
-    });
-    --%>
     
     //라디오 - 기본배송지 선택시 이벤트
     $('#address_default').click((e) => {
@@ -382,19 +334,11 @@
     });
     
 	//주문명 생성
-	console.log($(".productName").html());
 	let orderName = $(".productName").html();
 	if(<%= cartList != null && cartList.size() >= 1 %>){
 		orderName += " 외 " + <%= cartList.size() - 1 %> + "건";
 	}
 		
-	<%--
-	//주문자 주소 처리
-	<%	String buyerAddress = "(" + loginMember.getZipcode() + ") " + loginMember.getAddress();
-				buyerAddress += loginMember.getAddressDetail() != null ? loginMember.getAddressDetail() : ""; %>
-    let buyerAddress = "<%= buyerAddress %>";
-    --%>
-
    //아임포트 결제-결제준비
    IMP.init('imp68598851'); 
    

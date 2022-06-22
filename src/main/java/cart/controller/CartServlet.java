@@ -1,5 +1,4 @@
 package cart.controller;
-//ㅇㅇㅇ22
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +33,10 @@ public class CartServlet extends HttpServlet {
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String memberId = loginMember.getMemberId();
 			
-			String defaultDate = new Methods().getDefaultFilstShippingDate();
 			Map<String, Object> map = cartService.findByIdCart(memberId);
+			String defaultDate = new Methods().getDefaultFilstShippingDate();
 			List<Cart> cartList = (List<Cart>) map.get("cartList");
 			for(Cart cart : cartList) {
-				System.out.println(cart);
 				if(cart.getFirstShipppingDate().compareTo(defaultDate) < 0) {
 					cart.setFirstShipppingDate(defaultDate);
 					cartService.firstShippingDateUpdate(cart);

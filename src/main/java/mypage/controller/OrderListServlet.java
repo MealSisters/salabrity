@@ -25,23 +25,19 @@ public class OrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			HttpSession session = request.getSession();
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			String memberId = loginMember.getMemberId();
+			
+			List<BuyExt> list = buyService.findBuyExtById(memberId);
 
-		//업무로직
-		HttpSession session = request.getSession();
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		String memberId = loginMember.getMemberId();
-		
-		List<BuyExt> list = buyService.findBuyExtById(memberId);
-
-		//뷰단 위임
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderList.jsp").forward(request, response);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderList.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
-		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-			super.doPost(req, resp);
-		}
-
 }

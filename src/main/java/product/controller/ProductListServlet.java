@@ -20,15 +20,11 @@ public class ProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//업무로직
 			List <ProductExt> list = productService.findAllProduct();
-			System.out.println("Servlet"+list);
 			
-			//view단 위임
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/views/product/productList.jsp").forward(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}

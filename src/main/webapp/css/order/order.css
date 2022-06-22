@@ -1,13 +1,8 @@
 @charset "UTF-8";
 
-/*
-	order.css
-*/
-
 #content{
 	margin: 2% 3% 0 3%;
 }
-
 #content h1 {
     font-size: 20px;
     border-bottom: 3px solid #116916;
@@ -19,7 +14,6 @@ div.order_list{
 	padding: 0;
 	margin-bottom: 20px;
 }
-
 #content .order_tbl{
 	border-top: solid 2px #777;
 	border-collapse: collapse;
@@ -31,7 +25,6 @@ div.order_list{
 	padding: 7px;
 	font-size: 14px;
 }
-
 .order_tbl td{ 
 	border-top: solid 1px #999;
 	font-size: 13px;
@@ -72,7 +65,6 @@ td.total_tit{
     padding: 10px 10px 20px 25px;
 	margin: 0;
 	text-align: left;
-
 }
 .ship-info{
 	padding: 0;
@@ -170,7 +162,6 @@ button.search_zipcode{
 	margin: 0;
 	appearance: none;
 	background-color: #116916;
-	/* border: solid #116916 1px; */
 	width: 15px;
 	height: 15px;
 	border-radius: 100%;
@@ -211,9 +202,6 @@ button.payment{
 	opacity: 0;
 	border-radius: 8px;
 }
-/* ====================================== */
-/* ====================================== */
-/* ====================================== */
 #destination_list h3{
 	margin-left: 3%;
 	margin-bottom: 12px;
@@ -239,45 +227,35 @@ button.payment{
 	border-radius: 2px;
 	cursor: pointer;
 }
-
 #destination_list th,
 #destination_list td {
 	text-align: center;
 	border-bottom: 1px solid #dbdbdb;
 	font-size: 12px;
 }
-
 #destination_list th {
 	height: 30px;
 	padding-top: 6px;
 }
-
 #destination_list td {
 	height: 47px;
 }
-
 #destination_list td.col1 {
 	width: 7.5%
 }
-
 #destination_list td.col2 {
 	width: 14%;
 }
-
 #destination_list td.col3 {
 	text-align: left;
 	width: 55%;
 }
-
 #destination_list td.col4 {
 	width: 17%;
 }
-
 #destination_list td.col5 {
 	width: 8.5%;
 }
-
-
 td.col1 input[type=radio] {
 	background-color: #FFFF;
 	border: solid #116916 2px;
@@ -290,18 +268,12 @@ td.col1 input[type=radio] {
 	cursor: pointer;
 	cursor: pointer;
 }
-
 td.col1 [type=radio]:checked {
 	margin: 0;
 	appearance: none;
 	background-color: #116916;
-	/* border: solid #116916 1px; */
 	width: 15px;
 	height: 15px;
 	border-radius: 100%;
 	transition-duration: 0.4s;
 }
-
-
-
-
