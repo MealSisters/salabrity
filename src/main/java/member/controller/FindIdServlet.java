@@ -40,7 +40,7 @@ public class FindIdServlet extends HttpServlet {
 			writer.print("<script>alert('가입하신 회원님의 아이디는 ");
 			writer.print(findId);
 			writer.println(" 입니다.'); </script>");
-			writer.println("<script>history.back();</script>");
+			writer.println("<script>history.go(-2);</script>");
 			writer.close();
 		} else {
 			writer.println("<script>alert('해당하는 회원 정보가 없습니다. 다시 시도해주세요.');</script>");
