@@ -56,7 +56,7 @@ public class FindPwdServlet extends HttpServlet {
       }else {
 		
     	  String host = "smtp.naver.com";
-    	  String user = "suntwooo@naver.com";
+    	  String user = "";
     	  String password = "";
     	  
     	  String toEmail = member.getEmail();
