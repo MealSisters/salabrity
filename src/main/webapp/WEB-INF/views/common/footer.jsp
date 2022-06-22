@@ -85,10 +85,10 @@
 	</div>
 	<script>
 	<!-- Channel Plugin Scripts -->
-	var memberIdVal = $("#memberId").val();
-	var memberNameVal = $("#memberName").val();
-	var phoneVal = $("#phone").val();
-	var emailVal = $("#email").val();
+	var memberIdVal = $("#chatMemberId").val();
+	var memberNameVal = $("#chatMemberName").val();
+	var phoneVal = $("#chatPhone").val();
+	var emailVal = $("#chatEmail").val();
 
 	if(memberIdVal=='') {
 		memberIdVal = null;
