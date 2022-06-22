@@ -300,11 +300,11 @@
 				console.log(checkedCartNoList);
 			if (!checkedCartNoList.length) {
 				alert("선택된 상품이 없습니다.");
-				return
+				return ;
 				};
         		$.ajax({
 					type : "POST",
-					async : true,
+					async : false,
 					traditional : true,
 					data : {cartNoList: checkedCartNoList},
 					url : "<%=request.getContextPath()%>/order/cart/checkedDelete",

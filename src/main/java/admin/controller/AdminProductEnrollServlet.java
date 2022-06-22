@@ -68,10 +68,10 @@ public class AdminProductEnrollServlet extends HttpServlet {
 			String[] arrMenuNo = multiReq.getParameterValues("menuNo");
 
 			ProductExt product = new ProductExt();
-			product.setProductId(productId);
-			product.setProductName(productName);
+			product.setProductId(productId.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			product.setProductName(productName.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			product.setProductPrice(productPrice);
-			product.setProductdescription(productDescription);
+			product.setProductdescription(productDescription.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			product.setProductTarget(productTarget);
 			product.setSubscriptionPeriod(subscriptionPeriod);
 

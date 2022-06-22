@@ -85,6 +85,13 @@ public class DestinationService {
 		return destination;
 	}
 	
+	public Destination findDestinationByShippingAddressNo(int shippingAddressNo) {
+		Connection conn = getConnection();
+		Destination destination = destinationDao.findDestinationByShippingAddressNo(conn, shippingAddressNo);
+		close(conn);
+		return destination;
+	}
+	
 
 
 	/*-------------------------------------- 이은지 start --------------------------------------*/

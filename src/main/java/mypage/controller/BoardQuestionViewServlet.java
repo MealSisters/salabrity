@@ -34,6 +34,9 @@ public class BoardQuestionViewServlet extends HttpServlet {
 			
 	
 			
+			answer.setTitle(answer.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			answer.setContent(answer.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			answer.setContent(answer.getContent().replaceAll("\n", "<br/>"));
 			posting.setTitle(posting.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));

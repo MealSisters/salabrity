@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.BoardUtil;
 import board.model.dto.BoardCode;
 import board.model.dto.PostingComment;
 import board.model.service.BoardService;

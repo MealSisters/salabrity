@@ -12,8 +12,6 @@
 					<h4 class="li_head">쇼핑정보</h4>
 				</li>
 				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/orderList">주문 조회</a></li>
-				<li class="sub_inner_list"><a href="<%= request.getContextPath() %>/mypage/cancelOrderList">취소 내역</a></li>
-
 			</ul>
 
 			<ul class="sub_box_inner">

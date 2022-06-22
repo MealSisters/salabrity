@@ -23,6 +23,7 @@ public class AdminAnswerViewServlet extends HttpServlet {
 		try {
 			int postingNo = Integer.parseInt(request.getParameter("no"));
 			PostingExt posting = mypageService.findByNo(postingNo);
+			posting.setContent(posting.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			posting.setContent(posting.getContent().replaceAll("\n", "<br/>"));
 			
 			request.setAttribute("posting", posting);

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cart.model.dto.Cart;
 import cart.model.service.CartService;
@@ -42,6 +43,7 @@ public class CartInsertServlet extends HttpServlet {
 			//값 처리
 			PrintWriter out = response.getWriter();
 			out.append(msg);
+			
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

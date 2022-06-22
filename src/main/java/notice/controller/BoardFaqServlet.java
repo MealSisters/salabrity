@@ -46,7 +46,7 @@ public class BoardFaqServlet extends HttpServlet {
 			List<Posting> list = null;
 			
 			list = mypageService.findFaqList(start, end);
-			System.out.println(list);
+//			System.out.println(list);
 
 			int totalContents = mypageService.faqTotal();
 			String url = request.getRequestURI();

@@ -44,10 +44,10 @@ public class AdminMenuEnrollServlet extends HttpServlet {
 			int calorie = Integer.parseInt(multiReq.getParameter("calorie"));
 
 			MenuExt menu = new MenuExt();
-			menu.setMenuId(menuId);
-			menu.setMenuName(menuName);
-			menu.setMenuDescription(menuDescription);
-			menu.setIngredients(ingredients);
+			menu.setMenuId(menuId.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			menu.setMenuName(menuName.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			menu.setMenuDescription(menuDescription.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			menu.setIngredients(ingredients.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			menu.setCalorie(calorie);
 			File file = multiReq.getFile("menuAttach");
 			if (file != null) {

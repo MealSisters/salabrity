@@ -35,9 +35,9 @@ public class PwdUpdateServlet extends HttpServlet {
 			String oldPassword = PwdEncrypt.encrypt(request.getParameter("oldPassword"), memberId);
 			String newPassword = PwdEncrypt.encrypt(request.getParameter("newPassword"), memberId);
 
-			System.out.println("memberId = " + memberId);
-			System.out.println("oldPassword = " + oldPassword);
-			System.out.println("newPassword = " + newPassword);
+//			System.out.println("memberId = " + memberId);
+//			System.out.println("oldPassword = " + oldPassword);
+//			System.out.println("newPassword = " + newPassword);
 			
 			Member member = memberService.findByMemberId(memberId);
 			String msg = "";

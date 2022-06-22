@@ -84,8 +84,8 @@ public class AdminProductUpdateServlet extends HttpServlet {
 
 			ProductExt product = new ProductExt();
 			product.setProductNo(productNo);
-			product.setProductName(productName);
-			product.setProductdescription(productDescription);
+			product.setProductName(productName.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+			product.setProductdescription(productDescription.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
 			product.setProductTarget(productTarget);
 			product.setSubscriptionPeriod(subscriptionPeriod);
 

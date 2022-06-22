@@ -64,7 +64,59 @@ if(productHere != null)
 			<input type="hidden" name="delWeekDayCode" value="" />
 		</form>
 <%
-		for(int i = 1; i <= 2; i++){
+		for(int i = 1; i <= productHere.getSubscriptionPeriod() ; i++){
+%>
+				<ul>
+<% 
+			for(int j = 0; j < 7 ; j++) {
+				if(j > 0 &&  j < 6) {
+%>
+					<li data-wdCode="W<%= i %>D<%= j %>">
+						<div class="day-code"><span>Week<%= i %> Day<%= j %></span></div>
+<% 
+					if(calMap.get("W"+i+"D"+j) != null) {
+						CalendarExt cal = calMap.get("W"+i+"D"+j);
+%>
+						<div class="day-menu"><a href="<%=request.getContextPath() %>/menu/menuInfo?menuNo=<%= cal.getMenuNo() %>"><%= cal.getMenuName() %></a></div>
+                        <div class="day-btns">
+<% 
+						if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { 
+%>
+	                            <div class="modifyDay-wrapper">
+	                                <button class="modifyDay">수정</button>
+	                            </div>
+	                            <div class="deleteDay-wrapper">
+	                                <button class="deleteDay">삭제</button>
+	                            </div>
+<% 
+						} 
+%>
+	                        </div>
+<% 
+					} else if(loginMember != null && loginMember.getMemberRole() == MemberRole.A) { 
+%>
+                        <div class="day-btns">
+                            <div class="enrollDay-wrapper">
+                                <button class="enrollDay">등록</button>
+                            </div>
+                        </div>
+<% 
+					}
+%>
+					</li>
+<% 
+				} else { 
+%>
+					<li></li>
+<% 
+				}
+			} 
+%>
+				</ul>
+<%
+		}
+	} else if (productHere != null) {
+		for(int i = 1; i <= productHere.getSubscriptionPeriod() ; i++){
 %>
 				<ul>
 <% 
@@ -116,7 +168,7 @@ if(productHere != null)
 <%
 		}
 	} else if(recentProductName != null) {
-		for(int i = 1; i <= 2; i++){
+		for(int i = 1; i <= recentProduct.getSubscriptionPeriod() ; i++){
 %>
 				<ul>
 <% 
@@ -169,7 +221,6 @@ window.addEventListener('load', () => {
     deleteBtns.forEach((button) => {
         button.addEventListener('click', menuDeleteEvent);
     });
-    console.log("온로드 끝");
 });
 
 const menuEnrollEvent = (e) => {
@@ -187,7 +238,7 @@ const menuUpdateEvent = (e) => {
 const menuDeleteEvent = (e) => {
 	const targetli = e.target.parentElement.parentElement.parentElement;
 	const dataWdCode = $(targetli).attr("data-wdCode");
-	document.querySelector("[name=delProductNo]").value = "<%= productHere.getProductNo() %>";
+	document.querySelector("[name=delProductNo]").value = "<%= productHere!=null ? productHere.getProductNo() : ""%>";
 	document.querySelector("[name=delWeekDayCode]").value = dataWdCode;
 	if(confirm("캘린더에 등록된 정보를 삭제하시겠습니까?")){
 		document.calendarDeleteFrm.submit();
