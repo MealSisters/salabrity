@@ -32,9 +32,6 @@ public class PaymentServlet extends HttpServlet {
 	private DestinationService destinationService = new DestinationService();
 	private BuyService buyService = new BuyService();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// 전달받은 값 처리
@@ -60,7 +57,6 @@ public class PaymentServlet extends HttpServlet {
 			String shippingAddrInput = request.getParameter("shippingAddrInput");
 			String shippingAddrDetailInput = request.getParameter("shippingAddrDetailInput");
 			
-			System.out.println("buyerPostcode@servlet" + buyerPostcode);
 			// 배송지 정보 처리
 			// 직접입력일땐 shipping_address 테이블에 레코드 추가
 			if(shippingAddressNo == 0 ) {
@@ -71,13 +67,17 @@ public class PaymentServlet extends HttpServlet {
 			
 			// 주문 객체 생성 및 추가
 			Date today = new Date(System.currentTimeMillis());
-			BuyExt buy = new BuyExt(merchantUid, memberId, shippingAddressNo, payMethod, amount, buyerEmail, buyerName,
-					buyerTel, buyerAddress, buyerPostcode, paymentDate, today, impUid, PayStatement.valueOf(payStatement), requestTerm);
+			BuyExt buy = new BuyExt(merchantUid, memberId, shippingAddressNo,
+					payMethod, amount, buyerEmail, buyerName, buyerTel,
+					buyerAddress, buyerPostcode, paymentDate, today, impUid,
+					PayStatement.valueOf(payStatement), requestTerm);
 
 			Gson gson = new Gson();
-			PayPB[] array = gson.fromJson(str, PayPB[].class);
+			// json객체배열형식의 문자열을 java 객체배열로 변환
+			PayPB[] array = gson.fromJson(str, PayPB[].class); 
 			List<PayPB> tmpList = Arrays.asList(array);
 			List<ProductBuyExt> pbList = new ArrayList<>();
+			// 실제 사용할 객체배열에 옮기기
 			for (PayPB ppb : tmpList) {
 				ProductBuyExt pb = new ProductBuyExt();
 				pb.setProductNo(ppb.getProductNo());
@@ -91,10 +91,10 @@ public class PaymentServlet extends HttpServlet {
 			// 주문테이블 insert + 상품-주문 테이블 insert 트랜잭션 처리
 			int result = buyService.insertBuy(buy);
 
-			String msg = "결제성공";
+			// String msg = "결제성공";
 
 			response.setContentType("application/json; charset=utf-8");
-			new Gson().toJson(msg, response.getWriter());
+			// new Gson().toJson(msg, response.getWriter());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

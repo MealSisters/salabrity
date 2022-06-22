@@ -395,10 +395,10 @@
     let buyerAddress = "<%= buyerAddress %>";
     --%>
 
-   //아임포트 결제-결제준비
-   IMP.init('imp68598851'); 
    
 	<%-------------------------------------- 이은지 start --------------------------------------%>
+   //아임포트 결제-결제준비
+   IMP.init('imp68598851'); 
 	
 	$('#paymentBtn').click((e) => {
 		// 사용자 form 입력값 가져오기
@@ -406,7 +406,7 @@
 		const buyerAddrMerge = $('#address').val()+" "+$('#address_detail').val();
 		const requestTermVal = document.querySelector("#requestTerm").value;
 
-		// 배송지정보 옵션 처리 1.주문고객정보 2.기본배송지 3.배송지정보에서선택 4.직접입력
+		// 배송지정보 옵션 처리 1.기본배송지 2.배송지정보에서선택 3.직접입력
 		let shippingAddrNo = 0;
 		switch($("[type=radio]:checked").val()){
 		<%-- case "user_addr": shippingOpt = "userAddr"; break; --%>
@@ -423,6 +423,7 @@
 			break;
 		}
 
+		// 배열에 현재 구매에 포함된 상품정보(json형식) 추가
 		let payPbArr = [];
 		<% for(int i = 0 ; i < pbList.size(); i++) { %>
 			payPbArr.push({ 
@@ -431,57 +432,66 @@
 				firstShippingDate: "<%= pbList.get(i).getFirstShippingDate() %>"
 			});
 		<% } %>
+
+		// json객체배열에 저장
 		const jsonPayPbArr = JSON.stringify(payPbArr);
 
+		// IMP.request_pay(결제정보, callback) : 결제창 호출
 	 	IMP.request_pay({
-	 	    pg : 'inicis', // version 1.1.0부터 지원.
+
+	 	    pg : 'inicis',
 	 	    pay_method : 'card',
 	 	    merchant_uid : new Date().getTime(),
 	 	    name : orderName,
 	 	  	amount : <%=totalPrice%>, //판매 가격
-	 	    // amount : 10, // 테스트용 판매 가격
 	 	    buyer_email : '<%=loginMember.getEmail()%>',
 	 	    buyer_name : $('#shipping_person').val(),
 	 	    buyer_tel : buyerTelMerge,
 	 	    buyer_addr : buyerAddrMerge,
-	 	    buyer_postcode : $('#zipcode').val(),
-	 	    custom_data: '{"after_url":"http://localhost:8888/items"}'
-	 	}, function (rsp) { // callback
-	 	    if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-	 	        console.log(rsp); // 결제정보 확인용 출력문
+	 	    buyer_postcode : $('#zipcode').val()
 
-	 	        // jQuery로 HTTP 요청
+	 	}, function (rsp) { // callback
+	 		
+	 		// 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	 	    if (rsp.success) { 	
+	 	        
+	 	    	// DB저장에 필요한 정보를 서블릿으로 전달
 	 	        $.ajax({
 					url: "<%=request.getContextPath()%>/buy/payment",
 					method: "POST",
 					dataType : "json",
 					data: {
-		 	            merchantUid: rsp.merchant_uid, // 주문번호(buy테이블 고유값)
-		 	            memberId: "<%=loginMember.getMemberId()%>",
-		 	            payMethod: rsp.pay_method,
-		 	            amount: rsp.paid_amount,
-		 	            buyerEmail: rsp.buyer_email,
-		 	            buyerName: rsp.buyer_name,
-		 	            buyerTel: rsp.buyer_tel,
-		 	            buyerAddr: rsp.buyer_addr,
-		 	            buyerPostcode: rsp.buyer_postcode,
-		 	            paySec: rsp.paid_at,
-						impUid: rsp.imp_uid, // 결제번호
-						payStatement: rsp.status,
-		 	            requestTerm: requestTermVal,
+						// buy 테이블에 필요한 정보
+		 	            merchantUid : rsp.merchant_uid, // 주문번호(buy테이블 고유값)
+		 	            memberId : "<%=loginMember.getMemberId()%>",
+		 	            payMethod : rsp.pay_method,
+		 	            amount : rsp.paid_amount,
+		 	            buyerEmail : rsp.buyer_email,
+		 	            buyerName : rsp.buyer_name,
+		 	            buyerTel : rsp.buyer_tel,
+		 	            buyerAddr : rsp.buyer_addr,
+		 	            buyerPostcode : rsp.buyer_postcode,
+		 	            paySec : rsp.paid_at, // Unix time
+						impUid : rsp.imp_uid, // 결제번호
+						payStatement : rsp.status,
+		 	            requestTerm : requestTermVal,
 
-						jsonPbArr: jsonPayPbArr,
+		 	        	// product_buy 테이블에 필요한 정보
+						jsonPbArr : jsonPayPbArr,
 
-		 	         	shippingAddrNo: shippingAddrNo,
-
-						shippingAddrInput: $('#address').val(),
-						shippingAddrDetailInput: $('#address_detail').val()
+						// shipping_address 테이블에 필요한 정보
+		 	         	shippingAddrNo : shippingAddrNo,
+						shippingAddrInput : $('#address').val(),
+						shippingAddrDetailInput : $('#address_detail').val()
 					}
-	 	      	}).done(function(data) { // 응답 처리
+	 	      	}).done(function(data) {
+	 	      		// 결제 성공 시 응답 처리 : 알림 후 웰컴페이지 이동
 	 	      		alert("결제에 성공하였습니다.");
 	 	      		location.href = "<%=request.getContextPath()%>/";
-	 	       });
+		 	    });
+
 	 	    } else {
+		 	  // 결제 실패 case : 알림창 출력
 	 	      alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
 	 	    }
 		});
