@@ -35,7 +35,7 @@ public class memberDeleteServlet extends HttpServlet {
 			
 			// 업무로직
 			int result = memberService.deleteMember(memberId);
-			System.out.println("탈퇴 회원 정보 : " + memberId);
+//			System.out.println("탈퇴 회원 정보 : " + memberId);
 			
 			if(result>0) {
 

@@ -156,7 +156,7 @@ document.memberUpdateFrm.onsubmit = () => {
 	}
 	
 	// phone
-     if(!/^[0-9]{2,3}[0-9]{3,4}[0-9]{4}/.test(phone.value)) {
+     if(!/^[0-9]{7,}/.test(phone.value)) {
 		alert("유효하지 않은 전화번호입니다.");
 		return false;
 	}

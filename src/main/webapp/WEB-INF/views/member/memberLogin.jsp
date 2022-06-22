@@ -17,7 +17,7 @@ window.onload = () => {
 		const memberIdVal = memberId.value;
 		const passwordVal = password.value;
 		
-		console.log(memberIdVal, passwordVal);
+		//console.log(memberIdVal, passwordVal);
 		
 		if(!/^.{3,}$/.test(memberIdVal)) {
 			alert("유효한 아이디를 입력해주세요.");

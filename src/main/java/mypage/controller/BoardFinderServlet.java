@@ -54,7 +54,7 @@ public class BoardFinderServlet extends HttpServlet {
 //		System.out.println("list = " + list);
 		
 		int totalContents = mypageService.searchMyWriteListCount(memberId, param);
-		System.out.println(totalContents);
+//		System.out.println(totalContents);
 		
 		String url = request.getRequestURI() + "?searchType=" + searchType + "&searchKeyword=" + searchKeyword ;
 		String pageBar = PageBar.getPagebar(cPage, numPerPage, totalContents, url);
