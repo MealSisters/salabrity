@@ -102,9 +102,13 @@ window.onload = () => {
 // 수정 유효성 검사
 document.memberUpdateFrm.onsubmit = () => {
 	
+	if(!/[A-Za-z0-9]{1,}/.test(email.value)){
+		alert("이메일을 입력해주세요.");
+		return false;
+	}
 	// 이메일
-	if(/^[0-9A-Z]([-_\.]?[0-9A-Z])*@[0-9A-Z]([-_\.]?[0-9A-Z])*\.[A-Z]{2,6}$/.test(email.value)){
-		alert("이메일을 확인해주세요.");
+	if(!/^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(email.value)){
+		alert("잘못된 이메일 형식입니다.");
 		return false;
 	}
 	

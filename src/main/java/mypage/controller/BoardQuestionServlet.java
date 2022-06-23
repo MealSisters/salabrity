@@ -37,8 +37,6 @@ public class BoardQuestionServlet extends HttpServlet {
 		
 		try {
 			String saveDirectory = getServletContext().getRealPath("/upload/question/mypage");
-//			System.out.println("saveDirectory = " + saveDirectory);
-			
 			int maxPostSize = 1024 * 1024 * 10;
 			
 //			// d. 인코딩
@@ -79,7 +77,6 @@ public class BoardQuestionServlet extends HttpServlet {
 			int result = mypageService.insertQuestion(posting);
 			
 			response.sendRedirect(request.getContextPath() + "/mypage/boardQuestionList");
-//			response.sendRedirect(request.getContextPath() + "/mypage/boardQuestionView?no=" + posting.getPostingNo());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

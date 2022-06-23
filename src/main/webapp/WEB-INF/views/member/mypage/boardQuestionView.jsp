@@ -43,13 +43,10 @@
 				
 
 				<div class="question_view_content">
-				<!--  <div class="view_question_box"> -->
-					
 						<div class="q_cont">
 							<p>
 							<%= posting.getContent() %></p>
 						</div>
-				<!--   	</div>-->	
 					
 				<% 
 				List<PostingAttach> attachments = posting.getAttachments();
@@ -63,8 +60,6 @@
 				}
 			}
 		%>
-		
-		
 						</div>
 						<% 
 						if(answer.getPostingNo() != 0){
@@ -72,7 +67,7 @@
 				  	<div class="view_answer_box">
 						
 						<div class="answer_view_hd">
-					<h3><%= answer.getTitle() %></h3>
+					<h3><%= answer.getTitle().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></h3>
 				</div>
 
 				<div class="question_view_info">
@@ -82,11 +77,9 @@
 				
 
 				<div class="answer_view_content">
-				<!--  <div class="view_question_box"> -->
-					
 						<div class="a_cont">
 							<p>
-							<%= answer.getContent() %></p>
+							<%= answer.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %></p>
 						</div>
 						
 						<% 

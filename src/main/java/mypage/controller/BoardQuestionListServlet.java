@@ -47,11 +47,8 @@ public class BoardQuestionListServlet extends HttpServlet {
 		
 		
 		list = mypageService.findQuestionList(memberId, start, end);
-//	System.out.println("----------" + list);
 		int totalContents = mypageService.myQuestionTotal(memberId);
-//		System.out.println("토탈컨텐츠 : " + totalContents);
 		String url = request.getRequestURI();
-//		System.out.println(url);
 		
 		String pageBar = PageBar.getPagebar(cPage, numPerPage, totalContents, url);
 		
