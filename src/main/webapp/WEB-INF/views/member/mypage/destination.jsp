@@ -100,7 +100,7 @@
         new daum.Postcode({
             oncomplete: function (data) {
 				if(data.buildingName !== ""){
-					document.getElementById("address").value = data.address + ' (' + data.buildingName + ')';
+					document.getElementById("address").value = data.address + ' (' + data.buildingName + ') ';
 				}else{
 					document.getElementById("address").value = data.address;
 				}
@@ -131,7 +131,7 @@
 				data : {shippingAddressNo : radio.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
 				url : "<%=request.getContextPath()%>/mypage/destination/defaultUpdate",
 				success : function(data){
-					
+					location.reload();
 				},
 				error : function(data){
 					alert("요청실패");
@@ -151,7 +151,7 @@
 				data : {shippingAddressNo : isDefaultValueN.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
 				url : "<%=request.getContextPath()%>/mypage/destination/delFlagUpdate",
 				success : function(data){
-			
+					location.reload();
 				},
 				error : function(data){
 					alert("요청실패");
