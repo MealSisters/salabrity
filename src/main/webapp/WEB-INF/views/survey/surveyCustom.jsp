@@ -32,7 +32,7 @@
  		<input type="checkbox" id="uniq" name="uniq" value="diabetes">
 		<label for="uniq"> 당뇨환자</label>
         <input type="checkbox" id="uniq2" name="uniq" value="baby">
-        <label for="uniq2"> 유아 </label>
+        <label for="uniq2"> 어린이 </label>
       </div>
 
     	<div class="submit">
