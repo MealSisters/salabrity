@@ -18,6 +18,7 @@ String productName = "";
 if(productHere != null)
 	productName = productHere.getProductName();
 
+System.out.println("calMap = " + calMap );
 %>
 
 <!-- 관리자분기처리 예정 -->

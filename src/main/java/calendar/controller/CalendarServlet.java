@@ -43,6 +43,7 @@ public class CalendarServlet extends HttpServlet {
 			} else {
 				// 기본위치를 최근등록상품으로 설정하는 경우
 				calList = calendarService.findRecentProductCal();
+				System.out.println("calList = " + calList.size());
 				if (productAll != null && !productAll.isEmpty())
 					recentProduct = productAll.get(0);
 
