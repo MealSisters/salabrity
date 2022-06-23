@@ -50,9 +50,7 @@ public class BoardWriteListServlet extends HttpServlet {
 			list = mypageService.MyWriteList(memberId, start, end);
 			
 			int totalContents = mypageService.MyWriteTotal(memberId);
-//			System.out.println("토탈컨텐츠 : " + totalContents);
 			String url = request.getRequestURI();
-//			System.out.println(url);
 			
 			String pageBar = PageBar.getPagebar(cPage, numPerPage, totalContents, url);
 			

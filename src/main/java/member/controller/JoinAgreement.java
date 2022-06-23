@@ -27,7 +27,6 @@ public class JoinAgreement extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp").forward(request, response);
-//		response.sendRedirect("/WEB-INF/views/member/memberEnroll.jsp");
 	}
 
 }

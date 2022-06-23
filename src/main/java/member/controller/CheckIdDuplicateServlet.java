@@ -23,7 +23,6 @@ public class CheckIdDuplicateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memberIdChk = request.getParameter("memberIdChk");
-//		System.out.println("checkId = " + memberId);
 		
 		Member member = memberService.findByMemberId(memberIdChk);
 

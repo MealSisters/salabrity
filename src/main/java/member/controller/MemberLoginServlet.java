@@ -43,7 +43,6 @@ public class MemberLoginServlet extends HttpServlet {
 			
 			// 업무로직
 			Member member = memberService.findByMemberId(memberId);
-//			System.out.println("member@MemberLoginServlet = " + member);
 			
 			HttpSession session = request.getSession();
 			// saveId
@@ -51,7 +50,6 @@ public class MemberLoginServlet extends HttpServlet {
 			cookie.setPath(request.getContextPath());
 			if(saveId != null) {
 				cookie.setMaxAge(7 * 24 * 60 * 60);
-//				System.out.println(cookie.getValue());
 			} else {
 				// 로그인 실패
 				cookie.setMaxAge(0); 
@@ -61,16 +59,11 @@ public class MemberLoginServlet extends HttpServlet {
 			if(member != null && password.equals(member.getPassword())) {
 				// 로그인 성공
 				session.setAttribute("loginMember", member);
-//			request.getRequestDispatcher("/index.jsp").forward(request, response); xxxx
 				response.sendRedirect(request.getContextPath() + "/");
 				
 			} else {
 				session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 				doGet(request, response);
-//			response.sendRedirect(request.getContextPath() + "/"); xxx
-				
-//		String referer = request.getHeader("Referer");
-//		response.sendRedirect(referer);
 				
 			}
 		} catch (Exception e) {

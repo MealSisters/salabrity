@@ -41,20 +41,16 @@ public class BoardFinderServlet extends HttpServlet {
 		Map<String, String> param = new HashMap<>();
 		param.put("searchType", searchType);
 		param.put("searchKeyword", searchKeyword);
-//		System.out.println("param = " + param);
 		
 		int end = cPage * numPerPage;
 		int start = (cPage - 1) * numPerPage + 1;
 		
 		HttpSession session = request.getSession();
 		String memberId = ((Member)session.getAttribute("loginMember")).getMemberId();
-//		System.out.println(memberId);
 
 		List<Posting> list = mypageService.searchMyWriteList(memberId, param, start, end);
-//		System.out.println("list = " + list);
 		
 		int totalContents = mypageService.searchMyWriteListCount(memberId, param);
-//		System.out.println(totalContents);
 		
 		String url = request.getRequestURI() + "?searchType=" + searchType + "&searchKeyword=" + searchKeyword ;
 		String pageBar = PageBar.getPagebar(cPage, numPerPage, totalContents, url);

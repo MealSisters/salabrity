@@ -31,7 +31,6 @@ public class FindIdServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		
 		String findId = memberService.findId(memberName, phone);
-//		System.out.println("아이디찾기"+findId);
 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter writer = response.getWriter();

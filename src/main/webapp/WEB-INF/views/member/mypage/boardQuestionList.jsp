@@ -32,33 +32,6 @@
 		<h4 class="mypage_hd">1:1 문의</h4>
 		
 			<div class="board_question_zone">
-
-
-	<%-- data() 함수 사용 예정..... --%>
-			<!--  	<div class="date_view_box">
-					<form>
-						<span class="date_span">조회기간</span>
-						<div class="date_check_box">
-							<button type="button" data-value="0">오늘</button>
-							<button type="button" data-value="7">7일</button>
-							<button type="button" data-value="15">15일</button>
-							<button type="button" data-value="30">1개월</button>
-							<button type="button" data-value="90">3개월</button>
-							<button type="button" data-value="365">1년</button>
-						</div>
-
-						<div class="date_check_calendar">
-							<input type="text" name="regDate" id="" class="ck_calendar" value="2022-06-08"> <span>~</span> 
-							<input type="text" name="regDate" id="" class="ck_calendar" value="2022-06-31">
-							<button type="submit" class="btn_date_check">
-								<span>조회</span>
-							</button>
-						</div>
-					</form>
-				</div>-->
-
-				
-				
 					<table class="question_list">
 						<thead>
 							<tr>
