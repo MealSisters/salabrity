@@ -91,10 +91,10 @@ public class PaymentServlet extends HttpServlet {
 			// 주문테이블 insert + 상품-주문 테이블 insert + 카트 테이블 delete 트랜잭션 처리
 			int result = buyService.insertBuy(buy);
 
-			// String msg = "결제성공";
+			String msg = "결제성공";
 
 			response.setContentType("application/json; charset=utf-8");
-			// new Gson().toJson(msg, response.getWriter());
+			new Gson().toJson(msg, response.getWriter());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
