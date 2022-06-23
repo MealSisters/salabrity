@@ -1,0 +1,294 @@
+.div-level1 {
+  width: 1180px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  font-size: 14px;
+}
+.div-level2 {
+  width: inherit;
+}
+
+.div-spacebtween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0;
+}
+.enrollBtn-wrapper {
+  padding: 0;
+  height: 25px;
+  background-color: #0eae5622;
+  border-radius: 8px;
+  transition-duration: 0.1s;
+}
+.enrollBtn-wrapper button {
+  height: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.enrollBtn-wrapper:hover {
+  background-color: #0EAE57;
+}
+.enrollBtn-wrapper button:hover {
+  color: #fff;
+}
+.sort-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+}
+.sort-wrapper select {
+  height: 22px;
+  border: .5px solid #888;
+}
+.sort-wrapper span {
+  margin: 4px 5px 0;
+}
+
+/*---------------------- 조회결과 영역 ----------------------*/
+.div-resultlist {
+  margin: 0 0 15px;
+  padding: 0;
+}
+.tbl-searchResult {
+  margin: auto;
+  width: inherit;
+  border-collapse: collapse;
+}
+.tbl-searchResult tr {
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+}
+.tbl-searchResult thead {
+  height: 35px;
+  font-size: 13px;
+  background-color: #116135;
+  color: #fff;
+}
+.div-resultlist th {
+  font-weight: normal;
+}
+.div-resultlist td {
+  height: 25px;
+  font-family: 'LeferiBaseType-RegularA';
+  padding: 2px 7px;
+  font-size: 13px;
+  text-align: center;
+}
+.div-resultlist td:not(:last-of-type) {
+  border-right: 1px dashed #ddd;
+}
+
+
+
+.col-memberRole select {
+  font-size: 13px;
+}
+.col-no {
+  width: 26px;
+  text-align: center;
+}
+.col-gender {
+  width: 40px;
+}
+.col-menuNo {
+  width: 60px;
+}
+.col-price {
+  width: 70px;
+}
+.col-memberName, .col-payStatus, .col-calorie {
+  width: 80px;
+}
+.col-birth, .col-regDate, .col-orderDate, #tbl-orderList th.col-buttons {
+  width: 96px;
+}
+.col-phone, #tbl-menuList .col-buttons {
+  width: 110px;
+}
+.col-memberId, .col-orderNo {
+  width: 130px;
+}
+.col-products, .col-orderReq {
+  width: 150px;
+}
+.col-menuId, .col-menuName {
+  width: 180px;
+}
+.col-shippingAddr {
+  width: 270px;
+}
+th.col-ingredients {
+  width: 528px;
+}
+
+td.col-buttons{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+td.col-buttons > div {
+  padding: 0;
+  height: 25px;
+  border-radius: 10px;
+  background-color: #0eae5622;
+  display: flex;
+  align-items: center;
+  transition-duration: 0.1s;
+}
+td.col-buttons a {
+  padding: 0 7px;
+  height: inherit;
+  line-height: 220%;
+  text-decoration: none;
+  color: #000;
+}
+td.col-buttons div:hover {
+  cursor: pointer;
+  color: #fff;
+}
+td.col-buttons a:hover {
+  color: #fff;
+}
+.div-modify:hover {
+  background-color: #0EAE57;
+}
+.div-cancel:hover {
+  background-color: #AD1C0E;
+
+}
+
+/*------------------ td 오버플로우 시 스크롤바 ------------------*/
+#tbl-orderList, #tbl-menuList {
+  table-layout: fixed;
+}
+#tbl-orderList td {
+  height: 35px;
+}
+td.td-xscroll {
+  overflow-x: scroll;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+td.td-xscroll::-webkit-scrollbar {
+  height: 7px;
+  z-index: 2;
+}
+td.td-xscroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #0eae5622;
+}
+td.td-xscroll::-webkit-scrollbar-thumb:hover {
+  background-color: #0EAE57;
+}
+
+
+/*------------------*/
+#tbl-menuList td{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+/*------------------ 수정버튼 클릭시 수정폼 노출 ------------------*/
+.div-opacityLow {
+  opacity: 0.3;
+}
+.div-hidden {
+  visibility: hidden;
+}
+.orderModifyFrm-wrapper {
+  width: 900px;
+  height: 50vh;
+  position: absolute;
+  top: 25vh;
+  margin: 0 auto;
+
+  background-color: #fff;
+  border: 1.5px solid #888;
+  border-radius: 30px;
+}
+#orderModifyFrm {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#orderModifyFrm > p {
+  font-family: 'LeferiPoint-BlackA';
+  font-size: 20px;
+  margin: 10px;
+}
+#orderModifyFrm > div {
+  width: 700px;
+  margin: 5px 0;
+}
+#orderModifyFrm > div:last-of-type {
+  margin-top: 10px;
+}
+#orderModifyFrm label {
+  margin: 0 10px 0 0;
+  font-family: 'LeferiPoint-BlackA';
+  color: #116135;
+}
+#orderModifyFrm select {
+  height: 22px;
+  margin-top: -4px;
+  font-size: 13px;
+}
+.shippingAddrList-wrapper {
+  height: 10vh;
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+  overflow-y: scroll;
+}
+.shippingAddrList-wrapper::-webkit-scrollbar {
+  width: 7px;
+}
+.shippingAddrList-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #0eae5622;
+}
+.shippingAddrList-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #0EAE57;
+}
+
+.div-orderModifyFrmButtons {
+  display: flex;
+  justify-content: center;
+}
+.div-orderModifyFrmButtons > div {
+  width: 72px;
+  height: 30px;
+  padding: 0;
+  margin: 0 10px;
+  border-radius: 10px;
+  transition-duration: 0.1s;
+}
+.div-orderModifyFrmButtons > div:first-of-type {
+  background-color: #333;
+}
+.div-orderModifyFrmButtons > div:last-of-type {
+  background-color: #116135;
+}
+.div-orderModifyFrmButtons button {
+  width: inherit;
+  height: inherit;
+  background: none;
+  border: none; 
+  color: #fff;
+  line-height: 240%;
+  cursor: pointer;
+}
+.div-orderModifyFrmButtons > div:hover {
+  background-color: #0EAE57;
+}

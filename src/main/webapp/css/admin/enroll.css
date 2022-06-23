@@ -1,0 +1,216 @@
+/*
+    사용위치 : 캘린더 등록, 상품등록, 메뉴등록
+*/
+
+.div-level1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pageTitle {
+    width: 990px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.formLine-wrapper {
+    width: 990px;
+    display: flex;
+    align-items: baseline;
+}
+.formLine-wrapper label {
+    font-family: 'LeferiBaseType-BoldA';
+    width: 100px;
+}
+.formLine-wrapper .label-includeMsgspan {
+	width: 500px;
+}
+.formLine-wrapper > p {
+    margin: 10px 16px;
+}
+.formLine-wrapper > p.p-productId, .formLine-wrapper > p.p-productPrice {
+	margin: 10px 5px 10px 0;
+}
+.updateFrm .formLine-wrapper > .p-static {
+	margin: 10px 0;
+}
+.formLine-wrapper > input {
+    margin-right: 10px;
+    width: 174px;
+}
+.textarea-wrapper {
+	padding: 0;
+    margin-bottom: 10px;
+}
+.textarea-wrapper > div {
+    align-items: flex-start;
+}
+.textarea-wrapper > span {
+	margin-left: 110px;
+    vertical-align: top;
+}
+textarea {
+    resize: none;
+}
+.uniqueCkeck-wrapper, .upfileBtn-wrapper {
+    padding: 0;
+    height: 25px;
+    background-color: #116135;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.delBtn-wrapper {
+	margin: 0 0 0 5px;
+	padding: 0;
+    height: 25px;
+    background-color: #888;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.uniqueCkeckBtn, .upfileBtn-wrapper button, .delBtn-wrapper button {
+    height: inherit;
+    line-height: 200%;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+}
+.uniqueCkeck-wrapper:hover, .upfileBtn-wrapper:hover {
+    background-color: #0EAE57;
+}
+input[type="file"] {
+    display: none;
+}
+.formLine-wrapper .upfileName {
+    font-size: 13px;
+    margin: 0 10px;
+}
+.detailimgLine-wrapper {
+    padding: 15px 10px;
+}
+.detailimgGroup-wrapper {
+    padding: 0;
+}
+.detail-wrapper {
+    display: flex;
+    align-items: baseline;
+    padding: 7px 0;
+}
+
+.radioGroup-wrapper {
+    padding: 0;
+    display: flex;
+}
+.radio-wrapper span {
+    margin: 0 20px 0 10px;
+}
+.menutable-wrapper {
+    margin-top: 7px;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-top: 2px solid #888;
+    border-bottom: 2px solid #888;
+}
+.menutable-wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+.menutable-wrapper::-webkit-scrollbar-thumb {
+    background-color: #0eae5622;
+    border-radius: 10px;
+}
+.menutable-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #0EAE57;
+}
+.menuList-wrapper, .menutable-wrapper {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.menutable-wrapper > div {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    height: 20px;
+}
+.menutable-wrapper > div:not(:last-of-type) {
+    border-bottom: 1px solid #888;
+}
+.menuList-top {
+    font-family: 'LeferiBaseType-BoldA';
+    font-size: 15px;
+    background-color: #ddd;
+    padding: 6px;
+}
+.menuList-top div{
+    padding: 0;
+}
+.menuList-top p {
+	margin: 10px 0 5px;
+}
+
+.menu-wrapper {
+    font-size: 13px;
+    padding: 6px;
+}
+.menu-wrapper > p {
+	margin: 5px 0;
+}
+.col-radio, .menu-radio {
+    width: 35px;
+}
+input[type="radio"] {
+    margin: 0 0 4px;
+}
+.col-menuName, .col-menuId, .p-menuName, .p-menuId {
+    width: 400px;
+}
+.col-menuCalorie, .p-menuCalorie {
+    width: 70px;
+}
+
+.goodMsg {
+	margin-left: 10px;
+	color: #0EAE57;
+    font-size: 13px;
+}
+.inputErrMsg {
+    margin-left: 10px;
+	color: red;
+    font-size: 13px;
+}
+
+.buttons-wrapper {
+    justify-content: center;
+    margin-top: 30px;
+}
+.buttons-wrapper > div {
+    width: 174px;
+    height: 40px;
+    padding: 0;
+    border-radius: 7px;
+    margin: 0 10px;
+    transition-duration: 0.1s;
+}
+.buttons-wrapper button {
+    background: none;
+    border: none;
+    width: inherit;
+    height: inherit;
+    padding: 0;
+    cursor: pointer;
+    color: #fff;
+}
+.enrollBtn-wrapper, .updateBtn-wrapper {
+    background-color: #116135;
+}
+.enrollBtn-wrapper:hover, .updateBtn-wrapper:hover {
+    background-color: #0EAE57;
+}
+.cancelBtn-wrapper {
+    background-color: #888;
+}
+.cancelBtn-wrapper:hover, .delBtn-wrapper:hover {
+    background-color: #AD1C0E;
+}

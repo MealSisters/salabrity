@@ -36,7 +36,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>			
+				</div>
 			</div>
 			<div class="cs">
 				<table>
@@ -78,10 +78,76 @@
 				</table>
 			</div>
 			<div class="rights">
-				<a href="#">이용약관</a> | <a href="#">개인정보처리방침</a>
-				<p>Copyright ⓒ 2022 All rights reserved by <strong>㈜샐러브리티</strong></p>			
+				<a href="<%= request.getContextPath() %>/tos">이용약관</a> | <a href="<%= request.getContextPath() %>/privacyPolicy">개인정보처리방침</a>
+				<p>Copyright ⓒ 2022 All rights reserved by <strong>㈜샐러브리티</strong></p>
 			</div>
 		</footer>
 	</div>
+	<script>
+	<!-- Channel Plugin Scripts -->
+	var memberIdVal = $("#chatMemberId").val();
+	var memberNameVal = $("#chatMemberName").val();
+	var phoneVal = $("#chatPhone").val();
+	var emailVal = $("#chatEmail").val();
+
+	if(memberIdVal=='') {
+		memberIdVal = null;
+	}
+	if(memberNameVal=='') {
+		memberNameVal = null;
+	}
+	if(phoneVal=='') {
+		phoneVal = null;
+	}
+	if(emailVal=='') {
+		emailVal = null;
+	}
+
+	(function() {
+	  var w = window;
+	  if (w.ChannelIO) {
+	    return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+	  }
+	  var ch = function() {
+	    ch.c(arguments);
+	  };
+	  ch.q = [];
+	  ch.c = function(args) {
+	    ch.q.push(args);
+	  };
+	  w.ChannelIO = ch;
+	  function l() {
+	    if (w.ChannelIOInitialized) {
+	      return;
+	    }
+	    w.ChannelIOInitialized = true;
+	    var s = document.createElement('script');
+	    s.type = 'text/javascript';
+	    s.async = true;
+	    s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+	    s.charset = 'UTF-8';
+	    var x = document.getElementsByTagName('script')[0];
+	    x.parentNode.insertBefore(s, x);
+	  }
+	  if (document.readyState === 'complete') {
+	    l();
+	  } else if (window.attachEvent) {
+	    window.attachEvent('onload', l);
+	  } else {
+	    window.addEventListener('DOMContentLoaded', l, false);
+	    window.addEventListener('load', l, false);
+	  }
+	})();
+	ChannelIO('boot', {
+	  "pluginKey": "875acb53-7bf0-445a-8d7e-d6ef21bab6e9",
+	  "memberId": memberIdVal,
+	  "profile": {
+	    "name": memberNameVal,
+	    "mobileNumber": phoneVal,
+	    "email": emailVal
+	  }
+	});
+	<!-- End Channel Plugin -->
+	</script>
 </body>
 </html>

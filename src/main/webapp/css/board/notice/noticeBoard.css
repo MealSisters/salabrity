@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+/* ===================================
+noticeBoardEnroll.jsp
+======================================*/
+
+#notice-board-enroll-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#notice-board-enroll-wrap .main-title {
+	font-size: 21px;
+}
+
+#notice-board-enroll-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
+/* ===================================
+noticeBoardUpdate.jsp
+======================================*/
+
+#notice-board-update-wrap {
+	width: 90%;
+	margin: 30px auto;
+}
+
+#notice-board-update-wrap .main-title {
+	font-size: 21px;
+}
+
+#notice-board-update-wrap .main-sub-title, sup {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}

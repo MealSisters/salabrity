@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+.list_header {
+    height: 300px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.list_header h1 {
+    margin: 100px 0 0 50px;
+}
+.list_header p {
+    margin-left: 50px;
+}
+#content .sort_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sort_box div {
+    font-weight: 900;
+    display: table-cell;
+    vertical-align: middle;
+}
+.product {
+    background-color: #eee;
+    border-radius: 10px;
+    width: 20%;
+
+}
+#sort {
+    line-height: normal;
+    height: 40px;
+    padding: 2px;
+    font-family: 'NanumSquare';
+    text-align: center;
+    border: none;
+    width: 100px;
+    outline-style: none;
+}
+.item {
+
+    display: flex;
+    list-style: none;
+    width: 251.8px;
+    flex-wrap: wrap;
+    margin: 10px 11.6px;
+    justify-content: space-between;
+}
+
+.item_img {
+    width: 250px;
+    height: 250px;
+    border-radius: 13px;
+    margin: auto;
+}
+.item_tit,
+.item_price,
+.item_dsc {
+    text-decoration: none;
+    color: black;
+}
+.item_tit:hover,
+.item_price:hover,
+.item_dsc:hover {
+    text-decoration: none;
+    color: #116916;
+    transition-duration: 0.5s;
+} 
+.item_tit {
+    font-weight: 700;
+    font-size: 1.2em;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+.item_price {
+    font-weight: 900;
+    width: 60%;
+    margin: 12px 0 0 0;
+    
+}
+.item_dsc {
+    margin: 12px 0 0 0;
+    width: 100%;
+}
+.add_cart {
+    display: block;
+    /* font-size: 1.6em; */
+    font-size: 20px;
+    margin: 10px 4% 0px 0px;
+    color: #116916;
+    float: right;
+    position: relative;
+    padding-top: 2px;
+    transition-duration: 0.5s;
+}
+.add_cart:hover{
+    color: #0b490f;
+}
+.product_list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 30px;
+}
+#content{
+	margin-bottom:50px;	
+}
+.page-bar{
+	text-align: center;
+}
+/*---------------------- 관리자 ----------------------*/
+.admin-headBtns {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: right;
+}
+.button-wrapper {
+    width: 74px;
+    height: 30px;
+    padding: 0;
+    margin: 0 10px;
+    background-color: #116916;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.button-wrapper button {
+    width: inherit;
+    height: inherit;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+.fa-cart-plus{
+	cursor: pointer;
+}
+.button-wrapper:hover {
+    background-color: #0EAE57;
+}
+.admin-bodyBtngroup {
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 0;
+}
+.admin-bodyBtngroup a {
+    color: #888;
+    transition-duration: 0.1s;
+}
+.edit_product {
+    margin-right: 5px;
+}
+.edit_product:hover {
+    color: #0EAE57;
+}
+.del_product:hover {
+    color: #AD1C0E;
+}
+.product_list{
+	margin-top: 60px;
+}
+

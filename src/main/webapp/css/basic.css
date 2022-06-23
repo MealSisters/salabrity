@@ -1,0 +1,397 @@
+@charset "UTF-8";
+
+/* ===================================
+font
+======================================*/
+
+@font-face {
+    font-family: 'LeferiPoint-BlackA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiBaseType-BoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-BoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiBaseType-RegularA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-RegularA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-SpecialA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-SpecialItalicA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===================================
+index.jsp - header/footer
+======================================*/
+
+* {
+	font-family: 'LeferiBaseType-RegularA';
+}
+
+div, section, header, footer {
+	padding: 10px;
+}
+
+select {
+	font-family: 'NanumSquare';
+}
+
+/* container */
+div#container {
+	width: 1200px;
+	min-height: 1080px;
+	margin: 0 auto;
+}
+
+/* header */
+header {
+	height: 80px;
+	display: flex;
+    justify-content: space-between;
+}
+
+.main-logo, .main-nav, .member-nav {
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+/* main-logo */
+.main-logo {
+	float: left;
+	font-family: 'LeferiPoint-BlackObliqueA';
+	letter-spacing: -2px;
+	font-weight: bold;
+	font-size: 30px;
+	color: #116916;
+	margin-left: 10px;
+}
+
+.main-logo a {
+	font-family: 'LeferiPoint-BlackObliqueA';
+	text-decoration: none;
+	color: #116916;
+}
+
+/* main-logo 작동 확인용 */
+.main-logo a:hover {
+	color: black;
+}
+
+/* header nav */
+header nav {
+	padding: 10px;
+}
+
+header nav ul li {
+	list-style-type: none;
+	font-size: 12.5px;
+	font-weight: bold;
+}
+
+header nav ul li a {
+	text-decoration: none;
+	color: black;
+}
+
+header nav ul li:hover {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.main-nav {
+	float: left;
+}
+
+.member-nav {
+	float: right;
+}
+
+.main-nav li {
+	float: left;
+	width: 10em;
+	text-align: center;
+}
+
+.member-nav li {
+	float: left;
+	width: 3em;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.member-nav li i {
+	color: #116916;
+}
+
+/* member-nav 작동 확인용 */
+.member-nav li i:hover {
+	color: black;
+}
+
+.login {
+	position: relative;
+}
+
+.member-nav-depth {
+	position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 999;
+    visibility: hidden;
+    max-height: 0;
+    margin-top: -1px;
+    padding-top: 10px;
+    transform: translateX(-50%);
+    width: 100px;
+}
+
+.inner-member-nav {
+	padding: 15px 20px;
+	border: 1px solid #116916;
+	border-radius: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.inner-member-nav ul {
+	display: contents;
+}
+
+.inner-member-nav ul li {
+	margin-right: 0;
+	width: fit-content;
+	margin-left: 5px;
+}
+
+/* .member-nav-depth li 사이 간격 */
+.member-nav-depth ul > li + li {
+	margin-top: 10px;
+}
+
+/* .inner-member-nav ul li의 마우스오버시 초기 설정 */
+.inner-member-nav ul > li > a {
+	display: inline;
+    color: #808080;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+}
+
+/* .inner-member-nav ul li의 a 마우스오버시 색상 변화 */
+.inner-member-nav ul > li > a:hover {
+	color: #f8674f;
+	border-color: #f8674f;
+}
+
+/* .login 마우스 오버시 사이드 메뉴 노출 */
+.login:hover > a + .member-nav-depth {
+	visibility: visible;
+	max-height: 100px;
+	-webkit-transition: max-height 0.5s ease;
+	transition: max-height 0.5s ease;
+}
+
+/* cart-order-cnt */
+/* .cart-order-cnt {
+	position: relative;
+	width: 13px;
+    height: 13px;
+    display: flex;
+	justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f8674f;
+    font-size: 10px;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: -1;
+    transform: translate(20px, -25px);
+} */
+
+#content {
+	min-height: 700px;
+}
+
+#content h2 {
+	margin-top : 200px;
+	text-align: center;
+}
+
+/* footer */
+footer {
+	background-color: rgb(245, 245, 245);
+	height: 300px;
+	clear: both;
+}
+
+footer table {
+	text-align: left;
+}
+
+footer a {
+	text-decoration: none;
+	color: black;
+}
+
+/* footer a태그 작동 확인 */
+footer a:hover {
+	text-decoration: underline;
+}
+
+.info {
+	float: left;	
+	margin-left: 70px;
+}
+
+.info-logo {
+	color: #116916;
+	font-size: 30px;
+}
+
+.info-logo span {
+	font-family: 'LeferiPoint-BlackObliqueA';
+	letter-spacing: -2px;
+}
+
+.info table {
+	width: 400px;
+	height: 200px;
+}
+
+tbody {
+	font-size: 15px;
+}
+
+.cs {
+	float: right;
+	margin-right: 30px;
+}
+
+.cs table {
+	width: 500px;
+	border-spacing: 9px;
+}
+
+.cs table th {
+	text-align: center;
+}
+
+.cs thead th {
+	font-size: 23px;
+}
+
+.cs thead td {
+	font-weight: bold;
+}
+
+.cs tbody th {
+	border: 1px solid black;
+}
+
+.cs tbody td {
+	font-size: 14px;
+}
+
+.cs tfoot {
+	font-size: 14px;
+}
+
+.footer-contents {
+	color: #116916;
+}
+
+.rights {
+	clear: both;
+	text-align: center;
+	font-size: 13px;
+}
+
+.rights a {
+	font-weight: bold;
+}
+
+/* ===================================
+tos.jsp + privacyPolicy.jsp
+======================================*/
+
+#tos-content-wrap, #policy-content-wrap {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.tos-content-list, .policy-content-list {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.tos-content-header i, .policy-content-header i {
+	color: #f8674f;
+}
+
+.list-header {
+	background-color: #f5f5f5;
+	padding: 10px;
+	font-size: 15px;
+}
+
+.list-content {
+	font-size: 14px;
+}
+
+.tos-content-list .list-content li {
+	margin: 20px;
+}
+
+.policy-content-list .list-content {
+	margin: 20px;
+}
+
+.policy-content-list .list-content li {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.policy-content-list .list-content p, .policy-content-list .list-content pre {
+	margin: 20px;
+}

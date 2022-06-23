@@ -1,0 +1,163 @@
+.div-level1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/*------------------ 상단 이미지 영역 ------------------*/
+.calendarimg-wrapper {
+    width: 1016px;
+    height: 200px;
+}
+.calendarimg {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
+/*------------------ 상품명 선택영역 ------------------*/
+.productName-wrapper {
+    width: 1016px;
+    margin-top: 40px;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productName-wrapper > p {
+    font-family: 'LeferiPoint-BlackA';
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    width: 700px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.productName-wrapper label {
+    font-family: 'LeferiBaseType-RegularA';
+    font-size: 15px;
+}
+.productName-wrapper select {
+    height: 22px;
+    width: 200px;
+    text-overflow: ellipsis;
+}
+.productName-wrapper option {
+    height: 40px;
+    font-size: 13px;
+    font-family: 'NanumSquare';
+}
+
+
+/*------------------ 캘린더 내용 영역 ------------------*/
+.calendar-content ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+.head {
+    padding: 0;
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #ddd;
+}
+.head ul {
+    height: 40px;
+}
+.head li {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    font-size: 13px;
+    width: 114px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 15px 10px;
+}
+
+.body {
+    padding: 0;
+}
+.body li {
+    list-style: none;
+    width: 144px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.body ul > li:first-of-type {
+    border-left: 1px solid #ddd;
+}
+.body li:not([data-wdCode]) {
+    background-color: #eee;
+}
+.day-code span {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    font-size: 14px;
+    color: #116135;
+}
+.day-code, .day-menu {
+    text-align: center;
+}
+.day-menu {
+    font-size: 14px;
+    width: 124px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.day-menu a {
+    text-decoration: none;
+    color: #000;
+}
+.day-menu a:hover {
+    color: #0EAE57;
+}
+.day-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+/* 관리자버튼 숨김처리 클래스 */
+.div-hidden {
+    visibility: hidden;
+}
+
+.day-btns > div {
+    padding: 0;
+    width: 40px;
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+.modifyDay-wrapper {
+    background-color: #116135;
+}
+.modifyDay-wrapper:hover {
+    background-color: #0EAE57;
+}
+.deleteDay-wrapper {
+    background-color: #333;
+}
+.deleteDay-wrapper:hover {
+    background-color: #AD1C0E;
+}
+.enrollDay-wrapper {
+    background-color: #0eae5670;
+}
+.enrollDay-wrapper:hover {
+    background-color: #0EAE57;
+}
+.day-btns button {
+    color: #fff;
+    border: none;
+    background-color: #ffffff00;
+    padding: 4px 6px 1px;
+    width: inherit;
+    text-align: center;
+    cursor: pointer;
+}

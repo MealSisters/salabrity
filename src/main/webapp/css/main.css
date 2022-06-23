@@ -1,0 +1,258 @@
+@charset "UTF-8";
+
+/* ===================================
+index.jsp - main
+======================================*/
+
+/* main-slider-wrap */
+#main-slider-wrap {
+	width: 97%;
+    height: 370px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#main-slider-wrap ul#main-slider {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#main-slider-wrap ul#main-slider li {
+    float: left;
+    position: relative;
+    width: 600px;
+    height: 370px;
+    list-style-type: none;
+}
+
+#main-slider-wrap ul#main-slider li img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.main-slider-btns {
+    position: absolute;
+    width: 50px;
+    top: 50%;
+    margin-top: -40px;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    -webkit-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.main-slider-btns:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#next {
+    right: -50px;
+    border-radius: 7px 0px 0px 7px;
+    color: #eee;
+}
+
+#previous {
+    left: -50px;
+    border-radius: 0px 7px 7px 7px;
+    color: #eee;
+}
+
+#next span, #previous span {
+	display: inline-block;
+	padding-top: 5px;
+}
+
+#main-slider-wrap.active #next {
+    right: 0px;
+}
+
+#main-slider-wrap.active #previous {
+    left: 0px;
+}
+
+#main-slider-pagination-wrap {
+    min-width: 20px;
+    margin-top: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 15px;
+    position: relative;
+    text-align: center;
+}
+
+#main-slider-pagination-wrap ul {
+    width: 100%;
+    padding: 0;
+}
+
+#main-slider-pagination-wrap ul li {
+    margin: 0 4px;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.5;
+    position: relative;
+    top: 0;
+}
+
+#main-slider-pagination-wrap ul li.active {
+    width: 12px;
+    height: 12px;
+    top: 3px;
+    opacity: 1;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
+}
+
+#main-slider-wrap ul,
+#main-slider-pagination-wrap ul li {
+    -webkit-transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+    -o-transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+    transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+}
+
+/* main-contents */
+.main-title {
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 10px 10px 5px 10px;
+}
+
+.main-sub-title {
+	text-align: center;
+	font-size: 15px;
+	padding: 5px 10px 30px 10px;
+	color: rgb(65, 65, 65);
+}
+
+#main-product-wrap {
+	margin-top: 30px;
+}
+
+.main-product-layout {
+	margin: 0 auto;
+	width: 95%;
+}
+
+.main-product-contents-wrap {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+}
+
+.main-product-content-wrap {
+	padding: 5px;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+}
+
+.main-product-img {
+	margin: 0;
+	width: 300px;
+	height: 300px;
+}
+
+.main-product-img img {
+	width: 300px;
+	height: 300px;
+	border-radius: 20px;
+}
+
+.main-product-name {
+	padding-bottom: 5px;
+}
+
+.main-product-price {
+	padding-top: 5px;
+}
+
+.main-product-name a {
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+}
+
+.main-product-name a:hover {
+	color: #f8674f;
+}
+
+.main-product-price a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #116916;
+}
+
+.tbl-main-service {
+	margin: 30px auto;
+	padding: 20px;
+	width: 95%;
+	padding-bottom: 50px;
+}
+
+.main-product-btn, .tbl-main-service {
+	text-align: center;
+}
+
+.tbl-main-service th {
+	height: 30px;
+}
+
+/* button */
+.main-product-btn, .main-service-btn {
+	background-color: #116916;
+	font-size: 15px;
+	margin: 50px auto;
+	width: 250px;
+}
+
+.main-product-btn:hover, .main-service-btn:hover {
+	cursor: position;
+	font-weight: bold;
+}
+
+.main-product-btn a, .main-service-btn a {
+	color: white;
+	text-decoration: none;
+}
+
+.main-service-msg {
+	width: 45%;
+}
+
+#main-service-msg1 {
+    padding-top: 60px;
+}
+
+.main-service-img {
+	height: 300px;
+}
+
+.main-service-img img {
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+}
+
+.main-service-img a {
+	text-decoration: none;
+	color: black;
+}

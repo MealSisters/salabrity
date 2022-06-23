@@ -1,0 +1,72 @@
+/*---------------------- 검색필터 영역 ----------------------*/
+#filter-wrapper {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  margin: 0 0 30px;
+  padding-top: 14px;
+}
+#filter-wrapper-title {
+  width: inherit;
+  margin-bottom: 0;
+  font-family: 'LeferiPoint-BlackObliqueA';
+  font-size: 20px;
+  color: #044F26;
+}
+#filter-wrapper form {
+  display: flex;
+  flex-wrap: wrap ;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#filter-wrapper .div-searchFilter {
+  display: flex;
+  align-items: center;
+}
+#filter-wrapper .div-searchFilter label {
+  margin: 0 10px;
+  font-family: 'LeferiBaseType-BoldA';
+}
+#filter-wrapper .div-searchFilter input {
+  margin-bottom: 4px;
+}
+#filter-wrapper .div-searchFilter input[type="text"] {
+  font-family: 'NanumSquare';
+  width: 120px;
+  height: 20px;
+}
+#filter-wrapper .div-searchFilter input[type="tel"] {
+  width: 120px;
+}
+#filter-wrapper .div-searchFilter input[type="radio"] {
+  margin: -4px 4px 0 10px;
+  vertical-align: middle;
+}
+#filter-wrapper .div-searchFilter select {
+  font-family: 'NanumSquare';
+  height: 24px;
+  margin-bottom: 4px;
+}
+#filter-wrapper .periodSeparator {
+  margin: 0 5px;
+}
+#filter-wrapper .div-searchbtn {
+  margin-bottom: 4px;
+  padding: 3px;
+  width: 40px;
+  height: 26px;
+  background-color: #116135;
+  border: 0px;
+  border-radius: 6px;
+  transition-duration: 0.1s;
+}
+#filter-wrapper .div-searchbtn button {
+  cursor: pointer;
+  width: inherit;
+  height: inherit;
+  background: none;
+  border: none;
+  color: #fff;
+}
+#filter-wrapper .div-searchbtn:hover {
+  background-color: #0EAE57;
+}

@@ -1,0 +1,166 @@
+@charset "utf-8";
+
+
+#content {
+	display: flex;
+}
+.heading {
+	display: flex;
+	justify-content: space-between;
+}
+.heading h1 {
+	font-size: 18px;
+	margin-top: 14px;
+	margin-bottom: 10px;
+}
+.heading p {
+	cursor: pointer;
+	font-size: 14px;
+}
+.heading p:hover {
+	font-size: 14.2px;
+	color: #116916;
+	transition-duration: 0.5s;
+}
+#destination {
+	width: 70%;
+	margin: 0 auto;
+}
+#destination table {
+	border-top: #116916 solid 2px;
+	width: 100%;
+	margin: auto;
+	border-collapse: collapse;
+}
+#destination th,
+#destination td {
+	text-align: center;
+	border-bottom: 1px solid #dbdbdb;
+	font-size: 13px;
+}
+#destination th {
+	height: 30px;
+	padding-top: 6px;
+}
+#destination td {
+	height: 47px;
+}
+#destination td.col1 {
+	width: 7.5%
+}
+#destination td.col2 {
+	width: 14%;
+}
+#destination td.col3 {
+	text-align: left;
+	width: 55%;
+}
+#destination td.col4 {
+	width: 17%;
+}
+#destination td.col5 {
+	width: 8.5%;
+}
+td.col5 .fa-regular {
+	font-size: 18px;
+	padding-top: 6px;
+	cursor: pointer;
+}
+td.col5 .fa-regular:hover {
+	font-size: 19px;
+	padding-top: 6px;
+	color: #116916;
+	transition-duration: .2s;
+}
+td.col1 input[type=radio] {
+	background-color: #FFFF;
+	border: solid #116916 2px;
+	margin: 0;
+	vertical-align: middle;
+	width: 15px;
+	height: 15px;
+	appearance: none;
+	border-radius: 100%;
+}
+td.col1 [type=radio]:checked {
+	margin: 0;
+	appearance: none;
+	background-color: #116916;
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	transition-duration: 0.4s;
+}
+#address_section {
+	position: absolute;
+	background-color: white;
+	width: 430px;
+	height: 495px;
+	z-index: -1;
+	opacity: 0;
+	left: 40%;
+	top: 190px;
+	border: #116916 solid;
+	border-radius: 10px;
+	padding: 0px 9px;
+}
+#address_section .zipcode_wrp {
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+}
+#address_section form input[type=text] {
+	height: 26px;
+	border: #116916 solid 1px;
+	border-radius: 3px;
+	width: 383.6px;
+	margin: 4px 0 15px 0;
+}
+#address_section form input[type=text]:focus {
+	outline: #116916 solid 2px;
+}
+#address_section form {
+	padding: 10px 20px;
+	font-size: 12px;
+}
+#address_section h1{
+	margin: 40px 0 7px 20px;
+}
+#address_section .submit_wrp{
+	text-align: center;
+}
+#address_section form input[type=text]#zipcode {
+	width: 50%
+}
+#address_section form button {
+	background-color: #116916;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	margin: 4px 0 15px 0;
+	width: 50%;
+	height: 30px;
+	font-size: 12px;
+	cursor: pointer;
+}
+#address_section form button.search_zipcode {
+	margin-left: 5%;
+	padding-top: 4px;
+}
+#address_section form button.submit{
+	height: 40px;
+	font-size: larger;
+	padding-top: 2px;
+}
+#address_section .sub_heading{
+	display: flex;
+	justify-content: space-between;
+	padding: 3px 0;
+}
+#address_section i.fa-xmark{
+	width: 35px;
+	text-align: center;
+	padding-top: 9px;
+	font-size: 25px;
+	cursor: pointer;
+}
