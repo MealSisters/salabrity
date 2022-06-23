@@ -58,11 +58,9 @@ public class BoardService {
 			result = boardDao.insertPosting(conn, posting);
 			int no = boardDao.findCurrentPostingNo(conn);
 			posting.setPostingNo(no);
-			System.out.println("방금 등록된 posting_no = " + no);
 			
 			BoardCode boardCode = boardDao.findCurrentBoardCode(conn, no);
 			posting.setBoardCode(boardCode);
-			System.out.println("방금 등록된 board_code = " + boardCode);
 
 			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
 			if(attachments != null && !attachments.isEmpty()) {
@@ -341,11 +339,9 @@ public class BoardService {
 			result = boardDao.insertPostingRef(conn, posting);
 			int no = boardDao.findCurrentPostingNo(conn);
 			posting.setPostingNo(no);
-			System.out.println("방금 등록된 posting_no = " + no);
 			
 			BoardCode boardCode = boardDao.findCurrentBoardCode(conn, no);
 			posting.setBoardCode(boardCode);
-			System.out.println("방금 등록된 board_code = " + boardCode);
 
 			List<PostingAttach> attachments = ((PostingExt) posting).getAttachments();
 			if(attachments != null && !attachments.isEmpty()) {

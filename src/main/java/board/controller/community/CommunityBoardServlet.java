@@ -32,12 +32,10 @@ public class CommunityBoardServlet extends HttpServlet {
 			Map<Object, String> c1Board = new HashMap<>();
 			c1Board.put("boardCode", "C1");
 			c1Board.put("orderBy", "reg_date");
-			System.out.println("c1Board = " + c1Board);
 			
 			Map<Object, String> c2Board = new HashMap<>();
 			c2Board.put("boardCode", "C2");
 			c2Board.put("orderBy", "read_count");
-			System.out.println("c2Board = " + c2Board);
 			
 			// 2. 업무 로직
 			List<PostingExt> cPostingList = boardService.findCommunityPostingList(c1Board);

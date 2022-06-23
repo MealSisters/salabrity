@@ -57,7 +57,6 @@ public class CommunityBoardHacksViewServlet extends HttpServlet {
 				cookie.setPath(request.getContextPath() + "/board/community/hacksView");
 				cookie.setMaxAge(365 * 24 * 60 * 60);
 				response.addCookie(cookie);
-				System.out.println("> 신규 postingCookie 생성");
 			}
 			
 			// 게시글 조회

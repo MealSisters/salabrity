@@ -99,7 +99,6 @@ public class CommunityBoardGeneralUpdateServlet extends HttpServlet {
 							
 				// b. db record에 대한 처리 - db record 삭제
 				result = boardService.deletePostingAttach(attachNo);
-				System.out.println("> " + attachNo +"번 첨부파일 삭제!");
 			}
 		}
 	}
