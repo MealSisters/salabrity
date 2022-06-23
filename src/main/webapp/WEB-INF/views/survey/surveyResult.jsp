@@ -26,7 +26,7 @@
 	String imgSrc[] = { "/upload/menu/20220621_120944776_028.jpg",
 						"/upload/menu/20220614_175850911_140.jpg",
 						"/upload/menu/20220614_231804280_969.jpg",
-						"/upload/menu/어린이맞춤식단.jpg"};
+						"/upload/menu/20220622_111450131_779.jpg"};
 	
 	String resultName = "";
 	String resultDesc = "";
