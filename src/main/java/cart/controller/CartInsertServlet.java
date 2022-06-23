@@ -31,7 +31,6 @@ public class CartInsertServlet extends HttpServlet {
 			int productNo = Integer.parseInt(request.getParameter("productNo"));
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			String firstShippingDate = (String) request.getParameter("firstShippingDate");
-			System.out.println(firstShippingDate + " 카트 인서트 서블릿");
 			Cart cart = new Cart(memberId, productNo, quantity, firstShippingDate);
 			int result = cartService.cartInsert(cart);
 			String msg = result == 0 ? "이미 장바구니에 있는 상품입니다." : "장바구니에 추가되었습니다.";

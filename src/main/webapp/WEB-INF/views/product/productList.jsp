@@ -1,3 +1,4 @@
+<%@page import="common.utill.Methods"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "product.model.dto.ProductExt" %>
@@ -5,6 +6,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import= "java.util.Date" %>
 <%@ page import= "java.util.Calendar" %>
+<%@ page import= "common.utill.Methods" %>
 <%@ page import= "java.text.SimpleDateFormat" %>
 <%@ page import = "product.model.dto.ProductAttach" %>
 <%@ page import= "java.text.DecimalFormat" %>
@@ -13,19 +15,6 @@
 <% 
 	List<ProductExt> list = (List<ProductExt>) request.getAttribute("list");
 	DecimalFormat df = new DecimalFormat("#,###");
-	
-	Calendar cal = Calendar.getInstance();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	cal.setTime(new Date());
-	cal.add(Calendar.DATE, 3);
-	if(cal.get(Calendar.DAY_OF_WEEK) == 1){
-		cal.add(Calendar.DATE, 1);
-	} else if(cal.get(Calendar.DAY_OF_WEEK) == 7){
-		cal.add(Calendar.DATE, 2);
-	}
-	Date date = cal.getTime();
-	String defaultDate = sdf.format(date);
-
 %>
 <!-- 이은지 start -->
 <div class="list_header" style="background-image: url(<%= request.getContextPath() %>/images/productList_headimg.jpg);">
@@ -33,18 +22,14 @@
     <h1>정기배송</h1>
     <p>샐러브리티에서 판매하고 있는 건강하고 맛있는 식단들을 다양하게 만나보실 수 있습니다.</p>
 </div>
-
-
-
 <div class="product_list">
 <%
 	for(ProductExt product : list){
 		ProductAttach attach = product.getAttachs().get(0);
 %>
 	<div class="item">
-
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>">
-	    <img src="<%= request.getContextPath() %>/upload/product/<%= attach.getRenamedFileName()%>" alt="<%= attach.getOriginalFileName() %>" class="item_img">
+	    	<img src="<%= request.getContextPath() %>/upload/product/<%= attach.getRenamedFileName()%>" alt="<%= attach.getOriginalFileName() %>" class="item_img">
 	    </a>
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_tit"><%= product.getProductName() %></a>
 	    <a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>" class="item_dsc"><%= product.getProductdescription() %></a>
@@ -55,10 +40,7 @@
 	}
 %>
 
-
 </div>
-
-
 <!-- 이은지 start -->
 <form 
 	name="deleteProductFrm"
@@ -121,8 +103,6 @@
 <!-- 이은지 end -->
 <script>
 <% String memberId = loginMember != null ? loginMember.getMemberId() : ""; %>
-console.log("<%= memberId %>");
-		//장바구니
 		$(".fa-cart-plus").click((e) => {
 			if("<%=memberId%>" !== ""){
 			$.ajax({
@@ -130,7 +110,7 @@ console.log("<%= memberId %>");
 				async : true,
 
 				data : {productNo: $(event.target).prev().val(), memberId : "<%=memberId%>", quantity : 1
-					,firstShippingDate : "<%= defaultDate %>"},
+					,firstShippingDate : "<%=new Methods().getDefaultFilstShippingDate()%>"},
 
 				url : "<%=request.getContextPath()%>/order/cart/insertCart",
 				success : function(resp){
@@ -147,10 +127,5 @@ console.log("<%= memberId %>");
 		
 			}
 		});
-
-		
-		
-		
-
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

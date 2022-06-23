@@ -45,7 +45,6 @@ public class OrderViewServlet extends HttpServlet {
 			request.setAttribute("buyList", buyList);
 			request.setAttribute("productList", productList);
 			request.setAttribute("destination", destination);
-
 			request.getRequestDispatcher("/WEB-INF/views/member/mypage/orderView.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

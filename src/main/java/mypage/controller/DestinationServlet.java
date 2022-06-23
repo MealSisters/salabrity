@@ -25,19 +25,16 @@ public class DestinationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 2. 업무로직
 		try {
 			HttpSession session = request.getSession();
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String memberId = loginMember.getMemberId();
 			
 			List<Destination> list = destinationService.findById(memberId);
-			System.out.println("list = " + list);
-			// 3. view단 처리
+			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/views/member/mypage/destination.jsp").forward(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}

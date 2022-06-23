@@ -75,7 +75,6 @@ section#order_list h1>p{
 #order_list th{
 	width: 18%;
 }
-
 #order_list table td button{
 	background-color: white;
 	border-radius: 3px;
@@ -96,7 +95,6 @@ section#order_list h1>p{
 	transition-duration: 0.3s;
 	width: 70px;
 }
-
 .page-bar{
 	text-align: center;
 }
@@ -104,7 +102,6 @@ section#order_list h1>p{
 	padding-left: 20px;
 	width: 180px;
 }
-
 #order_list td.col3{
 	width: 180px;
 	text-align: center;
@@ -112,6 +109,5 @@ section#order_list h1>p{
 #order_list td.col4{
 	width: 100px;
 	text-align: center;
-	
 }
 

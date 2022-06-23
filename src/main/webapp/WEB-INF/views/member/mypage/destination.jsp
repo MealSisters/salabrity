@@ -9,7 +9,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/destination.css">
 <% List<Destination> list = (List<Destination>) request.getAttribute("list"); %>
-
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 <section id="destination">
@@ -30,8 +29,8 @@
             <input type="text" name="telephone" id="telephone" placeholder="01012341234"><br>
             <label for="zipcode">우편번호</label>
             <div class="zipcode_wrp">
-           	 <input type="text" name="zipcode" id="zipcode" readonly>
-           	 <button class="search_zipcode" type="button">우편번호 찾기</button><br>
+           		<input type="text" name="zipcode" id="zipcode" readonly>
+           		<button class="search_zipcode" type="button">우편번호 찾기</button><br>
             </div>
             <label for="address">주소</label><br>
             <input type="text" name="address" id="address"  readonly><br>
@@ -54,16 +53,16 @@
         </thead>
         <tbody>
 <%
-			if (list != null && !list.isEmpty()) {
-				for (Destination destination : list) {
-					String checked = "";
-					if (destination.getIsDefault().equals("Y")) {
+	if (list != null && !list.isEmpty()) {
+		for (Destination destination : list) {
+			String checked = "";
+			if (destination.getIsDefault().equals("Y")) {
 				checked = "checked";
-					}
-					String telephone = destination.getTelephone().substring(0, 3) + "-" + destination.getTelephone().substring(3, 7)
-					+ "-" + destination.getTelephone().substring(7);
-					String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
-					address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
+			}
+			String telephone = destination.getTelephone().substring(0, 3) + "-" + destination.getTelephone().substring(3, 7)
+				+ "-" + destination.getTelephone().substring(7);
+				String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
+				address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
 %>
 			<tr id= "<%= destination.getShippingAddressNo()%>">
                 <td class="col1">
@@ -75,38 +74,29 @@
                 <td class="col5">
                 	<i class="fa-regular fa-trash-can isDefaultValue<%=destination.getIsDefault()%>"></i>
                 </td>
-
             </tr>
-<% 
-        		}
-        	} else {
+<%
+		}
+	} else {
 %>
 			<tr>
 				<td colspan="5">등록된 배송지가 없습니다.</td>
 			</tr>
 <%       
-        	}    
+ 	}    
  %>
     	</tbody>
-
     </table>
 </section>
-
 <script>
-//배송지 추가 클릭시 이벤트
     const add_destination = document.querySelector('.address_add');
-    console.log(add_destination);
     add_destination.addEventListener('click', function () {
-
         document.querySelector("#address_section").style.opacity = "100";
         document.querySelector("#address_section").style.zIndex = "1";
-
     });
-//우편번호
-    const zipcode = document.querySelector('.search_zipcode');
-    console.log(zipcode);
-    zipcode.addEventListener('click', function () {
 
+    const zipcode = document.querySelector('.search_zipcode');
+    zipcode.addEventListener('click', function () {
         new daum.Postcode({
             oncomplete: function (data) {
 				if(data.buildingName !== ""){
@@ -119,7 +109,7 @@
             }
         }).open();
     });
-
+    
     const cancel = document.querySelector('i.fa-xmark');
     cancel.addEventListener('click', function () {
         document.getElementById("shipping_person").value = "";
@@ -132,10 +122,9 @@
     });
     
 	const radios = document.querySelectorAll('input[type=radio]');
-
 	radios.forEach(function(radio) {
 		radio.addEventListener('click', function () {
-			console.log(radio.parentNode.parentNode.id);
+
 			$.ajax({
 				type : "POST",
 				async : true,
@@ -145,12 +134,10 @@
 					location.reload();
 				},
 				error : function(data){
-					console.log('요청실패');
+					alert("요청실패");
 				}
 			});
-			
 		});
-
 	});
 	
 	//휴지통 아이콘 클릭시 이벤트
@@ -158,22 +145,18 @@
 
 	isDefaultValueNs.forEach(function(isDefaultValueN) {
 		isDefaultValueN.addEventListener('click', function () {
-			console.log(isDefaultValueN.parentNode.parentNode.id);
 			$.ajax({
 				type : "POST",
 				async : true,
 				data : {shippingAddressNo : isDefaultValueN.parentNode.parentNode.id, memberId : "<%= loginMember.getMemberId() %>"},
 				url : "<%=request.getContextPath()%>/mypage/destination/delFlagUpdate",
 				success : function(data){
-				
 					location.reload();
 				},
 				error : function(data){
-					console.log('요청에 실패했습니다.');
+					alert("요청실패");
 				}
-
 			});
-			
 		});
 	});
 	//기본배송지인 아이콘 클릭시 이벤트
@@ -182,30 +165,19 @@
 			alert('기본 배송지는 삭제할 수 없습니다.')	
 		});
 	//폼 제출 유효성 검사
-	$("form").submit(function(event){
-		console.log(zipcode.value);
-		console.log(typeof(zipcode.value));
-		
-		
-		console.log("폼이 제출되고 있을까요??");
-
-		
+	$("form").submit(function(event){		
 		if(!/^[가-힣]{2,}$/.test(shipping_person.value)){
 			alert("이름은 한글 2글자이상 입력해주세요.");
 			return false;
 		}
-		
 		if(!(/^01([0|1|6|7|8|9])([0-9]{8})$/.test(telephone.value))){
 			alert("휴대전화 번호가 올바르지 않습니다.");
 			return false;
 		}
-		
-		//우편번호
 		if(!/^[0-9]{5}$/.test($('#zipcode').val())){
 			alert("주소를 입력해주세요.1");
 			return false;
 		}			
-		
 	});
 	
 </script>
