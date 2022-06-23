@@ -37,7 +37,6 @@ public class SalesTrendServlet extends HttpServlet {
 
 			// 라인차트
 			List<SalesTrend> totalSalesData = adminService.findSalesTrend(param);
-			// System.out.println("totalSalesData@servlet = " + totalSalesData);
 
 			// 파이차트
 			Map<String, Date> pieParam = new HashMap<>();
