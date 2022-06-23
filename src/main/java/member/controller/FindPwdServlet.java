@@ -44,7 +44,6 @@ public class FindPwdServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		Member member = memberService.findByMemberId(memberId);
-//		System.out.println("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ"+member);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
@@ -56,8 +55,8 @@ public class FindPwdServlet extends HttpServlet {
       }else {
 		
     	  String host = "smtp.naver.com";
-    	  String user = "suntwooo@naver.com";
-    	  String password = "toffjqmflxl~!";
+    	  String user = "salabrity@naver.com";
+    	  String password = "toffjqmflxl123~!";
     	  
     	  String toEmail = member.getEmail();
 
@@ -70,8 +69,6 @@ public class FindPwdServlet extends HttpServlet {
   		  props.put("mail.smtp.starttls.enable", "true");
   		  props.put("mail.debug", "true");
   		  props.put("mail.smtp.ssl.protocols", "TLSv1.2");
-          
-          
           
           int random = (int)(Math.random() * (999999 - 100000 + 1)) + 100000;
 			String randomMsg = Integer.toString(random);
