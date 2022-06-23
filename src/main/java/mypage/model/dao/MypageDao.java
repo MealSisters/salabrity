@@ -347,24 +347,6 @@ public class MypageDao {
 	}
 
 
-//	private PostingExt handleBoardResultSet(ResultSet rset) throws SQLException {
-//		PostingExt posting = new PostingExt();
-//		posting.setPostingNo(rset.getInt("posting_no"));
-//		posting.setBoardCode(BoardCode.valueOf(rset.getString("board_code")));
-//		posting.setMemberId(rset.getString("member_id"));
-//		posting.setTitle(rset.getString("title"));
-//		posting.setContent(rset.getString("content"));
-//		posting.setRegDate(rset.getDate("reg_date"));
-//		posting.setReadCount(rset.getInt("read_count"));
-//		posting.setPostingLevel(rset.getInt("posting_level"));
-//		posting.setPostingRef(rset.getInt("posting_ref"));
-//		posting.setAttachCount(rset.getInt("attach_count"));
-//		posting.setCommentCount(rset.getInt("comment_count"));
-//		posting.setLikeCount(rset.getInt("like_count"));
-//		return posting;
-//	}
-
-
 	public List<PostingAttach> findAttachmentByNo(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

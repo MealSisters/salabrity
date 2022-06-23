@@ -39,7 +39,6 @@ public class FindPwdUpdateServlet extends HttpServlet {
 		String randomMsg = (String) request.getSession().getAttribute("randomMsg");
 		String randomPwd = request.getParameter("randomPwd");
 		String memberId = request.getParameter("memberId");
-//		System.out.println(memberId);
 		String newPassword = PwdEncrypt.encrypt(request.getParameter("newPassword"), memberId);
 		
 		
@@ -59,7 +58,6 @@ public class FindPwdUpdateServlet extends HttpServlet {
 			findPwdUpdate.setMemberId(memberId);
 			findPwdUpdate.setPassword(newPassword);
 			int result = memberService.findPwdUpdate(findPwdUpdate);
-//			System.out.println(result);
 			String msg = "";
 			msg = "비밀번호가 변경되었습니다.";
 

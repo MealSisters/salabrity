@@ -27,14 +27,11 @@ public class CartCheckedDelete extends HttpServlet {
 		try {
 			String[] cartNoArr =  request.getParameterValues("cartNoList");
 			
-			List<Integer> cartNoList = new ArrayList<Integer>();
 			for(int i = 0; i < cartNoArr.length;i++) {
 				int cartNo = Integer.parseInt(cartNoArr[i]);
 				int result = cartService.deleteByCartNo(cartNo);
 			}
-			System.out.println(cartNoList);
 		}  catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}

@@ -59,7 +59,6 @@ public class NoticeBoardDeleteServlet extends HttpServlet {
 				File delFilename = new File(delDirectory, attach.getRenamedFilename());
 				if(delFilename.exists()) {
 					delFilename.delete();
-					System.out.println("> " + attach.getRenamedFilename() + "파일 삭제!");
 				}
 			}
 		}

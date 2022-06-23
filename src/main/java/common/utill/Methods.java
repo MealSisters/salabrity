@@ -17,7 +17,11 @@ public class Methods {
 		}
 		Date date = cal.getTime();
 		String result = sdf.format(date);
-		System.out.println("기본날짜"+result);
+		return result;
+	}
+	
+	public String getPhoneNumberFormat(String phone) {
+		String result = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7);
 		return result;
 	}
 }

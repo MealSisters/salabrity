@@ -69,20 +69,5 @@ window.onload = () => {
 	</form>
 </div>
 </div>
-<!-- 
-<div class="member_sns_login">
-	<h3 class="head_log">SNS 로그인</h3>
-	<div class="member_sns_login_in">
-		<ul>
-			<li><a href="#" class="btn_naver_login"><img
-					src="<%= request.getContextPath() %>/images/naver.png"
-					alt="네이버 아이디 로그인"> <span class="btn_naver_login">NAVER</span></a></li>
-			<li><a href="#" class="btn_kakao_login"><img
-					src="<%= request.getContextPath() %>/images/kakao.png"
-					alt="카카오 아이디 로그인"> <span class="btn_kakao_login">KAKAO</span></a></li>
-		</ul>
-	</div>
-</div>
- -->
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

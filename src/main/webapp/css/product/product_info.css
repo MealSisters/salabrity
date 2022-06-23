@@ -7,18 +7,15 @@
 	justify-content: space-around;
 	margin: 20px;
 }
-
 .prd_img {
 	width: 450px;
 	height: 450px;
 }
-
 .prd_info {
 	width: 450px;
 	height: 450px;
 	padding: 0 0 10px 0;
 }
-
 div.tab_wrap {
 	width: 100%;
 	background-color: #f1f1f1;
@@ -33,7 +30,6 @@ ul.detail_tab {
 	width: 45%;
 	margin: auto;
 }
-
 .detail_tab li {
 	font-size: 14px;
 	vertical-align: middle;
@@ -43,18 +39,14 @@ ul.detail_tab {
 	margin: 0 10px;
 	padding: 0 0px;
 }
-
 div .prd_detail {
 	margin: 50px 0;
 	width: 94%;
 	margin: auto;
-	/* background-color: #f1f1f1; */
 }
-
 .prd_detail img {
 	width: 100%;
 }
-
 .detail_tab span {
 	font-family: 'LeferiPoint-BlackA';
 	font-size: 1.2em;
@@ -62,46 +54,38 @@ div .prd_detail {
 	top: 30%;
 	cursor: pointer;
 }
-
 .detail_tab1 {
 	border-bottom: #116916 solid;
 }
-
 a.go_cal {
 	float: right;
 	font-size: 15px;
 	color: #116916;
 	text-decoration: none;
 }
-
 .prd_tit_wrap, .prd_opt, .prd_opt_wrp {
 	padding-left: 0;
 }
-
 #content .prd_tit {
 	font-size: 24px;
 	margin: 32px 0 15px 0;
 	text-align: left;
 }
-
 .prd_sub_tit {
 	margin: 6px 0 7px 5px;
 	font-size: 13px;
 	color: #999;
 }
-
 .prd_opt_wrp {
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	display: table;
 	width: 100%;
 }
-
 .prd_opt {
 	display: table-row;
 	height: 25px;
 }
-
 .opt {
 	display: table-cell;
 	padding: 0;
@@ -109,7 +93,6 @@ a.go_cal {
 	vertical-align: middle;
 	font-size: 16px;
 }
-
 .opt_title {
 	height: 35px;
 	font-size: 16px;
@@ -119,25 +102,21 @@ a.go_cal {
 	padding: 10px 0;
 	vertical-align: middle;
 }
-
 .total_wrap {
 	font-size: 22px;
 	display: flex;
 	justify-content: space-between;
 	padding: 20px 0 10px 0;
 }
-
 .total_wrap>div {
 	font-weight: 700;
 	padding: 10px 0;
 }
-
 .order_btn_wrp {
 	/*display: flex;*/
 	padding: 0;
 	justify-content: space-between;
 }
-
 .order_btn_wrp a {
 	border: solid 1px #ccc;
 	display: block;
@@ -148,18 +127,15 @@ a.go_cal {
 	text-align: center;
 	text-decoration: none;
 }
-
 .btn_order {
 	color: #222;
 	display: none !important;
 }
-
 .btn_add_cart {
 	color: #f1f1f1;
 	background-color: #116916;
 
 }
-
 .datepicker {
 	width: 90%;
 	font-size: 13px;
@@ -172,34 +148,27 @@ a.go_cal {
 	padding-left: 10px;
 	padding-top: 5px;
 }
-
 .input_wrp {
 	padding: 0;
 }
-
 .datepicker:focus {
 	outline: none;
 }
-
 .quantity table {
 	margin: auto;
 	width: 100px;
 	border: solid 2px #777;
 	border-collapse: collapse;
 }
-
-
 .quantity_minus, .quantity_plus {
 	cursor: pointer;
 }
-
 ul.qty_wrp {
 	list-style: none;
 	display: table;
 	padding: 0;
 	text-align: center;
 }
-
 .qty_wrp li {
 	height: 25px;
 	border: solid 2px #777;
@@ -208,7 +177,6 @@ ul.qty_wrp {
 	vertical-align: middle;
 	text-align: center;
 }
-
 .qty input {
 	border: solid 2px #777;
 	border: none;
@@ -217,38 +185,29 @@ ul.qty_wrp {
 	text-align: center;
 	height: 25px;
 }
-
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-	{
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button{
 	-webkit-appearance: none;
 	margin: 0;
-	;
 }
-
 .flatpickr-days, .flatpickr-innerContainer, .flatpickr-weekdays,
 	.flatpickr-weekdaycontainer {
 	padding-left: 0;
 }
-
 .flatpickr-monthDropdown-months {
 	height: 20px !important;
 }
-
 .flatpickr-months, .flatpickr-current-month, .flatpickr-innerContainer {
 	padding-top: 0;
 	padding-bottom: 0;
 }
-
 .detail_tab2_active {
 	display: none;
 }
-
 .detail_tab2_active table {
 	margin: 30px 0 60px 30px;
 	border: 1px #fff solid;
 	border-collapse: collapse;
 }
-
 .detail_tab2_active th, .detail_tab2_active td {
 	border: 1px #fff solid;
 	height: 15px;

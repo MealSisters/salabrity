@@ -62,7 +62,6 @@ public class MemberEnrollServlet extends HttpServlet {
 			
 			
 			int result = memberService.insertMember(member);
-//			response.sendRedirect(request.getContextPath() + "/WEB-INF/views/member/joinEnd.jsp");
 			request.getRequestDispatcher("/WEB-INF/views/member/joinEnd.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

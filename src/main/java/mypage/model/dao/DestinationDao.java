@@ -117,7 +117,7 @@ public class DestinationDao {
 			pstmt.setString(1, memberId);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new DestinationException("기본배송지 제거 오류", e);
+			throw new DestinationException("기본배송지 플래그 변경 오류", e);
 		} finally {
 			close(pstmt);
 		}

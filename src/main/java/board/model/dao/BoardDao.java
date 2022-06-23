@@ -28,7 +28,6 @@ public class BoardDao {
 	
 	public BoardDao() {
 		String fileName = BoardDao.class.getResource("/sql/board-query.properties").getPath();
-		System.out.println("fileName@BoardDao = " + fileName);
 		
 		try {
 			prop.load(new FileReader(fileName));

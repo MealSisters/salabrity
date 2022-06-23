@@ -30,7 +30,6 @@ public class CommunityBoardHacksFileDownloadServlet extends HttpServlet {
 		
 		// 2. 업무 로직
 		PostingAttach attach = boardService.findPostingAttachByPostingAttachNo(no);
-		System.out.println(attach);
 		
 		String saveDirectory = getServletContext().getRealPath("/upload/board/community/hacks");
 		String originalFilename = attach.getOriginalFilename();

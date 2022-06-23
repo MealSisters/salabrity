@@ -56,7 +56,6 @@ public class NoticeBoardServlet extends HttpServlet {
 			int totalPostingContents = boardService.getTotalPostings(boardCode);
 			String url = request.getRequestURI();
 			String pagebar = PageBar.getMultiParamPagebar(cPage, numPerPage, totalPostingContents, url + "?BoardCode=" + boardCode);
-			System.out.println("pagebar = " + pagebar);
 			
 			// 3. view단 처리
 			request.setAttribute("postingList", postingList);

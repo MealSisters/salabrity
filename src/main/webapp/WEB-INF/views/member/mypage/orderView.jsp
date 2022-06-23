@@ -5,6 +5,7 @@
 <%@ page import= "java.util.List" %>
 <%@ page import= "java.util.ArrayList" %>
 <%@ page import= "java.sql.Date" %>
+<%@ page import= "common.utill.Methods" %>
 <%@ page import= "java.util.Calendar" %>
 <%@ page import= "product.model.dto.ProductExt" %>
 <%@ page import= "java.text.DecimalFormat" %>
@@ -13,28 +14,18 @@
 <%@ page import= "mypage.model.dto.Destination"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/member/orderView.css" />
-	<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
+<%@ include file="/WEB-INF/views/common/myPageSidebar.jsp"%>
 <%
+	Methods method = new Methods();
 	List<BuyExt> buyList = (List<BuyExt>)request.getAttribute("buyList");
 	List<ProductExt> productList = (List<ProductExt>)request.getAttribute("productList");
 	Destination destination = (Destination) request.getAttribute("destination");
-	Calendar cal = Calendar.getInstance();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	cal.setTime(new java.util.Date());
-	cal.add(Calendar.DATE, 3);
-	if(cal.get(Calendar.DAY_OF_WEEK) == 1){
-		cal.add(Calendar.DATE, 1);
-	} else if(cal.get(Calendar.DAY_OF_WEEK) == 7){
-		cal.add(Calendar.DATE, 2);
-	}
-	java.util.Date date = cal.getTime();
-	String defaultDate = sdf.format(date);
 	DecimalFormat df = new DecimalFormat("#,###");
 	String address = "(" + destination.getZipcode() + ") " + destination.getAddress();
 	address += destination.getAddressDetail() != null ? destination.getAddressDetail() : "";
-	
-	String tel = destination.getTelephone().substring(0, 3) + "-" + destination.getTelephone().substring(3, 7) + "-" + destination.getTelephone().substring(7);
-	String buyerTel = buyList.get(0).getBuyerTel().substring(0, 3) + "-" + buyList.get(0).getBuyerTel().substring(3, 7) + "-" + buyList.get(0).getBuyerTel().substring(7);
+	String tel = method.getPhoneNumberFormat(destination.getTelephone()); 
+	String buyerTel = method.getPhoneNumberFormat(buyList.get(0).getBuyerTel()); 
 %>
 
 <section id="order_view">
@@ -58,8 +49,8 @@
         %>
 			<tr class="row_odd">
 				<td rowspan="2" class="r1">
-				<% if(product.getDelFlag().equals("Y")){
-						
+				<% 
+					if(product.getDelFlag().equals("Y")){
 				%>
 				<img src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
 					alt="<%= product.getAttachs().get(i).getOriginalFileName() %>" class="prd_img">
@@ -79,17 +70,6 @@
 						&nbsp;&nbsp;주문개수 : <%= buy.getList().get(i).getQuantity()%> 개
 				</span>
 				</td>
-
-				<td rowspan="2" class="r4">
-				 	<form action="<%=request.getContextPath()%>/oroder/detail/addCart" method="post">
-						<button class="addCart">장바구니 담기</button>
-						<input type="hidden" name="quantity" value="<%= buy.getList().get(i).getQuantity() %>"/>
-						<input type="hidden" name="productNo" value="<%= product.getProductNo() %>"/>
-						<input type="hidden" name="firstShippingDate" value="<%= defaultDate %>"/>
-						<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>"/>
-						<input type="hidden" name="merchantUid" value="<%= buy.getMerchantUid() %>"/>
-					</form> 
-				</td>
 			</tr>
 			<tr class="row_even">
 				<td class="r2_2">가격 : <%= df.format(buy.getList().get(i).getQuantity() * product.getProductPrice()) %>
@@ -102,7 +82,6 @@
 		</table>
 		<div class="order_btn_wrp">
 			<button class="all_cart_btn btn">전체상품 다시 담기</button>
-
 		</div>
 		<p></p>
 	</article>

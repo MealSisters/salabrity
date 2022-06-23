@@ -24,22 +24,16 @@ public class DefaultDestinationUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//1. 입력값 처리
 			int shippingAddressNo = Integer.parseInt(request.getParameter("shippingAddressNo"));
 			String memberId = request.getParameter("memberId");
-			
-			//2. 업무로직
 					
 			Destination destination = new Destination();
 			destination.setShippingAddressNo(shippingAddressNo);
 			destination.setMemberId(memberId);
 			
-			int result = destinationService.updateDefaultDestination(destination);
-				
-			//3. 리다이렉트
+			int result = destinationService.updateDefaultDestination(destination);				
 			response.sendRedirect(request.getContextPath() + "/mypage/destination");
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			throw e;
 		}

@@ -11,7 +11,13 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-
+	
+	String uniq = request.getParameter("uniq");
+	String gender = request.getParameter("gender");	
+	
+	double h = Double.parseDouble(request.getParameter("heightInput"));
+	double w = Double.parseDouble(request.getParameter("weightInput"));
+	
 	String mealName[] = { "정갈한 한식 식단", "건강한 400칼로리 식단", "직장인 저당 런치 식단", "어린이 맞춤식단" };
 	String mealDesc[] = { "샐브가 선보이는 첫 한식 식단이에요.<br>풍부하고 전통적인 한식만의 맛은 물론 영양도 놓치지 않았죠.<br>샐브의 정갈한 한식으로 건강한 식단관리를 경험해보세요!",
 						"영양사 출신 요리사가 만들어 더욱 건강한 체중조절 식단<br>건강관리와 칼로리 조절을 동시에!<br>균형잡힌 샐브만의 건강도시락을 만나보세요.",
@@ -22,19 +28,13 @@
 						"/upload/menu/20220614_231804280_969.jpg",
 						"/upload/menu/어린이맞춤식단.jpg"};
 	
-	String uniq = request.getParameter("uniq");
-	String gender = request.getParameter("gender");	
-	
-	double h = Double.parseDouble(request.getParameter("heightInput"));
-	double w = Double.parseDouble(request.getParameter("weightInput"));
-	
-	h = h/100;
-	double bmi = w/(h*h);
-	
 	String resultName = "";
 	String resultDesc = "";
 	String resultImg = "";
 	int productNo = 0;
+	
+	h = h/100;
+	double bmi = w/(h*h);
 	
 	 if(uniq !=null){ 
 		if(uniq.equals("diabetes")){
