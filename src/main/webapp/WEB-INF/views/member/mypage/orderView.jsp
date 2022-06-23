@@ -59,7 +59,7 @@
 				%>
 				<a href="<%= request.getContextPath() %>/product/productInfo?no=<%= product.getProductNo() %>">
 					<img src="<%= request.getContextPath() %>/upload/product/<%=product.getAttachs().get(0).getRenamedFileName() %>"
-					alt="<%= product.getAttachs().get(i).getOriginalFileName() %>" class="prd_img">
+					alt="<%= product.getAttachs().get(0).getOriginalFileName() %>" class="prd_img">
 				</a>
 				<%
 				}

@@ -213,11 +213,15 @@
     const zipcode = document.querySelector('.search_zipcode');
     console.log(zipcode);
     zipcode.addEventListener('click', function () {
-
         new daum.Postcode({
             oncomplete: function (data) {
-                document.querySelector(".address").value = data.address;
-                document.querySelector(".zipcode").value = data.zonecode;
+				if(data.buildingName !== ""){
+					document.getElementById("address").value = data.address + ' (' + data.buildingName + ')';
+				}else{
+					document.getElementById("address").value = data.address;
+				}
+                document.getElementById("zipcode").value = data.zonecode;
+				document.getElementById("address_detail").focus;
             }
         }).open();
 
